@@ -8,7 +8,7 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({}) => {
   return (
-    <div className="lg:max-w-[632px]">
+    <div className="lg:max-w-[632px] pt-12 xl:pt-0">
       <div className="rounded-xl">
         <img src={blog1.src} alt="" className="lg:h-[429px] rounded-xl" />
       </div>
@@ -27,7 +27,7 @@ const BlogCard: React.FC<BlogCardProps> = ({}) => {
           </Typography>
         </div>
         <div className="pt-2">
-          <Typography type="Custom" className="xl:text-2xl">
+          <Typography type="Custom" className="text-2xl font-size-semibold">
             Blog title heading will go here
           </Typography>
           <Typography type="Custom" className="xl:text-base pt-2">

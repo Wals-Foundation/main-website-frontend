@@ -14,7 +14,7 @@ export default function Contact() {
             </Typography>
           </div>
           <form>
-            <div className="pt-32 lg:grid lg:grid-cols-2 gap-12">
+            <div className="pt-8 xl:pt-32 lg:grid lg:grid-cols-2 gap-12">
               <div className="max-w-[616px] p-8 border rounded-xl space-y-5 bg-section-bg-gray border-form-border">
                 <div>
                   <label htmlFor="name">Name</label>
@@ -32,7 +32,7 @@ export default function Contact() {
                   <Button title="Contact us" className="xl:w-full" />
                 </div>
               </div>
-              <div className="max-w-[648px] p-8 flex flex-col justify-between">
+              <div className="max-w-[648px] py-8 xl:py-0 xl:p-8 flex flex-col justify-between">
                 <div className="space-y-5">
                   <div className="flex justify-between items-center">
                     <Typography>Email</Typography>

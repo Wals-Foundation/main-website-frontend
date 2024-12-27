@@ -18,15 +18,15 @@ export default function Blog() {
               <div className="w-full lg:max-w-[656px] rounded-xl">
                 <img src={training.src} alt="" className="w-full lg:w-auto lg:h-[461px] rounded-xl" />
               </div>
-              <div className="lg:max-w-[656px]">
+              <div className="lg:max-w-[656px] pt-4 xl:pt-0">
                 <Typography
                   type="ParagraphHeader"
-                  className="bg-transparent-blue text-primary flex flex-col items-center justify-center w-auto lg:max-w-[118px] py-2"
+                  className="bg-transparent-blue text-primary flex flex-col items-center justify-center w-auto max-w-[118px] py-2"
                 >
                   Newest Blog
                 </Typography>
                 <div>
-                  <div className="flex items-center pb-2">
+                  <div className="flex items-center pt-4 xl:pt-0 pb-2">
                     <Typography>11 Jan 2022</Typography>
                     <div className="px-2">
                       <Typography>•</Typography>
@@ -35,12 +35,17 @@ export default function Blog() {
                   </div>
                   <div>
                     <div className="pb-6">
-                      <Typography type="Custom" className="text-[48px] leading-[56px]">
+                      <Typography
+                        type="Custom"
+                        className="text-[32px] leading-10 xl:text-[48px] xl:leading-[56px] font-size-semibold"
+                      >
                         Blog title heading will go here
                       </Typography>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
-                      </Typography>
+                      <div className="pt-3">
+                        <Typography>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+                        </Typography>
+                      </div>
                     </div>
                     <div />
                     <Button theme="border" title="Make a Donation" />

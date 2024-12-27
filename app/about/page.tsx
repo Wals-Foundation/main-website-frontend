@@ -123,17 +123,20 @@ export default function About() {
       <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32 pb-16">
         <div className="w-11/12 mx-auto ">
           <Typography type="ParagraphHeader">Our Values</Typography>
-          <div className="flex justify-between pt-10">
+          <div className="xl:flex justify-between pt-10">
             <ValuesCard
               image={transparent.src}
               title="Transparency"
               content={`We are open and accountable, sharing how funds are used and updating our donors and communities on project progress. This builds trust and shows that we work with integrity.`}
             />
-            <ValuesCard
-              image={transparent.src}
-              title="Efficiency"
-              content={`We maximize every resource to deliver the best possible outcomes, ensuring donations go further. For us, efficiency means stretching funds to create lasting, meaningful impact in every project.`}
-            />
+            <div className="py-8 x:py-0">
+              <ValuesCard
+                image={transparent.src}
+                title="Efficiency"
+                content={`We maximize every resource to deliver the best possible outcomes, ensuring donations go further. For us, efficiency means stretching funds to create lasting, meaningful impact in every project.`}
+              />
+            </div>
+
             <ValuesCard
               image={transparent.src}
               title="Effective"
@@ -148,9 +151,9 @@ export default function About() {
           <Typography type="ParagraphHeader" className="text-center">
             Our Impact
           </Typography>
-          <div className="grid grid-cols-3 gap-5 pt-8">
+          <div className="xl:grid xl:grid-cols-3 xl:gap-5 pt-8">
             <div
-              className="h-[251px] max-w-[421.33px] rounded-xl"
+              className="h-[251px] max-w-[421.33px] rounded-xl hidden xl:block"
               style={{
                 backgroundImage: `linear-gradient(#00000020, #00000020), url(${farmer.src})`,
                 backgroundPosition: "center",
@@ -159,16 +162,18 @@ export default function About() {
             />
             <ImpactCard title="20%" content="Awards and recognitions" />
             <div
-              className="h-[251px] max-w-[421.33px] rounded-xl"
+              className="h-[251px] max-w-[421.33px] rounded-xl hidden xl:block"
               style={{
                 backgroundImage: `linear-gradient(#00000020, #00000020), url(${poorFamilies.src})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
               }}
             />
-            <ImpactCard title="12%" content="Donations" />
+            <div className="py-8 xl:py-0">
+              <ImpactCard title="12%" content="Donations" />
+            </div>
             <div
-              className="h-[251px] max-w-[421.33px] rounded-xl"
+              className="h-[251px] max-w-[421.33px] rounded-xl hidden xl:block"
               style={{
                 backgroundImage: `linear-gradient(#00000020, #00000020), url(${poorChildren.src})`,
                 backgroundPosition: "center",
@@ -183,17 +188,19 @@ export default function About() {
       <section className="max-w-[1440px] mx-auto py-8 xl:py-16">
         <div className="w-11/12 mx-auto ">
           <Typography type="ParagraphHeader">Our Approach</Typography>
-          <div className="flex justify-between pt-10">
+          <div className="xl:flex justify-between pt-10">
             <ValuesCard
               image={transparent.src}
               title="Communities"
               content={`We empower communities to shape their own paths out of poverty, working with them to build solutions that reflect their needs and strengths.`}
             />
-            <ValuesCard
-              image={transparent.src}
-              title="Long-Term Thinking"
-              content={`Real change takes time, so we focus on 20-year plans that address root causes, investing in education, skills, and infrastructure for lasting impact.`}
-            />
+            <div className="py-8">
+              <ValuesCard
+                image={transparent.src}
+                title="Long-Term Thinking"
+                content={`Real change takes time, so we focus on 20-year plans that address root causes, investing in education, skills, and infrastructure for lasting impact.`}
+              />
+            </div>
             <ValuesCard
               image={transparent.src}
               title="Collaboration"
@@ -271,12 +278,12 @@ export default function About() {
             Meet the people that makes it possible
           </Typography>
           <div className="pt-8">
-            <div className="flex justify-between items-start">
-              <div className="flex justify-evenly items-center max-w-[816px] border rounded-xl p-6">
+            <div className="xl:flex justify-between items-start space-y-3">
+              <div className="xl:flex justify-evenly items-center max-w-[816px] border rounded-xl p-6">
                 <div className="max-w-[388px]">
-                  <img src={person.src} className="h-[459px] rounded-md" alt="" />
+                  <img src={person.src} className="xl:h-[459px] rounded-md" alt="" />
                 </div>
-                <div className="max-w-[356px] h-[459px] flex flex-col justify-between pl-5">
+                <div className="max-w-[356px] xl:h-[459px] xl:flex flex-col justify-between xl:pl-5 pt-4 xl:pt-0">
                   <div>
                     <Typography type="Custom" className="font-size-semibold xl:text-2xl">
                       Kris Spiros
@@ -295,7 +302,7 @@ export default function About() {
               </div>
               <div className="max-w-[496px]">
                 <div className="max-w-[388px]">
-                  <img src={person.src} className="h-[429px] rounded-md" alt="" />
+                  <img src={person.src} className="xl:h-[429px] rounded-md" alt="" />
                 </div>
                 <div>
                   <Typography className="text-center font-size-semibold pt-4">Mark King</Typography>

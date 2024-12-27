@@ -4,6 +4,7 @@ import "swiper/css"
 import "swiper/css/pagination"
 import Header from "@components/Header"
 import Footer from "@components/Footer"
+import ReduxProvider from "@logic/store/ReduxProvider"
 
 export const metadata: Metadata = {
   title: "Wals Foundation",
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   )

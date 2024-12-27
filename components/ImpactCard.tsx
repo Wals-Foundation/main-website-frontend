@@ -15,7 +15,7 @@ const ImpactCard: React.FC<ImpactCardProps> = (props) => {
           {title}
         </Typography>
       </div>
-      <div className="pt-2">
+      <div className="pt-10 xl:pt-2">
         <Typography className="text-white text-center">{content}</Typography>
       </div>
     </div>
