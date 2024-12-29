@@ -26,22 +26,12 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
       <div className="max-w-[482px] h-[429px] flex flex-col justify-between items-center">
         <div className="">
           <Typography type="Subtitle" className="text-left text-2xl">
-            {title} Microfinance Programs
+            {title}
           </Typography>
-          <Typography type="Custom">
-            {subtitle}
-            We provide small loans and financial support to aspiring entrepreneurs, empowering them to start or grow their
-            businesses.
-          </Typography>
+          <Typography type="Custom">{subtitle}</Typography>
         </div>
         <div className="border-t border-light-gray pt-5  w-full">
-          {pageControlSlugMap.get("cause_card_impact_text") && (
-            <Typography type="Custom">
-              {content}
-              More than 5,000 small businesses have been established, lifting families out of poverty and promoting
-              self-sustaining <br /> economies.
-            </Typography>
-          )}
+          {pageControlSlugMap.get("cause_card_impact_text") && <Typography type="Custom">{content}</Typography>}
           {pageControlSlugMap.get("cause_card_button_2") && (
             <div className="pt-4 xl:flex items-center">
               <div className="pb-4 xl:pb-0 x:pr-3">
