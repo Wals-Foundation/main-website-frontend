@@ -1,6 +1,7 @@
 import React from "react"
 import arrow from "@assets/images/arrow.png"
 import Typography from "./Typography"
+import Link from "next/link"
 
 interface HelpComponentProps {
   title: string
@@ -11,7 +12,7 @@ interface HelpComponentProps {
 const HelpComponent: React.FC<HelpComponentProps> = (props) => {
   const { title, content, icon } = props
   return (
-    <div className="xl:flex justify-between items-start py-10">
+    <Link href={"/"} className="xl:flex justify-between items-start py-10">
       <div className="w-auto">
         <img src={icon} alt="" className="w-12 h-12" />
       </div>
@@ -28,7 +29,7 @@ const HelpComponent: React.FC<HelpComponentProps> = (props) => {
           <img src={arrow.src} alt="" className="h-10 w-10" />
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
