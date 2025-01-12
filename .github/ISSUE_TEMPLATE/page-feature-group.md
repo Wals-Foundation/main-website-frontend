@@ -25,4 +25,4 @@ Only fill the following if UI feature is dynamic else clear the text from this l
 Replace with the schema of the endpoint
 ```
 
-**Don't forget to add applicable labels!!**
+**Don't forget to add applicable labels and project!!**
