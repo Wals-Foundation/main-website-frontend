@@ -1,5 +1,5 @@
 ---
-name: Page Feature Group
+name: Page UI Feature Group
 about: Use this template to group simple features on a page into 1 issue
 title: "[Replace with page name] page feature group"
 labels: UI
