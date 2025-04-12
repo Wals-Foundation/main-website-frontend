@@ -6,7 +6,7 @@ import Button from "@components/Button"
 export default function Contact() {
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32">
+      <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32 pb-16">
         <div className="w-11/12 mx-auto">
           <div>
             <Typography type="Title" className="text-center">

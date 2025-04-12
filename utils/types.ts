@@ -25,3 +25,11 @@ export type PageContent = {
   headline: string
   subheadline: string
 }
+
+export type Finance = {
+  date?: string
+  description?: string
+  channel?: string
+  amount?: number
+  type?: string
+}

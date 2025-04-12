@@ -75,11 +75,17 @@ const Footer: React.FC<FooterProps> = ({}) => {
                       <img src={slider4.src} className="h-[228px] rounded-lg" alt="" />
                     </div>
                   </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[228px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
                 </Swiper>
               </div>
-              <div className="hidden xl:block py-20">
+
+              <div className="hidden lg:block xl:hidden py-20">
                 <Swiper
-                  slidesPerView={4}
+                  slidesPerView={3.5}
                   onSlideChange={() => console.log("slide change")}
                   onSwiper={(swiper) => console.log(swiper)}
                   pagination={{ clickable: true }}
@@ -99,6 +105,78 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   <SwiperSlide>
                     <div>
                       <img src={slider3.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+
+              <div className="hidden lg:hidden xl:block py-20">
+                <Swiper
+                  slidesPerView={6}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 1000 }}
+                  loop
+                >
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider2.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider3.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
