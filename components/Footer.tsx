@@ -10,95 +10,106 @@ import slider2 from "@assets/images/slider2.png"
 import slider3 from "@assets/images/slider3.png"
 import slider4 from "@assets/images/slider4.png"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { useAppSelector } from "@logic/store/hooks"
+import { createSlugMapForControl } from "@utils"
 
 interface FooterProps {
   none?: string
 }
 
 const Footer: React.FC<FooterProps> = ({}) => {
+  const data = useAppSelector((state) => state.usePageHeadlines)
+  const pageControlSlugMap = createSlugMapForControl(data.pageControl)
+
   return (
     <footer>
       <section className="bg-white">
         <div className="py-10 px-3 xl:px-12">
-          <div className="max-w-[1440px] mx-auto">
-            <div className="w-11/12 mx-auto">
-              <div>
-                <Typography type="ParagraphHeader" className="text-center">
-                  Donate
-                </Typography>
-              </div>
-              <div className="py-5 xl:py-1">
-                <Typography type="Subtitle" className="text-center xl:text-[40px] font-size-semibol">
-                  Donate towards a <br /> worthy cause
-                </Typography>
-              </div>
-              <div className="xl:flex justify-center pt-2">
-                <Button theme="primary" title="Donate Now" />
+          {pageControlSlugMap.get("home_donate_footer") && (
+            <div className="max-w-[1440px] mx-auto">
+              <div className="w-11/12 mx-auto">
+                <div>
+                  <Typography type="ParagraphHeader" className="text-center">
+                    Donate
+                  </Typography>
+                </div>
+                <div className="py-5 xl:py-1">
+                  <Typography type="Subtitle" className="text-center xl:text-[40px] font-size-semibol">
+                    Donate towards a <br /> worthy cause
+                  </Typography>
+                </div>
+                <div className="xl:flex justify-center pt-2">
+                  <Button theme="primary" title="Donate Now" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="py-20 xl:hidden">
-            <Swiper
-              slidesPerView={1.6}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 1000 }}
-              loop
-            >
-              <SwiperSlide>
-                <div>
-                  <img src={slider1.src} className="h-[228px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider2.src} className="h-[228px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider3.src} className="h-[228px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider4.src} className="h-[228px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
-          <div className="hidden xl:block py-20">
-            <Swiper
-              slidesPerView={4}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 1000 }}
-              loop
-            >
-              <SwiperSlide>
-                <div>
-                  <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider2.src} className="h-[360px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider3.src} className="h-[360px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
+          )}
+          {pageControlSlugMap.get("home_gallery") && (
+            <>
+              <div className="py-20 xl:hidden">
+                <Swiper
+                  slidesPerView={1.6}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 1000 }}
+                  loop
+                >
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider1.src} className="h-[228px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider2.src} className="h-[228px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider3.src} className="h-[228px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[228px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+              <div className="hidden xl:block py-20">
+                <Swiper
+                  slidesPerView={4}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 1000 }}
+                  loop
+                >
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider2.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider3.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div>
+                      <img src={slider4.src} className="h-[360px] rounded-lg" alt="" />
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+            </>
+          )}
         </div>
       </section>
       <section className="bg-header">

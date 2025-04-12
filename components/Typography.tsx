@@ -30,7 +30,7 @@ const Typography: React.FC<TypographyProps> = (props) => {
           {children}
         </p>
       ) : type === "Custom" ? (
-        <p className={`${className} text-paragraph text-base`} style={styles}>
+        <p className={`${className} text-paragraph`} style={styles}>
           {children}
         </p>
       ) : (

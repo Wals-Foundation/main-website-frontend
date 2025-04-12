@@ -1,73 +1,106 @@
-import React from "react"
+"use client"
+import React, { useEffect, useState } from "react"
 import Button from "./Button"
 import logo from "@assets/images/WALS-LOGO.png"
 import menu from "@assets/images/Menu.png"
 import Typography from "./Typography"
 import Link from "next/link"
+import { useAppDispatch, useAppSelector } from "@logic/store/hooks"
+import { getPageControlData, getPageHeadlinesData } from "@logic/hooks/api/usePageHeadlines"
+import { createSlugMapForControl } from "@utils"
 
 const Header: React.FC = ({}) => {
+  const dispatch = useAppDispatch()
+  const data = useAppSelector((state) => state.usePageHeadlines)
+  const [loading, setLoading] = useState(false)
+
+  const pageControlSlugMap = createSlugMapForControl(data.pageControl)
+
+  const getAllData = async () => {
+    setLoading(true)
+    try {
+      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData())])
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getAllData()
+  }, [])
+
   return (
-    <section id="Header" className="max-w-[1440px] mx-auto">
-      <nav className="w-11/12 mx-auto flex justify-between items-center py-4 border-b border-border-gray">
-        <div className="cursor-pointer">
-          <Link href="/">
-            <img src={logo.src} alt="Wals Logo" />
-          </Link>
-        </div>
-        <div className="xl:hidden">
-          <img src={menu.src} alt="Wals Logo" />
-        </div>
-        <ul className="hidden xl:flex justify-between items-center">
-          <li>
-            <Link href={"/"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                Home
-              </Typography>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/about"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                About
-              </Typography>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/causes"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                Causes
-              </Typography>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/financials"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                Financials
-              </Typography>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/blog"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                Blog
-              </Typography>
-            </Link>
-          </li>
-          <li>
-            <Link href={"/contact"}>
-              <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
-                Contact
-              </Typography>
-            </Link>
-          </li>
-        </ul>
-        <div className="hidden xl:block">
-          <Link href={"/donate"}>
-            <Button title="Donate Now" />
-          </Link>
-        </div>
-      </nav>
-    </section>
+    <>
+      {loading ? (
+        <div className="fixed top-0 left-0 h-screen bg-blue-300 w-screen z-50">Loading</div>
+      ) : (
+        pageControlSlugMap.get("main_nav") && (
+          <section id="Header" className="max-w-[1440px] mx-auto">
+            <nav className="w-11/12 mx-auto flex justify-between items-center py-4 border-b border-border-gray">
+              <div className="cursor-pointer">
+                <Link href="/">
+                  <img src={logo.src} alt="Wals Logo" />
+                </Link>
+              </div>
+              <div className="xl:hidden">
+                <img src={menu.src} alt="Wals Logo" />
+              </div>
+              <ul className="hidden xl:flex justify-between items-center">
+                <li>
+                  <Link href={"/"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      Home
+                    </Typography>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/about"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      About
+                    </Typography>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/causes"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      Causes
+                    </Typography>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/financials"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      Financials
+                    </Typography>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/blog"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      Blog
+                    </Typography>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/contact"}>
+                    <Typography type="Custom" className="hover:text-primary cursor-pointer mx-3">
+                      Contact
+                    </Typography>
+                  </Link>
+                </li>
+              </ul>
+              <div className="hidden xl:block">
+                <Link href={"/donate"}>
+                  <Button title="Donate Now" />
+                </Link>
+              </div>
+            </nav>
+          </section>
+        )
+      )}
+    </>
   )
 }
 

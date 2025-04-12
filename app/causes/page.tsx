@@ -42,10 +42,20 @@ export default function Home() {
             </div>
 
             <div>
-              <CausesCard />
+              <CausesCard
+                title="Microfinance Programs"
+                subtitle="We provide small loans and financial support to aspiring entrepreneurs, empowering them to start or grow their businesses."
+                content={`More than 5,000 small businesses have been established, lifting families out of poverty and promoting
+              self-sustaining economies.`}
+              />
             </div>
             <div>
-              <CausesCard />
+              <CausesCard
+                title="Microfinance Programs"
+                subtitle="We provide small loans and financial support to aspiring entrepreneurs, empowering them to start or grow their businesses."
+                content={`More than 5,000 small businesses have been established, lifting families out of poverty and promoting
+              self-sustaining economies.`}
+              />
             </div>
             <div className="xl:hidden pt-10">
               <Button theme="secondary" title="View All Causes" />
