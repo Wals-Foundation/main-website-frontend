@@ -38,9 +38,6 @@ jobs:
       - name: Build Next.js app
         run: yarn build
 
-      - name: Export static site
-        run: yarn next export
-
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
