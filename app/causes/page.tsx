@@ -20,9 +20,7 @@ export default function Home() {
   const projectCausesData: any = data?.projectCausesData
 
   const communityCauses = useMemo(() => extractCausesByCode(communityCausesData) || [], [])
-
   const programCauses = useMemo(() => extractCausesByCode(programsCausesData) || [], [])
-
   const projectCauses = useMemo(() => extractCausesByCode(projectCausesData) || [], [])
 
   const causesData: Record<

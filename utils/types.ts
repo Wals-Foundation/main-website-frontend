@@ -21,6 +21,20 @@ export type Slugs =
   | "home_testimonial"
   | "home_donate_footer"
   | "home_gallery"
+  | "about_headline"
+  | "about_subheadline"
+  | "about_subheadline_button_1"
+  | "about_hero_carousel"
+  | "about_our_story"
+  | "about_our_mission"
+  | "about_our_vision"
+  | "about_our_values"
+  | "about_impact"
+  | "about_approach"
+  | "about_partners"
+  | "about_team"
+  | "about_faq"
+  | "about_donate_footer"
 
 export type PageContent = {
   headline: string

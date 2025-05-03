@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button"
-import logo from "@/assets/images/WALS-LOGO.png"
+import logo from "@/assets/images/logo.svg"
 import menu from "@/assets/images/Menu.png"
 import Typography from "./Typography"
 import Link from "next/link"
@@ -46,7 +46,7 @@ const Header: React.FC = ({}) => {
             <nav className="w-11/12 mx-auto flex justify-between items-center py-4 border-b border-border-gray">
               <div className="cursor-pointer">
                 <Link href="/">
-                  <img src={logo.src} alt="Wals Logo" />
+                  <img src={logo.src} alt="Wals Logo" className="w-16 h-auto" />
                 </Link>
               </div>
               <div className="xl:hidden">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Button from "@/components/Button"
@@ -26,18 +27,16 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
-  const pageControlSlugMap = createSlugMapForControl(data.pageControl)
-  const pageHeadlinesSlugMap = createSlugMapForPages(data.pageHeadlines)
   const dispatch = useAppDispatch()
 
   const communityCausesData: any = data?.communityCausesData
   const programsCausesData: any = data?.programsCausesData
   const projectCausesData: any = data?.projectCausesData
 
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
   const communityCauses = useMemo(() => extractCausesByCode(communityCausesData) || [], [])
-
   const programCauses = useMemo(() => extractCausesByCode(programsCausesData) || [], [])
-
   const projectCauses = useMemo(() => extractCausesByCode(projectCausesData) || [], [])
 
   const causesData: Record<
