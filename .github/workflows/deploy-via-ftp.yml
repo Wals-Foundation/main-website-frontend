@@ -10,10 +10,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    env:
-      PROD_BACKEND_URL: ${{ env.PROD_BACKEND_URL }}
-      STAGING_BACKEND_URL: ${{ env.STAGING_BACKEND_URL }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
