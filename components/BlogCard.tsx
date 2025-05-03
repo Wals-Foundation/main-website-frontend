@@ -1,6 +1,6 @@
 import React from "react"
 import Typography from "./Typography"
-import blog1 from "@assets/images/blog1.svg"
+import blog1 from "@/assets/images/blog1.svg"
 
 interface BlogCardProps {
   haeding?: string

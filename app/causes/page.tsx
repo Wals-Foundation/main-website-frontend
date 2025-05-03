@@ -129,7 +129,7 @@ export default function Home() {
                       title={cause.title}
                       subtitle={cause.subtitle}
                       content={cause.content}
-                      id={`cause?=${activeCause}&id=${cause?.id || ""}`}
+                      id={`cause?causeType=${activeCause}&id=${cause?.id || ""}`}
                     />
                   ))}
                 </div>
