@@ -1,7 +1,7 @@
-import Button from "@components/Button"
-import Typography from "@components/Typography"
-import training from "@assets/images/training.svg"
-import BlogCard from "@components/BlogCard"
+import Button from "@/components/Button"
+import Typography from "@/components/Typography"
+import training from "@/assets/images/training.svg"
+import BlogCard from "@/components/BlogCard"
 
 export default function Blog() {
   return (

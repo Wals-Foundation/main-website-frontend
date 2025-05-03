@@ -1,7 +1,7 @@
-import Typography from "@components/Typography"
-import FAQ from "@components/FAQ"
-import Input from "@components/Input"
-import Button from "@components/Button"
+import Typography from "@/components/Typography"
+import FAQ from "@/components/FAQ"
+import Input from "@/components/Input"
+import Button from "@/components/Button"
 
 export default function Contact() {
   return (

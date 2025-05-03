@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
-import usePageHeadlines from "@logic/hooks/api/usePageHeadlines"
+import usePageHeadlines from "@/logic/hooks/api/usePageHeadlines"
 
 const persistConfig = {
   key: "root",

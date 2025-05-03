@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Slugs =
   | "main_nav"
   | "subheadline_button_1"
@@ -32,4 +33,42 @@ export type Finance = {
   channel?: string
   amount?: number
   type?: string
+}
+
+export type CauseType = "Communities" | "Programs" | "Projects"
+
+type RawCauseResponse = {
+  data: {
+    id: number
+    code: string
+    cause: {
+      id: number
+      name: string
+      introduction: string
+      impact: string
+      problem: string
+      solution: string
+    }
+  }[]
+}
+
+type NormalizedCause = {
+  id: number
+  name: string
+  introduction: string
+  impact: string
+  problem: string
+  solution: string
+}
+
+export const extractCausesByCode = (response: RawCauseResponse): NormalizedCause[] => {
+  console.log(response)
+  return response?.data?.map((item: any) => ({
+    id: item.id,
+    name: item.cause.name,
+    introduction: item.cause.introduction,
+    impact: item.cause.impact,
+    problem: item.cause.problem,
+    solution: item.cause.solution,
+  }))
 }

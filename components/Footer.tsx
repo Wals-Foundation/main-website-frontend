@@ -1,17 +1,17 @@
 "use client"
 import React from "react"
-import logo from "@assets/images/WALS-LOGO.png"
-import Input from "@components/Input"
+import logo from "@/assets/images/WALS-LOGO.png"
+import Input from "@/components/Input"
 import Link from "next/link"
 import Typography from "./Typography"
 import Button from "./Button"
-import slider1 from "@assets/images/slider1.png"
-import slider2 from "@assets/images/slider2.png"
-import slider3 from "@assets/images/slider3.png"
-import slider4 from "@assets/images/slider4.png"
+import slider1 from "@/assets/images/slider1.png"
+import slider2 from "@/assets/images/slider2.png"
+import slider3 from "@/assets/images/slider3.png"
+import slider4 from "@/assets/images/slider4.png"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { useAppSelector } from "@logic/store/hooks"
-import { createSlugMapForControl } from "@utils"
+import { useAppSelector } from "@/logic/store/hooks"
+import { createSlugMapForControl } from "@/utils"
 
 interface FooterProps {
   none?: string
@@ -46,15 +46,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
           )}
           {pageControlSlugMap.get("home_gallery") && (
             <>
-              <div className="py-20 xl:hidden">
-                <Swiper
-                  slidesPerView={1.6}
-                  onSlideChange={() => console.log("slide change")}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  pagination={{ clickable: true }}
-                  autoplay={{ delay: 1000 }}
-                  loop
-                >
+              <div className="py-20 lg:hidden">
+                <Swiper slidesPerView={1.6} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[228px] rounded-lg" alt="" />
@@ -84,14 +77,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
               </div>
 
               <div className="hidden lg:block xl:hidden py-20">
-                <Swiper
-                  slidesPerView={3.5}
-                  onSlideChange={() => console.log("slide change")}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  pagination={{ clickable: true }}
-                  autoplay={{ delay: 1000 }}
-                  loop
-                >
+                <Swiper slidesPerView={3} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
@@ -135,15 +121,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 </Swiper>
               </div>
 
-              <div className="hidden lg:hidden xl:block py-20">
-                <Swiper
-                  slidesPerView={6}
-                  onSlideChange={() => console.log("slide change")}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  pagination={{ clickable: true }}
-                  autoplay={{ delay: 1000 }}
-                  loop
-                >
+              <div className="hidden xl:block py-20">
+                <Swiper slidesPerView={3.5} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />

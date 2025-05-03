@@ -1,7 +1,7 @@
 "use client"
-import Typography from "@components/Typography"
-import { getTransactionsData } from "@logic/hooks/api/usePageHeadlines"
-import { useAppDispatch, useAppSelector } from "@logic/store/hooks"
+import Typography from "@/components/Typography"
+import { getTransactionsData } from "@/logic/hooks/api/usePageHeadlines"
+import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import dayjs from "dayjs"
 import { useEffect, useState } from "react"
 

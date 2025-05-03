@@ -1,13 +1,13 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button"
-import logo from "@assets/images/WALS-LOGO.png"
-import menu from "@assets/images/Menu.png"
+import logo from "@/assets/images/WALS-LOGO.png"
+import menu from "@/assets/images/Menu.png"
 import Typography from "./Typography"
 import Link from "next/link"
-import { useAppDispatch, useAppSelector } from "@logic/store/hooks"
-import { getPageControlData, getPageHeadlinesData } from "@logic/hooks/api/usePageHeadlines"
-import { createSlugMapForControl } from "@utils"
+import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
+import { getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
+import { createSlugMapForControl } from "@/utils"
 
 const Header: React.FC = ({}) => {
   const dispatch = useAppDispatch()
@@ -15,6 +15,8 @@ const Header: React.FC = ({}) => {
   const [loading, setLoading] = useState(false)
 
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
+
+  const didRun = useRef(false)
 
   const getAllData = async () => {
     setLoading(true)
@@ -28,7 +30,10 @@ const Header: React.FC = ({}) => {
   }
 
   useEffect(() => {
-    getAllData()
+    if (!didRun.current) {
+      getAllData()
+      didRun.current = true
+    }
   }, [])
 
   return (

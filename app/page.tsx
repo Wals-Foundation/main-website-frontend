@@ -1,26 +1,93 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import Button from "@components/Button"
-import Typography from "@components/Typography"
-import BackgroundFarm from "@assets/images/farm.jpeg"
-import people1 from "@assets/images/people1.png"
-import people2 from "@assets/images/people2.png"
-import people3 from "@assets/images/people3.png"
-import people4 from "@assets/images/people4.png"
-import people5 from "@assets/images/people5.png"
-import VideoImage from "@assets/images/VideoImage.png"
-import involved from "@assets/images/involved.png"
-import gift from "@assets/images/gift.png"
+import Button from "@/components/Button"
+import Typography from "@/components/Typography"
+import BackgroundFarm from "@/assets/images/farm.jpeg"
+import people1 from "@/assets/images/people1.png"
+import people2 from "@/assets/images/people2.png"
+import people3 from "@/assets/images/people3.png"
+import people4 from "@/assets/images/people4.png"
+import people5 from "@/assets/images/people5.png"
+import VideoImage from "@/assets/images/VideoImage.png"
+import involved from "@/assets/images/involved.png"
+import gift from "@/assets/images/gift.png"
 import { Swiper, SwiperSlide } from "swiper/react"
-import HelpComponent from "@components/HelpComponent"
-import Testimonies from "@components/Testimonies"
-import { useAppSelector } from "@logic/store/hooks"
-import { createSlugMapForControl, createSlugMapForPages } from "@utils"
-import CausesCard from "@components/CausesCard"
+import HelpComponent from "@/components/HelpComponent"
+import Testimonies from "@/components/Testimonies"
+import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
+import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
+import CausesCard from "@/components/CausesCard"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { CauseType, extractCausesByCode } from "@/utils/types"
+import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/usePageHeadlines"
+import Link from "next/link"
 
 export default function Home() {
+  const [loading, setLoading] = useState(false)
+  const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
   const pageHeadlinesSlugMap = createSlugMapForPages(data.pageHeadlines)
+  const dispatch = useAppDispatch()
+
+  const communityCausesData: any = data?.communityCausesData
+  const programsCausesData: any = data?.programsCausesData
+  const projectCausesData: any = data?.projectCausesData
+
+  const communityCauses = useMemo(() => extractCausesByCode(communityCausesData) || [], [])
+
+  const programCauses = useMemo(() => extractCausesByCode(programsCausesData) || [], [])
+
+  const projectCauses = useMemo(() => extractCausesByCode(projectCausesData) || [], [])
+
+  const causesData: Record<
+    CauseType,
+    {
+      id: string
+      title: string
+      subtitle: string
+      content: string
+    }[]
+  > = {
+    Communities: communityCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? "",
+    })),
+    Programs: programCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? "",
+    })),
+    Projects: projectCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? "",
+    })),
+  }
+
+  const getAllData = async () => {
+    setLoading(true)
+    try {
+      await Promise.all([dispatch(getCommunitiesData()), dispatch(getProgamsData()), dispatch(getProjectsData())])
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const didRun = useRef(false)
+
+  useEffect(() => {
+    if (!didRun.current) {
+      getAllData()
+      didRun.current = true
+    }
+  }, [])
 
   return (
     <main className="bg-white">
@@ -264,32 +331,42 @@ export default function Home() {
               </div>
 
               <div className="max-w-[568px] mx-auto py-10">
-                <div className="flex justify-between items-center border-b border-border-gray">
-                  <div className="border-b-2 border-primary xl:px-8 pt-2 pb-3">
-                    <Typography className="font-size-semibold xl:text-xl">Communities</Typography>
-                  </div>
-                  <div className="xl:px-8 pt-2 pb-3">
-                    <Typography className="xl:text-xl">Programs</Typography>
-                  </div>
-                  <div className="xl:px-8 pt-2 pb-3">
-                    <Typography className="xl:text-xl">Projects</Typography>
-                  </div>
+                <div className="flex justify-between items-center border-b border-gray-300">
+                  {(["Communities", "Programs", "Projects"] as const).map((tab) => (
+                    <div
+                      key={tab}
+                      onClick={() => setActiveCause(tab)}
+                      className={`${
+                        activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
+                      } xl:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
+                    >
+                      <Typography className="font-size-semibold xl:text-xl">{tab}</Typography>
+                    </div>
+                  ))}
                 </div>
               </div>
+              {loading ? (
+                <Typography className="text-center">Loading...</Typography>
+              ) : (
+                <div className="space-y-6 mt-6">
+                  {causesData[activeCause].map((cause, index) => (
+                    <CausesCard
+                      key={index}
+                      title={cause.title}
+                      subtitle={cause.subtitle}
+                      content={cause.content}
+                      id={`cause?=${activeCause}&id=${cause?.id || ""}`}
+                    />
+                  ))}
+                </div>
+              )}
 
-              <CausesCard
-                title="Microfinance Programs"
-                subtitle="We provide small loans and financial support to aspiring entrepreneurs, empowering them to start or grow their businesses."
-                content={`More than 5,000 small businesses have been established, lifting families out of poverty and promoting
-        self-sustaining economies.`}
-              />
-
-              <div className="xl:hidden pt-10">
+              <Link href="/causes" className="xl:hidden pt-10">
                 <Button theme="secondary" title="View All Causes" />
-              </div>
-              <div className="hidden xl:flex justify-center pt-10">
+              </Link>
+              <Link href="/causes" className="hidden xl:flex justify-center pt-10">
                 <Button theme="border" title="View All Causes" />
-              </div>
+              </Link>
             </div>
           </div>
         </section>
@@ -346,14 +423,7 @@ export default function Home() {
       )}
       {pageControlSlugMap.get("home_testimonial") && (
         <section className="relative">
-          <Swiper
-            slidesPerView={1}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 1000 }}
-            loop
-          >
+          <Swiper slidesPerView={1} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
             <SwiperSlide>
               <Testimonies
                 icon={people5.src}

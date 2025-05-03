@@ -1,7 +1,7 @@
 import React from "react"
 import Typography from "./Typography"
 import Button from "./Button"
-import arrowDown from "@assets/images/arrow-down.svg"
+import arrowDown from "@/assets/images/arrow-down.svg"
 
 interface FAQProps {
   none?: string

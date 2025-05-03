@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import "./globals.css"
 import "swiper/css"
 import "swiper/css/pagination"
-import Header from "@components/Header"
-import Footer from "@components/Footer"
-import ReduxProvider from "@logic/store/ReduxProvider"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import ReduxProvider from "@/logic/store/ReduxProvider"
 
 export const metadata: Metadata = {
   title: "Wals Foundation",
