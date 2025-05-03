@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PROD_BACKEND_URL: https://your-production-url.com
-      STAGING_BACKEND_URL: https://your-staging-url.com
+      PROD_BACKEND_URL: ${{ env.PROD_BACKEND_URL }}
+      STAGING_BACKEND_URL: ${{ env.STAGING_BACKEND_URL }}
 
     steps:
       - name: Checkout code
