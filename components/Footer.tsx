@@ -172,8 +172,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
       <section className="bg-header">
         <div className="max-w-[1440px] mx-auto py-20 bg-bg-header">
           <div className="w-11/12 mx-auto">
-            <div className="xl:flex justify-between items-start pb-10">
-              <div className="max-w-[500px]">
+            <div className="lg:flex justify-between items-start pb-10 space-x-6">
+              <div className="lg:max-w-[500px]">
                 <div>
                   <img src={logo.src} alt="Wals Logo" className="w-[95px]" />
                 </div>
@@ -182,11 +182,11 @@ const Footer: React.FC<FooterProps> = ({}) => {
                     Join our newsletter to stay up to date on features and releases.
                   </Typography>
                 </div>
-                <div className="xl:flex justify-between items-center pt-6">
+                <div className="lg:flex justify-between items-center pt-6">
                   <div className="w-full">
                     <Input className="rounded-[68px]" placeholder="Enter your email" />
                   </div>
-                  <div className="pt-5 xl:pt-0 xl:pl-4">
+                  <div className="pt-5 lg:pt-0 lg:pl-4">
                     <Button theme="border" title="Submit" />
                   </div>
                 </div>
@@ -196,149 +196,150 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   </Typography>
                 </div>
               </div>
+              <div className="flex justify-between items-center w-full lg:w-1/2">
+                <div className="pt-8 xl:pt-0">
+                  <Typography className="text-white py-2">Links</Typography>
+                  <ul>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Home
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          About Us
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Causes
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Blog
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Contact
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Donate
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
 
-              <div className="pt-8 xl:pt-0">
-                <Typography className="text-white py-2">Links</Typography>
-                <ul>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Home
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        About Us
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Causes
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Blog
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Contact
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Donate
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                <div className="pt-8 xl:pt-0">
+                  <Typography className="text-white py-2">Links</Typography>
+                  <ul>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Home
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          About Us
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Causes
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Blog
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Contact
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Donate
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
 
-              <div className="pt-8 xl:pt-0">
-                <Typography className="text-white py-2">Links</Typography>
-                <ul>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Home
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        About Us
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Causes
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Blog
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Contact
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Donate
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-8 xl:pt-0">
-                <Typography className="text-white py-2">Links</Typography>
-                <ul>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Home
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        About Us
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Causes
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Blog
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Contact
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/"}>
-                      <Typography type="Custom" className="text-title-gray py-2">
-                        Donate
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
+                <div className="pt-8 xl:pt-0">
+                  <Typography className="text-white py-2">Links</Typography>
+                  <ul>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Home
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          About Us
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Causes
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Blog
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Contact
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={"/"}>
+                        <Typography type="Custom" className="text-title-gray py-2">
+                          Donate
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="border-t border-title-gray py-6 xl:flex justify-between items-center">

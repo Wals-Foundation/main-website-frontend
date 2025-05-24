@@ -10,7 +10,7 @@ interface ValuesCardProps {
 const ValuesCard: React.FC<ValuesCardProps> = (props) => {
   const { title, image, content } = props
   return (
-    <div className="max-w-[416px]">
+    <div className="xl:max-w-[416px]">
       <div>
         <img src={image} className="h-12 w-12" alt="" />
       </div>

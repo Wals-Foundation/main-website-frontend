@@ -13,7 +13,7 @@ const FAQ: React.FC<FAQProps> = ({}) => {
       <div className="max-w-[1440px] mx-auto">
         <div className="w-11/12 mx-auto ">
           <div className="xl:flex justify-between items-start">
-            <div className="pb-8 xl:pb-0 max-w-[500px]">
+            <div className="pb-8 xl:pb-0 xl:max-w-[500px]">
               <Typography type="Subtitle">Frequently asked questions</Typography>
               <div className="py-2">
                 <Typography type="Custom">
@@ -25,7 +25,7 @@ const FAQ: React.FC<FAQProps> = ({}) => {
                 <Button title="Contact Us" theme="border" />
               </div>
             </div>
-            <div className="max-w-[732px] border-t">
+            <div className="xl:max-w-[732px] border-t">
               <div className="py-5 border-b">
                 <div className="flex justify-between items-center">
                   <Typography className="font-size-bold">Question text goes here</Typography>

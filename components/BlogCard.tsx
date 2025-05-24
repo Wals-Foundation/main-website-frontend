@@ -8,9 +8,9 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({}) => {
   return (
-    <div className="lg:max-w-[632px] pt-12 xl:pt-0">
+    <div className="lg:max-w-[632px] pt-12 xl:pt-0 w-full">
       <div className="rounded-xl">
-        <img src={blog1.src} alt="" className="lg:h-[429px] rounded-xl" />
+        <img src={blog1.src} alt="" className="lg:h-[429px] w-full rounded-xl" />
       </div>
       <div className="pt-4">
         <div className="flex items-center">

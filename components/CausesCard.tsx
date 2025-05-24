@@ -21,11 +21,11 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
 
   return (
-    <div className="max-w-[1052px] mx-auto bg-white p-6 xl:flex justify-between items-start rounded-2xl w-full">
+    <div className="xl:max-w-[1052px] mx-auto bg-white p-6 xl:flex justify-between items-start rounded-2xl w-full">
       <div className="w-full">
-        <img src={oldLady.src} alt="" className="rounded-xl" />
+        <img src={oldLady.src} alt="" className="rounded-xl w-full lg:w-auto" />
       </div>
-      <div className="max-w-[482px] h-[429px] flex flex-col justify-between items-center w-full">
+      <div className="xl:max-w-[482px] h-[429px] flex flex-col justify-between items-center w-full">
         <div className="w-full">
           <Typography type="Subtitle" className="text-left text-2xl">
             {title}
@@ -35,8 +35,8 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
         <div className="border-t border-light-gray pt-5  w-full">
           {pageControlSlugMap.get("cause_card_impact_text") && <Typography type="Custom">{content}</Typography>}
           {pageControlSlugMap.get("cause_card_button_2") && (
-            <div className="pt-4 xl:flex items-center">
-              <div className="pb-4 xl:pb-0 xl:pr-3">
+            <div className="pt-4 lg:flex items-center">
+              <div className="pb-4 lg:pb-0 lg:pr-3">
                 <Link href={`/causes/${id}`}>
                   <Button theme="primary" title="Read More" />
                 </Link>

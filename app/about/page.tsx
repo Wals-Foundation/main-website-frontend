@@ -49,16 +49,16 @@ export default function About() {
     <main className="bg-white">
       <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32">
         <div className="w-11/12 mx-auto xl:flex justify-between items-start">
-          <div className="max-w-[758px]">
+          <div className="xl:max-w-[758px]">
             {pageControlSlugMap.get("about_headline") && (
-              <div className="max-w-[681px]">
+              <div className="xl:max-w-[681px]">
                 <Typography type="Title">
                   {pageHeadlinesSlugMap.get("about")?.headline || "Building a future of equal opportunities."}
                 </Typography>
               </div>
             )}
           </div>
-          <div className="max-w-[436px] pt-10 xl:pt-0">
+          <div className="xl:max-w-[436px] pt-10 xl:pt-0">
             {pageControlSlugMap.get("about_subheadline") && (
               <Typography>
                 {pageHeadlinesSlugMap.get("about")?.subheadline ||
@@ -130,7 +130,7 @@ export default function About() {
                   <div className="pb-8 xl:pb-0">
                     <Typography type="ParagraphHeader">Our Story</Typography>
                   </div>
-                  <div className="max-w-[825px]">
+                  <div className="xl:max-w-[825px]">
                     <Typography>{data.aboutOrganization?.organisation_story || ""}</Typography>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function About() {
                   <div className="pb-8 xl:pb-0">
                     <Typography type="ParagraphHeader">Our Mission</Typography>
                   </div>
-                  <div className="max-w-[825px]">
+                  <div className="xl:max-w-[825px]">
                     <Typography>{data.aboutOrganization?.organisation_mission || ""}</Typography>
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export default function About() {
                   <div className="pb-8 xl:pb-0">
                     <Typography type="ParagraphHeader">Our Vision</Typography>
                   </div>
-                  <div className="max-w-[825px]">
+                  <div className="xl:max-w-[825px]">
                     <Typography>{data.aboutOrganization?.organisation_vision || ""}</Typography>
                   </div>
                 </div>

@@ -93,14 +93,14 @@ export default function Home() {
       <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32">
         <div className="w-11/12 mx-auto xl:flex justify-between items-start">
           {pageControlSlugMap.get("home_headline") && (
-            <div className="max-w-[681px]">
+            <div className="xl:max-w-[681px]">
               <Typography type="Title">
                 {pageHeadlinesSlugMap.get("home")?.headline || "Creating pathways to opportunity for every community"}
               </Typography>
             </div>
           )}
 
-          <div className="max-w-[436px] pt-10 xl:pt-0">
+          <div className="xl:max-w-[436px] pt-10 xl:pt-0">
             {pageControlSlugMap.get("home_subheadline") && (
               <Typography>
                 {pageHeadlinesSlugMap.get("home")?.subheadline ||
@@ -135,10 +135,10 @@ export default function Home() {
                 className=""
               >
                 <div className="max-w-[1440px] mx-auto pt-10">
-                  <div className="w-11/12 mx-auto relative h-[784px]">
-                    <div className="absolute top-[60px] right-2 left-2 xl:right-5 xl:left-auto">
+                  <div className="w-11/12 mx-auto relative h-[90vh] lg:h-[784px]">
+                    <div className="absolute top-[60px] right-2 left-2 lg:right-5 lg:left-auto">
                       {pageControlSlugMap.get("home_hero_values_card_1") && (
-                        <div className="max-w-[374px] bg-white rounded-xl p-5">
+                        <div className="lg:max-w-[374px] bg-white rounded-xl p-5">
                           <Typography type="Custom">
                             Since 2010, our programs have <br /> empowered over 500 individuals.
                           </Typography>
@@ -157,7 +157,7 @@ export default function Home() {
                                 <img src={people4.src} alt="" className="rounded-full" />
                               </div>
                             </div>
-                            <div className="max-w-[176px]">
+                            <div className="lg:max-w-[176px]">
                               <Typography type="Custom" className="text-xs xl:text-sm">
                                 Make a donation to hear more save more lives
                               </Typography>
@@ -168,7 +168,7 @@ export default function Home() {
 
                       <div className="pt-2" />
                       {pageControlSlugMap.get("home_hero_values_card_2") && (
-                        <div className="max-w-[374px] bg-white rounded-xl p-5">
+                        <div className="lg:max-w-[374px] bg-white rounded-xl p-5">
                           <div>
                             <Typography className="font-size-semibold">Transparency</Typography>
                             <div className="pt-3">
@@ -194,7 +194,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div>
-                            <img src={VideoImage.src} alt="" />
+                            <img src={VideoImage.src} className="w-full lg:w-auto" alt="" />
                           </div>
                         </div>
                       )}
@@ -212,9 +212,9 @@ export default function Home() {
                 }}
               >
                 <div className="max-w-[1440px] mx-auto pt-10">
-                  <div className="w-11/12 mx-auto relative h-[784px]">
-                    <div className="absolute top-[60px] right-2 left-2 xl:right-5 xl:left-auto">
-                      <div className="max-w-[374px] bg-white rounded-xl p-5">
+                  <div className="w-11/12 mx-auto relative h-[90vh] lg:h-[784px]">
+                    <div className="absolute top-[60px] right-2 left-2 lg:right-5 lg:left-auto">
+                      <div className="lg:max-w-[374px] bg-white rounded-xl p-5">
                         <Typography type="Custom">
                           Since 2010, our programs have <br /> empowered over 500 individuals.
                         </Typography>
@@ -241,7 +241,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="pt-2" />
-                      <div className="max-w-[374px] bg-white rounded-xl p-5">
+                      <div className="lg:max-w-[374px] bg-white rounded-xl p-5">
                         <div>
                           <Typography className="font-size-semibold">Transparency</Typography>
                           <div className="pt-3">
@@ -267,7 +267,7 @@ export default function Home() {
                           </div>
                         </div>
                         <div>
-                          <img src={VideoImage.src} alt="" />
+                          <img src={VideoImage.src} alt="" className="w-full lg:w-auto" />
                         </div>
                       </div>
                     </div>
@@ -285,7 +285,7 @@ export default function Home() {
             <div className="pb-8 xl:pb-0">
               <Typography type="ParagraphHeader">About us</Typography>
             </div>
-            <div className="max-w-[825px]">
+            <div className="xl:max-w-[825px]">
               <Typography type="Subtitle">
                 Founded in 2018,
                 <span className="text-title-gray py-2">
@@ -360,12 +360,14 @@ export default function Home() {
                 </div>
               )}
 
-              <Link href="/causes" className="xl:hidden pt-10">
-                <Button theme="secondary" title="View All Causes" />
-              </Link>
-              <Link href="/causes" className="hidden xl:flex justify-center pt-10">
-                <Button theme="border" title="View All Causes" />
-              </Link>
+              <div className="pt-10">
+                <Link href="/causes" className="xl:hidden">
+                  <Button theme="secondary" title="View All Causes" />
+                </Link>
+                <Link href="/causes" className="hidden xl:flex justify-center">
+                  <Button theme="border" title="View All Causes" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
