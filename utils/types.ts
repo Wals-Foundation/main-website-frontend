@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type Slugs =
   | "main_nav"
-  | "subheadline_button_1"
-  | "subheadline_button_2"
+  | "home_subheadline_button_1"
+  | "home_subheadline_button_2"
   | "home_hero_carousel"
   | "cause_card_impact_text"
   | "cause_card_button_2"

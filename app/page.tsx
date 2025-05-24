@@ -109,8 +109,8 @@ export default function Home() {
               </Typography>
             )}
             <div className="pt-6 xl:pt-4 xl:flex items-center">
-              {pageControlSlugMap.get("subheadline_button_1") && <Button theme="secondary" title="Learn More" />}
-              {pageControlSlugMap.get("subheadline_button_2") && <Button theme="secondary" title="Learn More" />}
+              {pageControlSlugMap.get("home_subheadline_button_1") && <Button theme="secondary" title="Learn More" />}
+              {pageControlSlugMap.get("home_subheadline_button_2") && <Button theme="secondary" title="Learn More" />}
             </div>
           </div>
         </div>
