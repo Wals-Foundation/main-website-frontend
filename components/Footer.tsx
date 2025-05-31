@@ -10,6 +10,7 @@ import slider2 from "@/assets/images/slider2.png"
 import slider3 from "@/assets/images/slider3.png"
 import slider4 from "@/assets/images/slider4.png"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { Autoplay, Pagination } from "swiper/modules"
 import { useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl } from "@/utils"
 
@@ -24,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
   return (
     <footer>
       <section className="bg-white">
-        <div className="py-10 px-3 xl:px-12">
+        <div className="py-10 px-3 md:px-12">
           {pageControlSlugMap.get("home_donate_footer") && (
             <div className="max-w-[1440px] mx-auto">
               <div className="w-11/12 mx-auto">
@@ -33,12 +34,12 @@ const Footer: React.FC<FooterProps> = ({}) => {
                     Donate
                   </Typography>
                 </div>
-                <div className="py-5 xl:py-1">
-                  <Typography type="Subtitle" className="text-center xl:text-[40px] font-size-semibol">
+                <div className="py-5 md:py-1">
+                  <Typography type="Subtitle" className="text-center md:text-[40px] font-size-semibol">
                     Donate towards a <br /> worthy cause
                   </Typography>
                 </div>
-                <div className="xl:flex justify-center pt-2">
+                <div className="md:flex justify-center pt-2">
                   <Button theme="primary" title="Donate Now" />
                 </div>
               </div>
@@ -47,7 +48,16 @@ const Footer: React.FC<FooterProps> = ({}) => {
           {pageControlSlugMap.get("home_gallery") && (
             <>
               <div className="py-20 lg:hidden">
-                <Swiper slidesPerView={1.6} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
+                <Swiper
+                  slidesPerView={1.6}
+                  spaceBetween={20}
+                  loop={true}
+                  speed={800}
+                  autoplay={{ delay: 0, disableOnInteraction: false }}
+                  modules={[Autoplay]}
+                  allowTouchMove={false}
+                  grabCursor={false}
+                >
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[228px] rounded-lg" alt="" />
@@ -76,8 +86,17 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 </Swiper>
               </div>
 
-              <div className="hidden lg:block xl:hidden py-20">
-                <Swiper slidesPerView={3} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
+              <div className="hidden md:block xl:hidden py-20">
+                <Swiper
+                  slidesPerView={3}
+                  spaceBetween={20}
+                  loop={true}
+                  speed={800}
+                  autoplay={{ delay: 0, disableOnInteraction: false }}
+                  modules={[Autoplay]}
+                  allowTouchMove={false}
+                  grabCursor={false}
+                >
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
@@ -122,7 +141,16 @@ const Footer: React.FC<FooterProps> = ({}) => {
               </div>
 
               <div className="hidden xl:block py-20">
-                <Swiper slidesPerView={3.5} pagination={{ clickable: true }} autoplay={{ delay: 1000 }} loop>
+                <Swiper
+                  slidesPerView={3.5}
+                  spaceBetween={20}
+                  loop={true}
+                  speed={800}
+                  autoplay={{ delay: 0, disableOnInteraction: false }}
+                  modules={[Autoplay]}
+                  allowTouchMove={false}
+                  grabCursor={false}
+                >
                   <SwiperSlide>
                     <div>
                       <img src={slider1.src} className="h-[360px] rounded-lg" alt="" />
@@ -197,7 +225,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 </div>
               </div>
               <div className="flex justify-between items-center w-full lg:w-1/2">
-                <div className="pt-8 xl:pt-0">
+                <div className="pt-8 md:pt-0">
                   <Typography className="text-white py-2">Links</Typography>
                   <ul>
                     <li>
@@ -245,7 +273,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   </ul>
                 </div>
 
-                <div className="pt-8 xl:pt-0">
+                <div className="pt-8 md:pt-0">
                   <Typography className="text-white py-2">Links</Typography>
                   <ul>
                     <li>
@@ -293,7 +321,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   </ul>
                 </div>
 
-                <div className="pt-8 xl:pt-0">
+                <div className="pt-8 md:pt-0">
                   <Typography className="text-white py-2">Links</Typography>
                   <ul>
                     <li>
@@ -342,8 +370,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 </div>
               </div>
             </div>
-            <div className="border-t border-title-gray py-6 xl:flex justify-between items-center">
-              <div className="hidden xl:block">
+            <div className="border-t border-title-gray py-6 md:flex justify-between items-center">
+              <div className="hidden md:block">
                 <Typography>© 2024 We Are Liberating Societies Foundation. All rights reserved.</Typography>
               </div>
               <div>
@@ -365,7 +393,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   </li>
                 </ul>
               </div>
-              <div className="text-center pt-6 xl:hidden text-sm">
+              <div className="text-center pt-6 md:hidden text-sm">
                 <Typography>© 2024 We Are Liberating Societies Foundation. All rights reserved.</Typography>
               </div>
             </div>

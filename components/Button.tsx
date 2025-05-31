@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             : theme === "border"
             ? "border-2 border-primary text-primary"
             : "bg-primary text-white"
-        } rounded-[33px] px-6 py-4 font-size-bold cursor-pointer w-full xl:w-auto`}
+        } rounded-[33px] px-6 py-4 font-size-bold cursor-pointer w-full md:w-auto`}
       >
         {loading && (
           <svg

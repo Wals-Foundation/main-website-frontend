@@ -54,3 +54,23 @@ body {
 .font-size-bold {
   font-family: "ManropeBold";
 }
+
+.swiper-pagination {
+  bottom: 20px !important;
+  text-align: right; /* or center/left */
+}
+
+.swiper-pagination-bullet {
+  background-color: #ccc !important;
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #009ee2 !important;
+  width: 30px !important;
+  height: 5px !important;
+  border-radius: 5px !important;
+}

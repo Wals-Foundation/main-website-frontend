@@ -43,7 +43,7 @@ export default function Donate() {
         <Button
           title="Donate"
           type="submit"
-          className="xl:w-full"
+          className="md:w-full"
           loading={loading}
           onClick={() => {
             console.log(data.amount)
@@ -57,7 +57,7 @@ export default function Donate() {
 
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32">
+      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
         <div className="w-11/12 mx-auto">
           <div>
             <Typography type="Title" className="text-center">

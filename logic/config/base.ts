@@ -1,8 +1,8 @@
 import axios from "axios"
-import url from "./url"
+import { SERVER_URL } from "./url"
 
 const axiosInstance = axios.create({
-  baseURL: url.server, // Add your actual base URL
+  baseURL: SERVER_URL, // Add your actual base URL
 })
 
 export default axiosInstance

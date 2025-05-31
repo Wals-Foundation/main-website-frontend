@@ -6,7 +6,7 @@ import Typography from "@/components/Typography"
 import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/usePageHeadlines"
+import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import { CauseType, extractCausesByCode } from "@/utils/types"
 
 export default function Home() {
@@ -14,14 +14,10 @@ export default function Home() {
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const [loading, setLoading] = useState(false)
 
-  const data = useAppSelector((state) => state.usePageHeadlines)
-  const communityCausesData: any = data?.communityCausesData
-  const programsCausesData: any = data?.programsCausesData
-  const projectCausesData: any = data?.projectCausesData
-
-  const communityCauses = useMemo(() => extractCausesByCode(communityCausesData) || [], [])
-  const programCauses = useMemo(() => extractCausesByCode(programsCausesData) || [], [])
-  const projectCauses = useMemo(() => extractCausesByCode(projectCausesData) || [], [])
+  const causeData = useAppSelector((state) => state.useCauses)
+  const communityCauses = useMemo(() => extractCausesByCode(causeData?.communityCausesData) || [], [])
+  const programCauses = useMemo(() => extractCausesByCode(causeData?.programsCausesData) || [], [])
+  const projectCauses = useMemo(() => extractCausesByCode(causeData?.projectCausesData) || [], [])
 
   const causesData: Record<
     CauseType,
@@ -79,22 +75,22 @@ export default function Home() {
   return (
     <main className="bg-white">
       <section className="bg-white">
-        <div className="max-w-[1440px] mx-auto py-20 xl:px-12 bg-white">
+        <div className="max-w-[1440px] mx-auto py-20 md:px-12 bg-white">
           <div className="w-11/12 mx-auto">
-            <div className="py-1 px-10 xl:px-0">
+            <div className="py-1 px-10 md:px-0">
               <Typography type="Title" className="text-center text-[32px]">
                 Causes we are <br /> passionate about
               </Typography>
             </div>
 
-            <div className="hidden xl:block pt-4">
+            <div className="hidden md:block pt-4">
               <Typography className="text-center max-w-[688px] mx-auto">
                 Help us bring education, healthcare, and economic opportunities to underserved communities. Every donation creates
                 lasting change.
               </Typography>
             </div>
 
-            <div className="pt-3 xl:hidden block">
+            <div className="pt-3 md:hidden block">
               <Typography className="text-center mx-auto">
                 Donations should be made towards a specific community, program or project
               </Typography>
@@ -109,9 +105,9 @@ export default function Home() {
                     onClick={() => setActiveCause(tab)}
                     className={`${
                       activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
-                    } xl:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
+                    } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
                   >
-                    <Typography className="font-size-semibold xl:text-xl">{tab}</Typography>
+                    <Typography className="font-size-semibold md:text-xl">{tab}</Typography>
                   </div>
                 ))}
               </div>
@@ -135,7 +131,7 @@ export default function Home() {
                 </div>
 
                 {/* Mobile CTA */}
-                <div className="xl:hidden pt-10">
+                <div className="md:hidden pt-10">
                   <Button theme="secondary" title="View All Causes" />
                 </div>
               </>

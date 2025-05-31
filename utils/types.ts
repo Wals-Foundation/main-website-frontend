@@ -37,8 +37,10 @@ export type Slugs =
   | "about_donate_footer"
 
 export type PageContent = {
+  page: string
   headline: string
   subheadline: string
+  heroes: { image: { source: { url: string } } }[]
 }
 
 export type Finance = {
@@ -49,40 +51,60 @@ export type Finance = {
   type?: string
 }
 
+export type AboutOrganization = {
+  organisation_story?: string
+  organisation_mission?: string
+  organisation_vision?: string
+}
+
+export type AboutOrganizationValues = { title: string; explanation: string }
+
+export type AboutOrganizationApproach = { title: string; explanation: string }
+
 export type CauseType = "Communities" | "Programs" | "Projects"
 
-type RawCauseResponse = {
+export type RawCauseResponse = {
   data: {
-    id: number
-    code: string
-    cause: {
-      id: number
-      name: string
-      introduction: string
-      impact: string
-      problem: string
-      solution: string
+    id?: number
+    code?: string
+    cause?: {
+      id?: number
+      name?: string
+      introduction?: string
+      impact?: string
+      problem?: string
+      solution?: string
     }
   }[]
 }
 
-type NormalizedCause = {
-  id: number
-  name: string
-  introduction: string
-  impact: string
-  problem: string
-  solution: string
+export type NormalizedCause = {
+  id?: number
+  name?: string
+  cause?: {
+    community?: string
+    location?: string
+    address?: string
+    region?: string
+    district?: string
+    donationGoal?: string
+    totalDonated?: string
+    activities?: { title: string; expenditure: string; timeline: string; description: string }[]
+    remaining?: string
+    introduction?: string
+    impact?: string
+    problem?: string
+    solution?: string
+  }
 }
 
 export const extractCausesByCode = (response: RawCauseResponse): NormalizedCause[] => {
-  console.log(response)
   return response?.data?.map((item: any) => ({
     id: item.id,
-    name: item.cause.name,
-    introduction: item.cause.introduction,
-    impact: item.cause.impact,
-    problem: item.cause.problem,
-    solution: item.cause.solution,
+    name: item.cause?.name,
+    introduction: item.cause?.introduction,
+    impact: item.cause?.impact,
+    problem: item.cause?.problem,
+    solution: item.cause?.solution,
   }))
 }

@@ -6,7 +6,7 @@ import BlogCard from "@/components/BlogCard"
 export default function Blog() {
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 xl:pt-32">
+      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
         <div className="w-11/12 mx-auto">
           <div>
             <Typography type="Title" className="text-center">
@@ -18,7 +18,7 @@ export default function Blog() {
               <div className="w-full lg:max-w-[656px] rounded-xl">
                 <img src={training.src} alt="" className="w-full lg:w-auto lg:h-[461px] rounded-xl" />
               </div>
-              <div className="lg:max-w-[656px] pt-4 xl:pt-0">
+              <div className="lg:max-w-[656px] pt-4 md:pt-0">
                 <Typography
                   type="ParagraphHeader"
                   className="bg-transparent-blue text-primary flex flex-col items-center justify-center w-auto max-w-[118px] py-2"
@@ -26,7 +26,7 @@ export default function Blog() {
                   Newest Blog
                 </Typography>
                 <div>
-                  <div className="flex items-center pt-4 xl:pt-0 pb-2">
+                  <div className="flex items-center pt-4 md:pt-0 pb-2">
                     <Typography>11 Jan 2022</Typography>
                     <div className="px-2">
                       <Typography>•</Typography>
@@ -37,7 +37,7 @@ export default function Blog() {
                     <div className="pb-6">
                       <Typography
                         type="Custom"
-                        className="text-[32px] leading-10 xl:text-[48px] xl:leading-[56px] font-size-semibold"
+                        className="text-[32px] leading-10 md:text-[48px] md:leading-[56px] font-size-semibold"
                       >
                         Blog title heading will go here
                       </Typography>
