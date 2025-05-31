@@ -10,7 +10,7 @@ import slider2 from "@/assets/images/slider2.png"
 import slider3 from "@/assets/images/slider3.png"
 import slider4 from "@/assets/images/slider4.png"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay, Pagination } from "swiper/modules"
+import { Autoplay } from "swiper/modules"
 import { useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl } from "@/utils"
 
