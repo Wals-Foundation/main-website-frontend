@@ -20,7 +20,7 @@ const SliderContent: React.FC<SliderContentProps> = (props) => {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(#00000090, #00000090), url(${backgroundImageURL})`,
+        backgroundImage: `linear-gradient(#00000090, #00000090), url(${backgroundImageURL || ""})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         position: "relative",

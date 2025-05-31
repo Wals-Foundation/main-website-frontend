@@ -9,7 +9,6 @@ import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
 import { createSlugMapForControl } from "@/utils"
-
 import { usePathname } from "next/navigation"
 import { ENVIRONMENT } from "@/logic/config/url"
 
@@ -108,11 +107,7 @@ const Header: React.FC = ({}) => {
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
               >
-                <img
-                  src={mobileMenuOpen ? closeIcon.src : menu.src}
-                  alt={mobileMenuOpen ? "Close menu" : "Open menu"}
-                  className="w-6 h-6"
-                />
+                <img src={menu.src} alt={"Open menu"} className="w-6 h-6" />
               </button>
 
               {/* Desktop Navigation */}
@@ -211,10 +206,13 @@ const Header: React.FC = ({}) => {
                 }`}
               >
                 <div className="p-6 h-full flex flex-col">
-                  <div className="mb-8">
+                  <div className="mb-8 flex justify-between items-center">
                     <Link href="/" onClick={handleLinkClick}>
                       <img src={logo.src} alt="Wals Logo" className="w-16 h-auto" />
                     </Link>
+                    <div onClick={() => setMobileMenuOpen(false)}>
+                      <img src={closeIcon.src} />
+                    </div>
                   </div>
 
                   <ul className="flex-1 flex flex-col space-y-6">

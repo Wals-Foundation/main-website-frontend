@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-
 import Button from "@/components/Button"
 import Typography from "@/components/Typography"
 import CausesCard from "@/components/CausesCard"

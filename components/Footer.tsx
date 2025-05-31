@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
 
   return (
-    <footer>
+    <footer className="w-full">
       <section className="bg-white">
         <div className="py-10 px-3 md:px-12">
           {pageControlSlugMap.get("home_donate_footer") && (
@@ -197,10 +197,11 @@ const Footer: React.FC<FooterProps> = ({}) => {
           )}
         </div>
       </section>
-      <section className="bg-header">
+
+      <section className="bg-header w-full">
         <div className="max-w-[1440px] mx-auto py-20 bg-bg-header">
           <div className="w-11/12 mx-auto">
-            <div className="lg:flex justify-between items-start pb-10 space-x-6">
+            <div className="lg:flex justify-between items-start pb-10 lg:space-x-6">
               <div className="lg:max-w-[500px]">
                 <div>
                   <img src={logo.src} alt="Wals Logo" className="w-[95px]" />
@@ -224,7 +225,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   </Typography>
                 </div>
               </div>
-              <div className="flex justify-between items-center w-full lg:w-1/2">
+
+              <div className="flex justify-between items-center lg:w-1/2">
                 <div className="pt-8 md:pt-0">
                   <Typography className="text-white py-2">Links</Typography>
                   <ul>

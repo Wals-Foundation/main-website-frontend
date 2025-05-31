@@ -127,7 +127,7 @@ export default function Home() {
               homeData.heroes.map((item, n) => (
                 <SwiperSlide key={n}>
                   <SliderContent
-                    backgroundImageURL={`${IMAGE_URL}${item.image.source.url}`}
+                    backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url}`}
                     displayHeaderContent={!!pageControlSlugMap.get("home_hero_values_card_1")}
                     displaySubContent={!!pageControlSlugMap.get("home_hero_values_card_2")}
                     title="Since 2010, our programs have <br /> empowered over 500 individuals."
