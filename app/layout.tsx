@@ -7,8 +7,14 @@ import Footer from "@/components/Footer"
 import ReduxProvider from "@/logic/store/ReduxProvider"
 
 export const metadata: Metadata = {
-  title: "Wals Foundation",
-  description: "Wals foundation here",
+  title: "Wals Foundation – Empowering Communities, Transforming Lives",
+  description:
+    "Wals Foundation is a nonprofit organization dedicated to uplifting underserved communities through education, healthcare, and sustainable development initiatives.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 }
 
 export default function RootLayout({

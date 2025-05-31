@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import blog1 from "@/assets/images/blog1.svg"
@@ -35,8 +34,18 @@ export default function CauseDetailPage() {
     }
   }, [causeType, id])
 
-  if (loading) return <p className="p-4">Loading...</p>
-  if (!causeData) return <p className="p-4 text-red-500 text-center">No data found</p>
+  if (loading)
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <h1 className="px-4 text-center text-2xl">Loading...</h1>
+      </div>
+    )
+  if (!causeData)
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <h1 className="p-4 text-red-500 text-center text-2xl">No cause found</h1>
+      </div>
+    )
 
   return (
     <main className="max-w-[1440px] mx-auto px-4 md:px-20 py-10">

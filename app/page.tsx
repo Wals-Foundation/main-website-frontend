@@ -22,7 +22,7 @@ import { CauseType, extractCausesByCode } from "@/utils/types"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import Link from "next/link"
 import SliderContent from "@/components/SliderContent"
-import { IMAGE_URL } from "@/logic/config/url"
+import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
@@ -31,25 +31,13 @@ export default function Home() {
   const causeData = useAppSelector((state) => state.useCauses)
   const dispatch = useAppDispatch()
 
-  const communityCausesData: any = causeData?.communityCausesData
-  const programsCausesData: any = causeData?.programsCausesData
-  const projectCausesData: any = causeData?.projectCausesData
-
   const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
   const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
-  const communityCauses = useMemo(() => extractCausesByCode(communityCausesData) || [], [])
-  const programCauses = useMemo(() => extractCausesByCode(programsCausesData) || [], [])
-  const projectCauses = useMemo(() => extractCausesByCode(projectCausesData) || [], [])
+  const communityCauses = useMemo(() => extractCausesByCode(causeData?.communityCausesData) || [], [])
+  const programCauses = useMemo(() => extractCausesByCode(causeData?.programsCausesData) || [], [])
+  const projectCauses = useMemo(() => extractCausesByCode(causeData?.projectCausesData) || [], [])
 
-  const causesData: Record<
-    CauseType,
-    {
-      id: string
-      title: string
-      subtitle: string
-      content: string
-    }[]
-  > = {
+  const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string }[]> = {
     Communities: communityCauses.map((item: any) => ({
       id: item?.id ?? "0",
       title: item?.name ?? "Untitled Cause",
@@ -110,9 +98,17 @@ export default function Home() {
               long-term plans supported through collaboration and partnerships.`}
               </Typography>
             )}
-            <div className="pt-6 md:pt-4 md:flex items-center">
-              {pageControlSlugMap.get("home_subheadline_button_1") && <Button theme="secondary" title="Learn More" />}
-              {pageControlSlugMap.get("home_subheadline_button_2") && <Button theme="secondary" title="Learn More" />}
+            <div className="pt-6 md:pt-4 md:flex items-center space-x-2">
+              {pageControlSlugMap.get("home_subheadline_button_1") && (
+                <Link href={ENVIRONMENT === "development" ? "/donate" : "/donate.html"}>
+                  <Button title="Donate now" />
+                </Link>
+              )}
+              {pageControlSlugMap.get("home_subheadline_button_2") && (
+                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"}>
+                  <Button theme="secondary" title="Learn More" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -167,7 +163,9 @@ export default function Home() {
                 </span>
               </Typography>
               <div className="pt-8 md:pt-4">
-                <Button theme="secondary" title="Learn More About Us" />
+                <Link href={ENVIRONMENT === "development" ? "/about" : "/about.html"}>
+                  <Button theme="secondary" title="Learn More About Us" />
+                </Link>
               </div>
             </div>
           </div>
@@ -215,7 +213,7 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              {loading ? (
+              {loading || !causesData[activeCause].length ? (
                 <Typography className="text-center">Loading...</Typography>
               ) : (
                 <div className="space-y-6 mt-6">
@@ -225,17 +223,18 @@ export default function Home() {
                       title={cause.title}
                       subtitle={cause.subtitle}
                       content={cause.content}
-                      id={`cause?causeType=${activeCause}&id=${cause?.id || ""}`}
+                      id={`causeType=${activeCause}&id=${cause?.id || ""}`}
+                      displayDonateButton={!!pageControlSlugMap.get("causes_donate_footer")}
                     />
                   ))}
                 </div>
               )}
 
               <div className="pt-10">
-                <Link href="/causes" className="md:hidden">
+                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"} className="md:hidden">
                   <Button theme="secondary" title="View All Causes" />
                 </Link>
-                <Link href="/causes" className="hidden md:flex justify-center">
+                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"} className="hidden md:flex justify-center">
                   <Button theme="border" title="View All Causes" />
                 </Link>
               </div>

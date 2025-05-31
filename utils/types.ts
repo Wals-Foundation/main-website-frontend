@@ -35,6 +35,11 @@ export type Slugs =
   | "about_team"
   | "about_faq"
   | "about_donate_footer"
+  | "causes_headline"
+  | "cause_subheadline"
+  | "causes_list"
+  | "causes_donate_footer"
+  | "causes_gallery"
 
 export type PageContent = {
   page: string

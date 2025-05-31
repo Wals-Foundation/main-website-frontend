@@ -108,7 +108,7 @@ export default function About() {
         </section>
       )}
 
-      {loading ? (
+      {loading || !pageControlSlugMap.get("about_our_story") ? (
         <Typography className="text-center">Please wait...</Typography>
       ) : (
         <>

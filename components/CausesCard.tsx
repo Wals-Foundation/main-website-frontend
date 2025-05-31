@@ -13,11 +13,12 @@ interface CausesCardProps {
   title?: string
   subtitle?: ReactNode
   content?: ReactNode
+  displayDonateButton?: boolean
   link?: string
 }
 
 const CausesCard: React.FC<CausesCardProps> = (props) => {
-  const { title, subtitle, content, id } = props
+  const { title, subtitle, content, id, displayDonateButton } = props
   const data = useAppSelector((state) => state.usePageHeadlines)
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
 
@@ -38,13 +39,15 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
           {pageControlSlugMap.get("cause_card_button_2") && (
             <div className="pt-4 lg:flex items-center">
               <div className="pb-4 lg:pb-0 lg:pr-3">
-                <Link href={`/${ENVIRONMENT === "development" ? "causes" : "causes.html"}/${id}`}>
+                <Link href={`/${ENVIRONMENT === "development" ? "causes/cause?" : "causes/cause.html?"}${id}`}>
                   <Button theme="primary" title="Read More" />
                 </Link>
               </div>
-              <Link href="/donate">
-                <Button theme="secondary" title="Make a Donation" />
-              </Link>
+              {displayDonateButton && (
+                <Link href="/donate">
+                  <Button theme="secondary" title="Make a Donation" />
+                </Link>
+              )}
             </div>
           )}
         </div>
