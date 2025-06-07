@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { Fragment, useEffect, useRef, useState } from "react"
 import Button from "./Button"

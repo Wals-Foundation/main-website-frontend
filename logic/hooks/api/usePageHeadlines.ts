@@ -40,7 +40,7 @@ export const getPageHeadlinesData = createAsyncThunk("usePageHeadlines/getPageHe
       errorMessage = error.message
     }
 
-    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    console?.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
     return rejectWithValue({ message: errorMessage, status: statusCode })
   }
 })
