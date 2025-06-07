@@ -4,7 +4,7 @@
 import Button from "@/components/Button"
 import Typography from "@/components/Typography"
 import CausesCard from "@/components/CausesCard"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import { CauseType, extractCausesByCode } from "@/utils/types"
@@ -16,20 +16,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
   const causeData = useAppSelector((state) => state.useCauses)
-  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
-  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
-  const communityCauses = useMemo(
-    () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
-    [causeData?.communityCausesData]
-  )
-  const programCauses = useMemo(
-    () => extractCausesByCode(causeData?.programsCausesData || {}) || [],
-    [causeData?.programsCausesData]
-  )
-  const projectCauses = useMemo(
-    () => extractCausesByCode(causeData?.projectCausesData || {}) || [],
-    [causeData?.projectCausesData]
-  )
+  const pageControlSlugMap = createSlugMapForControl(data?.pageControl || [])
+  const pageHeadlinesSlugMap = createSlugMapForPages(data?.pageHeadlines || [])
+  const communityCauses = extractCausesByCode(causeData?.communityCausesData || {}) || []
+  const programCauses = extractCausesByCode(causeData?.programsCausesData || {}) || []
+  const projectCauses = extractCausesByCode(causeData?.projectCausesData || {}) || []
 
   const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string }[]> = {
     Communities: communityCauses.map((item: any) => ({
