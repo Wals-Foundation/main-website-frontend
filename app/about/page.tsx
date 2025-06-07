@@ -14,7 +14,7 @@ import ImpactCard from "@/components/ImpactCard"
 import FAQ from "@/components/FAQ"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import {
   getAboutOrganizationApproach,
   getAboutOrganizationData,
@@ -30,8 +30,8 @@ export default function About() {
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
   const aboutData = useAppSelector((state) => state.useAboutOrganization)
-  const pageControlSlugMap = createSlugMapForControl(data?.pageControl || [])
-  const pageHeadlinesSlugMap = createSlugMapForPages(data?.pageHeadlines || [])
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
 
   const getAllData = async () => {
     setLoading(true)

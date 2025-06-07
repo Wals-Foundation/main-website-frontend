@@ -13,7 +13,7 @@ import { createSlugMapForControl } from "@/utils"
 import { usePathname } from "next/navigation"
 import { ENVIRONMENT } from "@/logic/config/url"
 
-const Header: React.FC = ({}) => {
+const Header: React.FC = () => {
   const dispatch = useAppDispatch()
   const data = useAppSelector((state) => state.usePageHeadlines)
   const [loading, setLoading] = useState(false)
@@ -22,6 +22,7 @@ const Header: React.FC = ({}) => {
   const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
+  const pathname = usePathname()
 
   const getAllData = async () => {
     setLoading(true)
@@ -41,12 +42,8 @@ const Header: React.FC = ({}) => {
     }
   }, [])
 
-  // Close mobile menu when clicking on a link
-  const handleLinkClick = () => {
-    setMobileMenuOpen(false)
-  }
+  const handleLinkClick = () => setMobileMenuOpen(false)
 
-  // Close mobile menu when clicking outside or pressing Escape
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
@@ -69,26 +66,28 @@ const Header: React.FC = ({}) => {
     }
   }, [])
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto"
     return () => {
       document.body.style.overflow = "auto"
     }
   }, [mobileMenuOpen])
 
-  const pathname = usePathname()
+  const normalizeLink = (link?: string) => {
+    if (!link) return "/"
+    return ENVIRONMENT === "development" || link === "/" ? link : `${link}.html`
+  }
+
+  const isActiveLink = (link?: string) => {
+    const normalized = normalizeLink(link)
+    return pathname === normalized
+  }
 
   return (
     <>
       {loading && !pageControlSlugMap.get("main_nav") ? (
         <div className="fixed top-0 left-0 h-screen bg-blue-300 w-screen z-50 flex flex-col justify-center items-center">
-          <p>Loading</p>{" "}
+          <p>Loading</p>
         </div>
       ) : (
         pageControlSlugMap.get("main_nav") && (
@@ -100,7 +99,6 @@ const Header: React.FC = ({}) => {
                 </Link>
               </div>
 
-              {/* Mobile menu button */}
               <button
                 id="menu-button"
                 className="md:hidden p-2 z-50"
@@ -108,49 +106,42 @@ const Header: React.FC = ({}) => {
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
               >
-                <img src={menu.src} alt={"Open menu"} className="w-6 h-6" />
+                <img src={menu.src} alt="Open menu" className="w-6 h-6" />
               </button>
 
               {/* Desktop Navigation */}
               <ul className="hidden md:flex justify-between items-center">
                 {!!data.mainMenus?.length &&
-                  data.mainMenus?.map((items, n) => (
-                    <Fragment key={n}>
-                      {items.isEnabled && (
-                        <li>
-                          <Link
-                            href={
-                              items.destination?.link !== "/"
-                                ? items.destination?.link
-                                : ENVIRONMENT == "development"
-                                ? items.destination?.link
-                                : items.destination?.link + ".html"
-                            }
+                  data.mainMenus.map((items, n) => {
+                    if (!items.isEnabled) return null
+                    const finalLink = normalizeLink(items.destination?.link)
+
+                    return (
+                      <li key={n}>
+                        <Link href={finalLink}>
+                          <Typography
+                            type="Custom"
+                            className={`${
+                              isActiveLink(items.destination?.link) ? "text-primary" : ""
+                            } hover:text-primary cursor-pointer mx-3`}
                           >
-                            <Typography
-                              type="Custom"
-                              className={`${
-                                (pathname == items.destination?.link || pathname == items.destination.link + ".html") &&
-                                "text-primary"
-                              } hover:text-primary cursor-pointer mx-3`}
-                            >
-                              {items.text}
-                            </Typography>
-                          </Link>
-                        </li>
-                      )}
-                    </Fragment>
-                  ))}
+                            {items.text}
+                          </Typography>
+                        </Link>
+                      </li>
+                    )
+                  })}
               </ul>
+
               {pageControlSlugMap.get("get_involved_donate") && (
                 <div className="hidden md:block">
-                  <Link href={ENVIRONMENT == "development" ? "/donate" : "/donate.html"}>
+                  <Link href={normalizeLink("/donate")}>
                     <Button title="Donate Now" />
                   </Link>
                 </div>
               )}
 
-              {/* Mobile Menu Overlay and Side Panel */}
+              {/* Mobile Menu Overlay */}
               <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
                   mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -158,6 +149,7 @@ const Header: React.FC = ({}) => {
                 onClick={() => setMobileMenuOpen(false)}
               />
 
+              {/* Mobile Menu Panel */}
               <div
                 ref={mobileMenuRef}
                 className={`fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
@@ -170,44 +162,36 @@ const Header: React.FC = ({}) => {
                       <img src={logo.src} alt="Wals Logo" className="w-16 h-auto" />
                     </Link>
                     <div onClick={() => setMobileMenuOpen(false)}>
-                      <img src={closeIcon.src} />
+                      <img src={closeIcon.src} alt="Close" />
                     </div>
                   </div>
 
                   <ul className="flex-1 flex flex-col space-y-6">
                     {!!data.mainMenus?.length &&
-                      data.mainMenus?.map((items, n) => (
-                        <Fragment key={n}>
-                          {items.isEnabled && (
-                            <li>
-                              <Link
-                                href={
-                                  items.destination?.link !== "/"
-                                    ? items.destination?.link
-                                    : ENVIRONMENT == "development"
-                                    ? items.destination?.link
-                                    : items.destination?.link + ".html"
-                                }
-                                onClick={handleLinkClick}
+                      data.mainMenus.map((items, n) => {
+                        if (!items.isEnabled) return null
+                        const finalLink = normalizeLink(items.destination?.link)
+
+                        return (
+                          <li key={n}>
+                            <Link href={finalLink} onClick={handleLinkClick}>
+                              <Typography
+                                type="Custom"
+                                className={`${
+                                  isActiveLink(items.destination?.link) ? "text-primary" : ""
+                                } hover:text-primary cursor-pointer text-lg`}
                               >
-                                <Typography
-                                  type="Custom"
-                                  className={`${
-                                    (pathname == items.destination?.link || pathname == items.destination.link + ".html") &&
-                                    "text-primary"
-                                  } hover:text-primary cursor-pointer text-lg`}
-                                >
-                                  {items.text}
-                                </Typography>
-                              </Link>
-                            </li>
-                          )}
-                        </Fragment>
-                      ))}
+                                {items.text}
+                              </Typography>
+                            </Link>
+                          </li>
+                        )
+                      })}
                   </ul>
+
                   {pageControlSlugMap.get("get_involved_donate") && (
                     <div className="mt-auto pt-6">
-                      <Link href={ENVIRONMENT == "development" ? "/donate" : "/donate.html"} onClick={handleLinkClick}>
+                      <Link href={normalizeLink("/donate")} onClick={handleLinkClick}>
                         <Button title="Donate Now" className="w-full" />
                       </Link>
                     </div>

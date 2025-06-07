@@ -17,7 +17,7 @@ import Testimonies from "@/components/Testimonies"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import CausesCard from "@/components/CausesCard"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { CauseType, extractCausesByCode } from "@/utils/types"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import Link from "next/link"
@@ -30,11 +30,20 @@ export default function Home() {
   const data = useAppSelector((state) => state.usePageHeadlines)
   const causeData = useAppSelector((state) => state.useCauses)
   const dispatch = useAppDispatch()
-  const pageControlSlugMap = createSlugMapForControl(data?.pageControl || [])
-  const pageHeadlinesSlugMap = createSlugMapForPages(data?.pageHeadlines || [])
-  const communityCauses = extractCausesByCode(causeData?.communityCausesData || {}) || []
-  const programCauses = extractCausesByCode(causeData?.programsCausesData || {}) || []
-  const projectCauses = extractCausesByCode(causeData?.projectCausesData || {}) || []
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
+  const communityCauses = useMemo(
+    () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
+    [causeData?.communityCausesData]
+  )
+  const programCauses = useMemo(
+    () => extractCausesByCode(causeData?.programsCausesData || {}) || [],
+    [causeData?.programsCausesData]
+  )
+  const projectCauses = useMemo(
+    () => extractCausesByCode(causeData?.projectCausesData || {}) || [],
+    [causeData?.projectCausesData]
+  )
 
   const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string }[]> = {
     Communities: communityCauses.map((item: any) => ({
