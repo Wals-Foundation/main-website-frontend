@@ -22,7 +22,8 @@ import {
 } from "@/logic/hooks/api/useAboutOrganization"
 import { Autoplay, Pagination } from "swiper/modules"
 import SliderContent from "@/components/SliderContent"
-import { IMAGE_URL } from "@/logic/config/url"
+import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
+import Link from "next/link"
 
 export default function About() {
   const dispatch = useAppDispatch()
@@ -81,7 +82,9 @@ export default function About() {
             {pageControlSlugMap.get("about_subheadline_button_1") && (
               <div className="pt-6 md:pt-4 md:flex items-center">
                 <div className="pb-4 md:pr-3 md:pb-0">
-                  <Button theme="border" title="Get Involve" />
+                  <Link href={ENVIRONMENT == "development" ? "/contact" : "/contact.html"}>
+                    <Button theme="border" title="Get Involve" />
+                  </Link>
                 </div>
               </div>
             )}

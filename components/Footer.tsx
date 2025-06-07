@@ -55,8 +55,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   speed={800}
                   autoplay={{ delay: 0, disableOnInteraction: false }}
                   modules={[Autoplay]}
-                  allowTouchMove={false}
-                  grabCursor={false}
                 >
                   <SwiperSlide>
                     <div>
@@ -94,8 +92,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   speed={800}
                   autoplay={{ delay: 0, disableOnInteraction: false }}
                   modules={[Autoplay]}
-                  allowTouchMove={false}
-                  grabCursor={false}
                 >
                   <SwiperSlide>
                     <div>
@@ -148,8 +144,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
                   speed={800}
                   autoplay={{ delay: 0, disableOnInteraction: false }}
                   modules={[Autoplay]}
-                  allowTouchMove={false}
-                  grabCursor={false}
                 >
                   <SwiperSlide>
                     <div>

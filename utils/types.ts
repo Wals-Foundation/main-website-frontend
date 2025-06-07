@@ -41,6 +41,13 @@ export type Slugs =
   | "causes_donate_footer"
   | "causes_gallery"
 
+export type Menu = {
+  id: number
+  text: string
+  isEnabled: boolean
+  destination: { link: string }
+}
+
 export type PageContent = {
   page: string
   headline: string

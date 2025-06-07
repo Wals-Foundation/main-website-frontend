@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from "react"
+import React, { Fragment, useEffect, useRef, useState } from "react"
 import Button from "./Button"
 import logo from "@/assets/images/logo.svg"
 import menu from "@/assets/images/Menu.png"
@@ -7,7 +7,7 @@ import closeIcon from "@/assets/images/close.svg"
 import Typography from "./Typography"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
+import { getMainMenus, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
 import { createSlugMapForControl } from "@/utils"
 import { usePathname } from "next/navigation"
 import { ENVIRONMENT } from "@/logic/config/url"
@@ -25,7 +25,7 @@ const Header: React.FC = ({}) => {
   const getAllData = async () => {
     setLoading(true)
     try {
-      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData())])
+      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData()), dispatch(getMainMenus())])
     } catch (error) {
       console.error("Error fetching data:", error)
     } finally {
@@ -112,76 +112,34 @@ const Header: React.FC = ({}) => {
 
               {/* Desktop Navigation */}
               <ul className="hidden md:flex justify-between items-center">
-                <li>
-                  <Link href={"/"}>
-                    <Typography
-                      type="Custom"
-                      className={`${pathname == "/" && "text-primary"} hover:text-primary cursor-pointer mx-3`}
-                    >
-                      Home
-                    </Typography>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={ENVIRONMENT == "development" ? "/about" : "/about.html"}>
-                    <Typography
-                      type="Custom"
-                      className={`${
-                        (pathname == "/about" || pathname == "/about.html") && "text-primary"
-                      } hover:text-primary cursor-pointer mx-3`}
-                    >
-                      About
-                    </Typography>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={ENVIRONMENT == "development" ? "/causes" : "/causes.html"}>
-                    <Typography
-                      type="Custom"
-                      className={`${
-                        (pathname == "/causes" || pathname == "/causes.html") && "text-primary"
-                      } hover:text-primary cursor-pointer mx-3`}
-                    >
-                      Causes
-                    </Typography>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={ENVIRONMENT == "development" ? "/financials" : "/financials.html"}>
-                    <Typography
-                      type="Custom"
-                      className={`${
-                        (pathname == "/financials" || pathname == "/financials.html") && "text-primary"
-                      } hover:text-primary cursor-pointer mx-3`}
-                    >
-                      Financials
-                    </Typography>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={ENVIRONMENT == "development" ? "/blog" : "/blog.html"}>
-                    <Typography
-                      type="Custom"
-                      className={`${
-                        (pathname == "/blog" || pathname == "/blog.html") && "text-primary"
-                      } hover:text-primary cursor-pointer mx-3`}
-                    >
-                      Blog
-                    </Typography>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={ENVIRONMENT == "development" ? "/contact" : "/contact.html"}>
-                    <Typography
-                      type="Custom"
-                      className={`${
-                        (pathname == "/contact" || pathname == "/contact.html") && "text-primary"
-                      } hover:text-primary cursor-pointer mx-3`}
-                    >
-                      Contact
-                    </Typography>
-                  </Link>
-                </li>
+                {!!data.mainMenus?.length &&
+                  data.mainMenus?.map((items, n) => (
+                    <Fragment key={n}>
+                      {items.isEnabled && (
+                        <li>
+                          <Link
+                            href={
+                              items.destination?.link !== "/"
+                                ? items.destination?.link
+                                : ENVIRONMENT == "development"
+                                ? items.destination?.link
+                                : items.destination?.link + ".html"
+                            }
+                          >
+                            <Typography
+                              type="Custom"
+                              className={`${
+                                (pathname == items.destination?.link || pathname == items.destination.link + ".html") &&
+                                "text-primary"
+                              } hover:text-primary cursor-pointer mx-3`}
+                            >
+                              {items.text}
+                            </Typography>
+                          </Link>
+                        </li>
+                      )}
+                    </Fragment>
+                  ))}
               </ul>
               {pageControlSlugMap.get("get_involved_donate") && (
                 <div className="hidden md:block">
@@ -216,78 +174,35 @@ const Header: React.FC = ({}) => {
                   </div>
 
                   <ul className="flex-1 flex flex-col space-y-6">
-                    <li>
-                      <Link href={"/"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/" || pathname === "/") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          Home
-                        </Typography>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={ENVIRONMENT == "development" ? "/about" : "/about.html"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/about" || pathname === "/about.html") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          About
-                        </Typography>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={ENVIRONMENT == "development" ? "/causes" : "/causes.html"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/causes" || pathname === "/causes.html") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          Causes
-                        </Typography>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={ENVIRONMENT == "development" ? "/financials" : "/financials.html"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/causes" || pathname === "/causes.html") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          Financials
-                        </Typography>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={ENVIRONMENT == "development" ? "/blog" : "/blog.html"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/blog" || pathname === "/blog.html") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          Blog
-                        </Typography>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={ENVIRONMENT == "development" ? "/contact" : "/contact.html"} onClick={handleLinkClick}>
-                        <Typography
-                          type="Custom"
-                          className={`${
-                            (pathname == "/contact" || pathname === "/contact.html") && "text-primary"
-                          } hover:text-primary cursor-pointer text-lg`}
-                        >
-                          Contact
-                        </Typography>
-                      </Link>
-                    </li>
+                    {!!data.mainMenus?.length &&
+                      data.mainMenus?.map((items, n) => (
+                        <Fragment key={n}>
+                          {items.isEnabled && (
+                            <li>
+                              <Link
+                                href={
+                                  items.destination?.link !== "/"
+                                    ? items.destination?.link
+                                    : ENVIRONMENT == "development"
+                                    ? items.destination?.link
+                                    : items.destination?.link + ".html"
+                                }
+                                onClick={handleLinkClick}
+                              >
+                                <Typography
+                                  type="Custom"
+                                  className={`${
+                                    (pathname == items.destination?.link || pathname == items.destination.link + ".html") &&
+                                    "text-primary"
+                                  } hover:text-primary cursor-pointer text-lg`}
+                                >
+                                  {items.text}
+                                </Typography>
+                              </Link>
+                            </li>
+                          )}
+                        </Fragment>
+                      ))}
                   </ul>
                   {pageControlSlugMap.get("get_involved_donate") && (
                     <div className="mt-auto pt-6">

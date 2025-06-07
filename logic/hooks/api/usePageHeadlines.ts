@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/logic/config/base"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { PageContent, Slugs } from "@/utils/types"
+import { Menu, PageContent, Slugs } from "@/utils/types"
 import axios from "axios"
 
 type InitialState = {
   loading: boolean
   pageHeadlines: PageContent[]
+  mainMenus: Menu[]
   pageControl: { key: Slugs; isLive: boolean }[]
   error: string
 }
@@ -14,6 +15,7 @@ type InitialState = {
 const initialState: InitialState = {
   loading: false,
   pageControl: [],
+  mainMenus: [],
   pageHeadlines: [],
   error: "",
 }
@@ -66,6 +68,29 @@ export const getPageControlData = createAsyncThunk("usePageHeadlines/getPageCont
   }
 })
 
+export const getMainMenus = createAsyncThunk("usePageHeadlines/getMainMenus", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`main-menu-items?pagination[pageSize]=1000&populate=*`)
+    if (response.data) {
+      return response.data?.data
+    }
+  } catch (error) {
+    let errorMessage = "An unknown error occurred"
+    let statusCode: number | undefined
+
+    // Safely handling Axios errors
+    if (axios.isAxiosError(error)) {
+      statusCode = error.response?.status // Safely access status
+      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+    } else if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    return rejectWithValue({ message: errorMessage, status: statusCode })
+  }
+})
+
 const usePageHeadlinesSlice = createSlice({
   name: "usePageHeadlines",
   initialState,
@@ -91,6 +116,18 @@ const usePageHeadlinesSlice = createSlice({
       state.pageControl = action.payload
     })
     builder.addCase(getPageControlData.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message || "Users were not created"
+    })
+
+    builder.addCase(getMainMenus.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getMainMenus.fulfilled, (state, action) => {
+      state.loading = false
+      state.mainMenus = action.payload
+    })
+    builder.addCase(getMainMenus.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message || "Users were not created"
     })
