@@ -110,8 +110,10 @@ export type NormalizedCause = {
   }
 }
 
-export const extractCausesByCode = (response: RawCauseResponse): NormalizedCause[] => {
-  return response?.data?.map((item: any) => ({
+export const extractCausesByCode = (response?: RawCauseResponse): NormalizedCause[] => {
+  if (!response?.data) return []
+
+  return response.data.map((item: any) => ({
     id: item.id,
     name: item.cause?.name,
     introduction: item.cause?.introduction,
