@@ -30,8 +30,8 @@ export default function About() {
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
   const aboutData = useAppSelector((state) => state.useAboutOrganization)
-  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
-  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
 
   const getAllData = async () => {
     setLoading(true)

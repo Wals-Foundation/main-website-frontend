@@ -16,11 +16,20 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
   const causeData = useAppSelector((state) => state.useCauses)
-  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
-  const communityCauses = useMemo(() => extractCausesByCode(causeData?.communityCausesData) || [], [])
-  const programCauses = useMemo(() => extractCausesByCode(causeData?.programsCausesData) || [], [])
-  const projectCauses = useMemo(() => extractCausesByCode(causeData?.projectCausesData) || [], [])
-  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
+  const communityCauses = useMemo(
+    () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
+    [causeData?.communityCausesData]
+  )
+  const programCauses = useMemo(
+    () => extractCausesByCode(causeData?.programsCausesData || {}) || [],
+    [causeData?.programsCausesData]
+  )
+  const projectCauses = useMemo(
+    () => extractCausesByCode(causeData?.projectCausesData || {}) || [],
+    [causeData?.projectCausesData]
+  )
 
   const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string }[]> = {
     Communities: communityCauses.map((item: any) => ({
