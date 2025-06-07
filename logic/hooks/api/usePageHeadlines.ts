@@ -70,7 +70,7 @@ export const getPageControlData = createAsyncThunk("usePageHeadlines/getPageCont
 
 export const getMainMenus = createAsyncThunk("usePageHeadlines/getMainMenus", async (_, { rejectWithValue }) => {
   try {
-    const response = await axiosInstance.get(`main-menu-items?pagination[pageSize]=1000&populate=*`)
+    const response = await axiosInstance.get(`main-menu-items?pagination[pageSize]=1000&populate=*&sort=id:desc`)
     if (response.data) {
       return response.data?.data
     }
