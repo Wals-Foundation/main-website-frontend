@@ -86,6 +86,8 @@ export default function Home() {
     }
   }, [])
 
+  const swiperRef = useRef<any>(null)
+
   const homeData = pageHeadlinesSlugMap.get("home")
 
   return (
@@ -128,6 +130,7 @@ export default function Home() {
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
             loop={true}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
           >
@@ -136,6 +139,7 @@ export default function Home() {
                 <SwiperSlide key={n}>
                   <SliderContent
                     backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url}`}
+                    setSwiper={swiperRef}
                     displayHeaderContent={!!pageControlSlugMap.get("home_hero_values_card_1")}
                     displaySubContent={!!pageControlSlugMap.get("home_hero_values_card_2")}
                     title="Since 2010, our programs have <br /> empowered over 500 individuals."

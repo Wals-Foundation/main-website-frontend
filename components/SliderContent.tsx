@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react"
 import Typography from "./Typography"
 import { getYouTubeThumbnail } from "@/utils"
@@ -10,6 +11,7 @@ interface SliderContentProps {
   values?: { title: string; content: string }[]
   displayHeaderContent?: boolean
   displaySubContent?: boolean
+  setSwiper?: React.MutableRefObject<any>
   videoURL?: string
 }
 
@@ -78,7 +80,13 @@ const SliderContent: React.FC<SliderContentProps> = (props) => {
                       allowFullScreen
                     />
                   ) : (
-                    <div className="relative cursor-pointer" onClick={() => setShowVideo(true)}>
+                    <div
+                      className="relative cursor-pointer"
+                      onClick={() => {
+                        setShowVideo(true)
+                        props.setSwiper?.current?.autoplay?.stop()
+                      }}
+                    >
                       <img
                         src={getYouTubeThumbnail(videoURL || "") || "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg"}
                         alt="Video thumbnail"
