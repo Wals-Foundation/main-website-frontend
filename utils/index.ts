@@ -15,7 +15,7 @@ export function createSlugMapForPages(array: PageContent[]): Map<string, PageCon
   }
   return new Map(
     array.map((item) => [
-      item.page,
+      item.page?.toLowerCase(),
       { page: item.page, headline: item.headline, subheadline: item.subheadline, heroes: item.heroes },
     ])
   )

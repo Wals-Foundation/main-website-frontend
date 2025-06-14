@@ -45,7 +45,7 @@ export type Menu = {
   id: number
   text: string
   isEnabled: boolean
-  destination: { link: string }
+  destination: { relativeUrl: string }
 }
 
 export type PageContent = {

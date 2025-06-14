@@ -30,8 +30,8 @@ export default function About() {
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
   const aboutData = useAppSelector((state) => state.useAboutOrganization)
-  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl), [])
-  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines), [])
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data.pageControl) || [], [])
+  const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data.pageHeadlines) || [], [])
 
   const getAllData = async () => {
     setLoading(true)
@@ -102,9 +102,9 @@ export default function About() {
             pagination={{ clickable: true }}
           >
             {!!aboutDatas?.heroes?.length &&
-              aboutDatas.heroes.map((item, n) => (
+              aboutDatas.heroes?.map((item, n) => (
                 <SwiperSlide key={n}>
-                  <SliderContent backgroundImageURL={`${IMAGE_URL}${item.image.source.url}`} />
+                  <SliderContent backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url || ""}`} />
                 </SwiperSlide>
               ))}
           </Swiper>
@@ -117,7 +117,7 @@ export default function About() {
         <>
           <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
             <div className="w-11/12 mx-auto">
-              {pageControlSlugMap.get("about_our_story") && (
+              {pageControlSlugMap.get("about_our_story") && aboutData.aboutOrganization?.organisation_story && (
                 <div className="md:flex justify-between items-start">
                   <div className="pb-8 md:pb-0">
                     <Typography type="ParagraphHeader">Our Story</Typography>
@@ -128,7 +128,7 @@ export default function About() {
                 </div>
               )}
 
-              {pageControlSlugMap.get("about_our_mission") && (
+              {pageControlSlugMap.get("about_our_mission") && aboutData.aboutOrganization?.organisation_mission && (
                 <div className="md:flex justify-between items-start py-10">
                   <div className="pb-8 md:pb-0">
                     <Typography type="ParagraphHeader">Our Mission</Typography>
@@ -139,7 +139,7 @@ export default function About() {
                 </div>
               )}
 
-              {pageControlSlugMap.get("about_our_vision") && (
+              {pageControlSlugMap.get("about_our_vision") && aboutData.aboutOrganization?.organisation_vision && (
                 <div className="md:flex justify-between items-start">
                   <div className="pb-8 md:pb-0">
                     <Typography type="ParagraphHeader">Our Vision</Typography>
@@ -152,13 +152,13 @@ export default function About() {
             </div>
           </section>
 
-          {pageControlSlugMap.get("about_our_values") && (
+          {pageControlSlugMap.get("about_our_values") && aboutData.ourValues?.length && (
             <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
               <div className="w-11/12 mx-auto ">
                 <Typography type="ParagraphHeader">Our Values</Typography>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-between items-start pt-10">
-                  {!!aboutData.ourValues.length &&
+                  {!!aboutData.ourValues?.length &&
                     aboutData.ourValues.map((item, n) => (
                       <div key={n}>
                         <ValuesCard image={transparent.src} title={item.title} content={item.explanation} />
@@ -210,12 +210,12 @@ export default function About() {
             </section>
           )}
 
-          {pageControlSlugMap.get("about_approach") && (
+          {pageControlSlugMap.get("about_approach") && aboutData.ourApproach?.length && (
             <section className="max-w-[1440px] mx-auto py-8 md:py-16">
               <div className="w-11/12 mx-auto ">
                 <Typography type="ParagraphHeader">Our Approach</Typography>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 pt-10">
-                  {!!aboutData.ourApproach.length &&
+                  {!!aboutData.ourApproach?.length &&
                     aboutData.ourApproach.map((item, n) => (
                       <div key={n}>
                         <ValuesCard image={transparent.src} title={item.title} content={item.explanation} />

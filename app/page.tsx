@@ -132,7 +132,7 @@ export default function Home() {
             pagination={{ clickable: true }}
           >
             {!!homeData?.heroes?.length &&
-              homeData.heroes.map((item, n) => (
+              homeData.heroes?.map((item, n) => (
                 <SwiperSlide key={n}>
                   <SliderContent
                     backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url}`}

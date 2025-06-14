@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import React, { Fragment, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button"
 import logo from "@/assets/images/logo.svg"
 import menu from "@/assets/images/Menu.png"
@@ -75,12 +75,12 @@ const Header: React.FC = () => {
 
   const normalizeLink = (link?: string) => {
     if (!link) return "/"
-    return ENVIRONMENT === "development" || link === "/" ? link : `${link}.html`
+    return ENVIRONMENT == "development" || link === "/" ? link : `${link}.html`
   }
 
   const isActiveLink = (link?: string) => {
     const normalized = normalizeLink(link)
-    return pathname === normalized
+    return pathname == normalized
   }
 
   return (
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
                 {!!data.mainMenus?.length &&
                   data.mainMenus.map((items, n) => {
                     if (!items.isEnabled) return null
-                    const finalLink = normalizeLink(items.destination?.link)
+                    const finalLink = normalizeLink(items.destination?.relativeUrl)
 
                     return (
                       <li key={n}>
@@ -122,7 +122,7 @@ const Header: React.FC = () => {
                           <Typography
                             type="Custom"
                             className={`${
-                              isActiveLink(items.destination?.link) ? "text-primary" : ""
+                              isActiveLink(items.destination?.relativeUrl) ? "text-primary" : ""
                             } hover:text-primary cursor-pointer mx-3`}
                           >
                             {items.text}
@@ -170,7 +170,7 @@ const Header: React.FC = () => {
                     {!!data.mainMenus?.length &&
                       data.mainMenus.map((items, n) => {
                         if (!items.isEnabled) return null
-                        const finalLink = normalizeLink(items.destination?.link)
+                        const finalLink = normalizeLink(items.destination?.relativeUrl)
 
                         return (
                           <li key={n}>
@@ -178,7 +178,7 @@ const Header: React.FC = () => {
                               <Typography
                                 type="Custom"
                                 className={`${
-                                  isActiveLink(items.destination?.link) ? "text-primary" : ""
+                                  isActiveLink(items.destination?.relativeUrl) ? "text-primary" : ""
                                 } hover:text-primary cursor-pointer text-lg`}
                               >
                                 {items.text}
