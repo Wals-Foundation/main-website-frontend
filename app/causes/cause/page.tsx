@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getActivitiesData, getCauseByID } from "@/logic/hooks/api/useCauses"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay, Pagination } from "swiper/modules"
+import { Autoplay } from "swiper/modules"
 
 export default function CauseDetailPage() {
   const searchParams = useSearchParams()
@@ -66,18 +66,18 @@ export default function CauseDetailPage() {
         </select> */}
 
         {/* Donation and Info Section */}
-        {causeData?.causesData && (
+        {!!causeData?.causesData?.cause && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full pt-16">
             {/* Information */}
             <div>
               {[
-                ["Community", causeData.causesData.community?.name],
-                ["Location", causeData.causesData.cause?.location?.name],
+                ["Community", causeData.causesData?.community?.name],
+                ["Location", causeData.causesData?.cause?.location?.name],
                 [
                   "Address",
-                  causeData.causesData.cause?.location?.latitude ? (
+                  causeData.causesData?.cause?.location?.latitude ? (
                     <div className="text-right">
-                      <div>{causeData.causesData.cause?.name}</div>
+                      <div>{causeData.causesData?.cause?.name}</div>
                       <Link
                         href={`https://www.google.com/maps/dir/?api=1&destination=${causeData.causesData.cause?.location?.latitude},${causeData.causesData.cause?.location?.longitude}`}
                         target="_blank"
@@ -89,8 +89,8 @@ export default function CauseDetailPage() {
                     </div>
                   ) : null,
                 ],
-                ["Region", causeData.causesData.cause?.region?.name],
-                ["District", causeData.causesData.cause?.district?.name],
+                ["Region", causeData.causesData?.cause?.region?.name],
+                ["District", causeData.causesData?.cause?.district?.name],
               ].map(([label, value], i) =>
                 value ? (
                   <div key={i} className="border-b flex justify-between py-4">
@@ -185,11 +185,11 @@ export default function CauseDetailPage() {
         <div className="mt-14">
           <h2 className="text-3xl font-bold mb-6">Activities</h2>
           <Swiper
-            modules={[Autoplay, Pagination]}
+            modules={[Autoplay]}
             slidesPerView={2}
+            spaceBetween={20}
             loop={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
           >
             {!!causeData?.activities?.length ? (
               causeData?.activities?.map((activity, i: number) => (
