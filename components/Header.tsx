@@ -79,10 +79,10 @@ const Header: React.FC = () => {
   }
 
   const isActiveLink = (link?: string) => {
+    if (!link) return false
     const normalized = normalizeLink(link)
-    return pathname == normalized
+    return pathname === normalized || (normalized !== "/" && pathname.startsWith(normalized))
   }
-
   return (
     <>
       {loading && !pageControlSlugMap.get("main_nav") ? (

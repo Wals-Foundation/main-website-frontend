@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/logic/config/base"
-import { NormalizedCause, RawCauseResponse } from "@/utils/types"
+import { Activities, NormalizedCause, RawCauseResponse } from "@/utils/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 
@@ -10,6 +10,7 @@ type InitialState = {
   programsCausesData: RawCauseResponse
   projectCausesData: RawCauseResponse
   causesData: NormalizedCause
+  activities: Activities[]
   error: string
 }
 
@@ -18,11 +19,12 @@ const initialState: InitialState = {
   communityCausesData: { data: [] },
   programsCausesData: { data: [] },
   projectCausesData: { data: [] },
+  activities: [],
   causesData: {},
   error: "",
 }
 
-export const getCommunitiesData = createAsyncThunk("usePageHeadlines/getCommunitiesData", async (_, { rejectWithValue }) => {
+export const getCommunitiesData = createAsyncThunk("useCauses/getCommunitiesData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`communities?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -46,10 +48,18 @@ export const getCommunitiesData = createAsyncThunk("usePageHeadlines/getCommunit
 })
 
 export const getCauseByID = createAsyncThunk(
-  "usePageHeadlines/getCauseByID",
+  "useCauses/getCauseByID",
   async (data: { url: string; id: string }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(`${data.url}?filters[id][$eq]=${data.id}&populate=*`)
+      const response = await axiosInstance.get(
+        `${data.url}?filters[id][$eq]=${data.id}` +
+          `&populate[cause][populate][district]=*` +
+          `&populate[cause][populate][location]=*` +
+          `&populate[cause][populate][region]=*` +
+          `&populate[cause][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
+          `&populate[cause][populate][heroes][populate][image_old][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
+          `&populate[donatable][populate][donation][populate][currency]=*`
+      )
       if (response.data) {
         return response.data.data[0]
       }
@@ -71,7 +81,7 @@ export const getCauseByID = createAsyncThunk(
   }
 )
 
-export const getProgamsData = createAsyncThunk("usePageHeadlines/getProgamsData", async (_, { rejectWithValue }) => {
+export const getProgamsData = createAsyncThunk("useCauses/getProgamsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`programs?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -94,7 +104,7 @@ export const getProgamsData = createAsyncThunk("usePageHeadlines/getProgamsData"
   }
 })
 
-export const getProjectsData = createAsyncThunk("usePageHeadlines/getProjectsData", async (_, { rejectWithValue }) => {
+export const getProjectsData = createAsyncThunk("useCauses/getProjectsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`projects?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -117,8 +127,31 @@ export const getProjectsData = createAsyncThunk("usePageHeadlines/getProjectsDat
   }
 })
 
+export const getActivitiesData = createAsyncThunk("useCauses/getActivitiesData", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`activities?pagination[pageSize]=1000&populate=*`)
+    if (response.data) {
+      return response.data.data
+    }
+  } catch (error) {
+    let errorMessage = "An unknown error occurred"
+    let statusCode: number | undefined
+
+    // Safely handling Axios errors
+    if (axios.isAxiosError(error)) {
+      statusCode = error.response?.status // Safely access status
+      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+    } else if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    return rejectWithValue({ message: errorMessage, status: statusCode })
+  }
+})
+
 const useCauses = createSlice({
-  name: "usePageHeadlines",
+  name: "useCauses",
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -166,6 +199,18 @@ const useCauses = createSlice({
       state.programsCausesData = action.payload
     })
     builder.addCase(getProgamsData.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message || "Users were not created"
+    })
+
+    builder.addCase(getActivitiesData.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getActivitiesData.fulfilled, (state, action) => {
+      state.loading = false
+      state.activities = action.payload
+    })
+    builder.addCase(getActivitiesData.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message || "Users were not created"
     })

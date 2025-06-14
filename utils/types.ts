@@ -94,19 +94,193 @@ export type NormalizedCause = {
   id?: number
   name?: string
   cause?: {
-    community?: string
-    location?: string
-    address?: string
-    region?: string
-    district?: string
-    donationGoal?: string
-    totalDonated?: string
-    activities?: { title: string; expenditure: string; timeline: string; description: string }[]
-    remaining?: string
-    introduction?: string
+    id?: number
+    name?: string
     impact?: string
+    introduction?: string
     problem?: string
     solution?: string
+    district?: {
+      id?: number
+      name?: string
+      code?: string
+      documentId?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+    }
+    region?: {
+      id?: number
+      name?: string
+      code?: string
+      documentId?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+    }
+    location?: {
+      id?: number
+      name?: string
+      key?: string
+      latitude?: number
+      longitude?: number
+      documentId?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+    }
+    images?: {
+      id?: number
+      documentId?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+      source?: {
+        id?: number
+        documentId?: string
+        name?: string
+        url?: string
+        mime?: string
+        size?: number
+        width?: number
+        height?: number
+        hash?: string
+        ext?: string
+        createdAt?: Date
+        updatedAt?: Date
+        publishedAt?: Date
+      }
+    }[]
+    heroes?: {
+      id?: number
+      documentId?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+      image_old?: {
+        id?: number
+        documentId?: string
+        createdAt?: Date
+        updatedAt?: Date
+        publishedAt?: Date
+        source?: {
+          id?: number
+          documentId?: string
+          name?: string
+          url?: string
+          mime?: string
+          size?: number
+          width?: number
+          height?: number
+          hash?: string
+          ext?: string
+          createdAt?: Date
+          updatedAt?: Date
+          publishedAt?: Date
+        }
+      }
+    }[]
+  }
+  community?: {
+    id?: number
+    name?: string
+    code?: string
+    documentId?: string
+    createdAt?: Date
+    updatedAt?: Date
+    publishedAt?: Date
+  }
+  donatable?: {
+    id: number
+    key: string
+    type: string
+    documentId?: string
+    createdAt?: Date
+    updatedAt?: Date
+    publishedAt?: Date
+    donation?: {
+      id: number
+      documentId?: string
+      key?: string
+      targetAmountInBigInteger?: string
+      donatedAmountInBigInteger?: string
+      createdAt?: Date
+      updatedAt?: Date
+      publishedAt?: Date
+      currency?: {
+        id?: number
+        documentId?: string
+        code?: string
+        createdAt?: Date
+        updatedAt?: Date
+        publishedAt?: Date
+      }
+    }
+  }
+  program?: {
+    id: number
+    code: string
+    name: string
+    documentId?: string
+    createdAt?: Date
+    updatedAt?: Date
+    publishedAt?: Date
+  }
+}
+
+export type Activities = {
+  id: number
+  documentId: string
+  budgetAmount: string
+  description: string
+  startDate: string // ISO date string (e.g., "2025-06-28")
+  endDate: string
+  createdAt: string // ISO datetime string
+  updatedAt: string
+  publishedAt: string
+  budgetCurrency: {
+    id: number
+    documentId: string
+    code: string // e.g., "GHS"
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  community: {
+    id: number
+    documentId: string
+    name: string
+    code: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  donatable: {
+    id: number
+    documentId: string
+    key: string
+    type: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  program: {
+    id: number
+    documentId: string
+    code: string
+    name: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  project: {
+    id: number
+    documentId: string
+    code: string
+    name: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
   }
 }
 

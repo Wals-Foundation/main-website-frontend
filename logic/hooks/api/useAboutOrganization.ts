@@ -21,7 +21,7 @@ const initialState: InitialState = {
 }
 
 export const getAboutOrganizationData = createAsyncThunk(
-  "usePageHeadlines/getAboutOrganizationData",
+  "useAboutOrganiztion/getAboutOrganizationData",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(`/about-organisation?pagination[pageSize]=1000&populate=*`)
@@ -47,7 +47,7 @@ export const getAboutOrganizationData = createAsyncThunk(
 )
 
 export const getAboutOrganizationValues = createAsyncThunk(
-  "usePageHeadlines/getAboutOrganizationValues",
+  "useAboutOrganiztion/getAboutOrganizationValues",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(`/organisation-values?pagination[pageSize]=1000&populate=*`)
@@ -73,7 +73,7 @@ export const getAboutOrganizationValues = createAsyncThunk(
 )
 
 export const getAboutOrganizationApproach = createAsyncThunk(
-  "usePageHeadlines/getAboutOrganizationApproach",
+  "useAboutOrganiztion/getAboutOrganizationApproach",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(`/organisation-approaches?pagination[pageSize]=1000&populate=*`)
@@ -99,7 +99,7 @@ export const getAboutOrganizationApproach = createAsyncThunk(
 )
 
 const useAboutOrganiztion = createSlice({
-  name: "usePageHeadlines",
+  name: "useAboutOrganiztion",
   initialState,
   reducers: {},
   extraReducers(builder) {

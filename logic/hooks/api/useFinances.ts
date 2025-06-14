@@ -29,7 +29,7 @@ const initialState: InitialState = {
 }
 
 export const getAboutOrganizationData = createAsyncThunk(
-  "usePageHeadlines/getAboutOrganizationData",
+  "useFinance/getAboutOrganizationData",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(`/about-organisation?pagination[pageSize]=1000&populate=*`)
@@ -54,7 +54,7 @@ export const getAboutOrganizationData = createAsyncThunk(
   }
 )
 
-export const getPageHeadlinesData = createAsyncThunk("usePageHeadlines/getPageHeadlinesData", async (_, { rejectWithValue }) => {
+export const getPageHeadlinesData = createAsyncThunk("useFinance/getPageHeadlinesData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`pages?pagination[pageSize]=1000`)
     if (response.data) {
@@ -77,7 +77,7 @@ export const getPageHeadlinesData = createAsyncThunk("usePageHeadlines/getPageHe
   }
 })
 
-export const getPageControlData = createAsyncThunk("usePageHeadlines/getPageControlData", async (_, { rejectWithValue }) => {
+export const getPageControlData = createAsyncThunk("useFinance/getPageControlData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`feature-flags?pagination[pageSize]=1000`)
     if (response.data) {
@@ -100,7 +100,7 @@ export const getPageControlData = createAsyncThunk("usePageHeadlines/getPageCont
   }
 })
 
-export const getCommunitiesData = createAsyncThunk("usePageHeadlines/getCommunitiesData", async (_, { rejectWithValue }) => {
+export const getCommunitiesData = createAsyncThunk("useFinance/getCommunitiesData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`communities?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -123,7 +123,7 @@ export const getCommunitiesData = createAsyncThunk("usePageHeadlines/getCommunit
   }
 })
 
-export const getProgamsData = createAsyncThunk("usePageHeadlines/getProgamsData", async (_, { rejectWithValue }) => {
+export const getProgamsData = createAsyncThunk("useFinance/getProgamsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`programs?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -146,7 +146,7 @@ export const getProgamsData = createAsyncThunk("usePageHeadlines/getProgamsData"
   }
 })
 
-export const getProjectsData = createAsyncThunk("usePageHeadlines/getProjectsData", async (_, { rejectWithValue }) => {
+export const getProjectsData = createAsyncThunk("useFinance/getProjectsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`projects?pagination[pageSize]=1000&populate=*`)
     if (response.data) {
@@ -169,7 +169,7 @@ export const getProjectsData = createAsyncThunk("usePageHeadlines/getProjectsDat
   }
 })
 
-export const getTransactionsData = createAsyncThunk("usePageHeadlines/getTransactionsData", async (_, { rejectWithValue }) => {
+export const getTransactionsData = createAsyncThunk("useFinance/getTransactionsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`google-sheet?pagination[pageSize]=1000`)
     if (response.data) {
@@ -193,7 +193,7 @@ export const getTransactionsData = createAsyncThunk("usePageHeadlines/getTransac
 })
 
 const useFinance = createSlice({
-  name: "usePageHeadlines",
+  name: "useFinance",
   initialState,
   reducers: {},
   extraReducers(builder) {
