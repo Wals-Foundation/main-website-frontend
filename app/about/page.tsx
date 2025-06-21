@@ -21,7 +21,6 @@ import {
   getAboutOrganizationValues,
 } from "@/logic/hooks/api/useAboutOrganization"
 import { Autoplay, Pagination } from "swiper/modules"
-import SliderContent from "@/components/SliderContent"
 import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
 import Link from "next/link"
 
@@ -97,16 +96,48 @@ export default function About() {
           <Swiper
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
-            loop={true}
+            loop
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
           >
             {!!aboutDatas?.heroes?.length &&
-              aboutDatas.heroes?.map((item, n) => (
-                <SwiperSlide key={n}>
-                  <SliderContent backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url || ""}`} />
-                </SwiperSlide>
-              ))}
+              aboutDatas.heroes.map((item, n) => {
+                const sources = item?.images?.flatMap((img) => img?.source || []) || []
+
+                const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
+                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
+
+                const mobileImageUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : null
+                const desktopImageUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : null
+
+                return (
+                  <SwiperSlide key={n}>
+                    <div className="relative w-full h-[100vh] md:h-[70vh]">
+                      {/* Mobile image */}
+                      {mobileImageUrl && (
+                        <img
+                          src={mobileImageUrl}
+                          alt={`Hero Slide ${n + 1} - Mobile`}
+                          className="w-full h-full object-cover block md:hidden"
+                          loading="lazy"
+                        />
+                      )}
+
+                      {/* Desktop image */}
+                      {desktopImageUrl && (
+                        <img
+                          src={desktopImageUrl}
+                          alt={`Hero Slide ${n + 1} - Desktop`}
+                          className="w-full h-full object-cover hidden md:block"
+                          loading="lazy"
+                        />
+                      )}
+
+                      <div className="absolute inset-0 bg-black/60" />
+                    </div>
+                  </SwiperSlide>
+                )
+              })}
           </Swiper>
         </section>
       )}

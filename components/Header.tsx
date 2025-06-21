@@ -2,16 +2,16 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button"
-import logo from "@/assets/images/logo.svg"
 import menu from "@/assets/images/Menu.png"
 import closeIcon from "@/assets/images/close.svg"
 import Typography from "./Typography"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getMainMenus, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
-import { createSlugMapForControl } from "@/utils"
+import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import { usePathname } from "next/navigation"
-import { ENVIRONMENT } from "@/logic/config/url"
+import Logo from "./Logo"
+import Loader from "./Loader"
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -73,30 +73,18 @@ const Header: React.FC = () => {
     }
   }, [mobileMenuOpen])
 
-  const normalizeLink = (link?: string) => {
-    if (!link) return "/"
-    return ENVIRONMENT == "development" || link === "/" ? link : `${link}.html`
-  }
-
-  const isActiveLink = (link?: string) => {
-    if (!link) return false
-    const normalized = normalizeLink(link)
-    return pathname === normalized || (normalized !== "/" && pathname.startsWith(normalized))
-  }
   return (
     <>
       {loading && !pageControlSlugMap.get("main_nav") ? (
-        <div className="fixed top-0 left-0 h-screen bg-blue-300 w-screen z-50 flex flex-col justify-center items-center">
-          <p>Loading</p>
+        <div className="fixed top-0 left-0 h-screen bg-white w-screen z-50 flex flex-col justify-center items-center">
+          <Loader />
         </div>
       ) : (
         pageControlSlugMap.get("main_nav") && (
           <section id="Header" className="max-w-[1440px] mx-auto">
             <nav className="w-11/12 mx-auto flex justify-between items-center py-4 border-b border-border-gray relative">
               <div className="cursor-pointer">
-                <Link href="/">
-                  <img src={logo.src} alt="Wals Logo" className="w-16 h-auto" />
-                </Link>
+                <Logo />
               </div>
 
               <button
@@ -122,7 +110,7 @@ const Header: React.FC = () => {
                           <Typography
                             type="Custom"
                             className={`${
-                              isActiveLink(items.destination?.relativeUrl) ? "text-primary" : ""
+                              isActiveLink(pathname, items.destination?.relativeUrl) ? "text-primary" : ""
                             } hover:text-primary cursor-pointer mx-3`}
                           >
                             {items.text}
@@ -158,9 +146,9 @@ const Header: React.FC = () => {
               >
                 <div className="p-6 h-full flex flex-col">
                   <div className="mb-8 flex justify-between items-center">
-                    <Link href="/" onClick={handleLinkClick}>
-                      <img src={logo.src} alt="Wals Logo" className="w-16 h-auto" />
-                    </Link>
+                    <div className="cursor-pointer" onClick={handleLinkClick}>
+                      <Logo />
+                    </div>
                     <div onClick={() => setMobileMenuOpen(false)}>
                       <img src={closeIcon.src} alt="Close" />
                     </div>

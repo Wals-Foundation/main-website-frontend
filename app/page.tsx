@@ -20,14 +20,21 @@ import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { CauseType, extractCausesByCode } from "@/utils/types"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
+import DOMPurify from "dompurify"
 import Link from "next/link"
-import SliderContent from "@/components/SliderContent"
 import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
+import {
+  getAboutOrganizationApproach,
+  getAboutOrganizationData,
+  getAboutOrganizationValues,
+} from "@/logic/hooks/api/useAboutOrganization"
+import Loader from "@/components/Loader"
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
+  const aboutData = useAppSelector((state) => state.useAboutOrganization)
   const causeData = useAppSelector((state) => state.useCauses)
   const dispatch = useAppDispatch()
   const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
@@ -69,7 +76,14 @@ export default function Home() {
   const getAllData = async () => {
     setLoading(true)
     try {
-      await Promise.all([dispatch(getCommunitiesData()), dispatch(getProgamsData()), dispatch(getProjectsData())])
+      await Promise.all([
+        dispatch(getCommunitiesData()),
+        dispatch(getProgamsData()),
+        dispatch(getProjectsData()),
+        dispatch(getAboutOrganizationData()),
+        dispatch(getAboutOrganizationValues()),
+        dispatch(getAboutOrganizationApproach()),
+      ])
     } catch (error) {
       console.error("Error fetching data:", error)
     } finally {
@@ -126,34 +140,110 @@ export default function Home() {
 
       {pageControlSlugMap.get("home_hero_carousel") && (
         <section className="pt-10 relative">
+          <div className="absolute top-0 left-0 right-0 z-10 px-4 md:px-0">
+            <div className="max-w-[1440px] mx-auto py-10 md:py-16 md:right-10">
+              <div className="w-full md:w-11/12 mx-auto relative h-full">
+                <div className="my-10 mx-auto md:ml-auto md:mr-5 max-w-full md:max-w-[374px]">
+                  {!!pageControlSlugMap.get("home_hero_values_card_1") && (
+                    <div className="bg-white rounded-xl p-5">
+                      <Typography type="Custom">
+                        {"Since 2010, our programs have <br /> empowered over 500 individuals."}
+                      </Typography>
+                      <div className="pt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                        <div className="flex items-center gap-2">
+                          {[people1.src, people2.src, people3.src, people4.src].map((item, n) => (
+                            <div key={n} className="w-[41px] h-[41px] border-2 rounded-full border-white overflow-hidden">
+                              <img src={item} alt="" className="w-full h-full object-cover rounded-full" />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="max-w-[176px]">
+                          <Typography type="Custom" className="text-xs md:text-sm">
+                            Make a donation to hear more save more lives
+                          </Typography>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="pt-4" />
+
+                  {!!pageControlSlugMap.get("home_hero_values_card_2") && (
+                    <div className="bg-white rounded-xl p-5">
+                      {!!aboutData?.ourValues &&
+                        aboutData?.ourValues?.map((item, n) => (
+                          <div key={n} className="py-2">
+                            <Typography className="font-size-semibold">{item.title}</Typography>
+                            <div className="pt-1">
+                              <Typography type="Custom" className="text-sm">
+                                {item.explanation}
+                              </Typography>
+                            </div>
+                          </div>
+                        ))}
+
+                      <div className="pt-3">
+                        <iframe
+                          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                          width="100%"
+                          height="200"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-md w-full"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
           <Swiper
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
-            loop={true}
+            loop
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
           >
             {!!homeData?.heroes?.length &&
-              homeData.heroes?.map((item, n) => (
-                <SwiperSlide key={n}>
-                  <SliderContent
-                    backgroundImageURL={`${IMAGE_URL}${item?.image?.source.url}`}
-                    setSwiper={swiperRef}
-                    displayHeaderContent={!!pageControlSlugMap.get("home_hero_values_card_1")}
-                    displaySubContent={!!pageControlSlugMap.get("home_hero_values_card_2")}
-                    title="Since 2010, our programs have <br /> empowered over 500 individuals."
-                    peoplesImages={[people1.src, people2.src, people3.src, people4.src]}
-                    subtitle="Make a donation to hear more save more lives"
-                    values={[
-                      { title: "Transparency", content: "We’re open about our actions and funds to <br /> build trust." },
-                      { title: "Transparency", content: "We’re open about our actions and funds to <br /> build trust." },
-                      { title: "Transparency", content: "We’re open about our actions and funds to <br /> build trust." },
-                    ]}
-                    videoURL=""
-                  />
-                </SwiperSlide>
-              ))}
+              homeData.heroes.map((item, n) => {
+                const sources = item?.images?.flatMap((img) => img?.source || []) || []
+
+                const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
+                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
+
+                const mobileImageUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : null
+                const desktopImageUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : null
+
+                return (
+                  <SwiperSlide key={n}>
+                    <div className="relative w-full h-[100vh] md:h-[70vh]">
+                      {/* Mobile image */}
+                      {mobileImageUrl && (
+                        <img
+                          src={mobileImageUrl}
+                          alt={`Hero Slide ${n + 1} - Mobile`}
+                          className="w-full h-full object-cover block md:hidden"
+                          loading="lazy"
+                        />
+                      )}
+
+                      {/* Desktop image */}
+                      {desktopImageUrl && (
+                        <img
+                          src={desktopImageUrl}
+                          alt={`Hero Slide ${n + 1} - Desktop`}
+                          className="w-full h-full object-cover hidden md:block"
+                          loading="lazy"
+                        />
+                      )}
+
+                      <div className="absolute inset-0 bg-black/60" />
+                    </div>
+                  </SwiperSlide>
+                )
+              })}
           </Swiper>
         </section>
       )}
@@ -166,13 +256,14 @@ export default function Home() {
             </div>
             <div className="md:max-w-[825px]">
               <Typography type="Subtitle">
-                Founded in 2018,
-                <span className="text-title-gray py-2">
-                  We Are Liberating Societies Foundation started as a small community effort in Ghana helping families access
-                  resources to start businesses and generate sustainable income. A world without extreme poverty and with economic
-                  opportunity for all. To enable community-driven economic growth to eradicate poverty and create resilient
-                  societies.
-                </span>
+                {aboutData?.aboutOrganization?.organisation_story && (
+                  <div
+                    className="whitespace-pre-line"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(aboutData.aboutOrganization.organisation_story.replace(/\n/g, "<br />")),
+                    }}
+                  />
+                )}
               </Typography>
               <div className="pt-8 md:pt-4">
                 <Link href={ENVIRONMENT === "development" ? "/about" : "/about.html"}>
@@ -226,7 +317,9 @@ export default function Home() {
                 </div>
               </div>
               {loading || !causesData[activeCause].length ? (
-                <Typography className="text-center">Loading...</Typography>
+                <div className="min-h-[30vh] flex flex-col justify-center items-center">
+                  <Loader />
+                </div>
               ) : (
                 <div className="space-y-6 mt-6">
                   {causesData[activeCause].map((cause, index) => (

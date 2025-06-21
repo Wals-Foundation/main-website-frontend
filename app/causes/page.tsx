@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import { CauseType, extractCausesByCode } from "@/utils/types"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
+import Loader from "@/components/Loader"
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -116,8 +117,8 @@ export default function Home() {
                 </div>
 
                 {loading || !causesData[activeCause].length ? (
-                  <div className="flex flex-col justify-center items-center h-screen">
-                    <h1 className="px-4 text-center text-2xl">Loading...</h1>
+                  <div className="flex flex-col justify-center items-center h-[30vh]">
+                    <Loader />
                   </div>
                 ) : (
                   <>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/logic/config/base"
-import { AboutOrganization, AboutOrganizationApproach, AboutOrganizationValues } from "@/utils/types"
+import { AboutOrganization, AboutOrganizationApproach, AboutOrganizationValues, Contact, Gallery, Socials } from "@/utils/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 
@@ -9,14 +9,20 @@ type InitialState = {
   aboutOrganization: AboutOrganization
   ourValues: AboutOrganizationValues[]
   ourApproach: AboutOrganizationApproach[]
+  contact: Contact
+  socials: Socials[]
+  gallery: Gallery[]
   error: string
 }
 
 const initialState: InitialState = {
   loading: false,
   aboutOrganization: {},
+  contact: {},
+  socials: [],
   ourApproach: [],
   ourValues: [],
+  gallery: [],
   error: "",
 }
 
@@ -45,6 +51,75 @@ export const getAboutOrganizationData = createAsyncThunk(
     }
   }
 )
+
+export const getContactData = createAsyncThunk("useAboutOrganiztion/getContactData", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`/contact`)
+    if (response.data) {
+      return response.data?.data
+    }
+  } catch (error) {
+    let errorMessage = "An unknown error occurred"
+    let statusCode: number | undefined
+
+    // Safely handling Axios errors
+    if (axios.isAxiosError(error)) {
+      statusCode = error.response?.status // Safely access status
+      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+    } else if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    return rejectWithValue({ message: errorMessage, status: statusCode })
+  }
+})
+
+export const getGalleryData = createAsyncThunk("useAboutOrganiztion/getGalleryData", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`/gallery-items?pagination[pageSize]=1000&populate[image][populate]=source`)
+    if (response.data) {
+      return response.data?.data
+    }
+  } catch (error) {
+    let errorMessage = "An unknown error occurred"
+    let statusCode: number | undefined
+
+    // Safely handling Axios errors
+    if (axios.isAxiosError(error)) {
+      statusCode = error.response?.status // Safely access status
+      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+    } else if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    return rejectWithValue({ message: errorMessage, status: statusCode })
+  }
+})
+
+export const getSocialsData = createAsyncThunk("useAboutOrganiztion/getSocialsData", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get(`/social-medias?pagination[pageSize]=1000&populate=*`)
+    if (response.data) {
+      return response.data?.data
+    }
+  } catch (error) {
+    let errorMessage = "An unknown error occurred"
+    let statusCode: number | undefined
+
+    // Safely handling Axios errors
+    if (axios.isAxiosError(error)) {
+      statusCode = error.response?.status // Safely access status
+      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+    } else if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    return rejectWithValue({ message: errorMessage, status: statusCode })
+  }
+})
 
 export const getAboutOrganizationValues = createAsyncThunk(
   "useAboutOrganiztion/getAboutOrganizationValues",
@@ -111,6 +186,43 @@ const useAboutOrganiztion = createSlice({
       state.aboutOrganization = action.payload
     })
     builder.addCase(getAboutOrganizationData.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message || "Users were not created"
+    })
+
+    builder.addCase(getContactData.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getContactData.fulfilled, (state, action) => {
+      state.loading = false
+      state.contact = action.payload
+    })
+    builder.addCase(getContactData.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message || "Users were not created"
+    })
+
+    builder.addCase(getSocialsData.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getSocialsData.fulfilled, (state, action) => {
+      state.loading = false
+      state.socials = action.payload
+    })
+    builder.addCase(getSocialsData.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.error.message || "Users were not created"
+    })
+
+    builder.addCase(getGalleryData.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getGalleryData.fulfilled, (state, action) => {
+      state.loading = false
+      state.gallery = action.payload
+      console.log(action.payload)
+    })
+    builder.addCase(getGalleryData.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message || "Users were not created"
     })

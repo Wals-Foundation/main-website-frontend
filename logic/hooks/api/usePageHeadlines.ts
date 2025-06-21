@@ -23,7 +23,7 @@ const initialState: InitialState = {
 export const getPageHeadlinesData = createAsyncThunk("usePageHeadlines/getPageHeadlinesData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(
-      `/pages?pagination[pageSize]=1000&populate[heroes][populate][image][populate]=source`
+      `/pages?pagination[pageSize]=1000&populate[heroes][populate][images][populate]=source`
     )
     if (response.data) {
       return response.data?.data

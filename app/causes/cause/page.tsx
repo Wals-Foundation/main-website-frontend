@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getActivitiesData, getCauseByID } from "@/logic/hooks/api/useCauses"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper/modules"
+import Loader from "@/components/Loader"
 
 export default function CauseDetailPage() {
   const searchParams = useSearchParams()
@@ -40,13 +41,13 @@ export default function CauseDetailPage() {
 
   if (loading)
     return (
-      <div className="flex flex-col justify-center items-center h-screen">
-        <h1 className="px-4 text-center text-2xl">Loading...</h1>
+      <div className="flex flex-col justify-center items-center h-[40vh]">
+        <Loader />
       </div>
     )
   if (!causeData)
     return (
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-[40vh]">
         <h1 className="p-4 text-red-500 text-center text-2xl">No cause found</h1>
       </div>
     )
@@ -60,10 +61,6 @@ export default function CauseDetailPage() {
         <div className="w-full">
           <img src={blog1.src} alt="Cause" className="w-full h-[570px] object-cover rounded-md" />
         </div>
-
-        {/* <select name="" id="">
-          <option value="20">Twenty</option>
-        </select> */}
 
         {/* Donation and Info Section */}
         {!!causeData?.causesData?.cause && (

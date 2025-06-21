@@ -40,6 +40,8 @@ export type Slugs =
   | "causes_list"
   | "causes_donate_footer"
   | "causes_gallery"
+  | "footer_news_letter"
+  | "footer_links"
 
 export type Menu = {
   id: number
@@ -52,7 +54,7 @@ export type PageContent = {
   page: string
   headline: string
   subheadline: string
-  heroes: { image: { source: { url: string } } }[]
+  heroes: { images: { source: { url: string; name: string }[] }[] }[]
 }
 
 export type Finance = {
@@ -72,6 +74,12 @@ export type AboutOrganization = {
 export type AboutOrganizationValues = { title: string; explanation: string }
 
 export type AboutOrganizationApproach = { title: string; explanation: string }
+
+export type Contact = { email?: string; phone?: string }
+
+export type Socials = { accountUrl?: string; icon?: { url: string }; name: string }
+
+export type Gallery = { image?: { source: { name: string; url: string }[] } }
 
 export type CauseType = "Communities" | "Programs" | "Projects"
 
