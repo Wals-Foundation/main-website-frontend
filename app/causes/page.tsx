@@ -116,7 +116,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {loading || !causesData[activeCause].length ? (
+                {loading || !causesData[activeCause]?.length ? (
                   <div className="flex flex-col justify-center items-center h-[30vh]">
                     <Loader />
                   </div>

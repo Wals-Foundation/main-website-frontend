@@ -11,7 +11,7 @@ export function createSlugMapForControl(array: { key: Slugs; isLive: string | bo
 }
 
 export function createSlugMapForPages(array: PageContent[]): Map<string, PageContent> {
-  if (!Array.isArray(array) || array.length === 0) {
+  if (!Array.isArray(array) || array?.length === 0) {
     return new Map()
   }
   return new Map(

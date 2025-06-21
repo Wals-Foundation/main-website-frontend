@@ -241,7 +241,7 @@ const Footer: React.FC = ({}) => {
                       <div className="pt-8 md:pt-0">
                         <Typography className="text-white py-2">Follow Us</Typography>
                         <ul>
-                          {!!footerData.socials.length &&
+                          {!!footerData.socials?.length &&
                             footerData.socials.map((item, n) => (
                               <li key={n}>
                                 <Link href={item.accountUrl || ""}>
