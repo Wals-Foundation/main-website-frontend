@@ -229,7 +229,7 @@ const Footer: React.FC = ({}) => {
                                           : "text-title-gray "
                                       } hover:text-primary cursor-pointer`}
                                     >
-                                      {items.text}
+                                      {items?.text}
                                     </Typography>
                                   </Link>
                                 </li>
@@ -248,7 +248,7 @@ const Footer: React.FC = ({}) => {
                                   <div className="flex items-center space-x-2">
                                     {item?.icon?.url && <img src={IMAGE_URL + item?.icon?.url} className="h-8 rounded-full" />}
                                     <Typography type="Custom" className="text-title-gray py-2">
-                                      {item.name}
+                                      {item?.name}
                                     </Typography>
                                   </div>
                                 </Link>
@@ -263,14 +263,14 @@ const Footer: React.FC = ({}) => {
                           <li>
                             <Link href={"/"}>
                               <Typography type="Custom" className="text-title-gray py-2">
-                                {footerData.contact.email}
+                                {footerData.contact?.email}
                               </Typography>
                             </Link>
                           </li>
                           <li>
                             <Link href={"/"}>
                               <Typography type="Custom" className="text-title-gray py-2">
-                                {footerData.contact.phone}
+                                {footerData.contact?.phone}
                               </Typography>
                             </Link>
                           </li>
