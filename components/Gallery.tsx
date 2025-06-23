@@ -38,7 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
         {galleryFeatureFlag && (
           <>
             {/* Mobile */}
-            <div className="py-20 lg:hidden">
+            <div className="py-20 md:hidden">
               <Swiper
                 slidesPerView={1.6}
                 spaceBetween={20}
