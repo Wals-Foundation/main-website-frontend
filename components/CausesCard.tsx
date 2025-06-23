@@ -23,11 +23,11 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
 
   return (
-    <div className="md:max-w-[1052px] mx-auto bg-white p-6 md:flex justify-between items-start rounded-2xl w-full">
+    <div className="lg:max-w-[1052px] mx-auto bg-white p-6 md:flex justify-between items-start rounded-2xl w-full">
       <div className="w-full">
         <img src={oldLady.src} alt="" className="rounded-xl w-full lg:w-auto" />
       </div>
-      <div className="md:max-w-[482px] h-[429px] flex flex-col justify-between items-center w-full">
+      <div className="lg:max-w-[482px] h-[429px] flex flex-col justify-between items-center w-full">
         <div className="w-full">
           <Typography type="Subtitle" className="text-left text-2xl">
             {title}

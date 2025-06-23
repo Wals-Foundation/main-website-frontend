@@ -73,7 +73,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
             </div>
 
             {/* Tablet */}
-            <div className="hidden md:block xl:hidden py-20">
+            <div className="hidden md:block lg:hidden py-20">
               <Swiper
                 slidesPerView={3}
                 spaceBetween={20}
@@ -107,7 +107,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
             </div>
 
             {/* Desktop */}
-            <div className="hidden xl:block py-20">
+            <div className="hidden lg:block py-20">
               <Swiper
                 slidesPerView={3.5}
                 spaceBetween={20}

@@ -251,7 +251,7 @@ export default function Home() {
 
       {pageControlSlugMap.get("home_about_us") && (
         <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
-          <div className="w-11/12 mx-auto md:flex justify-between items-start">
+          <div className="w-11/12 mx-auto lg:flex justify-between items-start">
             <div className="pb-8 md:pb-0">
               <Typography type="ParagraphHeader">About us</Typography>
             </div>
