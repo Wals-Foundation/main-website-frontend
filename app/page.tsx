@@ -219,7 +219,7 @@ export default function Home() {
 
                 return (
                   <SwiperSlide key={n}>
-                    <div className="relative w-full h-[100vh] md:h-[70vh]">
+                    <div className="relative w-full h-[100vh]">
                       {/* Mobile image */}
                       {mobileImageUrl && (
                         <img
