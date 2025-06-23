@@ -103,65 +103,69 @@ export default function CauseDetailPage() {
 
             {/* Donation Summary */}
             <div className="flex items-center justify-center p-5 text-sm bg-gray-50 rounded-md">
-              <div className="w-full">
-                {[
-                  [
-                    "Donation Goal",
-                    `${causeData.causesData.donatable?.donation?.currency?.code} ${
-                      Number(causeData.causesData.donatable?.donation?.targetAmountInBigInteger)?.toFixed(2) || "0.00"
-                    }`,
-                  ],
-                  [
-                    "Total Donated",
-                    `${causeData.causesData.donatable?.donation?.currency?.code} ${
-                      Number(causeData.causesData.donatable?.donation?.donatedAmountInBigInteger)?.toFixed(2) || "0.00"
-                    }`,
-                  ],
-                  [
-                    "Remaining",
-                    `${causeData.causesData.donatable?.donation?.currency?.code} ${
-                      (
-                        Number(causeData.causesData.donatable?.donation?.targetAmountInBigInteger) -
-                        Number(causeData.causesData.donatable?.donation?.donatedAmountInBigInteger)
-                      )?.toFixed(2) || "940.00"
-                    }`,
-                  ],
-                ].map(([label, amount], i) => (
-                  <div key={i}>
-                    <div className="font-bold text-xl py-3">{amount}</div>
-                    <div className="text-gray-500">{label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Donation Chart */}
-              <div className="w-full mt-6">
-                {(() => {
-                  const donation = causeData.causesData.donatable?.donation
-                  const target = Number(donation?.targetAmountInBigInteger || 0)
-                  const donated = Number(donation?.donatedAmountInBigInteger || 0)
-                  const currency = donation?.currency?.code || "GHS"
-                  const percentage = target > 0 ? (donated / target) * 100 : 0
-
-                  return (
-                    <div className="relative h-40 w-40 mx-auto flex items-center justify-center text-xs text-center">
-                      <div
-                        className="absolute inset-0 rounded-full"
-                        style={{
-                          background: `conic-gradient(#009EE2 ${percentage}%, #DEF5FF ${percentage}% 100%)`,
-                          borderRadius: "9999px",
-                        }}
-                      />
-                      <div className="relative z-10 bg-white rounded-full h-28 w-28 flex flex-col items-center justify-center shadow">
-                        <span>Total Donated</span>
-                        <strong className="text-lg">
-                          {currency} {donated.toFixed(2)}
-                        </strong>
+              {causeData.causesData.donatable?.donation && (
+                <>
+                  <div className="w-full">
+                    {[
+                      [
+                        "Donation Goal",
+                        `${causeData.causesData.donatable?.donation?.currency?.code} ${
+                          Number(causeData.causesData.donatable?.donation?.targetAmountInBigInteger)?.toFixed(2) || "0.00"
+                        }`,
+                      ],
+                      [
+                        "Total Donated",
+                        `${causeData.causesData.donatable?.donation?.currency?.code} ${
+                          Number(causeData.causesData.donatable?.donation?.donatedAmountInBigInteger)?.toFixed(2) || "0.00"
+                        }`,
+                      ],
+                      [
+                        "Remaining",
+                        `${causeData.causesData.donatable?.donation?.currency?.code} ${
+                          (
+                            Number(causeData.causesData.donatable?.donation?.targetAmountInBigInteger) -
+                            Number(causeData.causesData.donatable?.donation?.donatedAmountInBigInteger)
+                          )?.toFixed(2) || "940.00"
+                        }`,
+                      ],
+                    ].map(([label, amount], i) => (
+                      <div key={i}>
+                        <div className="font-bold text-xl py-3">{amount}</div>
+                        <div className="text-gray-500">{label}</div>
                       </div>
-                    </div>
-                  )
-                })()}
-              </div>
+                    ))}
+                  </div>
+
+                  {/* Donation Chart */}
+                  <div className="w-full mt-6">
+                    {(() => {
+                      const donation = causeData.causesData.donatable?.donation
+                      const target = Number(donation?.targetAmountInBigInteger || 0)
+                      const donated = Number(donation?.donatedAmountInBigInteger || 0)
+                      const currency = donation?.currency?.code || "GHS"
+                      const percentage = target > 0 ? (donated / target) * 100 : 0
+
+                      return (
+                        <div className="relative h-40 w-40 mx-auto flex items-center justify-center text-xs text-center">
+                          <div
+                            className="absolute inset-0 rounded-full"
+                            style={{
+                              background: `conic-gradient(#009EE2 ${percentage}%, #DEF5FF ${percentage}% 100%)`,
+                              borderRadius: "9999px",
+                            }}
+                          />
+                          <div className="relative z-10 bg-white rounded-full h-28 w-28 flex flex-col items-center justify-center shadow">
+                            <span>Total Donated</span>
+                            <strong className="text-lg">
+                              {currency} {donated.toFixed(2)}
+                            </strong>
+                          </div>
+                        </div>
+                      )
+                    })()}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -187,7 +191,7 @@ export default function CauseDetailPage() {
           <div className="md:hidden">
             <Swiper
               modules={[Autoplay]}
-              slidesPerView={11}
+              slidesPerView={1}
               spaceBetween={10}
               loop={true}
               autoplay={{ delay: 3000, disableOnInteraction: false }}

@@ -4,7 +4,7 @@ import { Autoplay } from "swiper/modules"
 import Typography from "./Typography"
 import Button from "./Button"
 import { Gallery as GalleryType } from "@/utils/types"
-import { IMAGE_URL } from "@/logic/config/url"
+import { IMAGE_URL, isDev } from "@/logic/config/url"
 
 interface GalleryProps {
   donateFeatureFlag?: boolean
@@ -52,7 +52,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
                     const sources = item?.image?.source || []
 
                     const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                    const imgUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : ""
+                    const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
 
                     return (
                       <SwiperSlide key={idx}>
@@ -86,7 +86,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
                   const sources = item?.image?.source || []
 
                   const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                  const imgUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : ""
+                  const imgUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : ""
 
                   return (
                     <SwiperSlide key={idx}>
@@ -120,7 +120,7 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
                   const sources = item?.image?.source || []
 
                   const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                  const imgUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : ""
+                  const imgUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : ""
 
                   return (
                     <SwiperSlide key={idx}>
