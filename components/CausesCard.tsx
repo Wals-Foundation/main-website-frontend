@@ -6,7 +6,7 @@ import oldLady from "@/assets/images/oldLady.png"
 import { useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl } from "@/utils"
 import Link from "next/link"
-import { ENVIRONMENT } from "@/logic/config/url"
+import { isDev } from "@/logic/config/url"
 
 interface CausesCardProps {
   id?: string
@@ -39,7 +39,7 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
           {pageControlSlugMap.get("cause_card_button_2") && (
             <div className="pt-4 lg:flex items-center">
               <div className="pb-4 lg:pb-0 lg:pr-3">
-                <Link href={`/${ENVIRONMENT === "development" ? "causes/cause?" : "causes/cause.html?"}${id}`}>
+                <Link href={`/${isDev ? "causes/cause?" : "causes/cause.html?"}${id}`}>
                   <Button theme="primary" title="Read More" />
                 </Link>
               </div>

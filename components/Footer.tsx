@@ -5,13 +5,11 @@ import Input from "@/components/Input"
 import Link from "next/link"
 import Typography from "./Typography"
 import Button from "./Button"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay } from "swiper/modules"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import Logo from "./Logo"
 import { getContactData, getGalleryData, getSocialsData } from "@/logic/hooks/api/useAboutOrganization"
-import { IMAGE_URL } from "@/logic/config/url"
+import { IMAGE_URL, isDev } from "@/logic/config/url"
 import { usePathname } from "next/navigation"
 
 const Footer: React.FC = ({}) => {
@@ -46,135 +44,6 @@ const Footer: React.FC = ({}) => {
     <>
       {!loading && (
         <footer className="w-full">
-          <section className="bg-white">
-            <div className="py-10 px-3 md:px-12">
-              {pageControlSlugMap.get("home_donate_footer") && (
-                <div className="max-w-[1440px] mx-auto">
-                  <div className="w-11/12 mx-auto">
-                    <div>
-                      <Typography type="ParagraphHeader" className="text-center">
-                        Donate
-                      </Typography>
-                    </div>
-                    <div className="py-5 md:py-1">
-                      <Typography type="Subtitle" className="text-center md:text-[40px] font-size-semibol">
-                        Donate towards a <br /> worthy cause
-                      </Typography>
-                    </div>
-                    <div className="md:flex justify-center pt-2">
-                      <Button theme="primary" title="Donate Now" />
-                    </div>
-                  </div>
-                </div>
-              )}
-              {pageControlSlugMap.get("home_gallery") && (
-                <>
-                  {/* Mobile */}
-                  <div className="py-20 lg:hidden">
-                    <Swiper
-                      slidesPerView={1.6}
-                      spaceBetween={20}
-                      loop={true}
-                      speed={800}
-                      autoplay={{ delay: 0, disableOnInteraction: false }}
-                      modules={[Autoplay]}
-                    >
-                      {footerData.gallery?.map((item, idx) => {
-                        const sources = item?.image?.source || []
-
-                        const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                        const imgUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : ""
-
-                        return (
-                          <SwiperSlide key={idx}>
-                            <div>
-                              {imgUrl && (
-                                <img
-                                  src={imgUrl}
-                                  alt={`Gallery Image Mobile ${idx + 1}`}
-                                  className="h-[228px] w-full object-cover rounded-lg"
-                                  loading="lazy"
-                                />
-                              )}
-                            </div>
-                          </SwiperSlide>
-                        )
-                      })}
-                    </Swiper>
-                  </div>
-
-                  {/* Tablet */}
-                  <div className="hidden md:block xl:hidden py-20">
-                    <Swiper
-                      slidesPerView={3}
-                      spaceBetween={20}
-                      loop={true}
-                      speed={800}
-                      autoplay={{ delay: 0, disableOnInteraction: false }}
-                      modules={[Autoplay]}
-                    >
-                      {footerData?.gallery?.map((item, idx) => {
-                        const sources = item?.image?.source || []
-
-                        const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                        const imgUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : ""
-
-                        return (
-                          <SwiperSlide key={idx}>
-                            <div>
-                              {imgUrl && (
-                                <img
-                                  src={imgUrl}
-                                  alt={`Gallery Image Tablet ${idx + 1}`}
-                                  className="h-[360px] w-full object-cover rounded-lg"
-                                  loading="lazy"
-                                />
-                              )}
-                            </div>
-                          </SwiperSlide>
-                        )
-                      })}
-                    </Swiper>
-                  </div>
-
-                  {/* Desktop */}
-                  <div className="hidden xl:block py-20">
-                    <Swiper
-                      slidesPerView={3.5}
-                      spaceBetween={20}
-                      loop={true}
-                      speed={800}
-                      autoplay={{ delay: 0, disableOnInteraction: false }}
-                      modules={[Autoplay]}
-                    >
-                      {footerData?.gallery?.map((item, idx) => {
-                        const sources = item?.image?.source || []
-
-                        const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                        const imgUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : ""
-
-                        return (
-                          <SwiperSlide key={idx}>
-                            <div>
-                              {imgUrl && (
-                                <img
-                                  src={imgUrl}
-                                  alt={`Gallery Image Desktop ${idx + 1}`}
-                                  className="h-[360px] w-full object-cover rounded-lg"
-                                  loading="lazy"
-                                />
-                              )}
-                            </div>
-                          </SwiperSlide>
-                        )
-                      })}
-                    </Swiper>
-                  </div>
-                </>
-              )}
-            </div>
-          </section>
-
           <section className="bg-header w-full">
             <div className="max-w-[1440px] mx-auto py-20 bg-bg-header">
               <div className="w-11/12 mx-auto">
@@ -246,7 +115,12 @@ const Footer: React.FC = ({}) => {
                               <li key={n}>
                                 <Link href={item.accountUrl || ""}>
                                   <div className="flex items-center space-x-2">
-                                    {item?.icon?.url && <img src={IMAGE_URL + item?.icon?.url} className="h-8 rounded-full" />}
+                                    {item?.icon?.url && (
+                                      <img
+                                        src={isDev ? IMAGE_URL + item?.icon?.url : item?.icon?.url}
+                                        className="h-8 rounded-full"
+                                      />
+                                    )}
                                     <Typography type="Custom" className="text-title-gray py-2">
                                       {item?.name}
                                     </Typography>

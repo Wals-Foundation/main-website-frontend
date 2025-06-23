@@ -20,15 +20,16 @@ import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { CauseType, extractCausesByCode } from "@/utils/types"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
-import DOMPurify from "dompurify"
 import Link from "next/link"
-import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
+import { isDev, IMAGE_URL } from "@/logic/config/url"
 import {
   getAboutOrganizationApproach,
   getAboutOrganizationData,
   getAboutOrganizationValues,
 } from "@/logic/hooks/api/useAboutOrganization"
 import Loader from "@/components/Loader"
+import Gallery from "@/components/Gallery"
+import BlockRendererClient from "@/components/BlockRendererClient"
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
@@ -124,12 +125,12 @@ export default function Home() {
             )}
             <div className="pt-6 md:pt-4 md:flex items-center space-x-2">
               {pageControlSlugMap.get("home_subheadline_button_1") && (
-                <Link href={ENVIRONMENT === "development" ? "/donate" : "/donate.html"}>
+                <Link href={isDev ? "/donate" : "/donate.html"}>
                   <Button title="Donate now" />
                 </Link>
               )}
               {pageControlSlugMap.get("home_subheadline_button_2") && (
-                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"}>
+                <Link href={isDev ? "/causes" : "/causes.html"}>
                   <Button theme="secondary" title="Learn More" />
                 </Link>
               )}
@@ -213,8 +214,8 @@ export default function Home() {
                 const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
                 const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
 
-                const mobileImageUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : null
-                const desktopImageUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : null
+                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
+                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
 
                 return (
                   <SwiperSlide key={n}>
@@ -257,16 +258,13 @@ export default function Home() {
             <div className="md:max-w-[825px]">
               <Typography type="Subtitle">
                 {aboutData?.aboutOrganization?.organisation_story && (
-                  <div
-                    className="whitespace-pre-line"
-                    dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(aboutData.aboutOrganization.organisation_story.replace(/\n/g, "<br />")),
-                    }}
-                  />
+                  <div className="whitespace-pre-line">
+                    <BlockRendererClient content={aboutData?.aboutOrganization?.organisation_story} />;
+                  </div>
                 )}
               </Typography>
               <div className="pt-8 md:pt-4">
-                <Link href={ENVIRONMENT === "development" ? "/about" : "/about.html"}>
+                <Link href={isDev ? "/about" : "/about.html"}>
                   <Button theme="secondary" title="Learn More About Us" />
                 </Link>
               </div>
@@ -336,10 +334,10 @@ export default function Home() {
               )}
 
               <div className="pt-10">
-                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"} className="md:hidden">
+                <Link href={isDev ? "/causes" : "/causes.html"} className="md:hidden">
                   <Button theme="secondary" title="View All Causes" />
                 </Link>
-                <Link href={ENVIRONMENT === "development" ? "/causes" : "/causes.html"} className="hidden md:flex justify-center">
+                <Link href={isDev ? "/causes" : "/causes.html"} className="hidden md:flex justify-center">
                   <Button theme="border" title="View All Causes" />
                 </Link>
               </div>
@@ -421,6 +419,12 @@ export default function Home() {
           </Swiper>
         </section>
       )}
+
+      <Gallery
+        donateFeatureFlag={!!pageControlSlugMap?.get("home_donate_footer")}
+        galleryFeatureFlag={!!pageControlSlugMap?.get("home_gallery")}
+        galleryData={aboutData?.gallery}
+      />
     </main>
   )
 }

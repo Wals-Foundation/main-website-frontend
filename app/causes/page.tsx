@@ -10,6 +10,7 @@ import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hoo
 import { CauseType, extractCausesByCode } from "@/utils/types"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import Loader from "@/components/Loader"
+import Gallery from "@/components/Gallery"
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -19,6 +20,7 @@ export default function Home() {
   const causeData = useAppSelector((state) => state.useCauses)
   const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
   const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
+  const aboutData = useAppSelector((state) => state.useAboutOrganization)
   const communityCauses = useMemo(
     () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
     [causeData?.communityCausesData]
@@ -147,6 +149,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Gallery
+        donateFeatureFlag={!!pageControlSlugMap?.get("causes_donate_footer")}
+        galleryFeatureFlag={!!pageControlSlugMap?.get("causes_gallery")}
+        galleryData={aboutData?.gallery}
+      />
     </main>
   )
 }

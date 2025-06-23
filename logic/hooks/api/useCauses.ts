@@ -56,8 +56,8 @@ export const getCauseByID = createAsyncThunk(
           `&populate[cause][populate][district]=*` +
           `&populate[cause][populate][location]=*` +
           `&populate[cause][populate][region]=*` +
-          `&populate[cause][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
-          `&populate[cause][populate][heroes][populate][image_old][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
+          `&populate[cause][populate][gallery][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
+          `&populate[cause][populate][heroes][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
           `&populate[donatable][populate][donation][populate][currency]=*`
       )
       if (response.data) {

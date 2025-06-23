@@ -3,19 +3,22 @@
 import Link from "next/link"
 import blog1 from "@/assets/images/blog1.svg"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getActivitiesData, getCauseByID } from "@/logic/hooks/api/useCauses"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper/modules"
 import Loader from "@/components/Loader"
+import Gallery from "@/components/Gallery"
+import { createSlugMapForControl } from "@/utils"
 
 export default function CauseDetailPage() {
   const searchParams = useSearchParams()
   const causeType = searchParams.get("causeType")?.toLowerCase()
   const dispatch = useAppDispatch()
   const id = searchParams.get("id")
-
+  const data = useAppSelector((state) => state.usePageHeadlines)
+  const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
   const causeData = useAppSelector((state) => state.useCauses)
   const [loading, setLoading] = useState(true)
 
@@ -181,53 +184,107 @@ export default function CauseDetailPage() {
         {/* Activities Section */}
         <div className="mt-14">
           <h2 className="text-3xl font-bold mb-6">Activities</h2>
-          <Swiper
-            modules={[Autoplay]}
-            slidesPerView={2}
-            spaceBetween={20}
-            loop={true}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-          >
-            {!!causeData?.activities?.length ? (
-              causeData?.activities?.map((activity, i: number) => (
-                <SwiperSlide key={i}>
-                  <img src={blog1.src} alt="Activity" className="rounded-lg mb-4 object-cover h-[310px] w-full" />
-                  <h3 className="text-xl font-semibold mb-2">{activity?.program?.name}</h3>
-                  <div className="flex justify-between">
-                    <p className="text-sm text-gray-500">Expenditure</p>
-                    <p className="font-semibold text-sm">
-                      {activity?.budgetCurrency?.code} {Number(activity?.budgetAmount)?.toFixed(2)}
-                    </p>
-                  </div>
-                  <div className="flex justify-between mb-2">
-                    <p className="text-sm text-gray-500">Timeline</p>
-                    <p className="font-semibold text-sm">
-                      {activity?.startDate && activity?.endDate && (
-                        <>
-                          {new Date(activity.startDate).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                          {" - "}
-                          {new Date(activity.endDate).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </>
-                      )}
-                    </p>
-                  </div>
-                  <p className="text-gray-700 text-sm">{activity.description}</p>
-                </SwiperSlide>
-              ))
-            ) : (
-              <p>No activities listed.</p>
-            )}
-          </Swiper>
+          <div className="md:hidden">
+            <Swiper
+              modules={[Autoplay]}
+              slidesPerView={11}
+              spaceBetween={10}
+              loop={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+            >
+              {!!causeData?.activities?.length ? (
+                causeData?.activities?.map((activity, i: number) => (
+                  <SwiperSlide key={i}>
+                    <img src={blog1.src} alt="Activity" className="rounded-lg mb-4 object-cover h-[310px] w-full" />
+                    <h3 className="text-xl font-semibold mb-2">{activity?.program?.name}</h3>
+                    <div className="flex justify-between">
+                      <p className="text-sm text-gray-500">Expenditure</p>
+                      <p className="font-semibold text-sm">
+                        {activity?.budgetCurrency?.code} {Number(activity?.budgetAmount)?.toFixed(2)}
+                      </p>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <p className="text-sm text-gray-500">Timeline</p>
+                      <p className="font-semibold text-sm">
+                        {activity?.startDate && activity?.endDate && (
+                          <>
+                            {new Date(activity.startDate).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                            {" - "}
+                            {new Date(activity.endDate).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </>
+                        )}
+                      </p>
+                    </div>
+                    <p className="text-gray-700 text-sm">{activity.description}</p>
+                  </SwiperSlide>
+                ))
+              ) : (
+                <p>No activities listed.</p>
+              )}
+            </Swiper>
+          </div>
+          <div className="hidden md:block">
+            <Swiper
+              modules={[Autoplay]}
+              slidesPerView={2}
+              spaceBetween={20}
+              loop={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+            >
+              {!!causeData?.activities?.length ? (
+                causeData?.activities?.map((activity, i: number) => (
+                  <SwiperSlide key={i}>
+                    <img src={blog1.src} alt="Activity" className="rounded-lg mb-4 object-cover h-[310px] w-full" />
+                    <h3 className="text-xl font-semibold mb-2">{activity?.program?.name}</h3>
+                    <div className="flex justify-between">
+                      <p className="text-sm text-gray-500">Expenditure</p>
+                      <p className="font-semibold text-sm">
+                        {activity?.budgetCurrency?.code} {Number(activity?.budgetAmount)?.toFixed(2)}
+                      </p>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <p className="text-sm text-gray-500">Timeline</p>
+                      <p className="font-semibold text-sm">
+                        {activity?.startDate && activity?.endDate && (
+                          <>
+                            {new Date(activity.startDate).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                            {" - "}
+                            {new Date(activity.endDate).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </>
+                        )}
+                      </p>
+                    </div>
+                    <p className="text-gray-700 text-sm">{activity.description}</p>
+                  </SwiperSlide>
+                ))
+              ) : (
+                <p>No activities listed.</p>
+              )}
+            </Swiper>
+          </div>
         </div>
       </div>
+      <Gallery
+        donateFeatureFlag={!!pageControlSlugMap?.get("causes_donate_footer")}
+        galleryFeatureFlag={!!pageControlSlugMap?.get("causes_gallery")}
+        galleryData={causeData?.causesData?.cause?.gallery || []}
+      />
     </main>
   )
 }

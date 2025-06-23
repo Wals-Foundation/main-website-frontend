@@ -21,8 +21,10 @@ import {
   getAboutOrganizationValues,
 } from "@/logic/hooks/api/useAboutOrganization"
 import { Autoplay, Pagination } from "swiper/modules"
-import { ENVIRONMENT, IMAGE_URL } from "@/logic/config/url"
+import { ENVIRONMENT, IMAGE_URL, isDev } from "@/logic/config/url"
 import Link from "next/link"
+import Gallery from "@/components/Gallery"
+import BlockRendererClient from "@/components/BlockRendererClient"
 
 export default function About() {
   const dispatch = useAppDispatch()
@@ -107,8 +109,8 @@ export default function About() {
                 const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
                 const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
 
-                const mobileImageUrl = mobileImage?.url ? `${IMAGE_URL}${mobileImage.url}` : null
-                const desktopImageUrl = desktopImage?.url ? `${IMAGE_URL}${desktopImage.url}` : null
+                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
+                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
 
                 return (
                   <SwiperSlide key={n}>
@@ -154,7 +156,7 @@ export default function About() {
                     <Typography type="ParagraphHeader">Our Story</Typography>
                   </div>
                   <div className="md:max-w-[825px]">
-                    <Typography>{aboutData.aboutOrganization?.organisation_story || ""}</Typography>
+                    <BlockRendererClient content={aboutData?.aboutOrganization?.organisation_story} />;
                   </div>
                 </div>
               )}
@@ -405,6 +407,11 @@ export default function About() {
       )}
 
       {pageControlSlugMap.get("about_faq") && <FAQ />}
+      <Gallery
+        donateFeatureFlag={!!pageControlSlugMap?.get("about_donate_footer")}
+        galleryFeatureFlag={!!pageControlSlugMap?.get("about_gallery")}
+        galleryData={aboutData?.gallery}
+      />
     </main>
   )
 }

@@ -35,6 +35,7 @@ export type Slugs =
   | "about_team"
   | "about_faq"
   | "about_donate_footer"
+  | "about_gallery"
   | "causes_headline"
   | "cause_subheadline"
   | "causes_list"
@@ -159,6 +160,7 @@ export type NormalizedCause = {
         publishedAt?: Date
       }
     }[]
+    gallery?: Gallery[]
     heroes?: {
       id?: number
       documentId?: string
