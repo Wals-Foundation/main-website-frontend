@@ -85,8 +85,8 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
                 {galleryData?.map((item, idx) => {
                   const sources = item?.image?.source || []
 
-                  const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                  const imgUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : ""
+                  const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
+                  const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
 
                   return (
                     <SwiperSlide key={idx}>
@@ -119,8 +119,8 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
                 {galleryData?.map((item, idx) => {
                   const sources = item?.image?.source || []
 
-                  const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-                  const imgUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : ""
+                  const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
+                  const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
 
                   return (
                     <SwiperSlide key={idx}>
