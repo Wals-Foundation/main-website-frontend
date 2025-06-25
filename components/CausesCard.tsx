@@ -2,7 +2,6 @@
 import React, { ReactNode } from "react"
 import Typography from "./Typography"
 import Button from "./Button"
-import oldLady from "@/assets/images/oldLady.png"
 import { useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl } from "@/utils"
 import Link from "next/link"
@@ -11,6 +10,7 @@ import { isDev } from "@/logic/config/url"
 interface CausesCardProps {
   id?: string
   title?: string
+  image?: string
   subtitle?: ReactNode
   content?: ReactNode
   displayDonateButton?: boolean
@@ -18,15 +18,13 @@ interface CausesCardProps {
 }
 
 const CausesCard: React.FC<CausesCardProps> = (props) => {
-  const { title, subtitle, content, id, displayDonateButton } = props
+  const { title, subtitle, content, id, displayDonateButton, image } = props
   const data = useAppSelector((state) => state.usePageHeadlines)
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
 
   return (
     <div className="lg:max-w-[1052px] mx-auto bg-white p-6 md:flex justify-between items-start rounded-2xl w-full">
-      <div className="w-full">
-        <img src={oldLady.src} alt="" className="rounded-xl w-full lg:w-auto" />
-      </div>
+      <div className="w-full">{image && <img src={image} alt={title} className="rounded-xl w-full lg:w-auto" />} </div>
       <div className="lg:max-w-[482px] h-[429px] flex flex-col justify-between items-center w-full">
         <div className="w-full">
           <Typography type="Subtitle" className="text-left text-2xl">

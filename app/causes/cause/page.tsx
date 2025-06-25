@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper/modules"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
-import { createSlugMapForControl } from "@/utils"
+import { createSlugMapForControl, getHeroImageUrl } from "@/utils"
 
 export default function CauseDetailPage() {
   const searchParams = useSearchParams()
@@ -55,6 +55,8 @@ export default function CauseDetailPage() {
       </div>
     )
 
+  const heroImageUrl = getHeroImageUrl(causeData.causesData)
+
   return (
     <main className="max-w-[1440px] mx-auto px-4 md:px-20 py-10">
       <div className="max-w-[1050px] mx-auto">
@@ -62,7 +64,16 @@ export default function CauseDetailPage() {
 
         {/* Main Image */}
         <div className="w-full">
-          <img src={blog1.src} alt="Cause" className="w-full h-[570px] object-cover rounded-md" />
+          {heroImageUrl && (
+            <img
+              src={heroImageUrl}
+              alt={causeData.causesData?.name || "Cause image"}
+              width={1200}
+              height={570}
+              className="w-full h-[570px] object-cover rounded-md"
+              style={{ objectFit: "cover" }}
+            />
+          )}
         </div>
 
         {/* Donation and Info Section */}

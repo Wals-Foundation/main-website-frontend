@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import { CauseType, extractCausesByCode } from "@/utils/types"
-import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
+import { createSlugMapForControl, createSlugMapForPages, getHeroImageUrl } from "@/utils"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
 
@@ -34,26 +34,30 @@ export default function Home() {
     [causeData?.projectCausesData]
   )
 
-  const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string }[]> = {
-    Communities: communityCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? "",
-    })),
-    Programs: programCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? "",
-    })),
-    Projects: projectCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? "",
-    })),
-  }
+  const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string; image?: string | null }[]> =
+    {
+      Communities: communityCauses.map((item: any) => ({
+        id: item?.id ?? "0",
+        title: item?.name ?? "Untitled Cause",
+        subtitle: item?.introduction ?? "",
+        content: item?.impact ?? null,
+        image: getHeroImageUrl(item),
+      })),
+      Programs: programCauses.map((item: any) => ({
+        id: item?.id ?? "0",
+        title: item?.name ?? "Untitled Cause",
+        subtitle: item?.introduction ?? "",
+        content: item?.impact ?? "",
+        image: getHeroImageUrl(item),
+      })),
+      Projects: projectCauses.map((item: any) => ({
+        id: item?.id ?? "0",
+        title: item?.name ?? "Untitled Cause",
+        subtitle: item?.introduction ?? "",
+        content: item?.impact ?? "",
+        image: getHeroImageUrl(item),
+      })),
+    }
 
   const getAllData = async () => {
     setLoading(true)
@@ -129,9 +133,10 @@ export default function Home() {
                       {causesData[activeCause].map((cause, index) => (
                         <CausesCard
                           key={index}
-                          title={cause.title}
-                          subtitle={cause.subtitle}
-                          content={cause.content}
+                          image={cause?.image || ""}
+                          title={cause?.title}
+                          subtitle={cause?.subtitle}
+                          content={cause?.content}
                           displayDonateButton={!!pageControlSlugMap.get("causes_donate_footer")}
                           id={`causeType=${activeCause}&id=${cause?.id || ""}`}
                         />

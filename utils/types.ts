@@ -114,82 +114,16 @@ export type NormalizedCause = {
       name?: string
       code?: string
       documentId?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
     }
     region?: {
       id?: number
       name?: string
       code?: string
-      documentId?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
     }
-    location?: {
-      id?: number
-      name?: string
-      key?: string
-      latitude?: number
-      longitude?: number
-      documentId?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
-    }
-    images?: {
-      id?: number
-      documentId?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
-      source?: {
-        id?: number
-        documentId?: string
-        name?: string
-        url?: string
-        mime?: string
-        size?: number
-        width?: number
-        height?: number
-        hash?: string
-        ext?: string
-        createdAt?: Date
-        updatedAt?: Date
-        publishedAt?: Date
-      }
-    }[]
+    location?: { id?: number; name?: string; key?: string; latitude?: number; longitude?: number }
+    images?: { id?: number; source?: { url?: string } }[]
     gallery?: Gallery[]
-    heroes?: {
-      id?: number
-      documentId?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
-      image_old?: {
-        id?: number
-        documentId?: string
-        createdAt?: Date
-        updatedAt?: Date
-        publishedAt?: Date
-        source?: {
-          id?: number
-          documentId?: string
-          name?: string
-          url?: string
-          mime?: string
-          size?: number
-          width?: number
-          height?: number
-          hash?: string
-          ext?: string
-          createdAt?: Date
-          updatedAt?: Date
-          publishedAt?: Date
-        }
-      }
-    }[]
+    heroes?: { images?: { id?: number; source?: { name?: string; url?: string }[] }[] }[]
   }
   community?: {
     id?: number
@@ -204,38 +138,16 @@ export type NormalizedCause = {
     id: number
     key: string
     type: string
-    documentId?: string
-    createdAt?: Date
-    updatedAt?: Date
-    publishedAt?: Date
     donation?: {
       id: number
       documentId?: string
       key?: string
       targetAmountInBigInteger?: string
       donatedAmountInBigInteger?: string
-      createdAt?: Date
-      updatedAt?: Date
-      publishedAt?: Date
-      currency?: {
-        id?: number
-        documentId?: string
-        code?: string
-        createdAt?: Date
-        updatedAt?: Date
-        publishedAt?: Date
-      }
+      currency?: { code?: string }
     }
   }
-  program?: {
-    id: number
-    code: string
-    name: string
-    documentId?: string
-    createdAt?: Date
-    updatedAt?: Date
-    publishedAt?: Date
-  }
+  program?: { id: number; code: string; name: string }
 }
 
 export type Activities = {

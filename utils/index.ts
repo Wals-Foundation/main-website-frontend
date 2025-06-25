@@ -1,4 +1,5 @@
-import { ENVIRONMENT } from "@/logic/config/url"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ENVIRONMENT, IMAGE_URL, isDev } from "@/logic/config/url"
 import { PageContent, Slugs } from "./types"
 
 export function createSlugMapForControl(array: { key: Slugs; isLive: string | boolean }[]): Map<Slugs, string | boolean> {
@@ -37,4 +38,9 @@ export const isActiveLink = (pathname: string, link?: string) => {
   if (!link) return false
   const normalized = normalizeLink(link)
   return pathname === normalized || (normalized !== "/" && pathname.startsWith(normalized))
+}
+
+export const getHeroImageUrl = (item: any): string | null => {
+  const url = item?.cause?.heroes?.[0]?.images?.[0]?.source?.[0]?.url
+  return url ? (isDev ? `${IMAGE_URL}${url}` : url) : null
 }
