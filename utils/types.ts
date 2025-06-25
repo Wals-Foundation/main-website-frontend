@@ -1,3 +1,5 @@
+import { getHeroImageUrl } from "."
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type Slugs =
   | "main_nav"
@@ -216,5 +218,6 @@ export const extractCausesByCode = (response?: RawCauseResponse): NormalizedCaus
     impact: item.cause?.impact,
     problem: item.cause?.problem,
     solution: item.cause?.solution,
+    image: getHeroImageUrl(item),
   }))
 }

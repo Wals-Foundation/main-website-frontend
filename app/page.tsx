@@ -15,7 +15,7 @@ import { Autoplay, Pagination } from "swiper/modules"
 import HelpComponent from "@/components/HelpComponent"
 import Testimonies from "@/components/Testimonies"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { createSlugMapForControl, createSlugMapForPages, getHeroImageUrl } from "@/utils"
+import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { CauseType, extractCausesByCode } from "@/utils/types"
@@ -60,21 +60,21 @@ export default function Home() {
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? null,
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
       Programs: programCauses.map((item: any) => ({
         id: item?.id ?? "0",
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? "",
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
       Projects: projectCauses.map((item: any) => ({
         id: item?.id ?? "0",
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? "",
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
     }
 
@@ -144,7 +144,7 @@ export default function Home() {
       </section>
 
       {pageControlSlugMap.get("home_hero_carousel") && (
-        <section className="pt-10 relative min-h-[932px] md:min-h-[784px]">
+        <section className="pt-10 relative min-h-[932px] md:min-h-screen">
           <div className="absolute top-0 left-0 right-0 z-10 px-4 md:px-0">
             <div className="max-w-[1440px] mx-auto py-10 md:py-16 md:right-10">
               <div className="w-full md:w-11/12 mx-auto relative h-full">
@@ -223,13 +223,13 @@ export default function Home() {
 
                 return (
                   <SwiperSlide key={n}>
-                    <div className="relative w-full min-h-[932px] md:min-h-[784px]">
+                    <div className="relative w-full min-h-[932px] md:min-h-screen">
                       {/* Mobile image */}
                       {mobileImageUrl && (
                         <img
                           src={mobileImageUrl}
                           alt={`Hero Slide ${n + 1} - Mobile`}
-                          className="w-full h-full object-cover block md:hidden"
+                          className="w-full min-h-[932px] md:min-h-[784px] object-cover block md:hidden"
                           loading="lazy"
                         />
                       )}
@@ -239,7 +239,7 @@ export default function Home() {
                         <img
                           src={desktopImageUrl}
                           alt={`Hero Slide ${n + 1} - Desktop`}
-                          className="w-full h-full object-cover hidden md:block"
+                          className="w-full min-h-[932px] md:min-h-screen object-cover hidden md:block"
                           loading="lazy"
                         />
                       )}

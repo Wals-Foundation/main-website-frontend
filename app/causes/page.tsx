@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import Button from "@/components/Button"
 import Typography from "@/components/Typography"
 import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import { CauseType, extractCausesByCode } from "@/utils/types"
-import { createSlugMapForControl, createSlugMapForPages, getHeroImageUrl } from "@/utils"
+import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
 
@@ -41,21 +40,21 @@ export default function Home() {
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? null,
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
       Programs: programCauses.map((item: any) => ({
         id: item?.id ?? "0",
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? "",
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
       Projects: projectCauses.map((item: any) => ({
         id: item?.id ?? "0",
         title: item?.name ?? "Untitled Cause",
         subtitle: item?.introduction ?? "",
         content: item?.impact ?? "",
-        image: getHeroImageUrl(item),
+        image: item?.image,
       })),
     }
 
@@ -141,11 +140,6 @@ export default function Home() {
                           id={`causeType=${activeCause}&id=${cause?.id || ""}`}
                         />
                       ))}
-                    </div>
-
-                    {/* Mobile CTA */}
-                    <div className="md:hidden pt-10">
-                      <Button theme="secondary" title="View All Causes" />
                     </div>
                   </>
                 )}
