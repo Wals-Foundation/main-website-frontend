@@ -25,6 +25,7 @@ import { ENVIRONMENT, IMAGE_URL, isDev } from "@/logic/config/url"
 import Link from "next/link"
 import Gallery from "@/components/Gallery"
 import BlockRendererClient from "@/components/BlockRendererClient"
+import Loader from "@/components/Loader"
 
 export default function About() {
   const dispatch = useAppDispatch()
@@ -145,7 +146,9 @@ export default function About() {
       )}
 
       {loading || !pageControlSlugMap.get("about_our_story") ? (
-        <Typography className="text-center">Please wait...</Typography>
+        <div className="flex flex-col justify-center items-center h-[40vh]">
+          <Loader />
+        </div>
       ) : (
         <>
           <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
