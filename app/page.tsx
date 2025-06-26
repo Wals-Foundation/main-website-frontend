@@ -111,7 +111,7 @@ export default function Home() {
 
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
+      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
         <div className="w-11/12 mx-auto md:flex justify-between items-start">
           {pageControlSlugMap.get("home_headline") && (
             <div className="md:max-w-[681px]">
@@ -144,13 +144,66 @@ export default function Home() {
       </section>
 
       {pageControlSlugMap.get("home_hero_carousel") && (
-        <section className="pt-10 relative min-h-[932px] md:min-h-screen">
-          <div className="absolute top-0 left-0 right-0 z-10 px-4 md:px-0">
-        <section className="pt-10">
-          <div className="top-0 left-0 right-0 z-10 px-4 md:px-0">
-            <div className="max-w-[1440px] mx-auto py-10 md:py-16 md:right-10">
-              <div className="w-full md:w-11/12 mx-auto relative h-full">
-                <div className="my-10 mx-auto md:ml-auto md:mr-5 max-w-full md:max-w-[374px]">
+        /*<section className="pt-10 relative w-screen aspect-[16/9]">
+          <div className="absolute w-screen aspect-[16/9] bg-black"></div>
+          <div className="absolute bg-white end-20 h-full pt-10 pb-5">
+            <div className="left-0 right-0 bg-gray-200 h-full" style={{ top: 16, bottom: 8 }}>
+              second p
+            </div>
+          </div>
+        </section>*/
+        <section className="relative w-screen aspect-[2/3] md:aspect-[16/9]"> 
+          <Swiper
+          className="absolute w-full h-full"
+            modules={[Autoplay, Pagination]}
+            slidesPerView={1}
+            loop
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+          >
+            {!!homeData?.heroes?.length &&
+              homeData.heroes.map((item, n) => {
+                const sources = item?.images?.flatMap((img) => img?.source || []) || []
+
+                const mobileImage = sources.find((s) => /|2x3|/.test(s.name || ""))
+                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
+
+                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
+                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
+
+                return (
+                  <SwiperSlide key={n}>
+                    <div className="w-full h-full">
+                      {/* Mobile image */}
+                      {mobileImageUrl && (
+                        <img
+                          src={mobileImageUrl}
+                          alt={`Hero Slide ${n + 1} - Mobile`}
+                          className="w-full h-full block md:hidden"
+                          loading="lazy"
+                        />
+                      )}
+
+                      {/* Desktop image */}
+                      {desktopImageUrl && (
+                        <img
+                          src={desktopImageUrl}
+                          alt={`Hero Slide ${n + 1} - Desktop`}
+                          className="w-full h-full object-cover hidden md:block"
+                          loading="lazy"
+                        />
+                      )}
+
+                      <div className="absolute inset-0 bg-black/60" />
+                    </div>
+                  </SwiperSlide>
+                )
+              })}
+          </Swiper>
+          <div className="absolute top-0 end-0 h-full z-10 pb-5 pt-10 px-8">
+            <div className="h-full">
+              <div className="h-full w-full md:max-w-[360px] flex flex-col">
                   {!!pageControlSlugMap.get("home_hero_values_card_1") && (
                     <div className="bg-white rounded-xl p-5">
                       <Typography type="Custom">
@@ -176,7 +229,7 @@ export default function Home() {
                   <div className="pt-4" />
 
                   {!!pageControlSlugMap.get("home_hero_values_card_2") && (
-                    <div className="bg-white rounded-xl p-5">
+                    <div className="bg-white rounded-xl p-5 flex-1  overflow-auto">
                       {!!aboutData?.ourValues &&
                         aboutData?.ourValues?.map((item, n) => (
                           <div key={n} className="py-2">
@@ -201,57 +254,9 @@ export default function Home() {
                       </div>
                     </div>
                   )}
-                </div>
               </div>
             </div>
           </div>
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            slidesPerView={1}
-            loop
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-          >
-            {!!homeData?.heroes?.length &&
-              homeData.heroes.map((item, n) => {
-                const sources = item?.images?.flatMap((img) => img?.source || []) || []
-
-                const mobileImage = sources.find((s) => /|2x3|/.test(s.name || ""))
-                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-
-                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
-                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
-
-                return (
-                  <SwiperSlide key={n}>
-                    <div className="relative w-full min-h-[932px] md:min-h-screen">
-                      {/* Mobile image */}
-                      {mobileImageUrl && (
-                        <img
-                          src={mobileImageUrl}
-                          alt={`Hero Slide ${n + 1} - Mobile`}
-                          className="w-full min-h-[932px] md:min-h-[784px] object-cover block md:hidden"
-                          loading="lazy"
-                        />
-                      )}
-
-                      {/* Desktop image */}
-                      {desktopImageUrl && (
-                        <img
-                          src={desktopImageUrl}
-                          alt={`Hero Slide ${n + 1} - Desktop`}
-                          className="w-full min-h-[932px] md:min-h-screen object-cover hidden md:block"
-                          loading="lazy"
-                        />
-                      )}
-
-                      <div className="absolute inset-0 bg-black/60" />
-                    </div>
-                  </SwiperSlide>
-                )
-              })}
-          </Swiper>
         </section>
       )}
 
