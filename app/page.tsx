@@ -146,6 +146,8 @@ export default function Home() {
       {pageControlSlugMap.get("home_hero_carousel") && (
         <section className="pt-10 relative min-h-[932px] md:min-h-screen">
           <div className="absolute top-0 left-0 right-0 z-10 px-4 md:px-0">
+        <section className="pt-10">
+          <div className="top-0 left-0 right-0 z-10 px-4 md:px-0">
             <div className="max-w-[1440px] mx-auto py-10 md:py-16 md:right-10">
               <div className="w-full md:w-11/12 mx-auto relative h-full">
                 <div className="my-10 mx-auto md:ml-auto md:mr-5 max-w-full md:max-w-[374px]">
@@ -215,7 +217,7 @@ export default function Home() {
               homeData.heroes.map((item, n) => {
                 const sources = item?.images?.flatMap((img) => img?.source || []) || []
 
-                const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
+                const mobileImage = sources.find((s) => /|2x3|/.test(s.name || ""))
                 const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
 
                 const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
@@ -433,3 +435,26 @@ export default function Home() {
     </main>
   )
 }
+
+function aspectRatioRegex(ratio: string): RegExp {
+  // Escape the ratio in case it contains special regex characters
+  const escapedRatio = ratio.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+  // Match: _<ratio> right before the file extension at the end of the string
+  return new RegExp(`_${escapedRatio}(?=\\.[^.]+$)`)
+}
+
+/*
+    baseurl? parameter populate
+*/
+
+/* Input: Website image
+ //   function(feature_key, website image) {
+        map(key, aspect ratio)
+        string aspect ratio
+        
+        website - source -> 
+        const sources = item?.images?.flatMap((img) => img?.source || []) || []
+
+        url 
+ //.   }
+/ url*/
