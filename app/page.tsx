@@ -29,7 +29,9 @@ import {
 } from "@/logic/hooks/api/useAboutOrganization"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
-import BlockRendererClient from "@/components/BlockRendererClient"
+import BlockRenderer from "@/components/BlockRendererClient"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
@@ -54,29 +56,29 @@ export default function Home() {
   )
 
   const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string; image?: string | null }[]> =
-    {
-      Communities: communityCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? null,
-        image: item?.image,
-      })),
-      Programs: programCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? "",
-        image: item?.image,
-      })),
-      Projects: projectCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? "",
-        image: item?.image,
-      })),
-    }
+  {
+    Communities: communityCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? null,
+      image: item?.image,
+    })),
+    Programs: programCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? "",
+      image: item?.image,
+    })),
+    Projects: projectCauses.map((item: any) => ({
+      id: item?.id ?? "0",
+      title: item?.name ?? "Untitled Cause",
+      subtitle: item?.introduction ?? "",
+      content: item?.impact ?? "",
+      image: item?.image,
+    })),
+  }
 
   const getAllData = async () => {
     setLoading(true)
@@ -152,9 +154,9 @@ export default function Home() {
             </div>
           </div>
         </section>*/
-        <section className="relative w-screen aspect-[2/3] md:aspect-[16/9]"> 
+        <section className="relative w-screen aspect-[2/3] md:aspect-[16/9]">
           <Swiper
-          className="absolute w-full h-full"
+            className="absolute w-full h-full"
             modules={[Autoplay, Pagination]}
             slidesPerView={1}
             loop
@@ -204,56 +206,56 @@ export default function Home() {
           <div className="absolute top-0 end-0 h-full z-10 pb-5 pt-10 px-8">
             <div className="h-full">
               <div className="h-full w-full md:max-w-[360px] flex flex-col">
-                  {!!pageControlSlugMap.get("home_hero_values_card_1") && (
-                    <div className="bg-white rounded-xl p-5">
-                      <Typography type="Custom">
-                        {"Since 2010, our programs have <br /> empowered over 500 individuals."}
-                      </Typography>
-                      <div className="pt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                        <div className="flex items-center gap-2">
-                          {[people1.src, people2.src, people3.src, people4.src].map((item, n) => (
-                            <div key={n} className="w-[41px] h-[41px] border-2 rounded-full border-white overflow-hidden">
-                              <img src={item} alt="" className="w-full h-full object-cover rounded-full" />
-                            </div>
-                          ))}
-                        </div>
-                        <div className="max-w-[176px]">
-                          <Typography type="Custom" className="text-xs md:text-sm">
-                            Make a donation to hear more save more lives
-                          </Typography>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="pt-4" />
-
-                  {!!pageControlSlugMap.get("home_hero_values_card_2") && (
-                    <div className="bg-white rounded-xl p-5 flex-1  overflow-auto">
-                      {!!aboutData?.ourValues &&
-                        aboutData?.ourValues?.map((item, n) => (
-                          <div key={n} className="py-2">
-                            <Typography className="font-size-semibold">{item.title}</Typography>
-                            <div className="pt-1">
-                              <Typography type="Custom" className="text-sm">
-                                {item.explanation}
-                              </Typography>
-                            </div>
+                {!!pageControlSlugMap.get("home_hero_values_card_1") && (
+                  <div className="bg-white rounded-xl p-5">
+                    <Typography type="Custom">
+                      {"Since 2010, our programs have <br /> empowered over 500 individuals."}
+                    </Typography>
+                    <div className="pt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="flex items-center gap-2">
+                        {[people1.src, people2.src, people3.src, people4.src].map((item, n) => (
+                          <div key={n} className="w-[41px] h-[41px] border-2 rounded-full border-white overflow-hidden">
+                            <img src={item} alt="" className="w-full h-full object-cover rounded-full" />
                           </div>
                         ))}
-
-                      <div className="pt-3">
-                        <iframe
-                          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          width="100%"
-                          height="200"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="rounded-md w-full"
-                        />
+                      </div>
+                      <div className="max-w-[176px]">
+                        <Typography type="Custom" className="text-xs md:text-sm">
+                          Make a donation to hear more save more lives
+                        </Typography>
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
+
+                <div className="pt-4" />
+
+                {!!pageControlSlugMap.get("home_hero_values_card_2") && (
+                  <div className="bg-white rounded-xl p-5 flex-1  overflow-auto">
+                    {!!aboutData?.ourValues &&
+                      aboutData?.ourValues?.map((item, n) => (
+                        <div key={n} className="py-2">
+                          <Typography className="font-size-semibold">{item.title}</Typography>
+                          <div className="pt-1">
+                            <Typography type="Custom" className="text-sm">
+                              {item.explanation}
+                            </Typography>
+                          </div>
+                        </div>
+                      ))}
+
+                    <div className="pt-3">
+                      <iframe
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        width="100%"
+                        height="200"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-md w-full"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -267,13 +269,18 @@ export default function Home() {
               <Typography type="ParagraphHeader">About us</Typography>
             </div>
             <div className="md:max-w-[825px]">
-              <Typography type="Subtitle">
-                {aboutData?.aboutOrganization?.organisation_story && (
-                  <div className="whitespace-pre-line">
-                    <BlockRendererClient content={aboutData?.aboutOrganization?.organisation_story} />;
-                  </div>
+              {aboutData?.aboutOrganization?.organisation_story && (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{ // Not needed here but where there are numbers it'll be needed. Can be extracted into own component responsible for displaying markdown anywhere
+                      ol: ({ node, ...props }) => (
+                        <ol className="list-decimal pl-8" {...props} />
+                      ),
+                    }}
+                  >
+                    {aboutData?.aboutOrganization?.organisation_story}
+                  </ReactMarkdown>
                 )}
-              </Typography>
               <div className="pt-8 md:pt-4">
                 <Link href={isDev ? "/about" : "/about.html"}>
                   <Button theme="secondary" title="Learn More About Us" />
@@ -316,9 +323,8 @@ export default function Home() {
                     <div
                       key={tab}
                       onClick={() => setActiveCause(tab)}
-                      className={`${
-                        activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
-                      } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
+                      className={`${activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
+                        } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
                     >
                       <Typography className="font-size-semibold md:text-xl">{tab}</Typography>
                     </div>
