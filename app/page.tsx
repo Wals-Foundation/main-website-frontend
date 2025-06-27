@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Button from "@/components/Button"
@@ -11,17 +10,16 @@ import people5 from "@/assets/images/people5.png"
 import involved from "@/assets/images/involved.png"
 import gift from "@/assets/images/gift.png"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay, Pagination } from "swiper/modules"
 import HelpComponent from "@/components/HelpComponent"
 import Testimonies from "@/components/Testimonies"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
-import { CauseType, extractCausesByCode } from "@/utils/types"
+import { CauseType } from "@/utils/types"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
 import Link from "next/link"
-import { isDev, IMAGE_URL } from "@/logic/config/url"
+import { isDev } from "@/logic/config/url"
 import {
   getAboutOrganizationApproach,
   getAboutOrganizationData,
@@ -29,9 +27,10 @@ import {
 } from "@/logic/hooks/api/useAboutOrganization"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
-import BlockRenderer from "@/components/BlockRendererClient"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
+import HeroSection from "@/components/HeroSection"
+import Markdown from "@/components/Markdown"
+import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
+import HeroSliderSection from "@/components/HeroSliderSection"
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
@@ -42,224 +41,59 @@ export default function Home() {
   const dispatch = useAppDispatch()
   const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
   const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
-  const communityCauses = useMemo(
-    () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
-    [causeData?.communityCausesData]
-  )
-  const programCauses = useMemo(
-    () => extractCausesByCode(causeData?.programsCausesData || {}) || [],
-    [causeData?.programsCausesData]
-  )
-  const projectCauses = useMemo(
-    () => extractCausesByCode(causeData?.projectCausesData || {}) || [],
-    [causeData?.projectCausesData]
-  )
-
-  const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string; image?: string | null }[]> =
-  {
-    Communities: communityCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? null,
-      image: item?.image,
-    })),
-    Programs: programCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? "",
-      image: item?.image,
-    })),
-    Projects: projectCauses.map((item: any) => ({
-      id: item?.id ?? "0",
-      title: item?.name ?? "Untitled Cause",
-      subtitle: item?.introduction ?? "",
-      content: item?.impact ?? "",
-      image: item?.image,
-    })),
-  }
-
-  const getAllData = async () => {
-    setLoading(true)
-    try {
-      await Promise.all([
-        dispatch(getCommunitiesData()),
-        dispatch(getProgamsData()),
-        dispatch(getProjectsData()),
-        dispatch(getAboutOrganizationData()),
-        dispatch(getAboutOrganizationValues()),
-        dispatch(getAboutOrganizationApproach()),
-      ])
-    } catch (error) {
-      console.error("Error fetching data:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const causesData = useFormattedCausesData(causeData)
 
   const didRun = useRef(false)
 
   useEffect(() => {
+    const getAllData = async () => {
+      setLoading(true)
+      try {
+        await Promise.all([
+          dispatch(getCommunitiesData()),
+          dispatch(getProgamsData()),
+          dispatch(getProjectsData()),
+          dispatch(getAboutOrganizationData()),
+          dispatch(getAboutOrganizationValues()),
+          dispatch(getAboutOrganizationApproach()),
+        ])
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
     if (!didRun.current) {
       getAllData()
       didRun.current = true
     }
-  }, [])
-
-  const swiperRef = useRef<any>(null)
+  }, [dispatch])
 
   const homeData = pageHeadlinesSlugMap.get("home")
 
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
-        <div className="w-11/12 mx-auto md:flex justify-between items-start">
-          {pageControlSlugMap.get("home_headline") && (
-            <div className="md:max-w-[681px]">
-              <Typography type="Title">{homeData?.headline || "Creating pathways to opportunity for every community"}</Typography>
-            </div>
-          )}
-
-          <div className="md:max-w-[436px] pt-10 md:pt-0">
-            {pageControlSlugMap.get("home_subheadline") && (
-              <Typography>
-                {homeData?.subheadline ||
-                  ` Helping communities create a future with access to information, healthcare, and economic opportunities through
-              long-term plans supported through collaboration and partnerships.`}
-              </Typography>
-            )}
-            <div className="pt-6 md:pt-4 md:flex items-center space-x-2">
-              {pageControlSlugMap.get("home_subheadline_button_1") && (
-                <Link href={isDev ? "/donate" : "/donate.html"}>
-                  <Button title="Donate now" />
-                </Link>
-              )}
-              {pageControlSlugMap.get("home_subheadline_button_2") && (
-                <Link href={isDev ? "/causes" : "/causes.html"}>
-                  <Button theme="secondary" title="Learn More" />
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        headlineFlag={!!pageControlSlugMap.get("home_headline")}
+        headline={homeData?.headline || ""}
+        subheadlineFlag={!!pageControlSlugMap.get("home_subheadline")}
+        subheadline={homeData?.subheadline || ""}
+        Button1Flag={!!pageControlSlugMap.get("home_subheadline_button_1")}
+        Button1Link={isDev ? "/donate" : "/donate.html"}
+        Button1Title="Donate now"
+        Button2Flag={!!pageControlSlugMap.get("home_subheadline_button_2")}
+        Button2Link={isDev ? "/causes" : "/causes.html"}
+        Button2Title="Learn More"
+      />
 
       {pageControlSlugMap.get("home_hero_carousel") && (
-        /*<section className="pt-10 relative w-screen aspect-[16/9]">
-          <div className="absolute w-screen aspect-[16/9] bg-black"></div>
-          <div className="absolute bg-white end-20 h-full pt-10 pb-5">
-            <div className="left-0 right-0 bg-gray-200 h-full" style={{ top: 16, bottom: 8 }}>
-              second p
-            </div>
-          </div>
-        </section>*/
-        <section className="relative w-screen aspect-[2/3] md:aspect-[16/9]">
-          <Swiper
-            className="absolute w-full h-full"
-            modules={[Autoplay, Pagination]}
-            slidesPerView={1}
-            loop
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-          >
-            {!!homeData?.heroes?.length &&
-              homeData.heroes.map((item, n) => {
-                const sources = item?.images?.flatMap((img) => img?.source || []) || []
-
-                const mobileImage = sources.find((s) => /|2x3|/.test(s.name || ""))
-                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-
-                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
-                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
-
-                return (
-                  <SwiperSlide key={n}>
-                    <div className="w-full h-full">
-                      {/* Mobile image */}
-                      {mobileImageUrl && (
-                        <img
-                          src={mobileImageUrl}
-                          alt={`Hero Slide ${n + 1} - Mobile`}
-                          className="w-full h-full block md:hidden"
-                          loading="lazy"
-                        />
-                      )}
-
-                      {/* Desktop image */}
-                      {desktopImageUrl && (
-                        <img
-                          src={desktopImageUrl}
-                          alt={`Hero Slide ${n + 1} - Desktop`}
-                          className="w-full h-full object-cover hidden md:block"
-                          loading="lazy"
-                        />
-                      )}
-
-                      <div className="absolute inset-0 bg-black/60" />
-                    </div>
-                  </SwiperSlide>
-                )
-              })}
-          </Swiper>
-          <div className="absolute top-0 end-0 h-full z-10 pb-5 pt-10 px-8">
-            <div className="h-full">
-              <div className="h-full w-full md:max-w-[360px] flex flex-col">
-                {!!pageControlSlugMap.get("home_hero_values_card_1") && (
-                  <div className="bg-white rounded-xl p-5">
-                    <Typography type="Custom">
-                      {"Since 2010, our programs have <br /> empowered over 500 individuals."}
-                    </Typography>
-                    <div className="pt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="flex items-center gap-2">
-                        {[people1.src, people2.src, people3.src, people4.src].map((item, n) => (
-                          <div key={n} className="w-[41px] h-[41px] border-2 rounded-full border-white overflow-hidden">
-                            <img src={item} alt="" className="w-full h-full object-cover rounded-full" />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="max-w-[176px]">
-                        <Typography type="Custom" className="text-xs md:text-sm">
-                          Make a donation to hear more save more lives
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-4" />
-
-                {!!pageControlSlugMap.get("home_hero_values_card_2") && (
-                  <div className="bg-white rounded-xl p-5 flex-1  overflow-auto">
-                    {!!aboutData?.ourValues &&
-                      aboutData?.ourValues?.map((item, n) => (
-                        <div key={n} className="py-2">
-                          <Typography className="font-size-semibold">{item.title}</Typography>
-                          <div className="pt-1">
-                            <Typography type="Custom" className="text-sm">
-                              {item.explanation}
-                            </Typography>
-                          </div>
-                        </div>
-                      ))}
-
-                    <div className="pt-3">
-                      <iframe
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                        width="100%"
-                        height="200"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-md w-full"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSliderSection
+          heroes={homeData?.heroes || []}
+          peopleImages={[people1.src, people2.src, people3.src, people4.src]}
+          aboutData={aboutData?.ourValues}
+          heroSliderValues1={!!pageControlSlugMap.get("home_hero_values_card_1")}
+          heroSliderValues2={!!pageControlSlugMap.get("home_hero_values_card_2")}
+        />
       )}
 
       {pageControlSlugMap.get("home_about_us") && (
@@ -269,18 +103,7 @@ export default function Home() {
               <Typography type="ParagraphHeader">About us</Typography>
             </div>
             <div className="md:max-w-[825px]">
-              {aboutData?.aboutOrganization?.organisation_story && (
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{ // Not needed here but where there are numbers it'll be needed. Can be extracted into own component responsible for displaying markdown anywhere
-                      ol: ({ node, ...props }) => (
-                        <ol className="list-decimal pl-8" {...props} />
-                      ),
-                    }}
-                  >
-                    {aboutData?.aboutOrganization?.organisation_story}
-                  </ReactMarkdown>
-                )}
+              <Markdown content={aboutData?.aboutOrganization?.organisation_story} />
               <div className="pt-8 md:pt-4">
                 <Link href={isDev ? "/about" : "/about.html"}>
                   <Button theme="secondary" title="Learn More About Us" />
@@ -323,8 +146,9 @@ export default function Home() {
                     <div
                       key={tab}
                       onClick={() => setActiveCause(tab)}
-                      className={`${activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
-                        } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
+                      className={`${
+                        activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
+                      } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
                     >
                       <Typography className="font-size-semibold md:text-xl">{tab}</Typography>
                     </div>
@@ -446,26 +270,3 @@ export default function Home() {
     </main>
   )
 }
-
-function aspectRatioRegex(ratio: string): RegExp {
-  // Escape the ratio in case it contains special regex characters
-  const escapedRatio = ratio.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-  // Match: _<ratio> right before the file extension at the end of the string
-  return new RegExp(`_${escapedRatio}(?=\\.[^.]+$)`)
-}
-
-/*
-    baseurl? parameter populate
-*/
-
-/* Input: Website image
- //   function(feature_key, website image) {
-        map(key, aspect ratio)
-        string aspect ratio
-        
-        website - source -> 
-        const sources = item?.images?.flatMap((img) => img?.source || []) || []
-
-        url 
- //.   }
-/ url*/

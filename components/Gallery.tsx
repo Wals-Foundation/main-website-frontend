@@ -1,10 +1,11 @@
-import React from "react"
+"use client"
+
+import React, { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper/modules"
 import Typography from "./Typography"
 import Button from "./Button"
 import { Gallery as GalleryType } from "@/utils/types"
-import { IMAGE_URL, isDev } from "@/logic/config/url"
 
 interface GalleryProps {
   donateFeatureFlag?: boolean
@@ -13,19 +14,44 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag, galleryData }) => {
+  const [slidesPerView, setSlidesPerView] = useState(1.6)
+  const [imageHeight, setImageHeight] = useState("228px")
+
+  const [imageGap, setImageGap] = useState(10)
+
+  useEffect(() => {
+    const updateLayout = () => {
+      const width = window.innerWidth
+
+      if (width >= 1024) {
+        setSlidesPerView(3.5)
+        setImageHeight("360px")
+        setImageGap(15)
+      } else if (width >= 768) {
+        setSlidesPerView(3)
+        setImageHeight("360px")
+        setImageGap(12)
+      } else {
+        setSlidesPerView(1.6)
+        setImageHeight("300px")
+        setImageGap(10)
+      }
+    }
+
+    updateLayout()
+    window.addEventListener("resize", updateLayout)
+    return () => window.removeEventListener("resize", updateLayout)
+  }, [])
+
   return (
     <section className="bg-white">
       <div className="py-10 px-3 md:px-12">
         {donateFeatureFlag && (
           <div className="max-w-[1440px] mx-auto">
-            <div className="w-11/12 mx-auto">
-              <div>
-                <Typography type="ParagraphHeader" className="text-center">
-                  Donate
-                </Typography>
-              </div>
+            <div className="w-11/12 mx-auto text-center">
+              <Typography type="ParagraphHeader">Donate</Typography>
               <div className="py-5 md:py-1">
-                <Typography type="Subtitle" className="text-center md:text-[40px] font-size-semibol">
+                <Typography type="Subtitle" className="md:text-[40px] font-semibold">
                   Donate towards a <br /> worthy cause
                 </Typography>
               </div>
@@ -35,111 +61,32 @@ const Gallery: React.FC<GalleryProps> = ({ donateFeatureFlag, galleryFeatureFlag
             </div>
           </div>
         )}
-        {galleryFeatureFlag && (
-          <>
-            {/* Mobile */}
-            <div className="py-20 md:hidden">
-              <Swiper
-                slidesPerView={1.6}
-                spaceBetween={20}
-                loop={true}
-                speed={800}
-                autoplay={{ delay: 0, disableOnInteraction: false }}
-                modules={[Autoplay]}
-              >
-                {!!galleryData?.length &&
-                  galleryData?.map((item, idx) => {
-                    const sources = item?.image?.source || []
 
-                    const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                    const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
-
-                    return (
-                      <SwiperSlide key={idx}>
-                        <div>
-                          {imgUrl && (
-                            <img
-                              src={imgUrl}
-                              alt={`Gallery Image Mobile ${idx + 1}`}
-                              className="h-[228px] w-full object-cover rounded-lg"
-                              loading="lazy"
-                            />
-                          )}
-                        </div>
-                      </SwiperSlide>
-                    )
-                  })}
-              </Swiper>
-            </div>
-
-            {/* Tablet */}
-            <div className="hidden md:block lg:hidden py-20">
-              <Swiper
-                slidesPerView={3}
-                spaceBetween={20}
-                loop={true}
-                speed={800}
-                autoplay={{ delay: 0, disableOnInteraction: false }}
-                modules={[Autoplay]}
-              >
-                {galleryData?.map((item, idx) => {
-                  const sources = item?.image?.source || []
-
-                  const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                  const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
-
-                  return (
-                    <SwiperSlide key={idx}>
-                      <div>
-                        {imgUrl && (
-                          <img
-                            src={imgUrl}
-                            alt={`Gallery Image Tablet ${idx + 1}`}
-                            className="h-[360px] w-full object-cover rounded-lg"
-                            loading="lazy"
-                          />
-                        )}
-                      </div>
-                    </SwiperSlide>
-                  )
-                })}
-              </Swiper>
-            </div>
-
-            {/* Desktop */}
-            <div className="hidden lg:block py-20">
-              <Swiper
-                slidesPerView={3.5}
-                spaceBetween={20}
-                loop={true}
-                speed={800}
-                autoplay={{ delay: 0, disableOnInteraction: false }}
-                modules={[Autoplay]}
-              >
-                {galleryData?.map((item, idx) => {
-                  const sources = item?.image?.source || []
-
-                  const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                  const imgUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url || "") : ""
-
-                  return (
-                    <SwiperSlide key={idx}>
-                      <div>
-                        {imgUrl && (
-                          <img
-                            src={imgUrl}
-                            alt={`Gallery Image Desktop ${idx + 1}`}
-                            className="h-[360px] w-full object-cover rounded-lg"
-                            loading="lazy"
-                          />
-                        )}
-                      </div>
-                    </SwiperSlide>
-                  )
-                })}
-              </Swiper>
-            </div>
-          </>
+        {galleryFeatureFlag && !!galleryData?.length && (
+          <div className="py-20">
+            <Swiper
+              slidesPerView={slidesPerView}
+              spaceBetween={imageGap}
+              loop
+              speed={800}
+              autoplay={{ delay: 0, disableOnInteraction: true }}
+              modules={[Autoplay]}
+            >
+              {galleryData.map((item, idx) => (
+                <SwiperSlide key={idx}>
+                  {item.name && (
+                    <img
+                      src={item.url}
+                      alt={`Gallery Image ${idx + 1}`}
+                      className="w-full object-cover rounded-lg"
+                      style={{ height: imageHeight }}
+                      loading="lazy"
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         )}
       </div>
     </section>

@@ -6,10 +6,11 @@ import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
-import { CauseType, extractCausesByCode } from "@/utils/types"
+import { CauseType } from "@/utils/types"
 import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
+import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -20,43 +21,7 @@ export default function Home() {
   const pageControlSlugMap = useMemo(() => createSlugMapForControl(data?.pageControl || []), [data?.pageControl])
   const pageHeadlinesSlugMap = useMemo(() => createSlugMapForPages(data?.pageHeadlines || []), [data?.pageHeadlines])
   const aboutData = useAppSelector((state) => state.useAboutOrganization)
-  const communityCauses = useMemo(
-    () => extractCausesByCode(causeData?.communityCausesData || {}) || [],
-    [causeData?.communityCausesData]
-  )
-  const programCauses = useMemo(
-    () => extractCausesByCode(causeData?.programsCausesData || {}) || [],
-    [causeData?.programsCausesData]
-  )
-  const projectCauses = useMemo(
-    () => extractCausesByCode(causeData?.projectCausesData || {}) || [],
-    [causeData?.projectCausesData]
-  )
-
-  const causesData: Record<CauseType, { id: string; title: string; subtitle: string; content: string; image?: string | null }[]> =
-    {
-      Communities: communityCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? null,
-        image: item?.image,
-      })),
-      Programs: programCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? "",
-        image: item?.image,
-      })),
-      Projects: projectCauses.map((item: any) => ({
-        id: item?.id ?? "0",
-        title: item?.name ?? "Untitled Cause",
-        subtitle: item?.introduction ?? "",
-        content: item?.impact ?? "",
-        image: item?.image,
-      })),
-    }
+  const causesData = useFormattedCausesData(causeData)
 
   const getAllData = async () => {
     setLoading(true)

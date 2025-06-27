@@ -3,6 +3,7 @@ import axiosInstance from "@/logic/config/base"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Menu, PageContent, Slugs } from "@/utils/types"
 import axios from "axios"
+import { mapHeroImages } from "@/utils"
 
 type InitialState = {
   loading: boolean
@@ -20,27 +21,30 @@ const initialState: InitialState = {
   error: "",
 }
 
-export const getPageHeadlinesData = createAsyncThunk("usePageHeadlines/getPageHeadlinesData", async (_, { rejectWithValue }) => {
+export const getPageHeadlinesData = createAsyncThunk("page/getPageHeadlinesData", async (_, { rejectWithValue }) => {
   try {
-    const response = await axiosInstance.get(
-      `/pages?pagination[pageSize]=1000&populate[heroes][populate][images][populate]=source`
-    )
-    if (response.data) {
-      return response.data?.data
-    }
+    const res = await axiosInstance.get(`pages?pagination[pageSize]=1000&populate[heroes][populate][images][populate]=source`)
+
+    const pages = res.data?.data || []
+
+    const mappedPages = pages.map((page: any) => ({
+      ...page,
+      heroes: mapHeroImages(page.heroes || []),
+    }))
+
+    return mappedPages
   } catch (error) {
     let errorMessage = "An unknown error occurred"
     let statusCode: number | undefined
 
-    // Safely handling Axios errors
     if (axios.isAxiosError(error)) {
-      statusCode = error.response?.status // Safely access status
-      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
+      statusCode = error.response?.status
+      errorMessage = JSON.stringify(error.response?.data) || error.message
     } else if (error instanceof Error) {
       errorMessage = error.message
     }
 
-    console?.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
     return rejectWithValue({ message: errorMessage, status: statusCode })
   }
 })

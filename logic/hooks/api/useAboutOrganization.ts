@@ -75,28 +75,40 @@ export const getContactData = createAsyncThunk("useAboutOrganiztion/getContactDa
   }
 })
 
-export const getGalleryData = createAsyncThunk("useAboutOrganiztion/getGalleryData", async (_, { rejectWithValue }) => {
-  try {
-    const response = await axiosInstance.get(`/gallery-items?pagination[pageSize]=1000&populate[image][populate]=source`)
-    if (response.data) {
-      return response.data?.data
-    }
-  } catch (error) {
-    let errorMessage = "An unknown error occurred"
-    let statusCode: number | undefined
+export const getGalleryData = createAsyncThunk<Gallery[], void, { rejectValue: { message: string; status?: number } }>(
+  "useAboutOrganiztion/getGalleryData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/gallery-items?pagination[pageSize]=1000&populate[image][populate]=source`)
 
-    // Safely handling Axios errors
-    if (axios.isAxiosError(error)) {
-      statusCode = error.response?.status // Safely access status
-      errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred while"
-    } else if (error instanceof Error) {
-      errorMessage = error.message
-    }
+      const rawData = response.data?.data || []
 
-    console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
-    return rejectWithValue({ message: errorMessage, status: statusCode })
+      // Extract only { name, url } from each image source
+      const images: Gallery[] = rawData.flatMap(
+        (item: any) =>
+          item?.image?.source?.map((source: any) => ({
+            name: source.name,
+            url: source.url,
+          })) || []
+      )
+
+      return images
+    } catch (error) {
+      let errorMessage = "An unknown error occurred"
+      let statusCode: number | undefined
+
+      if (axios.isAxiosError(error)) {
+        statusCode = error.response?.status
+        errorMessage = JSON.stringify(error.response?.data) || error.message || "An error occurred"
+      } else if (error instanceof Error) {
+        errorMessage = error.message
+      }
+
+      console.error(`Error: ${errorMessage}, Status: ${statusCode || "Unknown"}`)
+      return rejectWithValue({ message: errorMessage, status: statusCode })
+    }
   }
-})
+)
 
 export const getSocialsData = createAsyncThunk("useAboutOrganiztion/getSocialsData", async (_, { rejectWithValue }) => {
   try {

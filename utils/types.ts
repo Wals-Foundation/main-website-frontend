@@ -1,5 +1,3 @@
-import { getHeroImageUrl } from "."
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type Slugs =
   | "main_nav"
@@ -57,7 +55,7 @@ export type PageContent = {
   page: string
   headline: string
   subheadline: string
-  heroes: { images: { source: { url: string; name: string }[] }[] }[]
+  heroes: { mobileImageUrl: string; desktopImageUrl: string }[]
 }
 
 export type Finance = {
@@ -82,7 +80,7 @@ export type Contact = { email?: string; phone?: string }
 
 export type Socials = { accountUrl?: string; icon?: { url: string }; name: string }
 
-export type Gallery = { image?: { source: { name: string; url: string }[] } }
+export type Gallery = { name: string; url: string }
 
 export type CauseType = "Communities" | "Programs" | "Projects"
 
@@ -206,18 +204,4 @@ export type Activities = {
     updatedAt: string
     publishedAt: string
   }
-}
-
-export const extractCausesByCode = (response?: RawCauseResponse): NormalizedCause[] => {
-  if (!response?.data) return []
-
-  return response.data.map((item: any) => ({
-    id: item.id,
-    name: item.cause?.name,
-    introduction: item.cause?.introduction,
-    impact: item.cause?.impact,
-    problem: item.cause?.problem,
-    solution: item.cause?.solution,
-    image: getHeroImageUrl(item),
-  }))
 }

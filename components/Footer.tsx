@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import Logo from "./Logo"
 import { getContactData, getGalleryData, getSocialsData } from "@/logic/hooks/api/useAboutOrganization"
-import { IMAGE_URL, isDev } from "@/logic/config/url"
 import { usePathname } from "next/navigation"
 
 const Footer: React.FC = ({}) => {
@@ -115,12 +114,7 @@ const Footer: React.FC = ({}) => {
                               <li key={n}>
                                 <Link href={item.accountUrl || ""}>
                                   <div className="flex items-center space-x-2">
-                                    {item?.icon?.url && (
-                                      <img
-                                        src={isDev ? IMAGE_URL + item?.icon?.url : item?.icon?.url}
-                                        className="h-8 rounded-full"
-                                      />
-                                    )}
+                                    {item?.icon?.url && <img src={item?.icon?.url} className="h-8 rounded-full" />}
                                     <Typography type="Custom" className="text-title-gray py-2">
                                       {item?.name}
                                     </Typography>

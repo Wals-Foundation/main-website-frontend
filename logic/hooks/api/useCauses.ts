@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/logic/config/base"
+import { populateDistrict, populateImage } from "@/utils/queries"
 import { Activities, NormalizedCause, RawCauseResponse } from "@/utils/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
@@ -27,7 +28,7 @@ const initialState: InitialState = {
 export const getCommunitiesData = createAsyncThunk("useCauses/getCommunitiesData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(
-      `communities?pagination[pageSize]=1000&populate[cause][populate][district]=*&populate[cause][populate][heroes][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*`
+      `communities?pagination[pageSize]=1000&${populateDistrict}&populate[cause]${populateImage}[populate][related][on][api::cause.cause][populate][district]=*`
     )
     if (response.data) {
       return response.data
@@ -55,11 +56,11 @@ export const getCauseByID = createAsyncThunk(
     try {
       const response = await axiosInstance.get(
         `${data.url}?filters[id][$eq]=${data.id}` +
-          `&populate[cause][populate][district]=*` +
+          `&${populateDistrict}` +
           `&populate[cause][populate][location]=*` +
           `&populate[cause][populate][region]=*` +
           `&populate[cause][populate][gallery][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
-          `&populate[cause][populate][heroes][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*` +
+          `&populate[cause]${populateImage}[populate][related][on][api::cause.cause][populate][district]=*` +
           `&populate[donatable][populate][donation][populate][currency]=*`
       )
       if (response.data) {
@@ -86,7 +87,7 @@ export const getCauseByID = createAsyncThunk(
 export const getProgamsData = createAsyncThunk("useCauses/getProgamsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(
-      `programs?pagination[pageSize]=1000&populate[cause][populate][district]=*&populate[cause][populate][heroes][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*`
+      `programs?pagination[pageSize]=1000&${populateDistrict}&populate[cause]${populateImage}[populate][related][on][api::cause.cause][populate][district]=*`
     )
     if (response.data) {
       return response.data
@@ -111,7 +112,7 @@ export const getProgamsData = createAsyncThunk("useCauses/getProgamsData", async
 export const getProjectsData = createAsyncThunk("useCauses/getProjectsData", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(
-      `projects?pagination[pageSize]=1000&populate[cause][populate][district]=*&populate[cause][populate][heroes][populate][images][populate][source][populate][related][on][api::cause.cause][populate][district]=*`
+      `projects?pagination[pageSize]=1000&${populateDistrict}&populate[cause]${populateImage}[populate][related][on][api::cause.cause][populate][district]=*`
     )
     if (response.data) {
       return response.data

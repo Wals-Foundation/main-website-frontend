@@ -1,9 +1,9 @@
 "use client"
-import React, { ReactNode } from "react"
+import React from "react"
 import Typography from "./Typography"
 import Button from "./Button"
 import { useAppSelector } from "@/logic/store/hooks"
-import { createSlugMapForControl } from "@/utils"
+import { createSlugMapForControl, trim } from "@/utils"
 import Link from "next/link"
 import { isDev } from "@/logic/config/url"
 
@@ -11,8 +11,8 @@ interface CausesCardProps {
   id?: string
   title?: string
   image?: string
-  subtitle?: ReactNode
-  content?: ReactNode
+  subtitle?: string
+  content?: string
   displayDonateButton?: boolean
   link?: string
 }
@@ -28,22 +28,24 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
         {/* Image Section */}
         {image && (
           <div className="w-full lg:w-1/2">
-            <img src={image} alt={title} className="rounded-xl w-full object-cover" />
+            <img src={image} alt={title} className="rounded-xl w-full h-[270px] md:h-[429px] object-cover" />
           </div>
         )}
 
         {/* Text Section */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-between h-full">
+        <div className="w-full lg:w-1/2 flex flex-col justify-between mg:min-h-[429px]">
           <div>
             <Typography type="Subtitle" className="text-left text-2xl">
-              {title}
+              {trim(title || "", 16)}
             </Typography>
-            <Typography type="Custom">{subtitle}</Typography>
+            <Typography type="Custom">{trim(subtitle || "", 150)}</Typography>
           </div>
           <div className="border-t border-light-gray pt-5 mt-4">
-            {pageControlSlugMap.get("cause_card_impact_text") && <Typography type="Custom">{content}</Typography>}
+            {pageControlSlugMap.get("cause_card_impact_text") && (
+              <Typography type="Custom">{trim(content || "", 150)}</Typography>
+            )}
             {pageControlSlugMap.get("cause_card_button_2") && (
-              <div className="pt-4 flex flex-col lg:flex-row items-start lg:items-center gap-4">
+              <div className="pt-4 md:flex flex-col lg:flex-row items-start lg:items-center gap-4">
                 <Link href={`/${isDev ? "causes/cause?" : "causes/cause.html?"}${id}`}>
                   <Button theme="primary" title="Read More" />
                 </Link>

@@ -1,10 +1,8 @@
 "use client"
-import Button from "@/components/Button"
 import Typography from "@/components/Typography"
 import transparent from "@/assets/images/transparent.svg"
 import poorFamilies from "@/assets/images/poor-families.svg"
 import poorChildren from "@/assets/images/poor-children.svg"
-import relume from "@/assets/images/relume.svg"
 import webflow from "@/assets/images/webflow.svg"
 import farmer from "@/assets/images/farmer.svg"
 import person from "@/assets/images/person.svg"
@@ -20,12 +18,12 @@ import {
   getAboutOrganizationData,
   getAboutOrganizationValues,
 } from "@/logic/hooks/api/useAboutOrganization"
-import { Autoplay, Pagination } from "swiper/modules"
-import { ENVIRONMENT, IMAGE_URL, isDev } from "@/logic/config/url"
-import Link from "next/link"
+import { isDev } from "@/logic/config/url"
 import Gallery from "@/components/Gallery"
-import BlockRendererClient from "@/components/BlockRendererClient"
 import Loader from "@/components/Loader"
+import HeroSection from "@/components/HeroSection"
+import AboutSection from "@/components/AboutSection"
+import HeroSliderSection from "@/components/HeroSliderSection"
 
 export default function About() {
   const dispatch = useAppDispatch()
@@ -63,85 +61,19 @@ export default function About() {
 
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
-        <div className="w-11/12 mx-auto md:flex justify-between items-start">
-          <div className="md:max-w-[758px]">
-            {pageControlSlugMap.get("about_headline") && (
-              <div className="md:max-w-[681px]">
-                <Typography type="Title">{aboutDatas?.headline || "Building a future of equal opportunities."}</Typography>
-              </div>
-            )}
-          </div>
-          <div className="md:max-w-[436px] pt-10 md:pt-0">
-            {pageControlSlugMap.get("about_subheadline") && (
-              <Typography>
-                {aboutDatas?.subheadline ||
-                  `Everyone deserves access to quality education, healthcare, and economic opportunities. Through strategic community
-              partnerships, we’re making it happen.`}
-              </Typography>
-            )}
-
-            {pageControlSlugMap.get("about_subheadline_button_1") && (
-              <div className="pt-6 md:pt-4 md:flex items-center">
-                <div className="pb-4 md:pr-3 md:pb-0">
-                  <Link href={ENVIRONMENT == "development" ? "/contact" : "/contact.html"}>
-                    <Button theme="border" title="Get Involve" />
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        headlineFlag={!!pageControlSlugMap.get("about_headline")}
+        headline={aboutDatas?.headline || ""}
+        subheadlineFlag={!!pageControlSlugMap.get("about_subheadline")}
+        subheadline={aboutDatas?.subheadline || ""}
+        Button1Flag={!!pageControlSlugMap.get("about_subheadline_button_1")}
+        Button1Link={isDev ? "/contact" : "/contact.html"}
+        Button1Title="Get Involve"
+      />
 
       {pageControlSlugMap.get("about_hero_carousel") && (
         <section className="pt-10 relative">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            slidesPerView={1}
-            loop
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-          >
-            {!!aboutDatas?.heroes?.length &&
-              aboutDatas.heroes.map((item, n) => {
-                const sources = item?.images?.flatMap((img) => img?.source || []) || []
-
-                const mobileImage = sources.find((s) => /1x1|2x3|3x4/.test(s.name || ""))
-                const desktopImage = sources.find((s) => /16x9|4x3|3x2/.test(s.name || ""))
-
-                const mobileImageUrl = mobileImage?.url ? (isDev ? `${IMAGE_URL}${mobileImage.url}` : mobileImage.url) : null
-                const desktopImageUrl = desktopImage?.url ? (isDev ? `${IMAGE_URL}${desktopImage.url}` : desktopImage.url) : null
-
-                return (
-                  <SwiperSlide key={n}>
-                    <div className="relative w-full h-[100vh]">
-                      {/* Mobile image */}
-                      {mobileImageUrl && (
-                        <img
-                          src={mobileImageUrl}
-                          alt={`Hero Slide ${n + 1} - Mobile`}
-                          className="w-full h-full object-cover block md:hidden"
-                          loading="lazy"
-                        />
-                      )}
-
-                      {/* Desktop image */}
-                      {desktopImageUrl && (
-                        <img
-                          src={desktopImageUrl}
-                          alt={`Hero Slide ${n + 1} - Desktop`}
-                          className="w-full h-full object-cover hidden md:block"
-                          loading="lazy"
-                        />
-                      )}
-
-                      <div className="absolute inset-0 bg-black/60" />
-                    </div>
-                  </SwiperSlide>
-                )
-              })}
-          </Swiper>
+          <HeroSliderSection heroes={aboutDatas?.heroes || []} />
         </section>
       )}
 
@@ -153,38 +85,25 @@ export default function About() {
         <>
           <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
             <div className="w-11/12 mx-auto">
-              {pageControlSlugMap.get("about_our_story") && aboutData.aboutOrganization?.organisation_story && (
-                <div className="md:flex justify-between items-start">
-                  <div className="pb-8 md:pb-0">
-                    <Typography type="ParagraphHeader">Our Story</Typography>
-                  </div>
-                  <div className="md:max-w-[825px]">
-                    <BlockRendererClient content={aboutData?.aboutOrganization?.organisation_story} />;
-                  </div>
-                </div>
-              )}
-
-              {pageControlSlugMap.get("about_our_mission") && aboutData.aboutOrganization?.organisation_mission && (
-                <div className="md:flex justify-between items-start py-10">
-                  <div className="pb-8 md:pb-0">
-                    <Typography type="ParagraphHeader">Our Mission</Typography>
-                  </div>
-                  <div className="md:max-w-[825px]">
-                    <Typography>{aboutData.aboutOrganization?.organisation_mission || ""}</Typography>
-                  </div>
-                </div>
-              )}
-
-              {pageControlSlugMap.get("about_our_vision") && aboutData.aboutOrganization?.organisation_vision && (
-                <div className="md:flex justify-between items-start">
-                  <div className="pb-8 md:pb-0">
-                    <Typography type="ParagraphHeader">Our Vision</Typography>
-                  </div>
-                  <div className="md:max-w-[825px]">
-                    <Typography>{aboutData.aboutOrganization?.organisation_vision || ""}</Typography>
-                  </div>
-                </div>
-              )}
+              <AboutSection
+                title="Our Story"
+                displayContent={!!pageControlSlugMap.get("about_our_story") && !!aboutData.aboutOrganization?.organisation_story}
+                content={aboutData?.aboutOrganization?.organisation_story || ""}
+              />
+              <AboutSection
+                title="Our Mission"
+                displayContent={
+                  !!pageControlSlugMap.get("about_our_mission") && !!aboutData.aboutOrganization?.organisation_mission
+                }
+                content={aboutData.aboutOrganization?.organisation_mission || ""}
+              />
+              <AboutSection
+                title="Our Vision"
+                displayContent={
+                  !!pageControlSlugMap.get("about_our_vision") && !!aboutData.aboutOrganization?.organisation_vision
+                }
+                content={aboutData.aboutOrganization?.organisation_vision || ""}
+              />
             </div>
           </section>
 
@@ -278,41 +197,6 @@ export default function About() {
                   autoplay={{ delay: 1000 }}
                   loop
                 >
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={relume.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={webflow.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={relume.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={webflow.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={relume.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={webflow.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="h-14">
-                      <img src={relume.src} alt="" className="h-14" />
-                    </div>
-                  </SwiperSlide>{" "}
                   <SwiperSlide>
                     <div className="h-14">
                       <img src={webflow.src} alt="" className="h-14" />

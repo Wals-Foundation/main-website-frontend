@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ENVIRONMENT, IMAGE_URL, isDev } from "@/logic/config/url"
+import { ENVIRONMENT } from "@/logic/config/url"
 import { PageContent, Slugs } from "./types"
 
 export function createSlugMapForControl(array: { key: Slugs; isLive: string | boolean }[]): Map<Slugs, string | boolean> {
@@ -40,7 +40,33 @@ export const isActiveLink = (pathname: string, link?: string) => {
   return pathname === normalized || (normalized !== "/" && pathname.startsWith(normalized))
 }
 
-export const getHeroImageUrl = (item: any): string | null => {
+export const getSingleImageUrl = (item: any): string | null => {
   const url = item?.cause?.heroes?.[0]?.images?.[0]?.source?.[0]?.url
-  return url ? (isDev ? `${IMAGE_URL}${url}` : url) : null
+  return url ? url : null
+}
+
+export const mapHeroImages = (heroes: any) => {
+  return heroes.map((hero: any) => {
+    const sources = hero.images?.flatMap((img: any) => img.source || []) || []
+
+    const mobileImage = sources.find((s: any) => /2x3/.test(s.name || ""))
+    const desktopImage = sources.find((s: any) => /(16x9|4x3|3x2)/.test(s.name || ""))
+
+    return {
+      ...hero,
+      mobileImageUrl: mobileImage?.url || null,
+      desktopImageUrl: desktopImage?.url || null,
+    }
+  })
+}
+
+export function aspectRatioRegex(ratio: string): RegExp {
+  // Escape the ratio in case it contains special regex characters
+  const escapedRatio = ratio.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")
+  // Match: _<ratio> right before the file extension at the end of the string
+  return new RegExp(`_${escapedRatio}(?=\\.[^.]+$)`)
+}
+
+export const trim = (str: string = "", length: number) => {
+  return str.length > length ? str.slice(0, length + 1) + "..." : str
 }
