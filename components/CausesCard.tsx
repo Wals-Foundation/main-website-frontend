@@ -33,7 +33,7 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
         )}
 
         {/* Text Section */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-between mg:min-h-[429px]">
+        <div className="w-full lg:w-1/2 flex flex-col justify-between md:min-h-[429px]">
           <div>
             <Typography type="Subtitle" className="text-left text-2xl">
               {trim(title || "", 16)}
