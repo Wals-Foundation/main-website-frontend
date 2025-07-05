@@ -5,10 +5,12 @@ import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-dat
 import { MenuItem } from "@/menu/data/menu-item";
 import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state";
 import { fetchMainMenuItems } from "@/menu/data/menu-strapi-data-source";
+import { get } from "http";
 
 // Responsibilities: parsing url arguments, managing state and handling UI logic
 
 const initialState: PageUiState = {
+    currentUrlPath: "/",
     featureFlags: {},
     featureFlagsError: null,
     header: {
@@ -22,16 +24,19 @@ const initialState: PageUiState = {
 }
 
 function buildPageUiState(
+    currentState: PageUiState,
     mainMenuItemsResult: MenuItem[] | StrapiError,
     featureFlagsResult: Record<string, boolean> | StrapiError
 ): PageUiState {
     const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult
+    const currentUrlKey = getCurrentUrlKey(currentState.currentUrlPath);
     return {
+        ...currentState,
         loading: false,
         featureFlags: featureFlags,
         featureFlagsError: isStrapiError(featureFlagsResult) ? featureFlagsResult : null,
         header: {
-            menuItems: isStrapiError(mainMenuItemsResult) ? [] : mapMenuItemsToUiStates(mainMenuItemsResult),
+            menuItems: isStrapiError(mainMenuItemsResult) ? [] : mapMenuItemsToUiStates(mainMenuItemsResult, currentUrlKey),
             mainMenuItemsError: isStrapiError(mainMenuItemsResult) ? mainMenuItemsResult : null,
             menuOpened: false,
             showDonateBtn: featureFlags['get_involved_donate'] ?? false,
@@ -41,10 +46,11 @@ function buildPageUiState(
 
 // Thunks
 
-export const initialisePage = createAsyncThunk("initialisePage", async (_, { rejectWithValue }) => {
+export const initialisePage = createAsyncThunk("initialisePage", async (_, { getState, rejectWithValue }) => {
     try {
         const [mainMenuItems, featureFlags] = await Promise.all([await fetchMainMenuItems(), await fetchFeatureFlags()])
-        return buildPageUiState(mainMenuItems, featureFlags);
+        const currentState = (getState() as { usePage: PageUiState }).usePage;
+        return buildPageUiState(currentState, mainMenuItems, featureFlags);
     } catch (error) {
         return rejectWithValue(StrapiError.Unknown)
     }
@@ -54,10 +60,9 @@ const usePage = createSlice({
     name: "usePage",
     initialState,
     reducers: {
-        updateSelectedMenuItem: (state, action) => {
-            const basePath = action.payload.split("/")[1];
-            const key = basePath ? `/${basePath}` : '/';
-
+        updateCurrentUrlPath: (state, action) => {
+            const key = getCurrentUrlKey(action.payload);
+            state.currentUrlPath = action.payload
             state.header.menuItems = state.header.menuItems.map((item) => ({
                 ...item,
                 isSelected: item.link === key
@@ -83,4 +88,10 @@ const usePage = createSlice({
 })
 
 export default usePage.reducer
-export const { updateSelectedMenuItem } = usePage.actions;
+export const { updateCurrentUrlPath } = usePage.actions;
+
+function getCurrentUrlKey(currentUrlPath: string): string {
+    const basePath = currentUrlPath.split("/")[1];
+    const key = basePath ? `/${basePath}` : '/';
+    return key;
+}

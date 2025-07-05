@@ -24,8 +24,11 @@ function mapMenuItemToUiState(item: MenuItem): MenuItemUiState {
   };
 }
 
-export function mapMenuItemsToUiStates(items: MenuItem[]): MenuItemUiState[] {
-  return items.map(mapMenuItemToUiState);
+export function mapMenuItemsToUiStates(items: MenuItem[], currentUrlKey:string): MenuItemUiState[] {
+  return items.map(mapMenuItemToUiState).map((item) => ({
+    ...item,
+    isSelected: item.link === currentUrlKey,
+  }));
 }
 
 

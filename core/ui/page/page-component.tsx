@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import PageHeaderDesktop from "./page-header/page-header-desktop-component"
 import { useEffect } from "react"
-import { initialisePage, updateSelectedMenuItem } from "./logic"
+import { initialisePage, updateCurrentUrlPath } from "./logic"
 import { usePathname } from "next/navigation"
 
 const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -19,7 +19,7 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
     }, [])
     useEffect(() => {
-        dispatch(updateSelectedMenuItem(currentUrlPathName))
+        dispatch(updateCurrentUrlPath(currentUrlPathName))
     }, [currentUrlPathName])
 
     /* -- Layout -- */
