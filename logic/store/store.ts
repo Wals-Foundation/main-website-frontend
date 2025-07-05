@@ -5,6 +5,8 @@ import useAboutOrganization from "@/logic/hooks/api/useAboutOrganization"
 import usePageHeadlines from "@/logic/hooks/api/usePageHeadlines"
 import useFinances from "@/logic/hooks/api/useFinances"
 import useCauses from "@/logic/hooks/api/useCauses"
+import usePage from "@/components/page/logic"
+
 
 const persistConfig = { key: "root", storage, blacklist: [] }
 
@@ -13,6 +15,9 @@ const rootReducer = combineReducers({
   useAboutOrganization: useAboutOrganization,
   useCauses: useCauses,
   useFinances: useFinances,
+
+  // From suggestions from Mark
+  usePage: usePage
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

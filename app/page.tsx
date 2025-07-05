@@ -33,7 +33,7 @@ import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesD
 import HeroSliderSection from "@/components/HeroSliderSection"
 
 export default function Home() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false) // 
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
   const aboutData = useAppSelector((state) => state.useAboutOrganization)

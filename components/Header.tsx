@@ -7,7 +7,7 @@ import closeIcon from "@/assets/images/close.svg"
 import Typography from "./Typography"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { getMainMenus, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
+import { getMainMenusOld, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import { usePathname } from "next/navigation"
 import Logo from "./Logo"
@@ -22,12 +22,12 @@ const Header: React.FC = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
-  const pathname = usePathname()
+  const pathname = usePathname() // TODO: Move to page and add to global state
 
   const getAllData = async () => {
     setLoading(true)
     try {
-      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData()), dispatch(getMainMenus())])
+      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData()), dispatch(getMainMenusOld())])
     } catch (error) {
       console.error("Error fetching data:", error)
     } finally {
