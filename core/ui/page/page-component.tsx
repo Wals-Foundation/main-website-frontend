@@ -10,6 +10,7 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const currentUrlPathName = usePathname()
     const dispatch = useAppDispatch()
 
+    // redirect to not-found for disabled pages
     /* -- Handle Events */
     useEffect(() => {
         try {

@@ -1,4 +1,4 @@
-import { Meta } from "@/components/core/data/strapi-collection-meta-response";
+import { Meta } from "@/core/data/strapi-collection-meta-response";
 import { MenuItem } from "./menu-item";
 
 export interface Destination {
@@ -25,12 +25,14 @@ export interface MainMenuItemsResponse {
 }
 
 export function mapMainMenuItemsResponseToMenuItems(response: MainMenuItemsResponse): MenuItem[] {
-    return response.data.map(item => ({
-        id: item.documentId,
-        label: item.text,
-        isEnabled: item.isEnabled,
-        relativeUrl: item.destination.relativeUrl,
-    }));
+    return response.data
+        .filter(item => item.isEnabled)
+        .map(item => ({
+            id: item.documentId,
+            label: item.text,
+            isEnabled: item.isEnabled,
+            relativeUrl: item.destination.relativeUrl,
+        }));
 }
 
 
