@@ -1,4 +1,5 @@
-import { Meta } from "@/core/data/strapi-collection-meta-response";
+import { Meta } from "@/components/core/data/strapi-collection-meta-response";
+import { MenuItem } from "./menu-item";
 
 export interface Destination {
   id: number;
@@ -21,13 +22,6 @@ export interface MainMenuItem {
 export interface MainMenuItemsResponse {
   data: MainMenuItem[];
   meta: Meta
-}
-
-export interface MenuItem {
-    id: string;
-    label: string;
-    isEnabled: boolean;
-    relativeUrl: string;
 }
 
 export function mapMainMenuItemsResponseToMenuItems(response: MainMenuItemsResponse): MenuItem[] {

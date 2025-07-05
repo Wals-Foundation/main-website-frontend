@@ -1,3 +1,4 @@
+import { interactiveElementMinHeight } from "@/core/ui/spacing"
 import React from "react"
 
 interface ButtonProps {
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             : theme === "border"
             ? "border-2 border-primary text-primary"
             : "bg-primary text-white"
-        } rounded-[33px] px-6 py-4 font-size-bold cursor-pointer w-full md:w-auto`}
+        } h-[${interactiveElementMinHeight}px] rounded-[33px] px-6 py-4 font-size-bold cursor-pointer md:w-auto`}
       >
         {loading && (
           <svg

@@ -13,4 +13,17 @@ const Logo: React.FC = () => {
   )
 }
 
+export const WalsLogo: React.FC = () => {
+  return (
+    <Link href="/">
+      <img
+        src={logo.src}
+        alt="Wals Logo"
+        className="h-[30px] sm:h-[50px] w-auto"
+      />
+    </Link>
+  );
+};
+
+
 export default Logo

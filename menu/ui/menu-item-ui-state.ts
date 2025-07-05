@@ -1,3 +1,5 @@
+import { MenuItem } from "../data/menu-item";
+
 /**
  * Represents the UI state of a menu item.
  *
@@ -12,4 +14,18 @@ export interface MenuItemUiState {
     label: string;
     link: string;
 }
+
+function mapMenuItemToUiState(item: MenuItem): MenuItemUiState {
+  return {
+    id: item.id,
+    label: item.label,
+    link: item.relativeUrl,
+    isSelected: false,
+  };
+}
+
+export function mapMenuItemsToUiStates(items: MenuItem[]): MenuItemUiState[] {
+  return items.map(mapMenuItemToUiState);
+}
+
 

@@ -1,0 +1,37 @@
+'use client'
+import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
+import PageHeaderDesktop from "./page-header/page-header-desktop-component"
+import { useEffect } from "react"
+import { initialisePage, updateSelectedMenuItem } from "./logic"
+import { usePathname } from "next/navigation"
+
+const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const pageUiState = useAppSelector((state) => state.usePage)
+    const currentUrlPathName = usePathname()
+    const dispatch = useAppDispatch()
+
+    /* -- Handle Events */
+    useEffect(() => {
+        try {
+            dispatch(initialisePage())
+        } catch (error) {
+            console.error("Error on page initialisation :",error)
+        }
+    }, [])
+    useEffect(() => {
+        dispatch(updateSelectedMenuItem(currentUrlPathName))
+    }, [currentUrlPathName])
+
+    /* -- Layout -- */
+    return (
+        <>
+            <PageHeaderDesktop
+                menuItems={pageUiState.header.menuItems}
+                showDonateBtn={pageUiState.header.showDonateBtn}
+            />
+            {children}
+        </>
+    )
+}
+
+export default Page

@@ -33,7 +33,12 @@ import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesD
 import HeroSliderSection from "@/components/HeroSliderSection"
 
 export default function Home() {
-  const [loading, setLoading] = useState(false) // 
+  return(
+    <>
+     <h1>Welcome Home</h1>
+    </>
+  )
+  /* const [loading, setLoading] = useState(false) // 
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
   const aboutData = useAppSelector((state) => state.useAboutOrganization)
@@ -146,9 +151,8 @@ export default function Home() {
                     <div
                       key={tab}
                       onClick={() => setActiveCause(tab)}
-                      className={`${
-                        activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
-                      } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
+                      className={`${activeCause === tab ? "border-b-2 border-primary text-primary" : "text-gray-600"
+                        } md:px-8 pt-2 pb-3 cursor-pointer transition-colors duration-300`}
                     >
                       <Typography className="font-size-semibold md:text-xl">{tab}</Typography>
                     </div>
@@ -268,5 +272,5 @@ export default function Home() {
         galleryData={aboutData?.gallery}
       />
     </main>
-  )
+  ) */
 }

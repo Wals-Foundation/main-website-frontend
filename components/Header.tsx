@@ -7,7 +7,7 @@ import closeIcon from "@/assets/images/close.svg"
 import Typography from "./Typography"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { getMainMenusOld, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
+import { getMainMenus, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import { usePathname } from "next/navigation"
 import Logo from "./Logo"
@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   const getAllData = async () => {
     setLoading(true)
     try {
-      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData()), dispatch(getMainMenusOld())])
+      await Promise.all([dispatch(getPageHeadlinesData()), dispatch(getPageControlData()), dispatch(getMainMenus())])
     } catch (error) {
       console.error("Error fetching data:", error)
     } finally {

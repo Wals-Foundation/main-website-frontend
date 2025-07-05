@@ -72,7 +72,7 @@ export const getPageControlData = createAsyncThunk("usePageHeadlines/getPageCont
   }
 })
 
-export const getMainMenusOld = createAsyncThunk("usePageHeadlines/getMainMenus", async (_, { rejectWithValue }) => {
+export const getMainMenus = createAsyncThunk("usePageHeadlines/getMainMenus", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get(`main-menu-items?pagination[pageSize]=1000&populate=*&sort=id:asc`)
     if (response.data) {
@@ -103,7 +103,6 @@ const usePageHeadlinesSlice = createSlice({
     builder.addCase(getPageHeadlinesData.pending, (state) => {
       state.loading = true
     })
-    where you map to ui state
     builder.addCase(getPageHeadlinesData.fulfilled, (state, action) => {
       state.loading = false
       state.pageHeadlines = action.payload
@@ -125,14 +124,14 @@ const usePageHeadlinesSlice = createSlice({
       state.error = action.error.message || "Users were not created"
     })
 
-    builder.addCase(getMainMenusOld.pending, (state) => {
+    builder.addCase(getMainMenus.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(getMainMenusOld.fulfilled, (state, action) => {
+    builder.addCase(getMainMenus.fulfilled, (state, action) => {
       state.loading = false
       state.mainMenus = action.payload
     })
-    builder.addCase(getMainMenusOld.rejected, (state, action) => {
+    builder.addCase(getMainMenus.rejected, (state, action) => {
       state.loading = false
       state.error = action.error.message || "Users were not created"
     })

@@ -1,4 +1,4 @@
-import { Meta } from "@/core/data/strapi-collection-meta-response";
+import { Meta } from "@/components/core/data/strapi-collection-meta-response";
 
 export interface Feature {
   id: number;
@@ -13,16 +13,14 @@ export interface FeatureFlagsResponse {
 }
 
 export function mapFeatureFlagsResponseToLiveStateMap(
-  response: FeatureFlagsResponse
+  features: Feature[]
 ): Record<string, boolean> {
   const liveStateMap: Record<string, boolean> = {};
 
-  response.data.forEach((feature) => {
-    if (feature.isLive) {
-      liveStateMap[feature.key] = true;
-    } else {
-      liveStateMap[feature.key] = false;
-    }
+  features.forEach((feature) => {
+    liveStateMap[feature.key] = feature.isLive;
   });
+
   return liveStateMap;
 }
+
