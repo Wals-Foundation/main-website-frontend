@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       <button
         type={type}
         onClick={onClick}
-        className={`h-interactive px-6 rounded-full font-size-bold vertical-align: middle ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
+        className={`h-interactive px-6 rounded-full font-size-bold vertical-align: middle whitespace-nowrap ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
       >
         {loading && (
           <svg

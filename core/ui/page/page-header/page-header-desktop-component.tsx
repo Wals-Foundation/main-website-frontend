@@ -5,16 +5,20 @@ import PageHeaderDesktopMenu from "@/menu/ui/page-header-desktop-menu-component"
 
 const PageHeaderDesktop: React.FC<{ menuItems: MenuItemUiState[], showDonateBtn: boolean }> = ({ menuItems, showDonateBtn }) => {
     return (
-        <>
-            <header
-                className="w-11/12 mx-auto sticky border-b border-border-gray flex justify-between items-center py-4 top-0 z-50 bg-white"
-            >
+        <header className="w-11/12 mx-auto sticky top-0 z-50 bg-white border-b border-border-gray flex items-center py-4">
+            <div className="shrink-0">
                 <WalsLogo />
-                <PageHeaderDesktopMenu menuItems={menuItems} className="flex-1" />
-                {showDonateBtn && <Button title="Donate Now" />}
-            </header>
-        </>
-    )
-}
+            </div>
+            <div className="flex-1 min-w-0 overflow-x-auto">
+                <PageHeaderDesktopMenu menuItems={menuItems} className="w-full" />
+            </div>
+            {showDonateBtn && (
+                <div className="shrink-0 ml-4">
+                    <Button title="Donate Now" />
+                </div>
+            )}
+        </header>
+    );
+};
 
 export default PageHeaderDesktop;
