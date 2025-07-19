@@ -1,4 +1,3 @@
-import { interactiveElementMinHeight } from "@/core/ui/spacing"
 import React from "react"
 
 interface ButtonProps {
@@ -9,7 +8,33 @@ interface ButtonProps {
   type?: "submit" | "reset" | "button" | undefined
   className?: string
 }
+// /filled/outlined/text, enabled/disabled
+const buttonStyle = (enabled: boolean, theme?: "primary" | "secondary" | "border"): string => {
+  const filledButtonStyle = "bg-primary text-white hover:bg-primary-50"
+  const filledButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
+  const outlinedButtonStyle = "border-2 border-primary text-primary"
+  const outlinedButtonDisabledStyle = "border-2 border-btn-disabled text-btn-disabled-text"
+  const textButtonStyle = "bg-btn-text text-primary"
+  const textButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
 
+  switch (theme) {
+    case "border":
+      if (enabled)
+        return outlinedButtonStyle
+      else
+        return outlinedButtonDisabledStyle
+    case "secondary":
+      if (enabled)
+        return textButtonStyle
+      else
+        return textButtonDisabledStyle
+    default:
+      if (enabled)
+        return filledButtonStyle
+      else
+        return filledButtonDisabledStyle
+  }
+}
 const Button: React.FC<ButtonProps> = (props) => {
   const { title, loading, onClick, type, theme, className } = props
   return (
@@ -17,13 +42,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       <button
         type={type}
         onClick={onClick}
-        className={`${!!className ? className : ""} ${
-          theme === "secondary"
-            ? "bg-secondary text-primary"
-            : theme === "border"
-            ? "border-2 border-primary text-primary"
-            : "bg-primary text-white"
-        } h-[${interactiveElementMinHeight}px] rounded-[33px] px-6 py-4 font-size-bold cursor-pointer md:w-auto`}
+        className={`h-12 px-6 rounded-full font-size-bold vertical-align: middle ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
       >
         {loading && (
           <svg
@@ -44,8 +63,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             />
           </svg>
         )}
-
-        <>{!loading ? title || "Submit" : ""}</>
+        <span>{!loading ? title || "Submit" : ""}</span>
       </button>
     </>
   )

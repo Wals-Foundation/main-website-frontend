@@ -8,7 +8,6 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "#009EE2",
-        secondary: "#ECF6FF",
         header: "#111111",
         ash: "#8C8C8C",
         "title-gray": "#B5B5B5",
@@ -19,6 +18,9 @@ export default {
         "light-blue": "#00ACEE",
         "transparent-blue": "#F3FAFD",
         "form-border": "#E6ECF0",
+        "btn-disabled":"#E0E0E0",
+        "btn-disabled-text":"#B5B5B5",
+        "btn-text":"#ECF6FF"
       },
     },
   },
