@@ -1,8 +1,8 @@
 import axios from "axios"
-import { SERVER_URL } from "./url"
+import { Config } from "@/core/data/config"
 
 const axiosInstance = axios.create({
-  baseURL: SERVER_URL, // Add your actual base URL
+  baseURL: Config.strapi.serverUrl,
 })
 
 export const axiosFetcher = async <T>(url: string): Promise<T> => {

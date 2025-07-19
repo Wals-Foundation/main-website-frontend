@@ -1,93 +1,134 @@
-import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PageUiState } from "./page-ui-state";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
 import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-data-source";
 import { MenuItem } from "@/menu/data/menu-item";
-import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state";
 import { fetchMainMenuItems } from "@/menu/data/menu-strapi-data-source";
-import { get } from "http";
 
 // Responsibilities: parsing url arguments, managing state and handling UI logic
-
-const initialState: PageUiState = {
-    currentUrlPath: "/",
-    featureFlags: {},
-    featureFlagsError: null,
-    header: {
-        menuItems: [],
-        mainMenuItemsError: null,
-        menuOpened: false,
-        showDonateBtn: false
-    },
-    loading: true,
-
+export interface FeatureFlagsState {
+    featureFlags: Record<string, boolean>; // or specific flag names
+    featureFlagsError: StrapiError | null;
+    loading: boolean;
 }
 
-function buildPageUiState(
-    currentState: PageUiState,
-    mainMenuItemsResult: MenuItem[] | StrapiError,
-    featureFlagsResult: Record<string, boolean> | StrapiError
-): PageUiState {
-    const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult
-    const currentUrlKey = getCurrentUrlKey(currentState.currentUrlPath);
-    return {
-        ...currentState,
-        loading: false,
-        featureFlags: featureFlags,
-        featureFlagsError: isStrapiError(featureFlagsResult) ? featureFlagsResult : null,
-        header: {
-            menuItems: isStrapiError(mainMenuItemsResult) ? [] : mapMenuItemsToUiStates(mainMenuItemsResult, currentUrlKey),
-            mainMenuItemsError: isStrapiError(mainMenuItemsResult) ? mainMenuItemsResult : null,
-            menuOpened: false,
-            showDonateBtn: featureFlags['get_involved_donate'] ?? false,
-        },
-    };
+export interface MainMenuItemsState {
+    mainMenuItems: MenuItem[];
+    mainMenuItemsError: StrapiError | null;
+    loading: boolean;
+}
+
+export interface PageState {
+    currentUrlPath: string;
+    menuOpened: boolean;
+    showDonateBtn: boolean;
+}
+
+export const initialFeatureFlagsState: FeatureFlagsState = {
+    featureFlags: {},
+    featureFlagsError: null,
+    loading: true,
+}
+
+export const initialMainMenuItemsState: MainMenuItemsState = {
+    mainMenuItems: [],
+    mainMenuItemsError: null,
+    loading: true,
+}
+
+const initialPageState: PageState = {
+    currentUrlPath: "/",
+    menuOpened: false,
+    showDonateBtn: false
 }
 
 // Thunks
 
-export const initialisePage = createAsyncThunk("initialisePage", async (_, { getState, rejectWithValue }) => {
+export const initialiseFeatureFlags = createAsyncThunk("initialiseFeatureFlags", async (_, { rejectWithValue }) => {
     try {
-        const [mainMenuItems, featureFlags] = await Promise.all([await fetchMainMenuItems(), await fetchFeatureFlags()])
-        const currentState = (getState() as { usePage: PageUiState }).usePage;
-        return buildPageUiState(currentState, mainMenuItems, featureFlags);
+        const featureFlagsResult = await fetchFeatureFlags();
+        return {
+            featureFlags: isStrapiError(featureFlagsResult) ? {} : featureFlagsResult,
+            featureFlagsError: isStrapiError(featureFlagsResult) ? featureFlagsResult : null,
+            loading: false,
+        }
     } catch (error) {
         return rejectWithValue(StrapiError.Unknown)
     }
 })
 
-const usePage = createSlice({
-    name: "usePage",
-    initialState,
-    reducers: {
-        updateCurrentUrlPath: (state, action) => {
-            const key = getCurrentUrlKey(action.payload);
-            state.currentUrlPath = action.payload
-            state.header.menuItems = state.header.menuItems.map((item) => ({
-                ...item,
-                isSelected: item.link === key
-            }));
-        },
-    },
+export const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems", async (_, { rejectWithValue }) => {
+    try {
+        const menuItemsResult = await fetchMainMenuItems();
+        return {
+            mainMenuItems: isStrapiError(menuItemsResult) ? [] : menuItemsResult,
+            mainMenuItemsError: isStrapiError(menuItemsResult) ? menuItemsResult : null,
+            loading: false,
+        }
+    } catch (error) {
+        return rejectWithValue(StrapiError.Unknown)
+    }
+})
+
+const useFeatureFlags = createSlice({
+    name: "useFeatureFlags",
+    initialState: initialFeatureFlagsState,
+    reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(initialisePage.pending, (state) => {
+        builder.addCase(initialiseFeatureFlags.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(initialisePage.fulfilled, (state, action) => {
+        builder.addCase(initialiseFeatureFlags.fulfilled, (state, action) => {
             state.loading = false;
-            Object.assign(state, action.payload);
+            state.featureFlags = action.payload.featureFlags;
+            state.featureFlagsError = action.payload.featureFlagsError;
         });
-        builder.addCase(initialisePage.rejected, (state, action) => {
+        builder.addCase(initialiseFeatureFlags.rejected, (state, action) => {
             state.loading = false;
             if (action.payload && isStrapiError(action.payload)) {
                 state.featureFlagsError = action.payload;
-                state.header.mainMenuItemsError = action.payload;
             }
         });
     }
 })
 
-export default usePage.reducer
+const useMainMenuItems = createSlice({
+    name: "useMainMenuItems",
+    initialState: initialMainMenuItemsState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(initialiseMainMenuItems.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(initialiseMainMenuItems.fulfilled, (state, action) => {
+            state.loading = false;
+            state.mainMenuItems = action.payload.mainMenuItems;
+            state.mainMenuItemsError = action.payload.mainMenuItemsError;
+        });
+        builder.addCase(initialiseMainMenuItems.rejected, (state, action) => {
+            state.loading = false;
+            if (action.payload && isStrapiError(action.payload)) {
+                state.mainMenuItemsError = action.payload;
+            }
+        });
+    }
+})
+
+const usePage = createSlice({
+    name: "usePage",
+    initialState: initialPageState,
+    reducers: {
+        updateCurrentUrlPath: (state, action) => {
+            state.currentUrlPath = getCurrentUrlKey(action.payload);
+        },
+        toggleMenu: (state) => {
+            state.menuOpened = !state.menuOpened;
+        }
+    }
+})
+
+export const featureFlagsReducer = useFeatureFlags.reducer;
+export const mainMenuItemsReducer = useMainMenuItems.reducer;
+export const pageReducer = usePage.reducer;
 export const { updateCurrentUrlPath } = usePage.actions;
 
 function getCurrentUrlKey(currentUrlPath: string): string {
