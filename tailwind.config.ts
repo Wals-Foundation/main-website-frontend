@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import plugin from 'tailwindcss/plugin'
 
 export default {
   content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -24,5 +25,13 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addComponents }) {
+      addComponents({
+        '.h-interactive': {
+          '@apply h-10 sm:h-14': {},
+        },
+      })
+    }),
+  ],
 } satisfies Config
