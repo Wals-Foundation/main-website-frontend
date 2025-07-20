@@ -1,15 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-data-source";
-import { MenuItem } from "@/menu/data/menu-item";
+import { MenuItem } from "@/menu/menu-item";
 import { fetchMainMenuItems } from "@/menu/data/menu-strapi-data-source";
 
 // Responsibilities: parsing url arguments, managing state and handling UI logic
-export interface FeatureFlagsState {
-    featureFlags: Record<string, boolean>; // or specific flag names
-    featureFlagsError: StrapiError | null;
-    loading: boolean;
-}
+
 
 export interface MainMenuItemsState {
     mainMenuItems: MenuItem[];
@@ -21,12 +16,6 @@ export interface PageState {
     currentUrlPath: string;
     menuOpened: boolean;
     showDonateBtn: boolean;
-}
-
-export const initialFeatureFlagsState: FeatureFlagsState = {
-    featureFlags: {},
-    featureFlagsError: null,
-    loading: true,
 }
 
 export const initialMainMenuItemsState: MainMenuItemsState = {
@@ -43,19 +32,6 @@ const initialPageState: PageState = {
 
 // Thunks
 
-export const initialiseFeatureFlags = createAsyncThunk("initialiseFeatureFlags", async (_, { rejectWithValue }) => {
-    try {
-        const featureFlagsResult = await fetchFeatureFlags();
-        return {
-            featureFlags: isStrapiError(featureFlagsResult) ? {} : featureFlagsResult,
-            featureFlagsError: isStrapiError(featureFlagsResult) ? featureFlagsResult : null,
-            loading: false,
-        }
-    } catch (error) {
-        return rejectWithValue(StrapiError.Unknown)
-    }
-})
-
 export const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems", async (_, { rejectWithValue }) => {
     try {
         const menuItemsResult = await fetchMainMenuItems();
@@ -66,28 +42,6 @@ export const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems
         }
     } catch (error) {
         return rejectWithValue(StrapiError.Unknown)
-    }
-})
-
-const useFeatureFlags = createSlice({
-    name: "useFeatureFlags",
-    initialState: initialFeatureFlagsState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(initialiseFeatureFlags.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(initialiseFeatureFlags.fulfilled, (state, action) => {
-            state.loading = false;
-            state.featureFlags = action.payload.featureFlags;
-            state.featureFlagsError = action.payload.featureFlagsError;
-        });
-        builder.addCase(initialiseFeatureFlags.rejected, (state, action) => {
-            state.loading = false;
-            if (action.payload && isStrapiError(action.payload)) {
-                state.featureFlagsError = action.payload;
-            }
-        });
     }
 })
 
@@ -126,7 +80,6 @@ const usePage = createSlice({
     }
 })
 
-export const featureFlagsReducer = useFeatureFlags.reducer;
 export const mainMenuItemsReducer = useMainMenuItems.reducer;
 export const pageReducer = usePage.reducer;
 export const { updateCurrentUrlPath } = usePage.actions;

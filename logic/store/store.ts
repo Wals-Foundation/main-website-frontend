@@ -5,10 +5,11 @@ import useAboutOrganization from "@/logic/hooks/api/useAboutOrganization"
 import usePageHeadlines from "@/logic/hooks/api/usePageHeadlines"
 import useFinances from "@/logic/hooks/api/useFinances"
 import useCauses from "@/logic/hooks/api/useCauses"
-import { featureFlagsReducer, FeatureFlagsState, initialFeatureFlagsState, initialMainMenuItemsState, mainMenuItemsReducer, MainMenuItemsState, pageReducer } from "@/core/ui/page/logic"
+import { mainMenuItemsReducer, MainMenuItemsState, pageReducer } from "@/core/ui/page/logic"
 import { createTransform } from 'redux-persist';
 import { Config } from "@/core/data/config"
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
+import featureFlagsReducer from "@/feature-flags/ui/logic"
 
 const menuItemsTransform = createTransform(
   (inboundState: any) => {
@@ -45,43 +46,6 @@ const menuItemsTransform = createTransform(
   }
 );
 
-const featureFlagsTransform = createTransform(
-  (inboundState: FeatureFlagsState) => {
-    if (inboundState && typeof inboundState === "object") {
-      return {
-        ...inboundState,
-        _persistedAt: Date.now()
-      };
-    } else {
-      return inboundState;
-    }
-  },
-  (outboundState: any) => {
-    if (outboundState && typeof outboundState === "object" && '_persistedAt' in outboundState) {
-      const now = Date.now();
-      const isExpired = outboundState?._persistedAt &&
-        (now - outboundState._persistedAt > Config.page.cacheMaxAge);
-
-      if (isExpired) {
-        console.info("Feature flags expired - refreshing");
-        return {};
-      }
-      const { _persistedAt, ...featureFlags } = outboundState;
-      return featureFlags
-    } else {
-      return outboundState
-    }
-  }
-);
-
-
-const useFeatureFlagsPersistConfig: PersistConfig<FeatureFlagsState> = {
-  key: "useFeatureFlags",
-  storage,
-  transforms: [featureFlagsTransform],
-  stateReconciler: autoMergeLevel1
-};
-
 const useMainMenuItemsPersistConfig: PersistConfig<MainMenuItemsState> = {
   key: "useMainMenuItems",
   storage,
@@ -98,7 +62,7 @@ const rootReducer = combineReducers({
   useFinances: useFinances,
 
   // From suggestions from Mark
-  useFeatureFlags: persistReducer(useFeatureFlagsPersistConfig, featureFlagsReducer),
+  useFeatureFlags: featureFlagsReducer,
   useMainMenuItems: persistReducer(useMainMenuItemsPersistConfig, mainMenuItemsReducer),
   usePage: pageReducer,
 })

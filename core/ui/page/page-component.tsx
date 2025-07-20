@@ -1,9 +1,8 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import PageHeaderDesktop from "./page-header/page-header-desktop-component"
-import { useEffect, useMemo } from "react"
+import { useEffect } from "react"
 import {
-    initialiseFeatureFlags,
     initialiseMainMenuItems,
     updateCurrentUrlPath
 } from "./logic"
@@ -11,7 +10,7 @@ import { usePathname } from "next/navigation"
 import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state"
 import { createSelector } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-
+import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
 
 const selectPageUiState = createSelector(
     [
@@ -45,6 +44,13 @@ const selectHeaderProps = createSelector(
         showDonateBtn: pageUiState.header.showDonateBtn
     })
 )
+
+/*
+    TEST CASES
+        Fresh Load (site never loaded in browser)
+        Refresh
+        Cache expired - environment variable can be toggled to speed it up
+*/
 
 const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const dispatch = useAppDispatch()
