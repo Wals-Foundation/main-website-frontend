@@ -1,5 +1,5 @@
 import { axiosFetcher } from "@/logic/config/base";
-import { MenuItem } from "./menu-item";
+import { MenuItem } from "../menu-item";
 import { MainMenuItemsResponse, mapMainMenuItemsResponseToMenuItems } from "./menu-item-response";
 import { StrapiError } from "@/core/data/strapi-error";
 import { mainMenuItemsCacheKey as mainMenuItemsRelativeUrl } from "@/core/data/cache-keys";

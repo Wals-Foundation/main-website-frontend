@@ -1,5 +1,5 @@
 import { Meta } from "@/core/data/strapi-collection-meta-response";
-import { MenuItem } from "./menu-item";
+import { MenuItem } from "../menu-item";
 
 export interface Destination {
   id: number;

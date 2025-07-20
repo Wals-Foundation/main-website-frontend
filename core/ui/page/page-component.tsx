@@ -2,15 +2,13 @@
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import PageHeaderDesktop from "./page-header/page-header-desktop-component"
 import { useEffect } from "react"
-import {
-    initialiseMainMenuItems,
-    updateCurrentUrlPath
-} from "./logic"
+import { updateCurrentUrlPath } from "./logic"
 import { usePathname } from "next/navigation"
 import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state"
 import { createSelector } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
 import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
+import { initialiseMainMenuItems } from "@/menu/ui/logic"
 
 const selectPageUiState = createSelector(
     [

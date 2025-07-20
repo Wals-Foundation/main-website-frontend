@@ -1,4 +1,4 @@
-import { MenuItem } from "../data/menu-item";
+import { MenuItem } from "../menu-item";
 
 /**
  * Represents the UI state of a menu item.
