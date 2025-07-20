@@ -1,6 +1,6 @@
 import { baseSpacingDiv2 } from "@/core/ui/spacing";
 import { MenuItemUiState } from "./menu-item-ui-state"
-import PageHeaderMenuItem from "./page-header-menu-item"
+import PageHeaderMenuItem from "./PageHeaderMenuItem"
 
 const PageHeaderDesktopMenu: React.FC<{ className: string, menuItems: MenuItemUiState[] }> = ({ className, menuItems }) => {
     return (

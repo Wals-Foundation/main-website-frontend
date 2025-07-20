@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import { WalsLogo } from "@/components/Logo";
 import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
-import PageHeaderDesktopMenu from "@/menu/ui/page-header-desktop-menu-component";
+import PageHeaderDesktopMenu from "@/menu/ui/PageDeaderDesktopMenu";
 
 const PageHeaderDesktop: React.FC<{ menuItems: MenuItemUiState[], showDonateBtn: boolean }> = ({ menuItems, showDonateBtn }) => {
     return (

@@ -1,4 +1,5 @@
 export enum StrapiError {
+    Aborted = 'Aborted',
     Network = 'Network',
     Server = 'Server',
     Unknown = 'Unknown'

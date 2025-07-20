@@ -1,14 +1,17 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import PageHeaderDesktop from "./page-header/page-header-desktop-component"
+import PageHeaderDesktop from "./page-header/PageHeaderDesktop"
 import { useEffect } from "react"
-import { updateCurrentUrlPath } from "./logic"
+import { fetchPageData, updateCurrentUrlPath, updateViewportBreakpoint } from "./logic"
 import { usePathname } from "next/navigation"
 import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state"
 import { createSelector } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
 import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
 import { initialiseMainMenuItems } from "@/menu/ui/logic"
+import Loader from "@/components/Loader"
+import PageHeaderMobile from "./page-header/PageHeaderMenu"
+import { ViewportBreakpoint } from "@/core/domain/models"
 
 const selectPageUiState = createSelector(
     [
@@ -28,6 +31,7 @@ const selectPageUiState = createSelector(
                 menuOpened: pageState.menuOpened,
                 showDonateBtn: featureFlagsState.featureFlags['get_involved_donate'] ?? false,
             },
+            viewportBreakpoint: pageState.viewportBreakpoint,
             isFeatureFlagsRehydrated: featureFlagsState?._persist?.rehydrated,
             isMenuItemsRehydrated: mainMenuItemsState?._persist?.rehydrated
         }
@@ -48,6 +52,8 @@ const selectHeaderProps = createSelector(
         Fresh Load (site never loaded in browser)
         Refresh
         Cache expired - environment variable can be toggled to speed it up
+        Page change
+        Environment change - seems stuck on loading
 */
 
 const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -84,12 +90,44 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         dispatch(updateCurrentUrlPath(currentUrlPathName))
     }, [dispatch, currentUrlPathName])
 
+    // Fetch page data
+    useEffect(() => {
+        const thunk = dispatch(fetchPageData(currentUrlPathName));
+        return () => {
+            thunk.abort(); // cancels previous request when URL changes
+        };
+    }, [currentUrlPathName]);
+
+    // Observe and update viewport break point
+    useEffect(() => {
+        const updateBreakpoint = () => {
+            const width = window.innerWidth;
+
+            if (width < 640) dispatch(updateViewportBreakpoint(ViewportBreakpoint.Mobile));
+            else dispatch(updateViewportBreakpoint(ViewportBreakpoint.Nonmobile));
+        };
+
+        updateBreakpoint(); // Initial
+        window.addEventListener("resize", updateBreakpoint);
+
+        return () => window.removeEventListener("resize", updateBreakpoint);
+    }, []);
+
     return (
         <>
-            <PageHeaderDesktop {...headerProps} />
-            {children}
+            {(pageUiState.loading || pageUiState.viewportBreakpoint === null) ? (
+                <div className="min-h-[30vh] flex flex-col justify-center items-center">
+                    <Loader />
+                </div>
+            ) : (
+                <>
+                    {(pageUiState.viewportBreakpoint === 'sm') ? (<PageHeaderMobile />) : (<PageHeaderDesktop {...headerProps} />)}
+                    {children}
+                </>
+            )}
         </>
-    )
+    );
+
 }
 
 export default Page

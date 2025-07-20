@@ -31,13 +31,62 @@ import HeroSection from "@/components/HeroSection"
 import Markdown from "@/components/Markdown"
 import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
 import HeroSliderSection from "@/components/HeroSliderSection"
+import PageIntro from "@/components/PageIntro"
+import PageHeadline from "@/components/PageHeadline"
+import PageSubHeadlineAndActions from "@/components/PageSubheadlineAndActions"
+import { shallowEqual } from "react-redux"
 
 export default function Home() {
-  return(
+  /* 
+    1. Running effects with stores
+    2. Store as repo client rendering/ usr for ssr rendering
+    3. usw for fetch
+    How does next js build a page with react components
+    4. What triggers rerendering for react components, that's what the UI needs dependending
+    5. Once 4 is know, we structure client-side rendering and ssr
+   */
+
+  const pageData = useAppSelector((state) => state.usePage)
+  const aboutUsUrl = useAppSelector((state) =>
+    state.useMainMenuItems.mainMenuItems.find(item => item.id === 'about')?.relativeUrl || 'about'
+  );
+  const features = useAppSelector(
+    (state) => ({
+      donate: state.useFeatureFlags.featureFlags["home_donate_button"],
+      learnMore: state.useFeatureFlags.featureFlags["home_learn_more_button"],
+    }),
+    shallowEqual
+  )
+
+
+  return (
     <>
-     <h1>Welcome Home</h1>
+      <section>
+        {(pageData.headline && pageData.subheadline) && (
+          <PageIntro
+            headline={<PageHeadline headline={pageData.headline} />}
+            subheadlineAndActions={
+              <PageSubHeadlineAndActions
+                subheadline={pageData.subheadline}
+                actions={[
+                  features.donate && (
+                    <Link href="">
+                      <Button theme="border" title="Make donation" />
+                    </Link>
+                  ),
+                  features.learnMore && (
+                    <Link href={`/${aboutUsUrl}`}>
+                      <Button theme="secondary" title="Lean more" />
+                    </Link>
+                  ),
+                ]} />
+            }
+          />
+        )}
+      </section>
     </>
   )
+
   /* const [loading, setLoading] = useState(false) // 
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)

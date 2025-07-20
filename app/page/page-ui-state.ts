@@ -16,5 +16,6 @@ export interface PageUiState {
     featureFlagsError: StrapiError | null;
     header: PageHeaderUiState;
     loading: boolean;
+    viewportBreakpoint: 'sm' | 'md' | null;
 }
 

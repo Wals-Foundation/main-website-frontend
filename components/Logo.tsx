@@ -19,7 +19,7 @@ export const WalsLogo: React.FC = () => {
       <img
         src={logo.src}
         alt="Wals Logo"
-        className="h-[30px] sm:h-[50px] w-auto"
+        className="h-interactive"
       />
     </Link>
   );
