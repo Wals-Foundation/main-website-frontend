@@ -5,7 +5,7 @@ import PageHeaderDesktopMenu from "@/menu/ui/PageDeaderDesktopMenu";
 
 const PageHeaderDesktop: React.FC<{ menuItems: MenuItemUiState[], showDonateBtn: boolean }> = ({ menuItems, showDonateBtn }) => {
     return (
-        <header className="w-11/12 mx-auto sticky top-0 z-50 bg-white border-b border-border-gray flex items-center py-4">
+        <header className="w-11/12 mx-auto top-0 z-50 bg-white border-b border-border-gray flex items-center py-4">
             <div className="shrink-0">
                 <WalsLogo />
             </div>

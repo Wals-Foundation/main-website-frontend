@@ -35,6 +35,7 @@ import PageIntro from "@/components/PageIntro"
 import PageHeadline from "@/components/PageHeadline"
 import PageSubHeadlineAndActions from "@/components/PageSubheadlineAndActions"
 import { shallowEqual } from "react-redux"
+import PageHeroes from "@/components/PageHeroes"
 
 export default function Home() {
   /* 
@@ -82,6 +83,15 @@ export default function Home() {
                 ]} />
             }
           />
+        )}
+        {pageData.heroes && (
+          <div className="relative w-screen pt-4 aspect-[2/3] md:aspect-[16/9]">
+            <PageHeroes
+              className="absolute h-full"
+              feature="home_hero_carousel"
+              heroes={pageData.heroes}
+            />
+          </div>
         )}
       </section>
     </>

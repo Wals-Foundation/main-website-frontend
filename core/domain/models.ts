@@ -1,5 +1,6 @@
 export interface ImageSource {
     id: string;
+    alt: string;
     url: string;
     name: string;
 }
@@ -11,7 +12,7 @@ export interface Image {
 
 export interface Hero {
     id: string;
-    images: Image[];
+    image: Image;
 }
 
 export enum ViewportBreakpoint {

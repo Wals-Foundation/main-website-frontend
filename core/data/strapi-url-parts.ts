@@ -1,5 +1,5 @@
 
-const heroesImagesPath = "populate[heroes][populate][images]"
+const heroesImagesPath = "populate[heroes][populate][image]"
 const imageSourcePath = "[populate][source]"
 const heroImageSourceFields = `${heroesImagesPath}${imageSourcePath}[fields][0]=url&${heroesImagesPath}${imageSourcePath}[fields][1]=name`
 const mainMenuDestinationFields = "populate[destination][fields][0]=relativeUrl"

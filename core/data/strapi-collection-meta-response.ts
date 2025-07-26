@@ -16,7 +16,7 @@ export interface ImageResponse {
 export interface HeroResponse {
   id: number;
   documentId: string;
-  images: ImageResponse[];
+  image: ImageResponse;
 }
 
 export interface Pagination {
@@ -33,7 +33,7 @@ export interface Meta {
 export function mapHeroResponseToHero(heroResponse: HeroResponse): Hero {
   return {
     id: heroResponse.documentId,
-    images: heroResponse.images.map(mapImageResponseToImage)
+    image: mapImageResponseToImage(heroResponse.image)
   };
 }
 
@@ -49,6 +49,7 @@ function mapImageSourceResponseToImageSource(
 ): ImageSource {
   return {
     id: sourceResponse.documentId,
+    alt:"", // TODO: update to match alt from network
     url: sourceResponse.url,
     name: sourceResponse.name
   };
