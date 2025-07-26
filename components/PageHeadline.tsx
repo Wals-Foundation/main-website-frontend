@@ -4,7 +4,7 @@ const PageHeadline: React.FC<{ className?: string, headline: string }> = ({ clas
     return (
         <>
             <div className={` ${className ?? ""}`}>
-                <Title text={text} className="md:min-w-[1ch]"/>
+                <Title text={text}/>
             </div>
         </>
     )

@@ -3,7 +3,7 @@ import React, { ReactNode } from "react"
 export const Text: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <p className={`w-full mx-auto text-base sm:text-lg md:text-xl leading-relaxed md:min-w-[50ch] md:max-w-[75ch]
+      <p className={`text-base sm:text-lg md:text-xl leading-relaxed md:max-w-[75ch]
       text-paragraph ${className ?? ""} `}>
         {text}
       </p>
@@ -14,7 +14,7 @@ export const Text: React.FC<{ className?: string, text: string }> = ({ className
 export const Title: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <h1 className={`w-full mx-auto md:min-w-[50ch] md:max-w-[75ch] font-size-semibold text-header text-5xl md:text-7xl 
+      <h1 className={`md:max-w-[75ch] font-size-semibold text-header text-5xl md:text-7xl 
       leading-tight ${className ?? ""}`}>
         {text}
       </h1>
