@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm"
 
 /**
  * Docs is here https://github.com/remarkjs/react-markdown
+ * https://github.com/tailwindlabs/tailwindcss-typography
  */
 const MarkdownDisplay: React.FC<{ className?: string, markdown: string }> = ({ className, markdown }) => {
     return (

@@ -1,23 +1,78 @@
 import React, { ReactNode } from "react"
 
-export const Text: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const Title: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <p className={`text-base sm:text-lg md:text-xl leading-relaxed md:max-w-[75ch]
-      text-paragraph ${className ?? ""} `}>
+      <h1 className={`text-5xl sm:text-6xl text-typo-black-500 font-size-semibold
+        leading-[3.5rem] sm:leading-[4.75rem] sm:max-w-[75ch] ${className ?? ""}`}>
+        {text}
+      </h1>
+    </>
+  )
+}
+
+export const SectionHeader: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <h2 className={`text-base text-typo-white-800 font-size-semibold uppercase
+        leading-6 sm:max-w-[75ch]  ${className ?? ""}`}>
+        {text}
+      </h2>
+    </>
+  )
+}
+
+export const HeadlingLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <h3 className={`text-4xl text-typo-black-500 font-size-semibold 
+        leading-10 sm:leading-[3rem] sm:max-w-[75ch]  ${className ?? ""}`}>
+        {text}
+      </h3>
+    </>
+  )
+}
+
+export const HeadingMedium: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <h4 className={`text-base sm:text-xl text-typo-black-500 font-size-semibold 
+        leading-8 sm:leading-10 sm:max-w-[75ch] ${className ?? ""}`}>
+        {text}
+      </h4>
+    </>
+  )
+}
+
+export const HeadingSmall: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <h5 className={`text-base text-typo-white-800 font-size-semibold 
+        leading-6 sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+        {text}
+      </h5>
+    </>
+  )
+}
+
+export const TextLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <p className={`text-base sm:text-lg text-typo-white-900 
+        leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""} `}>
         {text}
       </p>
     </>
   )
 }
 
-export const Title: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const TextMedium: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <h1 className={`md:max-w-[75ch] font-size-semibold text-header text-5xl md:text-7xl 
-      leading-tight ${className ?? ""}`}>
+      <p className={`text-base text-typo-black-400 
+        leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""} `}>
         {text}
-      </h1>
+      </p>
     </>
   )
 }

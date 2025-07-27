@@ -1,5 +1,5 @@
 import React from "react"
-import Typography from "./Typography"
+import Typography, { SectionHeader } from "./Typography"
 import MarkdownDisplay from "./MarkdownDisplay"
 
 interface AboutSectionProps {
@@ -12,11 +12,11 @@ const AboutUsSection: React.FC<AboutSectionProps> = ({ displayContent, title, co
   return (
     <>
       {displayContent && (
-        <div className="md:flex justify-between items-start">
+        <div className="sm:flex justify-between items-start">
           <div className="pb-8 md:pb-0">
-            <Typography type="ParagraphHeader">{title}</Typography>
+            <SectionHeader text={title} />
           </div>
-          <div className="md:max-w-[825px]">
+          <div className="sm:max-w-[825px]">
             <MarkdownDisplay markdown={content} />;
           </div>
         </div>
