@@ -1,14 +1,14 @@
 import React from "react"
 import Typography from "./Typography"
-import Markdown from "./Markdown"
+import MarkdownDisplay from "./MarkdownDisplay"
 
 interface AboutSectionProps {
   displayContent?: boolean
-  title?: string
-  content?: string
+  title: string
+  content: string
 }
 
-const AboutSection: React.FC<AboutSectionProps> = ({ displayContent, title, content }) => {
+const AboutUsSection: React.FC<AboutSectionProps> = ({ displayContent, title, content }) => {
   return (
     <>
       {displayContent && (
@@ -17,7 +17,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ displayContent, title, cont
             <Typography type="ParagraphHeader">{title}</Typography>
           </div>
           <div className="md:max-w-[825px]">
-            <Markdown content={content} />;
+            <MarkdownDisplay markdown={content} />;
           </div>
         </div>
       )}
@@ -25,4 +25,4 @@ const AboutSection: React.FC<AboutSectionProps> = ({ displayContent, title, cont
   )
 }
 
-export default AboutSection
+export default AboutUsSection

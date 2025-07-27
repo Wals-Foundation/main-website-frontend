@@ -32,8 +32,9 @@ import PageSubHeadlineAndActions from "@/components/PageSubheadlineAndActions"
 import PageHeroes from "@/components/PageHeroes"
 import { isStrapiError } from "@/core/data/strapi-error"
 import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-datasource"
-import { fetchPageData } from "./page/logic"
+import { fetchPageData } from "../main-page/ui/logic"
 import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
+import HomeAboutUs from "@/components/HomeAboutUs"
 
 const getHomeFeatureFlags = async (): Promise<{ donate: Boolean, learnMore: Boolean }> => {
   const featureFlagsResult = await fetchFeatureFlags()
@@ -102,13 +103,7 @@ export default async function Home() {
         )}
       </section>
       <section>
-        {/* <div className="pt-4">
-          {isStrapiError(aboutOurStoryResult) ? (
-            <p>About Story Errored</p>
-          ) : (
-            <p>{aboutOurStoryResult}</p>
-          )}
-        </div> */}
+        <HomeAboutUs className="w-11/12 mx-auto mt-8" />
       </section>
     </>
   )

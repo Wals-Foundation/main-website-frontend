@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 import plugin from 'tailwindcss/plugin'
+import typography from '@tailwindcss/typography';
 
 export default {
   content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -19,14 +20,15 @@ export default {
         "light-blue": "#00ACEE",
         "transparent-blue": "#F3FAFD",
         "form-border": "#E6ECF0",
-        "btn-disabled":"#E0E0E0",
-        "btn-disabled-text":"#B5B5B5",
-        "btn-text":"#ECF6FF"
+        "btn-disabled": "#E0E0E0",
+        "btn-disabled-text": "#B5B5B5",
+        "btn-text": "#ECF6FF"
       },
     },
   },
   plugins: [
-    plugin(function({ addComponents }) {
+    typography,
+    plugin(function ({ addComponents }) {
       addComponents({
         '.h-interactive': {
           '@apply h-10 sm:h-14': {},

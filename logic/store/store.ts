@@ -6,7 +6,7 @@ import useFinances from "@/logic/hooks/api/useFinances"
 import useCauses from "@/logic/hooks/api/useCauses"
 import featureFlagsReducer from "@/feature-flags/ui/logic"
 import mainMenuItemsReducer from "@/menu/ui/logic"
-import { pageReducer } from "@/app/page/logic"
+import { pageReducer } from "@/main-page/ui/logic"
 
 
 

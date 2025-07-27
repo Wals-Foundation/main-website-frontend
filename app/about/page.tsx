@@ -22,7 +22,7 @@ import { isDev } from "@/logic/config/url"
 import Gallery from "@/components/Gallery"
 import Loader from "@/components/Loader"
 import HeroSection from "@/components/HeroSection"
-import AboutSection from "@/components/AboutSection"
+import AboutUsSection from "@/components/AboutUsSection"
 import HeroSliderSection from "@/components/HeroSliderSection"
 
 export default function About() {
@@ -85,19 +85,19 @@ export default function About() {
         <>
           <section className="max-w-[1440px] mx-auto pt-16 md:pt-32">
             <div className="w-11/12 mx-auto">
-              <AboutSection
+              <AboutUsSection
                 title="Our Story"
                 displayContent={!!pageControlSlugMap.get("about_our_story") && !!aboutData.aboutOrganization?.organisation_story}
                 content={aboutData?.aboutOrganization?.organisation_story || ""}
               />
-              <AboutSection
+              <AboutUsSection
                 title="Our Mission"
                 displayContent={
                   !!pageControlSlugMap.get("about_our_mission") && !!aboutData.aboutOrganization?.organisation_mission
                 }
                 content={aboutData.aboutOrganization?.organisation_mission || ""}
               />
-              <AboutSection
+              <AboutUsSection
                 title="Our Vision"
                 displayContent={
                   !!pageControlSlugMap.get("about_our_vision") && !!aboutData.aboutOrganization?.organisation_vision
