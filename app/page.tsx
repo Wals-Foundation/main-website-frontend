@@ -25,16 +25,16 @@ import HeroSection from "@/components/HeroSection"
 import Markdown from "@/components/Markdown"
 import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
 import HeroSliderSection from "@/components/HeroSliderSection" */
-import PageIntro from "@/components/PageIntro"
-import PageHeadline from "@/components/PageHeadline"
-import PageSubHeadlineAndActions from "@/components/PageSubheadlineAndActions"
+import PageIntro from "@/main-page/ui/PageIntro"
+import PageSubHeadlineAndActions from "@/main-page/ui/PageSubheadlineAndActions"
 /* import { shallowEqual } from "react-redux" */
-import PageHeroes from "@/components/PageHeroes"
+import PageHeroes from "@/main-page/ui/PageHeroes"
 import { isStrapiError } from "@/core/data/strapi-error"
 import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-datasource"
 import { fetchPageData } from "../main-page/ui/logic"
 import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
 import HomeAboutUs from "@/components/HomeAboutUs"
+import PageHeadline from "@/main-page/ui/PageHeadline"
 
 const getHomeFeatureFlags = async (): Promise<{ donate: Boolean, learnMore: Boolean }> => {
   const featureFlagsResult = await fetchFeatureFlags()
