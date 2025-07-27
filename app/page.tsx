@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+
 import Button from "@/components/Button"
-import Typography from "@/components/Typography"
+/* import Typography from "@/components/Typography"
 import people1 from "@/assets/images/people1.png"
 import people2 from "@/assets/images/people2.png"
 import people3 from "@/assets/images/people3.png"
@@ -17,27 +17,34 @@ import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
 import CausesCard from "@/components/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { CauseType } from "@/utils/types"
-import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
+import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses" */
 import Link from "next/link"
-import { isDev } from "@/logic/config/url"
-import {
-  getAboutOrganizationApproach,
-  getAboutOrganizationData,
-  getAboutOrganizationValues,
-} from "@/logic/hooks/api/useAboutOrganization"
-import Loader from "@/components/Loader"
+/* import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
 import HeroSection from "@/components/HeroSection"
 import Markdown from "@/components/Markdown"
 import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
-import HeroSliderSection from "@/components/HeroSliderSection"
+import HeroSliderSection from "@/components/HeroSliderSection" */
 import PageIntro from "@/components/PageIntro"
 import PageHeadline from "@/components/PageHeadline"
 import PageSubHeadlineAndActions from "@/components/PageSubheadlineAndActions"
-import { shallowEqual } from "react-redux"
+/* import { shallowEqual } from "react-redux" */
 import PageHeroes from "@/components/PageHeroes"
+import { isStrapiError } from "@/core/data/strapi-error"
+import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-datasource"
+import { fetchPageData } from "./page/logic"
+import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
 
-export default function Home() {
+const getHomeFeatureFlags = async (): Promise<{ donate: Boolean, learnMore: Boolean }> => {
+  const featureFlagsResult = await fetchFeatureFlags()
+  const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult
+  return {
+    donate: featureFlags["home_donate_button"],
+    learnMore: featureFlags["home_learn_more_button"],
+  }
+}
+
+export default async function Home() {
   /* 
     1. Running effects with stores
     2. Store as repo client rendering/ usr for ssr rendering
@@ -47,52 +54,61 @@ export default function Home() {
     5. Once 4 is know, we structure client-side rendering and ssr
    */
 
-  const pageData = useAppSelector((state) => state.usePage)
-  const aboutUsUrl = useAppSelector((state) =>
-    state.useMainMenuItems.mainMenuItems.find(item => item.id === 'about')?.relativeUrl || 'about'
-  );
-  const features = useAppSelector(
-    (state) => ({
-      donate: state.useFeatureFlags.featureFlags["home_donate_button"],
-      learnMore: state.useFeatureFlags.featureFlags["home_learn_more_button"],
-    }),
-    shallowEqual
-  )
+  const pageData = await fetchMainPageData("home")
+  const aboutUsUrl = "about"
+  //const { data: aboutOurStoryResult, error } = useSWR(aboutOurStoryCacheKey, fetchOurStory, { refreshInterval: 3000000 }) // TODO:handle error
+
+  const features = await getHomeFeatureFlags()
 
 
   return (
     <>
       <section>
-        {(pageData.headline && pageData.subheadline) && (
-          <PageIntro
-            headline={<PageHeadline headline={pageData.headline} />}
-            subheadlineAndActions={
-              <PageSubHeadlineAndActions
-                subheadline={pageData.subheadline}
-                actions={[
-                  features.donate && (
-                    <Link href="">
-                      <Button theme="border" title="Make donation" />
-                    </Link>
-                  ),
-                  features.learnMore && (
-                    <Link href={`/${aboutUsUrl}`}>
-                      <Button theme="secondary" title="Lean more" />
-                    </Link>
-                  ),
-                ]} />
-            }
-          />
-        )}
-        {pageData.heroes && (
-          <div className="relative w-screen pt-4 aspect-[2/3] md:aspect-[16/9]">
-            <PageHeroes
-              className="absolute h-full"
-              feature="home_hero_carousel"
-              heroes={pageData.heroes}
-            />
+        {isStrapiError(pageData) ? (
+          <p>Page Errored</p>
+        ) : (
+          <div>
+            {(pageData?.headline && pageData.subheadline) && (
+              <PageIntro
+                headline={<PageHeadline headline={pageData.headline} />}
+                subheadlineAndActions={
+                  <PageSubHeadlineAndActions
+                    subheadline={pageData.subheadline}
+                    actions={[
+                      features.donate && (
+                        <Link href="">
+                          <Button theme="border" title="Make donation" />
+                        </Link>
+                      ),
+                      features.learnMore && (
+                        <Link href={`/${aboutUsUrl}`}>
+                          <Button theme="secondary" title="Lean more" />
+                        </Link>
+                      ),
+                    ]} />
+                }
+              />
+            )}
+            {pageData?.heroes && (
+              <div className="relative w-screen pt-4 aspect-[2/3] sm:aspect-[16/9]">
+                <PageHeroes
+                  className="absolute h-full"
+                  feature="home_hero_carousel"
+                  heroes={pageData.heroes}
+                />
+              </div>
+            )}
           </div>
         )}
+      </section>
+      <section>
+        {/* <div className="pt-4">
+          {isStrapiError(aboutOurStoryResult) ? (
+            <p>About Story Errored</p>
+          ) : (
+            <p>{aboutOurStoryResult}</p>
+          )}
+        </div> */}
       </section>
     </>
   )

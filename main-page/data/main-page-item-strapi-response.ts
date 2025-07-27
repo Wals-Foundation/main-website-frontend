@@ -1,4 +1,4 @@
-import { HeroResponse, Meta, mapHeroResponseToHero } from "@/core/data/strapi-collection-meta-response";
+import { HeroResponse, Meta, mapHeroResponseToHero } from "@/core/data/strapi-responses";
 import { Page } from "../page";
 
 export interface PageResponse {

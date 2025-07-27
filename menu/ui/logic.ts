@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { Config } from "@/core/data/config";
+import { Config } from "@/core/domain/config";
 import { createTransform, PersistConfig, persistReducer } from 'redux-persist';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import storage from "redux-persist/lib/storage"
 import { MenuItem } from "../menu-item";
-import { fetchMainMenuItems } from "@/menu/data/menu-strapi-data-source";
+import { fetchMainMenuItems } from "@/menu/data/menu-strapi-datasource";
 
 export interface MainMenuItemsState {
     mainMenuItems: MenuItem[];
@@ -70,7 +70,7 @@ const menuItemsTransform = createTransform(
         if (outboundState && typeof outboundState === "object" && '_persistedAt' in outboundState) {
             const now = Date.now();
             const isExpired = outboundState?._persistedAt &&
-                (now - outboundState._persistedAt > Config.page.cacheMaxAge);
+                (now - outboundState._persistedAt > Config.page.reduxCacheMaxAge);
 
             // Handle expired state
             if (isExpired) {

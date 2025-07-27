@@ -1,8 +1,9 @@
 import { StrapiError } from "@/core/data/strapi-error";
-import { axiosFetcher } from "@/logic/config/base";
+import { getFetcher } from "@/logic/config/base";
 import { Feature, FeatureFlagsResponse, mapFeatureFlagsResponseToLiveStateMap } from "./feature-flags-response";
 import { featureFlagsCacheKey as featureFlagsUrl } from "@/core/data/cache-keys";
 import { paginate } from "@/core/data/strapi-url-parts";
+import { Config } from "@/core/domain/config";
 
 export async function fetchFeatureFlags(): Promise<Record<string, boolean> | StrapiError> {
     try {
@@ -11,8 +12,13 @@ export async function fetchFeatureFlags(): Promise<Record<string, boolean> | Str
         const allFeatures: Feature[] = [];
 
         while (true) {
-            const response = await axiosFetcher<FeatureFlagsResponse>(
-                `${featureFlagsUrl}&${paginate(page, pageSize)}`
+            const response = await getFetcher<FeatureFlagsResponse>(
+                `${featureFlagsUrl}&${paginate(page, pageSize)}`,
+                {
+                    next: {
+                        revalidate: Config.page.cacheMaxAge
+                    },
+                }
             );
 
             allFeatures.push(...response.data);

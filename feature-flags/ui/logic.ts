@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { fetchFeatureFlags } from "../data/feature-flags-strapi-data-source";
-import { Config } from "@/core/data/config";
+import { fetchFeatureFlags } from "../data/feature-flags-strapi-datasource";
+import { Config } from "@/core/domain/config";
 import { createTransform, PersistConfig, persistReducer } from 'redux-persist';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import storage from "redux-persist/lib/storage"
@@ -68,7 +68,7 @@ const featureFlagsTransform = createTransform(
     if (outboundState && typeof outboundState === "object" && '_persistedAt' in outboundState) {
       const now = Date.now();
       const isExpired = outboundState?._persistedAt &&
-        (now - outboundState._persistedAt > Config.page.cacheMaxAge);
+        (now - outboundState._persistedAt > Config.page.reduxCacheMaxAge);
 
       if (isExpired) {
         console.info("Feature flags expired - refreshing");

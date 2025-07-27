@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import PageHeaderDesktop from "./page-header/PageHeaderDesktop"
 import { useEffect } from "react"

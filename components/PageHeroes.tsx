@@ -1,9 +1,18 @@
+"use client"
 import { Hero, ViewportBreakpoint } from '@/core/domain/models';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from "swiper/modules"
+import { Autoplay, Pagination } from "swiper/modules"
 import 'swiper/css';
 import Image from '@/image/Image';
 import { useAppSelector } from '@/logic/store/hooks';
+import { Config } from '@/core/domain/config';
+
+/*
+    TEST CASES
+    Number of heroes - 0,1,3
+    Image aspect ratio - correct image name available (mobil & web), correct image name unavailable
+    Slides - autoplay, interact
+*/
 
 const PageHeroes: React.FC<{
     className?: string,
@@ -17,8 +26,9 @@ const PageHeroes: React.FC<{
             {
                 <Swiper
                     className={`w-full ${className ?? ""}`}
-                    modules={[Autoplay]}
-                    autoplay={{ delay: 3000 }}
+                    modules={[Autoplay, Pagination]}
+                    autoplay={{ delay: Config.images.slides.autoPlayDelay }}
+                    pagination={{ clickable: true }}
                 >
                     {heroes.map((hero) => (
                         <SwiperSlide key={hero.id} className="w-full h-full">
@@ -26,7 +36,10 @@ const PageHeroes: React.FC<{
                                 feature={feature}
                                 image={hero.image}
                                 breakpoint={viewportBreakpoint ?? ViewportBreakpoint.Nonmobile}
-                                widthClass="w-full" />
+                                widthClass="w-full"
+                            />
+                            {/* Puts an overlay over the images */}
+                            <div className="absolute inset-0 bg-black/60" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
