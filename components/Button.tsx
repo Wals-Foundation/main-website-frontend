@@ -1,6 +1,3 @@
-"use client"
-import { ViewportBreakpoint } from "@/core/domain/models"
-import { useAppSelector } from "@/logic/store/hooks"
 import React from "react"
 
 interface ButtonProps {
@@ -40,14 +37,13 @@ const buttonStyle = (enabled: boolean, theme?: "primary" | "secondary" | "border
 }
 const Button: React.FC<ButtonProps> = (props) => {
   const { title, loading, onClick, type, theme, className } = props
-  const isMobile = useAppSelector((state) => state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile)
   return (
     <>
       <button
         type={type}
         onClick={onClick}
-        className={`h-interactive ${isMobile ? "w-full" : ""} px-6 rounded-full font-size-bold vertical-align: 
-          middle whitespace-nowrap ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
+        className={`h-interactive w-full sm:w-fit px-6 rounded-full font-size-bold align-middle
+           whitespace-nowrap ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
       >
         {loading && (
           <svg

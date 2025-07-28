@@ -1,10 +1,9 @@
 "use client"
-import { Hero, ViewportBreakpoint } from '@/core/domain/models';
+import { Hero } from '@/core/domain/models';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper/modules"
 import 'swiper/css';
-import Image from '@/image/Image';
-import { useAppSelector } from '@/logic/store/hooks';
+import ImageDisplay from '@/image/Image';
 import { Config } from '@/core/domain/config';
 
 /*
@@ -19,7 +18,6 @@ const PageHeroes: React.FC<{
     feature: string,
     heroes: Hero[]
 }> = ({ className, feature, heroes }) => {
-    const viewportBreakpoint = useAppSelector((state) => state.usePage.viewportBreakpoint)
 
     return (
         <>
@@ -32,10 +30,9 @@ const PageHeroes: React.FC<{
                 >
                     {heroes.map((hero) => (
                         <SwiperSlide key={hero.id} className="w-full h-full">
-                            <Image
+                            <ImageDisplay
                                 feature={feature}
                                 image={hero.image}
-                                breakpoint={viewportBreakpoint ?? ViewportBreakpoint.Nonmobile}
                                 widthClass="w-full"
                             />
                             {/* Puts an overlay over the images */}

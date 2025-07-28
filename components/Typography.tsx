@@ -22,7 +22,7 @@ export const SectionHeader: React.FC<{ className?: string, text: string }> = ({ 
   )
 }
 
-export const HeadlingLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const HeadingLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
       <h3 className={`text-4xl text-typo-black-500 font-size-semibold 
@@ -36,7 +36,7 @@ export const HeadlingLarge: React.FC<{ className?: string, text: string }> = ({ 
 export const HeadingMedium: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <h4 className={`text-base sm:text-xl text-typo-black-500 font-size-semibold 
+      <h4 className={`text-lg sm:text-xl text-typo-black-500 font-size-semibold 
         leading-8 sm:leading-10 sm:max-w-[75ch] ${className ?? ""}`}>
         {text}
       </h4>

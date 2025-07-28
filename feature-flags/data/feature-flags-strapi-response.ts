@@ -1,4 +1,4 @@
-import { Meta } from "@/components/core/data/strapi-collection-meta-response";
+import { Meta } from "@/core/data/strapi-responses";
 
 export interface Feature {
   id: number;

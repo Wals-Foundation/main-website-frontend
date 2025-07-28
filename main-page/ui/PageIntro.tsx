@@ -17,8 +17,8 @@ const PageIntro: React.FC<
                 </div>
             ) : (
                 <div className={`w-11/12 mx-auto pt-16 flex ${className ?? ""}`}>
-                    <div className="md:grow-2 md:pr-14">{headline}</div>
-                    <div className="md:grow-1">{subheadlineAndActions}</div>
+                    <div className="sm:grow-2 sm:pr-14">{headline}</div>
+                    <div className="sm:grow-1">{subheadlineAndActions}</div>
                 </div>
             )}
         </>

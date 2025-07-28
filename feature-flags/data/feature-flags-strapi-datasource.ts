@@ -1,6 +1,6 @@
 import { StrapiError } from "@/core/data/strapi-error";
 import { getFetcher } from "@/logic/config/base";
-import { Feature, FeatureFlagsResponse, mapFeatureFlagsResponseToLiveStateMap } from "./feature-flags-response";
+import { Feature, FeatureFlagsResponse, mapFeatureFlagsResponseToLiveStateMap } from "./feature-flags-strapi-response";
 import { featureFlagsCacheKey as featureFlagsUrl } from "@/core/data/cache-keys";
 import { paginate } from "@/core/data/strapi-url-parts";
 import { Config } from "@/core/domain/config";

@@ -1,4 +1,4 @@
-import { Title } from "./Typography"
+import { Title } from "@/components/Typography"
 
 const PageHeadline: React.FC<{ className?: string, headline: string }> = ({ className, headline: text }) => {
     return (

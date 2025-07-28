@@ -41,7 +41,6 @@ export async function fetchOurStory(aboutOurStoryRelativeUrl: string): Promise<s
                     revalidate: Config.page.cacheMaxAge
                 },
             })
-        console.log("Our story response", response)
         return mapOrganisationStoryResponseToStory(response.data)
     } catch (error) {
         console.error(error)

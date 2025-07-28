@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Typography from "@/components/Typography"
-import CausesCard from "@/components/CausesCard"
+import CausesCard from "@/cause/ui/CausesCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"

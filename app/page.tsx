@@ -35,6 +35,10 @@ import { fetchPageData } from "../main-page/ui/logic"
 import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
 import HomeAboutUs from "@/components/HomeAboutUs"
 import PageHeadline from "@/main-page/ui/PageHeadline"
+import { SectionHeader } from "@/components/Typography"
+import { CauseCard } from "@/cause/ui/CausesCard"
+import { CauseType } from "@/cause/models"
+import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 
 const getHomeFeatureFlags = async (): Promise<{ donate: Boolean, learnMore: Boolean }> => {
   const featureFlagsResult = await fetchFeatureFlags()
@@ -104,6 +108,15 @@ export default async function Home() {
       </section>
       <section>
         <HomeAboutUs className="w-11/12 mx-auto mt-8" />
+      </section>
+      <section className="w-screen bg-section-bg-gray p-4">
+        <SectionHeader className="mx-auto w-fit" text="Featured Causes" />
+        <FeaturedCauses
+          className="w-11/12 mx-auto mt-4"
+          causeDetailsUrl="cause-detail"
+          donateUrl="donate"
+          donateFeatureFlag={features.donate}
+        />
       </section>
     </>
   )

@@ -40,4 +40,14 @@ export default {
       })
     }),
   ],
+  safelist:[
+    "sm:col-span-2",
+    "sm:flex",
+    "sm:flex-1",
+    "sm:gap-4",
+    "sm:gap-8",
+    "sm:grid",
+    "sm:grid-cols-2",
+    "sm:pt-0",
+  ]
 } satisfies Config

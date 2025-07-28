@@ -1,16 +1,18 @@
+"use client"
 import { Image as ImageDomain, ViewportBreakpoint } from "@/core/domain/models";
 import getFeatureViewportBreakpointImageSource from "./utils";
+import { useAppSelector } from "@/logic/store/hooks";
 
-const Image: React.FC<{
+const ImageDisplay: React.FC<{
     className?: string,
     feature: string,
     image: ImageDomain,
-    widthClass: string,
-    breakpoint: ViewportBreakpoint
-}> = ({ className, feature, image, widthClass, breakpoint }) => {
-    let featureBreakpoint = `${feature}_${(breakpoint === ViewportBreakpoint.Mobile) ? 'mobile' : 'desktop'}`
+    widthClass: string
+}> = ({ className, feature, image, widthClass }) => {
+    const isMobile = useAppSelector((state) => state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile)
+    let featureBreakpoint = `${feature}_${isMobile ? 'mobile' : 'desktop'}`
     let { aspectRatio, source } = getFeatureViewportBreakpointImageSource(featureBreakpoint, image.source)
-    
+
     return (
         <>
             {
@@ -26,4 +28,4 @@ const Image: React.FC<{
     )
 }
 
-export default Image
+export default ImageDisplay
