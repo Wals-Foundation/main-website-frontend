@@ -19,3 +19,6 @@ All layouts and styles that are dependent on breakpoint are done server side and
 ### Server component to client
 Mark all pages as use client
 Move data fetch into useSWR
+
+### Todos
+Search for todo comments and complete them

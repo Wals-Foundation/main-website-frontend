@@ -43,6 +43,7 @@ export default {
     }),
   ],
   safelist: [
+    "h-60",
     "sm:col-span-2",
     "sm:flex",
     "sm:flex-1",

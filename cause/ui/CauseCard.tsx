@@ -154,7 +154,6 @@ export const CauseCard: React.FC<{
                 className="object-cover rounded-lg"
                 feature="cause_card"
                 image={causeImage}
-                widthClass=""
               />
             )}
           </div>

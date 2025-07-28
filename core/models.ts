@@ -1,3 +1,9 @@
+export interface PagedData<T> {
+    data: T[];
+    page: number;
+    hasNextPage: boolean;
+};
+
 export interface ImageSource {
     id: string;
     alt: string;

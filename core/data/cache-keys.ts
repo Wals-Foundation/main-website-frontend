@@ -1,5 +1,15 @@
 import { CauseType } from "@/cause/models";
-import { aboutOurStoryQueryFields, aboutQueryFields, aboutValuesQueryFields, causesQuery, featuredCauseQuery, mainMenuItemQueryFields, pageQuery, paginate } from "./strapi-url-parts";
+import {
+    aboutOurStoryQueryFields,
+    aboutQueryFields,
+    aboutValuesQueryFields,
+    causesQuery,
+    featuredCauseQuery,
+    galleryQuery,
+    mainMenuItemQueryFields,
+    pageQuery,
+    paginate
+} from "./strapi-url-parts";
 
 export const aboutCachekey = `about-organisation?${aboutQueryFields}`
 export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
@@ -19,6 +29,10 @@ export const causesCacheKey = (type: CauseType, page: number, pageSize?: number)
     }[type];
 
     return `${typePath}?${causesQuery()}&${paginate(page, pageSize)}`;
+};
+
+export const galleryCacheKey = (page: number, pageSize?: number): string => {
+    return `gallery-items?${galleryQuery()}&${paginate(page, pageSize)}`;
 };
 
 

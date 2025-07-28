@@ -3,7 +3,7 @@ import { Config } from "../config"
 //paths
 const aboutValuesPath = "[populate][organisation_values]"
 const causePath = "populate[cause]" // For community,program and project
-const heroesImagesPath = "[populate][image]"
+const imagePath = "[populate][image]"
 const heroesPath = "[populate][heroes]"
 const imageSourcePath = "[populate][source]"
 
@@ -11,6 +11,7 @@ const imageSourcePath = "[populate][source]"
 const aboutValuesFields = `${aboutValuesPath}[fields][0]=title&${aboutValuesPath}[fields][1]=explanation`
 const featuredCausesSortFields = "sort=featuredIndex:desc"
 const featuredCausesQueryLimit = "pagination[start]=0&pagination[limit]=1"
+const gallerySortFields = "sort=updatedAt:desc"
 const mainMenuDestinationFields = "[populate][destination][fields][0]=relativeUrl"
 const pageFields = "fields[0]=headline&fields[1]=subheadline"
 
@@ -45,8 +46,8 @@ export const causesQuery = (): string => {
     return `[fields][0]=code&${featuredCausesSortFields
         }&${featuredCauseFields([causePath])
         }&${heroFields([causePath, heroesPath])
-        }&${imageFields([causePath, heroesPath, heroesImagesPath])
-        }&${imageSourceFields([causePath, heroesPath, heroesImagesPath, imageSourcePath])
+        }&${imageFields([causePath, heroesPath, imagePath])
+        }&${imageSourceFields([causePath, heroesPath, imagePath, imageSourcePath])
         }`
 }
 
@@ -54,10 +55,16 @@ export const featuredCauseQuery = (): string => {
     return `${causesQuery()}&${featuredCausesQueryLimit}`
 }
 
+export const galleryQuery = (): string => {
+    return `[fields][0]=id&${gallerySortFields}&${imageFields([imagePath])
+        }&${imageSourceFields([imagePath, imageSourcePath])
+        }`
+}
+
 export const pageQuery = (pageKey: string): string => {
     return `filters[page][$eq]=${pageKey}&${pageFields}&${heroFields([heroesPath])
-        }&${imageFields([heroesPath, heroesImagesPath])
-        }&${imageSourceFields([heroesPath, heroesImagesPath, imageSourcePath])
+        }&${imageFields([heroesPath, imagePath])
+        }&${imageSourceFields([heroesPath, imagePath, imageSourcePath])
         }`
 }
 

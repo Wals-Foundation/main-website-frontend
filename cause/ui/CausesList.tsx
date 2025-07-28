@@ -1,6 +1,6 @@
-import InfiniteScroller from "@/components/InfiniteScroller"
 import { Cause } from "../models"
 import { CauseCard } from "./CauseCard"
+import List from "@/components/List"
 
 const CausesList: React.FC<{
     className?: string,
@@ -23,25 +23,33 @@ const CausesList: React.FC<{
 }) => {
         return (
             <>
-                <div className={className}>
-                    {causes.map((cause) => (
-                        <CauseCard
-                            key={cause.id}
-                            className="w-full"
-                            backgroundColorClass={backgroundColorClass}
-                            causeId={cause.id}
-                            causeName={cause.name}
-                            causeImage={cause.heroes[0].image}
-                            causeImpact={cause.impact}
-                            causeIntro={cause.introduction}
-                            causeType={cause.type}
-                            donateUrl={donateUrl}
-                            viewCauseDetailsUrl={viewCauseDetailsUrl}
-                            donateFeatureFlag={donateFeatureFlag}
-                        />
-                    ))}
-                    <InfiniteScroller className="mt-4" hasMoreData={hasMoreCauses} onLoadMoreData={onLoadMoreCauses} />
-                </div>
+                <List
+                    className={className}
+                    hasMoreItems={hasMoreCauses}
+                    isVertical={true}
+                    itemsCount={causes.length}
+                    item={(index) => {
+                        const cause = causes[index]
+                        return (
+                            <CauseCard
+                                className="w-full"
+                                backgroundColorClass={backgroundColorClass}
+                                causeId={cause.id}
+                                causeName={cause.name}
+                                causeImage={cause.heroes[0].image}
+                                causeImpact={cause.impact}
+                                causeIntro={cause.introduction}
+                                causeType={cause.type}
+                                donateUrl={donateUrl}
+                                viewCauseDetailsUrl={viewCauseDetailsUrl}
+                                donateFeatureFlag={donateFeatureFlag}
+                            />
+                        )
+                    }}
+                    itemContainerClass={(_) => "mb-4"}
+                    itemKey={(index) => causes[index].id}
+                    onLoadMoreItems={onLoadMoreCauses}
+                />
             </>
         )
     }

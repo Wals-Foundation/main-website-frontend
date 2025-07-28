@@ -7,8 +7,7 @@ const ImageDisplay: React.FC<{
     className?: string,
     feature: string,
     image: ImageDomain,
-    widthClass: string
-}> = ({ className, feature, image, widthClass }) => {
+}> = ({ className, feature, image }) => {
     const isMobile = useAppSelector((state) => state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile)
     let featureBreakpoint = `${feature}_${isMobile ? 'mobile' : 'desktop'}`
     let { aspectRatio, source } = getFeatureViewportBreakpointImageSource(featureBreakpoint, image.source)
@@ -20,7 +19,7 @@ const ImageDisplay: React.FC<{
                     id={image.id}
                     src={source.url}
                     alt={source.alt}
-                    className={`${className ?? ""} ${widthClass} aspect-[${aspectRatio}]`}
+                    className={`${className ?? ""} aspect-[${aspectRatio}]`}
                     loading="lazy"
                 />
             }

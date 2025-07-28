@@ -39,14 +39,23 @@ import { HeadingLarge, SectionHeader, TextLarge } from "@/components/Typography"
 import { CauseCard } from "@/cause/ui/CauseCard"
 import { CauseType } from "@/cause/models"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
+import { PagedData } from "@/core/models"
+import { GalleryItem } from "@/gallery/gallery-item"
+import { fetchGalleryItems } from "@/gallery/data/gallery-strapi-datasource"
+import PageGallery from "@/main-page/ui/PageGallery"
 
 const getHomeFeatureFlags = async (): Promise<{ donate: boolean, learnMore: boolean }> => {
-  const featureFlagsResult = await fetchFeatureFlags()
-  const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult
+  const result = await fetchFeatureFlags()
+  const featureFlags = isStrapiError(result) ? {} : result
   return {
     donate: featureFlags["home_donate_button"],
     learnMore: featureFlags["home_learn_more_button"],
   }
+}
+
+const getGalleryItems = async (): Promise<PagedData<GalleryItem>> => {
+  const result = await fetchGalleryItems(1)
+  return !isStrapiError(result) ? result : { data: [], page: 1, hasNextPage: false }
 }
 
 export default async function Home() {
@@ -64,6 +73,7 @@ export default async function Home() {
   //const { data: aboutOurStoryResult, error } = useSWR(aboutOurStoryCacheKey, fetchOurStory, { refreshInterval: 3000000 }) // TODO:handle error
 
   const features = await getHomeFeatureFlags()
+  const initialGalleryItems = await getGalleryItems()
 
 
   return (
@@ -119,6 +129,9 @@ export default async function Home() {
             donateFeatureFlag={features.donate}
           />
         </div>
+      </section>
+      <section className="mt-8">
+        <PageGallery className="mb-4" initialItems={initialGalleryItems} />
       </section>
     </>
   )

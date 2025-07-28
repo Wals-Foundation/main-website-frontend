@@ -31,9 +31,9 @@ const PageHeroes: React.FC<{
                     {heroes.map((hero) => (
                         <SwiperSlide key={hero.id} className="w-full h-full">
                             <ImageDisplay
+                                className="w-full"
                                 feature={feature}
                                 image={hero.image}
-                                widthClass="w-full"
                             />
                             {/* Puts an overlay over the images */}
                             <div className="absolute inset-0 bg-black/60" />

@@ -54,3 +54,13 @@ function mapImageSourceResponseToImageSource(
     name: sourceResponse.name
   };
 }
+
+export function mapMetaToPagination(meta: Meta): { 
+  page: number; 
+  hasNextPage: boolean 
+} {
+  return {
+    page: meta.pagination.page,
+    hasNextPage: meta.pagination.page < meta.pagination.pageCount
+  };
+}
