@@ -1,10 +1,10 @@
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error"
-import { CauseOverview } from "../models"
-import { fetchFeaturedCommunities } from "../data/cause-strapi-datasource"
+import { CauseOverview, CauseType } from "../models"
+import { fetchFeaturedCauses } from "../data/cause-strapi-datasource"
 import { CauseCard } from "./CausesCard"
 
 const getFeaturedCommunities = async (): Promise<CauseOverview[] | StrapiError> => {
-    return await fetchFeaturedCommunities()
+    return await fetchFeaturedCauses(CauseType.Community)
 }
 
 const FeaturedCauses: React.FC<{

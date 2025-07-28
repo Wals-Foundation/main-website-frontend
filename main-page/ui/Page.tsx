@@ -11,7 +11,7 @@ import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
 import { initialiseMainMenuItems } from "@/menu/ui/logic"
 import Loader from "@/components/Loader"
 import PageHeaderMobile from "./page-header/PageHeaderMenu"
-import { ViewportBreakpoint } from "@/core/domain/models"
+import { ViewportBreakpoint } from "@/core/models"
 
 const selectPageUiState = createSelector(
     [

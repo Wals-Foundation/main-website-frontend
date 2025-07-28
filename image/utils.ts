@@ -1,4 +1,4 @@
-import { ImageSource } from "@/core/domain/models";
+import { ImageSource } from "@/core/models";
 
 const featureViewportBreakpointAspectRatio: Record<string, string> = {
     home_hero_carousel_desktop: "16x9",

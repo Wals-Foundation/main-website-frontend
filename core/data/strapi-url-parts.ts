@@ -1,3 +1,5 @@
+import { Config } from "../config"
+
 //paths
 const aboutValuesPath = "[populate][organisation_values]"
 const causePath = "populate[cause]" // For community,program and project
@@ -39,13 +41,17 @@ export const aboutValuesQueryFields = `${aboutValuesFields}&fields[0]=id`
 export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
-export const featuredCauseQuery = (): string => {
-    return `[fields][0]=code&${featuredCausesQueryLimit}&${featuredCausesSortFields
+export const causesQuery = (): string => {
+    return `[fields][0]=code&${featuredCausesSortFields
         }&${featuredCauseFields([causePath])
         }&${heroFields([causePath, heroesPath])
         }&${imageFields([causePath, heroesPath, heroesImagesPath])
         }&${imageSourceFields([causePath, heroesPath, heroesImagesPath, imageSourcePath])
         }`
+}
+
+export const featuredCauseQuery = (): string => {
+    return `${causesQuery()}&${featuredCausesQueryLimit}`
 }
 
 export const pageQuery = (pageKey: string): string => {
@@ -55,6 +61,6 @@ export const pageQuery = (pageKey: string): string => {
         }`
 }
 
-export const paginate = (page: number, pageSize: number = 10): string => {
+export const paginate = (page: number, pageSize: number = Config.strapi.contentPageSize): string => {
     return `pagination[page]=${page}&pagination[pageSize]=${pageSize}`
 }

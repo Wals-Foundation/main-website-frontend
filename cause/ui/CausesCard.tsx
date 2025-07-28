@@ -6,7 +6,7 @@ import { createSlugMapForControl, trim } from "@/utils"
 import Link from "next/link"
 import { isDev } from "@/logic/config/url"
 import { CauseType } from "../models"
-import { Image } from "@/core/domain/models"
+import { Image } from "@/core/models"
 import MarkdownDisplay from "@/components/MarkdownDisplay"
 import ImageDisplay from '@/image/Image';
 

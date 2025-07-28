@@ -1,4 +1,4 @@
-import { Hero } from "@/core/domain/models";
+import { Hero } from "@/core/models";
 
 export interface Page {
     id: string;

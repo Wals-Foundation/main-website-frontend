@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Config } from "@/core/domain/config"
+import { Config } from "@/core/config"
 
 export const getFetcher = async <T>(
   url: string,

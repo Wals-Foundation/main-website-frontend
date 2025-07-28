@@ -1,5 +1,5 @@
 "use client"
-import { Image as ImageDomain, ViewportBreakpoint } from "@/core/domain/models";
+import { Image as ImageDomain, ViewportBreakpoint } from "@/core/models";
 import getFeatureViewportBreakpointImageSource from "./utils";
 import { useAppSelector } from "@/logic/store/hooks";
 

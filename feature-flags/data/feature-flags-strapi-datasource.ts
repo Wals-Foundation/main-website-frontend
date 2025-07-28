@@ -3,7 +3,7 @@ import { getFetcher } from "@/logic/config/base";
 import { Feature, FeatureFlagsResponse, mapFeatureFlagsResponseToLiveStateMap } from "./feature-flags-strapi-response";
 import { featureFlagsCacheKey as featureFlagsUrl } from "@/core/data/cache-keys";
 import { paginate } from "@/core/data/strapi-url-parts";
-import { Config } from "@/core/domain/config";
+import { Config } from "@/core/config";
 
 export async function fetchFeatureFlags(): Promise<Record<string, boolean> | StrapiError> {
     try {

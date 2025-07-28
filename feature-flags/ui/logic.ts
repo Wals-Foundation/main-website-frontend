@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
 import { fetchFeatureFlags } from "../data/feature-flags-strapi-datasource";
-import { Config } from "@/core/domain/config";
+import { Config } from "@/core/config";
 import { createTransform, PersistConfig, persistReducer } from 'redux-persist';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import storage from "redux-persist/lib/storage"

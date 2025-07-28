@@ -1,4 +1,5 @@
-import { aboutOurStoryQueryFields, aboutQueryFields, aboutValuesQueryFields, featuredCauseQuery, mainMenuItemQueryFields, pageQuery } from "./strapi-url-parts";
+import { CauseType } from "@/cause/models";
+import { aboutOurStoryQueryFields, aboutQueryFields, aboutValuesQueryFields, causesQuery, featuredCauseQuery, mainMenuItemQueryFields, pageQuery, paginate } from "./strapi-url-parts";
 
 export const aboutCachekey = `about-organisation?${aboutQueryFields}`
 export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
@@ -9,6 +10,17 @@ export const mainMenuItemsCacheKey = `main-menu-items?${mainMenuItemQueryFields}
 export const featuredCommunitiesCacheKey = `communities?${featuredCauseQuery()}`
 export const featuredProgramsCacheKey = `programs?${featuredCauseQuery()}`
 export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
+
+export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {
+    const typePath = {
+        [CauseType.Community]: 'communities',
+        [CauseType.Program]: 'programs',
+        [CauseType.Project]: 'projects',
+    }[type];
+
+    return `${typePath}?${causesQuery()}&${paginate(page, pageSize)}`;
+};
+
 
 export const pageDataCacheKey = (key: string): string => {
     const strapiPageKey = (key === "/") ? "home" : key

@@ -1,10 +1,10 @@
 "use client"
-import { Hero } from '@/core/domain/models';
+import { Hero } from '@/core/models';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper/modules"
 import 'swiper/css';
 import ImageDisplay from '@/image/Image';
-import { Config } from '@/core/domain/config';
+import { Config } from '@/core/config';
 
 /*
     TEST CASES

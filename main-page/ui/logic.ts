@@ -1,5 +1,5 @@
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { Hero, ViewportBreakpoint } from "@/core/domain/models";
+import { Hero, ViewportBreakpoint } from "@/core/models";
 import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource";
 import { Page } from "@/main-page/page";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";

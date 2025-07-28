@@ -1,4 +1,4 @@
-import { Hero, Image, ImageSource } from "../domain/models";
+import { Hero, Image, ImageSource } from "../models";
 
 export interface ImageSourceResponse {
   id: number;

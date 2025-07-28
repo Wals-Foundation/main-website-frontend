@@ -1,5 +1,5 @@
 "use client"
-import { ViewportBreakpoint } from "@/core/domain/models";
+import { ViewportBreakpoint } from "@/core/models";
 import { useAppSelector } from "@/logic/store/hooks";
 import React from "react";
 

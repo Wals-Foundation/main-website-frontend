@@ -13,7 +13,7 @@ import {
     OrganisationStoryResponse,
     OrganisationValuesResponse
 } from "./about-strapi-responses";
-import { Config } from "@/core/domain/config";
+import { Config } from "@/core/config";
 
 export async function fetchAboutOrganisation(): Promise<Organisation | StrapiError> {
     try {
