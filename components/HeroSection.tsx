@@ -33,7 +33,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
-      <div className={clsx(`w-11/12 mx-auto md:flex justify-between items-start ${className}`)}>
+      <div className={clsx(`w-11/12 mx-auto md:flex justify-between items-start ${className ?? ""}`)}>
         {headlineFlag && (
           <div className="md:max-w-[681px]">
             <Typography type="Title">{headline}</Typography>

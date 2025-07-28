@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Typography from "@/components/Typography"
-import CausesCard from "@/cause/ui/CausesCard"
+import CausesCardOld from "@/cause/ui/CauseCard"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses"
@@ -95,7 +95,7 @@ export default function Home() {
                     {/* Cause Cards */}
                     <div className="space-y-6 mt-6">
                       {causesData[activeCause].map((cause, index) => (
-                        <CausesCard
+                        <CausesCardOld
                           key={index}
                           image={cause?.image || ""}
                           title={cause?.title}

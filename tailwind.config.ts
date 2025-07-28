@@ -10,10 +10,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "#009EE2",
-        "typo-black-400":"#414141",
-        "typo-black-500":"#111111",
-        "typo-white-800":"#8C8C8C",
-        "typo-white-900":"#6B6B6B",
+        "typo-black-200": "#303030",
+        "typo-black-400": "#414141",
+        "typo-black-500": "#111111",
+        "typo-gray": "#B5B5B5",
+        "typo-white-800": "#8C8C8C",
+        "typo-white-900": "#6B6B6B",
         header: "#111111",
         ash: "#8C8C8C",
         "title-gray": "#B5B5B5",
@@ -40,7 +42,7 @@ export default {
       })
     }),
   ],
-  safelist:[
+  safelist: [
     "sm:col-span-2",
     "sm:flex",
     "sm:flex-1",
@@ -48,6 +50,10 @@ export default {
     "sm:gap-8",
     "sm:grid",
     "sm:grid-cols-2",
+    "sm:grid-cols-3",
+    "sm:ml-4",
+    "sm:p-8",
     "sm:pt-0",
+    "sm:px-8"
   ]
 } satisfies Config

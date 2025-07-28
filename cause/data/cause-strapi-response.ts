@@ -1,7 +1,7 @@
 import { HeroResponse, mapHeroResponseToHero, Meta } from "@/core/data/strapi-responses";
-import { CauseOverview, CauseType } from "../models";
+import { Cause, CauseType } from "../models";
 
-export interface CauseOverviewResponse {
+export interface CauseInfoResponse {
     id: number;
     documentId: string;
     name: string;
@@ -10,22 +10,22 @@ export interface CauseOverviewResponse {
     heroes: HeroResponse[]
 }
 
-export interface CauseOverviewResponse {
+export interface CauseResponse {
     id: number;
     documentId: string;
     code: string;
-    cause: CauseOverviewResponse;
+    cause: CauseInfoResponse;
 }
 
-export interface CausesOverviewResponse {
-    data: CauseOverviewResponse[];
+export interface CausesResponse {
+    data: CauseResponse[];
     meta: Meta;
 }
 
-export function mapCauseOverviewResponseToCauseOverview(
-    response: CauseOverviewResponse,
+function mapCauseResponseToCause(
+    response: CauseResponse,
     type: CauseType
-): CauseOverview {
+): Cause {
     return {
         id: response.code,
         name: response.cause.name,
@@ -36,9 +36,9 @@ export function mapCauseOverviewResponseToCauseOverview(
     };
 }
 
-export function mapCausesOverviewResponseToCausesOverview(
-    response: CausesOverviewResponse,
+export function mapCausesResponseToCauses(
+    response: CausesResponse,
     type: CauseType
-): CauseOverview[] {
-    return response.data.map(item => mapCauseOverviewResponseToCauseOverview(item, type));
+): Cause[] {
+    return response.data.map(item => mapCauseResponseToCause(item, type));
 }

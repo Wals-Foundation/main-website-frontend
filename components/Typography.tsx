@@ -47,8 +47,8 @@ export const HeadingMedium: React.FC<{ className?: string, text: string }> = ({ 
 export const HeadingSmall: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
   return (
     <>
-      <h5 className={`text-base text-typo-white-800 font-size-semibold 
-        leading-6 sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      <h5 className={` ${className ?? ""} text-base text-typo-black-500 font-size-semibold 
+        leading-6 sm:leading-[1.875rem] sm:max-w-[75ch]`}>
         {text}
       </h5>
     </>

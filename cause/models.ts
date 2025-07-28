@@ -6,7 +6,7 @@ export enum CauseType {
     Project = "project"
 }
 
-export interface CauseOverview {
+export interface Cause {
     id: string;
     name: string;
     type: CauseType;

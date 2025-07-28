@@ -24,7 +24,7 @@ const CauseActions: React.FC<{
 }> = ({ className, causeId, causeType, donateUrl, viewCauseDetailsUrl, donateFeatureFlag }) => {
   return (
     <>
-      <div className={`w-full sm:flex sm:gap-4 ${className}`}>
+      <div className={`w-full sm:flex sm:gap-4 ${className ?? ""}`}>
         <Link href={`${viewCauseDetailsUrl}/${causeType}/${causeId}`}>
           <Button theme="primary" title="Read more" />
         </Link>
@@ -51,7 +51,7 @@ const CauseImpactAndActions: React.FC<{
 }> = ({ className, causeId, causeImpact, causeType, donateUrl, viewCauseDetailsUrl, donateFeatureFlag }) => {
   return (
     <>
-      <div className={`w-full ${className}`}>
+      <div className={`w-full ${className ?? ""}`}>
         <MarkdownDisplay markdown={causeImpact} />
         <CauseActions
           className="mt-4"
@@ -73,7 +73,7 @@ const CauseOverview: React.FC<{
 }> = ({ className, causeName, causeIntro }) => {
   return (
     <>
-      <div className={`w-full pb-16 border-b border-border-gray ${className}`}>
+      <div className={`w-full pb-16 border-b border-border-gray ${className ?? ""}`}>
         <HeadingMedium text={causeName} />
         <MarkdownDisplay className="mt-2" markdown={causeIntro} />
       </div>
@@ -104,7 +104,7 @@ const CauseOverviewAndActions: React.FC<{
 }) => {
     return (
       <>
-        <div className={`w-full ${className}`}>
+        <div className={`w-full ${className ?? ""}`}>
           <CauseOverview causeName={causeName} causeIntro={causeIntro} />
           <CauseImpactAndActions
             className="mt-4"
@@ -122,6 +122,7 @@ const CauseOverviewAndActions: React.FC<{
 
 export const CauseCard: React.FC<{
   className?: string,
+  backgroundColorClass: string,
   causeId: string,
   causeName: string,
   causeImage?: Image,
@@ -133,6 +134,7 @@ export const CauseCard: React.FC<{
   donateFeatureFlag: Boolean,
 }> = ({
   className,
+  backgroundColorClass,
   causeName,
   causeId,
   causeImage,
@@ -145,11 +147,11 @@ export const CauseCard: React.FC<{
 }) => {
     return (
       <>
-        <div className={"p-4 sm:flex sm:gap-8  bg-white rounded-2xl" + className}>
+        <div className={`p-4 sm:p-8 sm:grid sm:grid-cols-2 sm:gap-8 rounded-lg ${backgroundColorClass} ${className ?? ""}`}>
           <div className="sm:flex-1">
             {causeImage && (
               <ImageDisplay
-                className="object-cover rounded-xl"
+                className="object-cover rounded-lg"
                 feature="cause_card"
                 image={causeImage}
                 widthClass=""
@@ -183,7 +185,7 @@ interface CausesCardProps {
   link?: string
 }
 
-const CausesCard: React.FC<CausesCardProps> = (props) => {
+const CausesCardOld: React.FC<CausesCardProps> = (props) => {
   const { title, subtitle, content, id, displayDonateButton, image } = props
   const data = useAppSelector((state) => state.usePageHeadlines)
   const pageControlSlugMap = createSlugMapForControl(data.pageControl)
@@ -229,4 +231,4 @@ const CausesCard: React.FC<CausesCardProps> = (props) => {
   )
 }
 
-export default CausesCard
+export default CausesCardOld

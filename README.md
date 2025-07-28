@@ -15,3 +15,7 @@ Put use client on top of page to make it work with static server
 ## Architecture and Decisions
 ### Breakpoint rendering
 All layouts and styles that are dependent on breakpoint are done server side and depend on viewportbreakpoint stored in a redux store in pagedata slice.
+
+### Server component to client
+Mark all pages as use client
+Move data fetch into useSWR

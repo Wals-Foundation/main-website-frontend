@@ -35,12 +35,12 @@ import { fetchPageData } from "../main-page/ui/logic"
 import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
 import HomeAboutUs from "@/components/HomeAboutUs"
 import PageHeadline from "@/main-page/ui/PageHeadline"
-import { SectionHeader } from "@/components/Typography"
-import { CauseCard } from "@/cause/ui/CausesCard"
+import { HeadingLarge, SectionHeader, TextLarge } from "@/components/Typography"
+import { CauseCard } from "@/cause/ui/CauseCard"
 import { CauseType } from "@/cause/models"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 
-const getHomeFeatureFlags = async (): Promise<{ donate: Boolean, learnMore: Boolean }> => {
+const getHomeFeatureFlags = async (): Promise<{ donate: boolean, learnMore: boolean }> => {
   const featureFlagsResult = await fetchFeatureFlags()
   const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult
   return {
@@ -109,14 +109,16 @@ export default async function Home() {
       <section>
         <HomeAboutUs className="w-11/12 mx-auto mt-8" />
       </section>
-      <section className="w-screen bg-section-bg-gray p-4">
-        <SectionHeader className="mx-auto w-fit" text="Featured Causes" />
-        <FeaturedCauses
-          className="w-11/12 mx-auto mt-4"
-          causeDetailsUrl="cause-detail"
-          donateUrl="donate"
-          donateFeatureFlag={features.donate}
-        />
+      <section className="w-screen bg-section-bg-gray mt-4 py-8 sm:py-16">
+        <div className="w-11/12 md:max-w-[1052px] mx-auto">
+          <FeaturedCauses
+            className="w-full mx-auto mt-4"
+            causesUrl="causes"
+            causeDetailsUrl="causes"
+            donateUrl="donate"
+            donateFeatureFlag={features.donate}
+          />
+        </div>
       </section>
     </>
   )
