@@ -55,6 +55,7 @@ export default {
     "sm:grid-cols-2",
     "sm:grid-cols-3",
     "sm:ml-4",
+    "sm:mt-0",
     "sm:p-8",
     "sm:pt-0",
     "sm:px-8"

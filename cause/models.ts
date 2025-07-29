@@ -1,5 +1,5 @@
 import { Hero } from "@/core/models";
-import { Donatable } from "@/donatable/models";
+import { Donatable } from "@/donation/models";
 
 export enum CauseType {
     Community = 'community',

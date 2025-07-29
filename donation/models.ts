@@ -13,7 +13,7 @@ export enum DonatableType {
 export interface Donatable {
     key: string;
     currency: Currency,
-    targetAmountInBigInteger: BigInt;
-    donatedAmountInBigInteger: BigInt;
+    donatedAmountInMinorCurrencyUnit: bigint;
+    targetAmountInMinorCurrencyUnit: bigint;
     type: DonatableType;
 }

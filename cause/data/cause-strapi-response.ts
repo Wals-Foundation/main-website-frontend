@@ -1,6 +1,6 @@
 import { HeroResponse, mapHeroResponseToHero, Meta } from "@/core/data/strapi-responses";
 import { Cause, CauseDetail, CauseType, District,Location, Region } from "../models";
-import { DonatableResponse, mapDonatableResponseToDonatable } from "@/donatable/data/donatable-strapi-response";
+import { DonatableResponse, mapDonatableResponseToDonatable } from "@/donation/data/donatable-strapi-response";
 
 export interface CauseDetailResponse {
     id: number;

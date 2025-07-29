@@ -27,8 +27,8 @@ export function mapDonatableResponseToDonatable(response: DonatableResponse): Do
     return {
         key: response.key,
         currency: response.donation.currency.code as Currency,
-        targetAmountInBigInteger: BigInt(response.donation.targetAmountInBigInteger),
-        donatedAmountInBigInteger: BigInt(response.donation.donatedAmountInBigInteger),
+        targetAmountInMinorCurrencyUnit: BigInt(response.donation.targetAmountInBigInteger),
+        donatedAmountInMinorCurrencyUnit: BigInt(response.donation.donatedAmountInBigInteger),
         type: response.type as DonatableType
     };
 }

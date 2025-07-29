@@ -77,6 +77,17 @@ export const TextMedium: React.FC<{ className?: string, text: string }> = ({ cla
   )
 }
 
+export const Caption: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+  return (
+    <>
+      <h6 className={` ${className ?? ""} text-sm text-typo-white-800 
+        leading-[1.375rem] sm:leading-[1.875rem] sm:max-w-[75ch]`}>
+        {text}
+      </h6>
+    </>
+  )
+}
+
 interface TypographyProps {
   type?: "Title" | "Subtitle" | "ParagraphHeader" | "Custom" | "Paragraph"
   className?: string | undefined
