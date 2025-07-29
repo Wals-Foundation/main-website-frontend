@@ -17,7 +17,7 @@ const PageGallery: React.FC<{
     return (
         <>
             <Gallery
-                className={className}
+                className={className ?? ""}
                 feature="gallery"
                 initialItems={initialItems}
                 onLoadMoreItems={loadMoreGalleryItems}

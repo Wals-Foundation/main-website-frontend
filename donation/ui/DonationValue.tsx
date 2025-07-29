@@ -9,7 +9,7 @@ const DonationValue: React.FC<{
     valueInMinorCurrencyUnit: bigint
 }> = ({ className, currency, label, valueInMinorCurrencyUnit }) => {
     return (
-        <div className={className}>
+        <div className={className ?? ""}>
             <TextLarge
                 className="font-size-bold"
                 text={`${currency} ${formatValueFromMinorToMajorUnit(valueInMinorCurrencyUnit)}`}

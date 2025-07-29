@@ -9,7 +9,7 @@ const Donation: React.FC<{
     targetAmountInMinorCurrencyUnit: bigint,
 }> = ({ className, currency, donatedAmountInMinorCurrencyUnit, targetAmountInMinorCurrencyUnit }) => {
     return (
-        <div className={className}>
+        <div className={className ?? ""}>
             <div className="w-full p-4 sm:grid sm:grid-cols-2 sm:gap-8  bg-section-bg-gray  rounded-lg">
                 <div>
                     <DonationValue
@@ -30,6 +30,7 @@ const Donation: React.FC<{
                 </div>
                 <div className="mt-8 sm:mt-0">
                     <DonationProgress
+                        className="w-60 sm:w-full mx-auto"
                         donatedAmountInMinorCurrencyUnit={donatedAmountInMinorCurrencyUnit}
                         targetAmountInMinorCurrencyUnit={targetAmountInMinorCurrencyUnit}
                     />

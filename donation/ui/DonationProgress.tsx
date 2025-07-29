@@ -1,3 +1,5 @@
+"use client"
+
 import { Caption, TextLarge } from '@/components/Typography';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
@@ -11,7 +13,7 @@ const DonationProgress: React.FC<{
     );
 
     return (
-        <div className={`relative w-full aspect-square ${className}`}>
+        <div className={`relative w-full aspect-square ${className ?? ""}`}>
             <CircularProgressbarWithChildren
                 value={progressValue}
                 strokeWidth={10}

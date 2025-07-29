@@ -148,7 +148,7 @@ export const CauseCard: React.FC<{
 }) => {
     return (
       <>
-        <div className={`p-4 sm:p-8 sm:grid sm:grid-cols-2 sm:gap-8 rounded-lg ${backgroundColorClass} ${className ?? ""}`}>
+        <article className={`p-4 sm:p-8 sm:grid sm:grid-cols-2 sm:gap-8 rounded-lg ${backgroundColorClass} ${className ?? ""}`}>
           <div className="sm:flex-1">
             {causeImage && (
               <ImageDisplay
@@ -169,7 +169,7 @@ export const CauseCard: React.FC<{
               viewCauseDetailsUrl={viewCauseDetailsUrl}
               donateFeatureFlag={donateFeatureFlag} />
           </div>
-        </div>
+        </article>
       </>
     )
 

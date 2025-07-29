@@ -1,5 +1,6 @@
 import { fetchCauseDetail } from "@/cause/data/cause-strapi-datasource"
 import { CauseDetail, CauseType } from "@/cause/models"
+import CauseDetailDisplay from "@/cause/ui/CauseDetailDisplay";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error"
 
 const getCommunityDetails = async (code: string): Promise<{ community: CauseDetail | null, error: StrapiError | null }> => {
@@ -26,6 +27,12 @@ export default async function CommunityDetail({
     const { code } = await params
     const { community, error } = await getCommunityDetails(code)
     return (
-        <p>{`I'm a ${community?.name} with ${code}`}</p>
+        <>
+            {community && (
+                <div className="w-11/12 mb-12 mx-auto sm:max-w-[1440px]">
+                    <CauseDetailDisplay community={community} />
+                </div>
+            )}
+        </>
     )
 }

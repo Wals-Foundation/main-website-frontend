@@ -92,10 +92,12 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     // Fetch page data
     useEffect(() => {
-        const thunk = dispatch(fetchPageData(currentUrlPathName));
-        return () => {
-            thunk.abort(); // cancels previous request when URL changes
-        };
+        if (currentUrlPathName == "/") {
+            const thunk = dispatch(fetchPageData(currentUrlPathName));
+            return () => {
+                thunk.abort(); // cancels previous request when URL changes
+            };
+        }
     }, [currentUrlPathName]);
 
     // Observe and update viewport break point

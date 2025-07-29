@@ -27,7 +27,7 @@ const Gallery: React.FC<{
 
     return (
         <>
-            <div className={className}>
+            <div className={className ?? ""}>
                 <List
                     hasMoreItems={hasMoreItems}
                     isVertical={false}
