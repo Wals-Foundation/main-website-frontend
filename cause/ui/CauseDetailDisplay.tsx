@@ -1,9 +1,11 @@
-import { HeadingLarge } from "@/components/Typography"
+import { HeadingLarge, TextLarge } from "@/components/Typography"
 import { CauseDetail } from "../models"
 import CauseInfoSection from "./CauseInfoSection"
 import ImageDisplay from "@/image/Image"
 import CauseLocationInfo from "./CauseLocationInfo"
 import Donation from "@/donation/ui/Donation"
+import Link from "next/link"
+import { createGoogleMapsLink } from "../utils"
 
 const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetail }> = ({ className, causeDetail }) => {
     return (
@@ -17,6 +19,17 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                 />
                 <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
                     <div>
+                        <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b border-border-gray">
+                            <TextLarge text="Location" />
+                            <Link
+                                href={createGoogleMapsLink(causeDetail.location.latitude, causeDetail.location.longitude)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="my-auto mt-2 sm:mt-0 sm:col-span-2 text-primary underline"
+                            >
+                                <TextLarge className="sm:text-right text-primary underline" text="Get Directions" overrideTextColor={true} />
+                            </Link>
+                        </div>
                         {(causeDetail.communities.length > 0) && (
                             <CauseLocationInfo className="py-4 border-b border-border-gray" label="Community" value={causeDetail.communities[0].name} />
                         )}

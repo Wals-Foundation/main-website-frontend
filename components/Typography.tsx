@@ -1,92 +1,108 @@
 import React, { ReactNode } from "react"
 
-export const Title: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const Title: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h1 className={`text-5xl sm:text-6xl text-typo-black-500 font-size-semibold
-        leading-[3.5rem] sm:leading-[4.75rem] sm:max-w-[75ch] ${className ?? ""}`}>
-        {text}
-      </h1>
-    </>
-  )
-}
+    <h1 className={`text-5xl sm:text-6xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold
+      leading-[3.5rem] sm:leading-[4.75rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h1>
+  );
+};
 
-export const SectionHeader: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const SectionHeader: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h2 className={`text-base text-typo-white-800 font-size-semibold uppercase
-        leading-6 sm:max-w-[75ch]  ${className ?? ""}`}>
-        {text}
-      </h2>
-    </>
-  )
-}
+    <h2 className={`text-base ${!overrideTextColor ? "text-typo-white-800" : ""} font-size-semibold uppercase
+      leading-6 sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h2>
+  );
+};
 
-export const HeadingLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const HeadingLarge: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h3 className={`text-4xl text-typo-black-500 font-size-semibold 
-        leading-10 sm:leading-[3rem] sm:max-w-[75ch]  ${className ?? ""}`}>
-        {text}
-      </h3>
-    </>
-  )
-}
+    <h3 className={`text-4xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
+      leading-10 sm:leading-[3rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h3>
+  );
+};
 
-export const HeadingMedium: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const HeadingMedium: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h4 className={`text-lg sm:text-xl text-typo-black-500 font-size-semibold 
-        leading-8 sm:leading-10 sm:max-w-[75ch] ${className ?? ""}`}>
-        {text}
-      </h4>
-    </>
-  )
-}
+    <h4 className={`text-lg sm:text-xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
+      leading-8 sm:leading-10 sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h4>
+  );
+};
 
-export const HeadingSmall: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const HeadingSmall: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h5 className={` ${className ?? ""} text-base text-typo-black-500 font-size-semibold 
-        leading-6 sm:leading-[1.875rem] sm:max-w-[75ch]`}>
-        {text}
-      </h5>
-    </>
-  )
-}
+    <h5 className={`text-base ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
+      leading-6 sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h5>
+  );
+};
 
-export const TextLarge: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const TextLarge: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <p className={`text-base sm:text-lg text-typo-white-900 
-        leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""} `}>
-        {text}
-      </p>
-    </>
-  )
-}
+    <p className={`text-base sm:text-lg ${!overrideTextColor ? "text-typo-white-900" : ""} 
+      leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </p>
+  );
+};
 
-export const TextMedium: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const TextMedium: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <p className={`text-base text-typo-black-400 
-        leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""} `}>
-        {text}
-      </p>
-    </>
-  )
-}
+    <p className={`text-base ${!overrideTextColor ? "text-typo-black-400" : ""} 
+      leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </p>
+  );
+};
 
-export const Caption: React.FC<{ className?: string, text: string }> = ({ className, text }) => {
+export const Caption: React.FC<{
+  className?: string;
+  text: string;
+  overrideTextColor?: boolean;
+}> = ({ className, text, overrideTextColor = false }) => {
   return (
-    <>
-      <h6 className={` ${className ?? ""} text-sm text-typo-white-800 
-        leading-[1.375rem] sm:leading-[1.875rem] sm:max-w-[75ch]`}>
-        {text}
-      </h6>
-    </>
-  )
-}
+    <h6 className={`text-sm ${!overrideTextColor ? "text-typo-white-800" : ""} 
+      leading-[1.375rem] sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      {text}
+    </h6>
+  );
+};
 
 interface TypographyProps {
   type?: "Title" | "Subtitle" | "ParagraphHeader" | "Custom" | "Paragraph"
