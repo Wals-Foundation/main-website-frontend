@@ -122,7 +122,7 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             ) : (
                 <>
                     {(pageUiState.viewportBreakpoint === 'sm') ? (<PageHeaderMobile />) : (<PageHeaderDesktop {...headerProps} />)}
-                    {children}
+                    <main>{children}</main>
                 </>
             )}
         </>

@@ -7,9 +7,9 @@ import { getActivitiesData, getCauseByID } from "@/logic/hooks/api/useCauses"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
 import { createSlugMapForControl } from "@/utils"
-import Markdown from "@/components/Markdown"
 import Activities from "@/components/Activities"
 import { useCauseDetails } from "@/logic/hooks/custom/useFormattedCauseDetails"
+import MarkdownDisplay from "@/components/MarkdownDisplay"
 
 export default function CauseDetailPage() {
   const searchParams = useSearchParams()
@@ -93,35 +93,35 @@ export default function CauseDetailPage() {
             {donationStats?.some(
               ([label, amount]) => label === "Donation Goal" && parseFloat(amount.replace(/[^\d.]/g, "")) > 0
             ) && (
-              <div className="flex items-center justify-between p-5 text-sm bg-gray-50 rounded-md">
-                <div className="w-full">
-                  {donationStats.map(([label, amount], i) => (
-                    <div key={i}>
-                      <div className="font-bold text-xl py-3">{amount}</div>
-                      <div className="text-gray-500">{label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div>
+                <div className="flex items-center justify-between p-5 text-sm bg-gray-50 rounded-md">
                   <div className="w-full">
-                    <div className="relative h-40 w-40 mx-auto flex items-center justify-center text-xs text-center">
-                      <div
-                        className="absolute inset-0 rounded-full"
-                        style={{
-                          background: `conic-gradient(#009EE2 ${percentage}%, #DEF5FF ${percentage}% 100%)`,
-                        }}
-                      />
-                      <div className="relative z-10 bg-white rounded-full h-28 w-28 flex flex-col items-center justify-center shadow">
-                        <span>Total Donated</span>
-                        <strong className="text-lg">
-                          {currency} {donated.toFixed(2)}
-                        </strong>
+                    {donationStats.map(([label, amount], i) => (
+                      <div key={i}>
+                        <div className="font-bold text-xl py-3">{amount}</div>
+                        <div className="text-gray-500">{label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="w-full">
+                      <div className="relative h-40 w-40 mx-auto flex items-center justify-center text-xs text-center">
+                        <div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background: `conic-gradient(#009EE2 ${percentage}%, #DEF5FF ${percentage}% 100%)`,
+                          }}
+                        />
+                        <div className="relative z-10 bg-white rounded-full h-28 w-28 flex flex-col items-center justify-center shadow">
+                          <span>Total Donated</span>
+                          <strong className="text-lg">
+                            {currency} {donated.toFixed(2)}
+                          </strong>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
         )}
 
@@ -130,7 +130,7 @@ export default function CauseDetailPage() {
             content ? (
               <div key={i}>
                 <h2 className="text-2xl font-semibold">{title}</h2>
-                <Markdown content={content} />
+                <MarkdownDisplay markdown={content} />
               </div>
             ) : null
           )}

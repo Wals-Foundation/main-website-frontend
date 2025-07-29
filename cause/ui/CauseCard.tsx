@@ -9,6 +9,7 @@ import { CauseType } from "../models"
 import { Image } from "@/core/models"
 import MarkdownDisplay from "@/components/MarkdownDisplay"
 import ImageDisplay from '@/image/Image';
+import { Config } from "@/core/config"
 
 /* TEST CASES
    Navigate to cause details
@@ -25,7 +26,7 @@ const CauseActions: React.FC<{
   return (
     <>
       <div className={`w-full sm:flex sm:gap-4 ${className ?? ""}`}>
-        <Link href={`${viewCauseDetailsUrl}/${causeType}/${causeId}`}>
+        <Link href={`${viewCauseDetailsUrl}/${causeType}${Config.isStaticHost ? "?code=" + causeId : "/" + causeId}`}>
           <Button theme="primary" title="Read more" />
         </Link>
         {donateFeatureFlag && (

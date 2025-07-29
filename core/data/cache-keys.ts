@@ -3,6 +3,7 @@ import {
     aboutOurStoryQueryFields,
     aboutQueryFields,
     aboutValuesQueryFields,
+    causeDetailQuery,
     causesQuery,
     featuredCauseQuery,
     galleryQuery,
@@ -10,6 +11,12 @@ import {
     pageQuery,
     paginate
 } from "./strapi-url-parts";
+
+const causePath = {
+    [CauseType.Community]: 'communities',
+    [CauseType.Program]: 'programs',
+    [CauseType.Project]: 'projects',
+};
 
 export const aboutCachekey = `about-organisation?${aboutQueryFields}`
 export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
@@ -22,13 +29,11 @@ export const featuredProgramsCacheKey = `programs?${featuredCauseQuery()}`
 export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
 
 export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {
-    const typePath = {
-        [CauseType.Community]: 'communities',
-        [CauseType.Program]: 'programs',
-        [CauseType.Project]: 'projects',
-    }[type];
+    return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;
+};
 
-    return `${typePath}?${causesQuery()}&${paginate(page, pageSize)}`;
+export const causeDetailCacheKey = (causeCode: string, type: CauseType): string => {
+    return `${causePath[type]}?${causeDetailQuery(causeCode)}`;
 };
 
 export const galleryCacheKey = (page: number, pageSize?: number): string => {

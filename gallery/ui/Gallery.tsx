@@ -42,7 +42,7 @@ const Gallery: React.FC<{
                             />
                         )
                     }}
-                    itemContainerClass={(index) => "ml-4"}
+                    itemContainerClass={(index) => `pl-4 ${(index === (galleryItems.length - 1)) ? "pr-4" : ""}`}
                     itemKey={(index) => galleryItems[index].id}
                     onLoadMoreItems={handleLoadMore}
                 />

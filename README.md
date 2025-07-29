@@ -17,8 +17,9 @@ Put use client on top of page to make it work with static server
 All layouts and styles that are dependent on breakpoint are done server side and depend on viewportbreakpoint stored in a redux store in pagedata slice.
 
 ### Server component to client
-Mark all pages as use client
-Move data fetch into useSWR
+Mark all pages as use client and adapt [dynamic routes](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#in-client-components) and [static exports](https://nextjs.org/docs/app/guides/static-exports)
+Move data fetch into useSWR, example in HomeAboutUs.tsx
 
 ### Todos
 Search for todo comments and complete them
+[] generate env.example

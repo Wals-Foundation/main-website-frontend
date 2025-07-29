@@ -23,7 +23,7 @@ const InfiniteScroller: React.FC<{
 
     return (
         <>
-            <div className={`w-full ${className ?? ""}`}>
+            <div className={`${className ?? ""}`}>
                 {hasMoreData && onLoadMoreData && (
                     <span ref={loadTrigger} className="mx-auto">Loading...</span>
                 )}

@@ -44,6 +44,8 @@ export default {
   ],
   safelist: [
     "h-60",
+    "pl-4",
+    "pr-4",
     "sm:col-span-2",
     "sm:flex",
     "sm:flex-1",
