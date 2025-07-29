@@ -3,13 +3,15 @@ import {
     aboutOurStoryQueryFields,
     aboutQueryFields,
     aboutValuesQueryFields,
-    causeDetailQuery,
+    communityDetailQuery,
     causesQuery,
     featuredCauseQuery,
     galleryQuery,
     mainMenuItemQueryFields,
     pageQuery,
-    paginate
+    paginate,
+    projectDetailQuery,
+    programDetailQuery
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -32,8 +34,16 @@ export const causesCacheKey = (type: CauseType, page: number, pageSize?: number)
     return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;
 };
 
-export const causeDetailCacheKey = (causeCode: string, type: CauseType): string => {
-    return `${causePath[type]}?${causeDetailQuery(causeCode)}`;
+export const communityDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Community]}?${communityDetailQuery(code)}`;
+};
+
+export const programDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Program]}?${programDetailQuery(code)}`;
+};
+
+export const projectDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Project]}?${projectDetailQuery(code)}`;
 };
 
 export const galleryCacheKey = (page: number, pageSize?: number): string => {

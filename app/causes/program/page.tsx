@@ -3,30 +3,30 @@
 import { fetchCauseDetail } from "@/cause/data/cause-strapi-datasource"
 import { CauseDetail, CauseType } from "@/cause/models"
 import CauseDetailDisplay from "@/cause/ui/CauseDetailDisplay"
-import { communityDetailCacheKey } from "@/core/data/cache-keys"
+import { programDetailCacheKey } from "@/core/data/cache-keys"
 import { isStrapiError } from "@/core/data/strapi-error"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
 
-export default function CommunityDetail() {
+export default function ProgramDetail() {
     const searchParams = useSearchParams()
     const code = searchParams.get('code') ?? ""
-    const { data, error } = useSWR([communityDetailCacheKey(code), code, CauseType.Community],
+    const { data, error } = useSWR([programDetailCacheKey(code), code, CauseType.Program],
         ([, code, causeType]) => fetchCauseDetail(code, causeType)) // TODO:handle error
-    const [community, setCommunity] = useState<CauseDetail | null>(null)
+    const [program, setProgram] = useState<CauseDetail | null>(null)
 
     useEffect(() => {
         if (data && !isStrapiError(data)) {
-            setCommunity(data[0])
+            setProgram(data[0])
         }
     }, [data])
 
     return (
         <>
-            {community && (
+            {program && (
                 <div className="w-11/12 mt-12 sm:mt-16 mb-12 mx-auto sm:max-w-[1440px]">
-                    <CauseDetailDisplay causeDetail={community} />
+                    <CauseDetailDisplay causeDetail={program} />
                 </div>
             )}
         </>

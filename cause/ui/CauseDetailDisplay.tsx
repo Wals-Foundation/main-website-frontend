@@ -5,34 +5,42 @@ import ImageDisplay from "@/image/Image"
 import CauseLocationInfo from "./CauseLocationInfo"
 import Donation from "@/donation/ui/Donation"
 
-const CauseDetailDisplay: React.FC<{ className?: string, community: CauseDetail }> = ({ className, community }) => {
+const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetail }> = ({ className, causeDetail }) => {
     return (
-        <article className="w-full">
-            <HeadingLarge className="w-fit mx-auto text-center" text={community.name} />
-            <ImageDisplay
-                className="mt-8 rounded-lg"
-                feature="cause_detail"
-                image={community.heroes[0].image}
-            />
-            <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
-                <div>
-                    <CauseLocationInfo className="py-4 border-b border-border-gray" label="Region" value={community.region.name} />
-                    <CauseLocationInfo className="py-4" label="District" value={community.district.name} />
-                </div>
-                <Donation
-                    className="mt-4 sm:mt-0 my-auto"
-                    currency={community.donatable.currency}
-                    donatedAmountInMinorCurrencyUnit={community.donatable.donatedAmountInMinorCurrencyUnit}
-                    targetAmountInMinorCurrencyUnit={community.donatable.targetAmountInMinorCurrencyUnit}
+        <div className={className ?? ""}>
+            <article className="w-full">
+                <HeadingLarge className="w-fit mx-auto text-center" text={causeDetail.name} />
+                <ImageDisplay
+                    className="mt-8 rounded-lg"
+                    feature="cause_detail"
+                    image={causeDetail.heroes[0].image}
                 />
-            </section>
-            <section className="mt-12">
-                <CauseInfoSection heading="Introduction" info={community.introduction} />
-                <CauseInfoSection className="mt-8" heading="Problem" info={community.problem} />
-                <CauseInfoSection className="mt-8" heading="Solution" info={community.solution} />
-                <CauseInfoSection className="mt-8" heading="Impact" info={community.impact} />
-            </section>
-        </article>
+                <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
+                    <div>
+                        {(causeDetail.communities.length > 0) && (
+                            <CauseLocationInfo className="py-4 border-b border-border-gray" label="Community" value={causeDetail.communities[0].name} />
+                        )}
+                        {(causeDetail.programs.length > 0) && (
+                            <CauseLocationInfo className="py-4 border-b border-border-gray" label="Program" value={causeDetail.programs[0].name} />
+                        )}
+                        <CauseLocationInfo className="py-4 border-b border-border-gray" label="Region" value={causeDetail.region.name} />
+                        <CauseLocationInfo className="py-4" label="District" value={causeDetail.district.name} />
+                    </div>
+                    <Donation
+                        className="mt-4 sm:mt-0 my-auto"
+                        currency={causeDetail.donatable.currency}
+                        donatedAmountInMinorCurrencyUnit={causeDetail.donatable.donatedAmountInMinorCurrencyUnit}
+                        targetAmountInMinorCurrencyUnit={causeDetail.donatable.targetAmountInMinorCurrencyUnit}
+                    />
+                </section>
+                <section className="mt-12">
+                    <CauseInfoSection heading="Introduction" info={causeDetail.introduction} />
+                    <CauseInfoSection className="mt-8" heading="Problem" info={causeDetail.problem} />
+                    <CauseInfoSection className="mt-8" heading="Solution" info={causeDetail.solution} />
+                    <CauseInfoSection className="mt-8" heading="Impact" info={causeDetail.impact} />
+                </section>
+            </article>
+        </div>
     )
 }
 

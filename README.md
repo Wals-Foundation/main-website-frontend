@@ -19,6 +19,7 @@ All layouts and styles that are dependent on breakpoint are done server side and
 ### Server component to client
 Mark all pages as use client and adapt [dynamic routes](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#in-client-components) and [static exports](https://nextjs.org/docs/app/guides/static-exports)
 Move data fetch into useSWR, example in HomeAboutUs.tsx
+switch NEXT_PUBLIC_IS_STATIC_HOST
 
 ### Todos
 Search for todo comments and complete them

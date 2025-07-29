@@ -1,5 +1,5 @@
 import { HeroResponse, mapHeroResponseToHero, Meta } from "@/core/data/strapi-responses";
-import { Cause, CauseDetail, CauseType, District,Location, Region } from "../models";
+import { Cause, CauseDetail, CauseType, District, Location, Region, RelatedCause } from "../models";
 import { DonatableResponse, mapDonatableResponseToDonatable } from "@/donation/data/donatable-strapi-response";
 
 export interface CauseDetailResponse {
@@ -8,6 +8,8 @@ export interface CauseDetailResponse {
     code: string;
     cause: CauseDetailInfoResponse;
     donatable: DonatableResponse;
+    communities: RelatedCauseResponse[] | null;
+    programs: RelatedCauseResponse[] | null;
 }
 
 export interface CauseDetailInfoResponse {
@@ -47,6 +49,12 @@ export interface RegionResponse {
     code: string;
 }
 
+export interface RelatedCauseResponse {
+    id: number;
+    documentId: string;
+    code: string;
+    name: string;
+}
 
 export interface CauseInfoResponse {
     id: number;
@@ -72,6 +80,15 @@ export interface CausesResponse {
 export interface CausesDetailsResponse {
     data: CauseDetailResponse[];
     meta: Meta;
+}
+
+function mapRelatedCauseReponseToRelatedCause(
+    response: RelatedCauseResponse
+): RelatedCause {
+    return {
+        id: response.code,
+        name: response.name
+    }
 }
 
 function mapCauseResponseToCause(
@@ -117,7 +134,7 @@ function mapRegionResponseToRegion(response: RegionResponse): Region {
 function mapCauseDetailInfoResponseToCauseDetailInfo(
     response: CauseDetailInfoResponse,
     type: CauseType
-): Omit<CauseDetail, 'donatable'> {
+): Omit<CauseDetail, 'donatable' | 'communities' | 'programs'> {
     return {
         id: response.id.toString(),
         name: response.name,
@@ -139,7 +156,9 @@ export function mapCausesDetailsResponseToCausesDetails(
 ): CauseDetail[] {
     return response.data.map(item => ({
         ...mapCauseDetailInfoResponseToCauseDetailInfo(item.cause, type),
-        donatable: mapDonatableResponseToDonatable(item.donatable)
+        donatable: mapDonatableResponseToDonatable(item.donatable),
+        communities: item?.communities?.map(mapRelatedCauseReponseToRelatedCause) ?? [],
+        programs: item?.programs?.map(mapRelatedCauseReponseToRelatedCause) ?? []
     }));
 }
 

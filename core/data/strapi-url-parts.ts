@@ -3,6 +3,7 @@ import { Config } from "../config"
 //paths
 const aboutValuesPath = "[populate][organisation_values]"
 const causePath = "[populate][cause]"
+const communitiesPath = "[populate][communities]"
 const currencyPath = "[populate][currency]"
 const districtPath = "[populate][district]"
 const donatablePath = "[populate][donatable]"
@@ -12,6 +13,7 @@ const imagePath = "[populate][image]"
 const imageSourcePath = "[populate][source]"
 const locationPath = "[populate][location]"
 const regionPath = "[populate][region]"
+const programsPath = "[populate][programs]"
 
 
 // Fields
@@ -77,6 +79,11 @@ const regionFields = (path: string[]): string => {
     return `${pathString}[fields][0]=name&${pathString}[fields][1]=code`
 }
 
+const relatedCauseFields = (path: string[]): string => {
+    const pathString = path.join("")
+    return `${pathString}[fields][0]=name&${pathString}[fields][1]=code`
+}
+
 
 // Final query params
 export const aboutQueryFields = `${aboutValuesFields}`
@@ -86,9 +93,9 @@ export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
 
-export const causeDetailQuery = (causeCode: string): string => {
+export const communityDetailQuery = (code: string): string => {
     return [
-        `filters[code][$eq]=${causeCode}`,
+        `filters[code][$eq]=${code}`,
         "[fields][0]=code",
         featuredCausesSortFields,
         causeDetailFields([causePath]),
@@ -125,6 +132,43 @@ export const galleryQuery = (): string => {
         gallerySortFields,
         imageFields([imagePath]),
         imageSourceFields([imagePath, imageSourcePath]),
+    ].join("&");
+};
+
+export const programDetailQuery = (code: string): string => {
+    return [
+        `filters[code][$eq]=${code}`,
+        "[fields][0]=code",
+        causeDetailFields([causePath]),
+        heroFields([causePath, heroesPath]),
+        imageFields([causePath, heroesPath, imagePath]),
+        imageSourceFields([causePath, heroesPath, imagePath, imageSourcePath]),
+        donatableFields([donatablePath]),
+        donationFields([donatablePath, donationPath]),
+        currencyFields([donatablePath, donationPath, currencyPath]),
+        districtFields([causePath, districtPath]),
+        locationFields([causePath, locationPath]),
+        regionFields([causePath, regionPath]),
+        relatedCauseFields([communitiesPath])
+    ].join("&");
+};
+
+export const projectDetailQuery = (code: string): string => {
+    return [
+        `filters[code][$eq]=${code}`,
+        "[fields][0]=code",
+        causeDetailFields([causePath]),
+        heroFields([causePath, heroesPath]),
+        imageFields([causePath, heroesPath, imagePath]),
+        imageSourceFields([causePath, heroesPath, imagePath, imageSourcePath]),
+        donatableFields([donatablePath]),
+        donationFields([donatablePath, donationPath]),
+        currencyFields([donatablePath, donationPath, currencyPath]),
+        districtFields([causePath, districtPath]),
+        locationFields([causePath, locationPath]),
+        regionFields([causePath, regionPath]),
+        relatedCauseFields([communitiesPath]),
+        relatedCauseFields([programsPath])
     ].join("&");
 };
 

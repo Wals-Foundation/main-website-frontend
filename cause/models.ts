@@ -7,6 +7,10 @@ export enum CauseType {
     Project = "project"
 }
 
+export interface RelatedCause {
+
+}
+
 export interface District {
     id: string;
     name: string;
@@ -27,6 +31,11 @@ export interface Region {
     code: string;
 }
 
+export interface RelatedCause {
+    id: string;
+    name: string;
+}
+
 export interface CauseDetail {
     id: string;
     name: string;
@@ -39,6 +48,8 @@ export interface CauseDetail {
     location: Location;
     region: Region;
     donatable: Donatable;
+    communities: RelatedCause[];
+    programs: RelatedCause[]
     heroes: Hero[]
 }
 

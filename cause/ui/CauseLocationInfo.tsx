@@ -9,7 +9,7 @@ const CauseLocationInfo: React.FC<{
         <div className={className ?? ""}>
             <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8">
                 <TextLarge text={label} />
-                <TextLarge className="mt-2 sm:mt-0 sm:col-span-2 text-end font-size-bold" text={value} />
+                <TextLarge className="mt-2 sm:mt-0 sm:col-span-2 text-right font-size-bold" text={value} />
             </div>
         </div>
     )
