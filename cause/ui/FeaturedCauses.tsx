@@ -26,7 +26,6 @@ const FeaturedCauses: React.FC<{
                     causesUrl={causesUrl}
                     donateUrl={donateUrl}
                     causeDetailsUrl={causeDetailsUrl}
-                    initialCauseType={CauseType.Community}
                     initialCommunities={!isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult : []}
                     initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []}
                     initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []}

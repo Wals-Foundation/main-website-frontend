@@ -20,7 +20,7 @@ export default function Home() {
         <HomeData />
       </section>
       <section>
-        <HomeAboutUs className="w-11/12 mx-auto mt-8" />
+        <HomeAboutUs />
       </section>
       <section className="w-screen bg-section-bg-gray mt-4 py-8 sm:py-16">
         <div className="w-11/12 md:max-w-[1052px] mx-auto">
@@ -34,7 +34,6 @@ export default function Home() {
       </section>
       <section className="mt-8">
         <PageGalleryInitialItems className="mb-4" />
-        {/* <DataFetcher cacheKey="homePageData" dataFetcherKey="homePageData" dataRendererKey="homePageData" /> */}
       </section>
     </>
   )

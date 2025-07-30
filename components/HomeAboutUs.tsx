@@ -20,7 +20,7 @@ const Content: React.FC<{
 };
 
 export const renderAboutOurStory = (dataLoad: DataLoad<string>) => (
-    <Content className="pt-8" {...dataLoad} />
+    <Content className="w-11/12 mx-auto mt-8 pt-8" {...dataLoad} />
 )
 
 const HomeAboutUs: React.FC<{ className?: string }> = ({ className }) => {

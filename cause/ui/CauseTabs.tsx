@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Cause, CauseType } from "../models"
 import Tabs from "@/components/Tabs"
 import CausesList from "./CausesList"
@@ -9,6 +9,7 @@ import Button from "@/components/Button"
 import { useAppSelector } from "@/logic/store/hooks"
 import { fetchCauses } from "../data/cause-strapi-datasource"
 import { isStrapiError } from "@/core/data/strapi-error"
+import { useSearchParams } from "next/navigation"
 
 const tabOrder: CauseType[] = [
     CauseType.Community,
@@ -28,7 +29,6 @@ const CauseTabs: React.FC<{
     causesUrl?: string,
     causeDetailsUrl: string,
     donateUrl: string,
-    initialCauseType: CauseType,
     initialCommunities: Cause[],
     initialPrograms: Cause[],
     initialProjects: Cause[],
@@ -39,14 +39,27 @@ const CauseTabs: React.FC<{
     causesUrl,
     donateUrl,
     causeDetailsUrl,
-    initialCauseType,
     initialCommunities,
     initialPrograms,
     initialProjects,
     loadMoreCauses,
 }) => {
+        const searchParams = useSearchParams()
+
+        const initialCauseTypeFromParams = useMemo(() => {
+            const typeParam = searchParams?.get("type")
+            if (
+                typeParam === CauseType.Community ||
+                typeParam === CauseType.Program ||
+                typeParam === CauseType.Project
+            ) {
+                return typeParam as CauseType
+            }
+            return CauseType.Community
+        }, [searchParams])
+
         const [activeTabIndex, setActiveTabIndex] = useState(() =>
-            tabOrder.indexOf(initialCauseType)
+            tabOrder.indexOf(initialCauseTypeFromParams)
         )
 
         const [communities, setCommunities] = useState(initialCommunities)

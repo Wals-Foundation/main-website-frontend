@@ -20,7 +20,6 @@ const AllCauses: React.FC<{
                     backgroundColorClass="bg-section-bg-gray"
                     donateUrl={donateUrl}
                     causeDetailsUrl={causeDetailsUrl}
-                    initialCauseType={CauseType.Community}
                     initialCommunities={!isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult.data : []}
                     initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult.data : []}
                     initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult.data : []}
