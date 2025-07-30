@@ -1,25 +1,36 @@
-"use client"
-import useSWR from "swr"
-import { aboutOurStoryCacheKey } from "@/core/data/cache-keys"
-import { fetchOurStory } from "@/app/about/data/about-strapi-datasource"
-import AboutUsSection from "./AboutUsSection"
-import { isStrapiError } from "@/core/data/strapi-error"
+import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
+import AboutUsSection from "./AboutUsSection";
+import { StrapiError } from "@/core/data/strapi-error";
+import DataFetcher from "./DataFetcher";
+import { DataLoad } from "@/core/models";
+
+const Content: React.FC<{
+    className?: string;
+    data?: string;
+    error?: StrapiError;
+    isLoading: boolean;
+}> = ({ className, data, error, isLoading }) => {
+    return (
+        <div className={className ?? ""}>
+            {data && (
+                <AboutUsSection displayContent={true} title="About Us" content={data} />
+            )}
+        </div>
+    );
+};
+
+export const renderAboutOurStory = (dataLoad: DataLoad<string>) => (
+    <Content className="pt-8" {...dataLoad} />
+)
 
 const HomeAboutUs: React.FC<{ className?: string }> = ({ className }) => {
-    const { data: aboutOurStoryResult, error } = useSWR(aboutOurStoryCacheKey, fetchOurStory, { refreshInterval: 3000000 }) // TODO:handle error
-
     return (
-        <>
-            <div className={`pt-8 ${className ?? ""}`}>
-                {!isStrapiError(aboutOurStoryResult) ? (
-                    <AboutUsSection displayContent={true} title="About Us" content={aboutOurStoryResult ?? ""} />
-                ) : (
-                    <p>{aboutOurStoryResult}</p>
-                )
-                }
-            </div>
-        </>
-    )
-}
+        <DataFetcher
+            cacheKey={aboutOurStoryCacheKey}
+            dataFetcherKey="about:ourStory"
+            dataRendererKey="about:ourStory"
+        />
+    );
+};
 
-export default HomeAboutUs
+export default HomeAboutUs;

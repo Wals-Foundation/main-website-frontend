@@ -1,3 +1,11 @@
+import { StrapiError } from "./data/strapi-error";
+
+export interface DataLoad<T> {
+    data?: T
+    error?: StrapiError
+    isLoading: boolean
+}
+
 export interface PagedData<T> {
     data: T[];
     page: number;
