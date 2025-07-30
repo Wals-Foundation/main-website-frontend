@@ -1,4 +1,5 @@
 import { fetchOurStory } from "@/app/about/data/about-strapi-datasource";
+import { fetchAboutPageData, renderAboutPageData } from "@/components/AboutData";
 import { renderAboutOurStory } from "@/components/HomeAboutUs";
 import { fetchHomePageData, renderHomePageData } from "@/components/HomeData";
 import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
@@ -12,6 +13,7 @@ import React from "react";
 // Define return types for each fetcher
 type DataFetchers = {
     "about:ourStory": () => Promise<string | StrapiError>;
+    "aboutPageData": () => Promise<Page | StrapiError>;
     "homePageData": () => Promise<Page | StrapiError>;
     "siteData": () => Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError>
     // Add more mappings here
@@ -19,6 +21,7 @@ type DataFetchers = {
 
 type DataRenderers = {
     "about:ourStory": (dataLoad: any) => React.ReactElement;
+    "aboutPageData": (dataLoad: any) => React.ReactElement;
     "homePageData": (dataLoad: any) => React.ReactElement;
     "siteData": (dataLoad: any) => React.ReactElement;
     // Add more mappings here
@@ -26,12 +29,14 @@ type DataRenderers = {
 
 export const dataRenderers = (): DataRenderers => ({
     "about:ourStory": renderAboutOurStory,
+    "aboutPageData": renderAboutPageData,
     "homePageData": renderHomePageData,
     "siteData": renderPageHeader
 })
 
 export const dataFetchers: DataFetchers = {
     "about:ourStory": () => fetchOurStory(aboutOurStoryCacheKey),
+    "aboutPageData": () => fetchAboutPageData(),
     "homePageData": () => fetchHomePageData(),
     "siteData": () => fetchSiteData()
 };

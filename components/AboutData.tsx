@@ -5,8 +5,8 @@ import { fetchPageData } from "@/main-page/ui/logic";
 import PageHeadline from "@/main-page/ui/PageHeadline";
 import PageHeroes from "@/main-page/ui/PageHeroes";
 import PageIntro from "@/main-page/ui/PageIntro";
-import HomePageSubheadlineAndActions from "./HomePageSubheadlineAndActions";
 import DataFetcher from "./DataFetcher";
+import AboutPageSubheadlineAndActions from "./AboutPageSubheadlineAndActions";
 
 const Content: React.FC<{
   className?: string;
@@ -20,7 +20,7 @@ const Content: React.FC<{
         <PageIntro
           headline={<PageHeadline headline={data.headline} />}
           subheadlineAndActions={
-            <HomePageSubheadlineAndActions subheadline={data.subheadline} />
+            <AboutPageSubheadlineAndActions subheadline={data.subheadline} />
           }
         />
       )}
@@ -37,15 +37,15 @@ const Content: React.FC<{
   )
 }
 
-export const fetchHomePageData = async (): Promise<Page | StrapiError> => {
-  return await fetchPageData("home");
+export const fetchAboutPageData = async (): Promise<Page | StrapiError> => {
+  return await fetchPageData("about");
 }
 
-export const renderHomePageData = (dataLoad: DataLoad<Page>) => (
+export const renderAboutPageData = (dataLoad: DataLoad<Page>) => (
   <Content {...dataLoad} />
 )
-const HomeData: React.FC = () => {
-  return (<DataFetcher cacheKey="homePageData" dataFetcherKey="homePageData" dataRendererKey="homePageData" />)
+const AboutPageData: React.FC = () => {
+  return (<DataFetcher cacheKey="aboutPageData" dataFetcherKey="aboutPageData" dataRendererKey="aboutPageData" />)
 }
 
-export default HomeData
+export default AboutPageData

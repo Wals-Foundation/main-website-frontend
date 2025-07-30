@@ -1,31 +1,16 @@
-"use client"
-import Typography from "@/components/Typography"
-import transparent from "@/assets/images/transparent.svg"
-import poorFamilies from "@/assets/images/poor-families.svg"
-import poorChildren from "@/assets/images/poor-children.svg"
-import webflow from "@/assets/images/webflow.svg"
-import farmer from "@/assets/images/farmer.svg"
-import person from "@/assets/images/person.svg"
-import { Swiper, SwiperSlide } from "swiper/react"
-import ValuesCard from "@/components/ValuesCard"
-import ImpactCard from "@/components/ImpactCard"
-import FAQ from "@/components/FAQ"
-import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
-import { useEffect, useMemo, useRef, useState } from "react"
-import {
-  getAboutOrganizationApproach,
-  getAboutOrganizationData,
-  getAboutOrganizationValues,
-} from "@/logic/hooks/api/useAboutOrganization"
-import { isDev } from "@/logic/config/url"
-import Gallery from "@/components/Gallery"
-import Loader from "@/components/Loader"
-import HeroSection from "@/components/HeroSection"
-import AboutUsSection from "@/components/AboutUsSection"
-import HeroSliderSection from "@/components/HeroSliderSection"
+import AboutPageData from "@/components/AboutData";
 
 export default function About() {
+  return (
+    <>
+      <section className="mt-8">
+        <AboutPageData />
+      </section>
+    </>
+  )
+}
+
+/* export default function About() {
   const dispatch = useAppDispatch()
   const [loading, setLoading] = useState(false)
   const data = useAppSelector((state) => state.usePageHeadlines)
@@ -301,4 +286,4 @@ export default function About() {
       />
     </main>
   )
-}
+} */

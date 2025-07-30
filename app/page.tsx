@@ -1,43 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import Button from "@/components/Button"
-/* import Typography from "@/components/Typography"
-import people1 from "@/assets/images/people1.png"
-import people2 from "@/assets/images/people2.png"
-import people3 from "@/assets/images/people3.png"
-import people4 from "@/assets/images/people4.png"
-import people5 from "@/assets/images/people5.png"
-import involved from "@/assets/images/involved.png"
-import gift from "@/assets/images/gift.png"
-import { Swiper, SwiperSlide } from "swiper/react"
-import HelpComponent from "@/components/HelpComponent"
-import Testimonies from "@/components/Testimonies"
-import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { createSlugMapForControl, createSlugMapForPages } from "@/utils"
-import CausesCard from "@/components/CausesCard"
-import { useEffect, useMemo, useRef, useState } from "react"
-import { CauseType } from "@/utils/types"
-import { getCommunitiesData, getProgamsData, getProjectsData } from "@/logic/hooks/api/useCauses" */
-import Link from "next/link"
-/* import Loader from "@/components/Loader"
-import Gallery from "@/components/Gallery"
-import HeroSection from "@/components/HeroSection"
-import Markdown from "@/components/Markdown"
-import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
-import HeroSliderSection from "@/components/HeroSliderSection" */
-import PageIntro from "@/main-page/ui/PageIntro"
-/* import { shallowEqual } from "react-redux" */
-import PageHeroes from "@/main-page/ui/PageHeroes"
-import { StrapiError } from "@/core/data/strapi-error"
-import { fetchPageData } from "../main-page/ui/logic"
 import HomeAboutUs from "@/components/HomeAboutUs"
-import PageHeadline from "@/main-page/ui/PageHeadline"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
-import { DataLoad, PagedData } from "@/core/models"
-import { Page } from "@/main-page/page"
 import PageGalleryInitialItems from "@/main-page/ui/PageGalleryInitialItems"
-import HomePageSubheadlineAndActions from "@/components/HomePageSubheadlineAndActions"
-import HomeContent from "@/components/HomeData"
+import HomeData from "@/components/HomeData"
 
 
 export default function Home() {
@@ -53,7 +17,7 @@ export default function Home() {
   return (
     <>
       <section className="mt-8">
-        <HomeContent />
+        <HomeData />
       </section>
       <section>
         <HomeAboutUs className="w-11/12 mx-auto mt-8" />
