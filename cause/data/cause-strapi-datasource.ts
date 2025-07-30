@@ -12,6 +12,7 @@ import {
 import { Config } from "@/core/config";
 import { CausesDetailsResponse, CausesResponse, mapCausesDetailsResponseToCausesDetails, mapCausesResponseToCauses } from "./cause-strapi-response";
 import { Cause, CauseDetail, CauseType } from "../models";
+import { PagedData } from "@/core/models";
 
 const cacheKeyMap: Record<CauseType, (code: string) => string> = {
   [CauseType.Community]: communityDetailCacheKey,
@@ -43,7 +44,7 @@ export const fetchCauseDetail = async (
 export const fetchCauses = async (
   type: CauseType,
   page: number
-): Promise<Cause[] | StrapiError> => {
+): Promise<PagedData<Cause> | StrapiError> => {
   const cacheKey = causesCacheKey(type, page);
   try {
     const response = await getFetcher<CausesResponse>(cacheKey, {
@@ -77,7 +78,7 @@ export const fetchFeaturedCauses = async (
       },
     });
 
-    return mapCausesResponseToCauses(response, type);
+    return mapCausesResponseToCauses(response, type).data;
   } catch (error: any) {
     console.error(error);
     return StrapiError.Server;

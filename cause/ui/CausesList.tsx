@@ -36,7 +36,7 @@ const CausesList: React.FC<{
                                 backgroundColorClass={backgroundColorClass}
                                 causeId={cause.id}
                                 causeName={cause.name}
-                                causeImage={cause.heroes[0].image}
+                                causeImage={cause.heroes[0]?.image}
                                 causeImpact={cause.impact}
                                 causeIntro={cause.introduction}
                                 causeType={cause.type}

@@ -1,6 +1,7 @@
-import { HeroResponse, mapHeroResponseToHero, Meta } from "@/core/data/strapi-responses";
+import { HeroResponse, mapHeroResponseToHero, mapMetaToPagination, Meta } from "@/core/data/strapi-responses";
 import { Cause, CauseDetail, CauseType, District, Location, Region, RelatedCause } from "../models";
 import { DonatableResponse, mapDonatableResponseToDonatable } from "@/donation/data/donatable-strapi-response";
+import { PagedData } from "@/core/models";
 
 export interface CauseDetailResponse {
     id: number;
@@ -165,6 +166,9 @@ export function mapCausesDetailsResponseToCausesDetails(
 export function mapCausesResponseToCauses(
     response: CausesResponse,
     type: CauseType
-): Cause[] {
-    return response.data.map(item => mapCauseResponseToCause(item, type));
+): PagedData<Cause> {
+    return {
+        data: response.data.map(item => mapCauseResponseToCause(item, type)),
+        ...mapMetaToPagination(response.meta)
+    };
 }
