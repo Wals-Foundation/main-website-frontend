@@ -5,7 +5,7 @@ import { mapPagesResponseToPages, PagesResponse } from "./main-page-item-strapi-
 import { Page } from "../page";
 import { Config } from "@/core/config";
 
-export const fetchMainPageData = async (key: string, signal?: AbortSignal): Promise<Page | null | StrapiError> => {
+export const fetchMainPageData = async (key: string, signal?: AbortSignal): Promise<Page | StrapiError> => {
     const pageDataRequestRelativeUrl = pageDataCacheKey(key);
 
     try {
@@ -18,12 +18,8 @@ export const fetchMainPageData = async (key: string, signal?: AbortSignal): Prom
                 },
             });
         const pages = mapPagesResponseToPages(response);
-        return pages.length > 0 ? pages[0] : null;
+        return pages[0];
     } catch (error: any) {
-        if (error.name === "AbortError") {
-            console.log("Page Data Request Cancelled", error);
-            return null;
-        }
         console.error(error);
         return StrapiError.Server;
     }

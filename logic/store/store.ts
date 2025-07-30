@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   useCauses: useCauses,
   useFinances: useFinances,
 
-  // From suggestions from Mark
+  // From suggestions from Mark - Dependent on static
   useFeatureFlags: featureFlagsReducer,
   useMainMenuItems: mainMenuItemsReducer,
   usePage: pageReducer,

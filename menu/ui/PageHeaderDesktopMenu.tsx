@@ -1,4 +1,3 @@
-import { baseSpacingDiv2 } from "@/core/ui/spacing";
 import { MenuItemUiState } from "./menu-item-ui-state"
 import PageHeaderMenuItem from "./PageHeaderMenuItem"
 

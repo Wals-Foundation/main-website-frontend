@@ -26,39 +26,21 @@ import Markdown from "@/components/Markdown"
 import { useFormattedCausesData } from "@/logic/hooks/custom/useFormattedCausesData"
 import HeroSliderSection from "@/components/HeroSliderSection" */
 import PageIntro from "@/main-page/ui/PageIntro"
-import PageSubHeadlineAndActions from "@/main-page/ui/PageSubheadlineAndActions"
 /* import { shallowEqual } from "react-redux" */
 import PageHeroes from "@/main-page/ui/PageHeroes"
-import { isStrapiError } from "@/core/data/strapi-error"
-import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-datasource"
+import { StrapiError } from "@/core/data/strapi-error"
 import { fetchPageData } from "../main-page/ui/logic"
-import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource"
 import HomeAboutUs from "@/components/HomeAboutUs"
 import PageHeadline from "@/main-page/ui/PageHeadline"
-import { HeadingLarge, SectionHeader, TextLarge } from "@/components/Typography"
-import { CauseCard } from "@/cause/ui/CauseCard"
-import { CauseType } from "@/cause/models"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
-import { PagedData } from "@/core/models"
-import { GalleryItem } from "@/gallery/gallery-item"
-import { fetchGalleryItems } from "@/gallery/data/gallery-strapi-datasource"
-import PageGallery from "@/main-page/ui/PageGallery"
+import { DataLoad, PagedData } from "@/core/models"
+import { Page } from "@/main-page/page"
+import PageGalleryInitialItems from "@/main-page/ui/PageGalleryInitialItems"
+import HomePageSubheadlineAndActions from "@/components/HomePageSubheadlineAndActions"
+import HomeContent from "@/components/HomeData"
 
-const getHomeFeatureFlags = async (): Promise<{ donate: boolean, learnMore: boolean }> => {
-  const result = await fetchFeatureFlags()
-  const featureFlags = isStrapiError(result) ? {} : result
-  return {
-    donate: featureFlags["home_donate_button"],
-    learnMore: featureFlags["home_learn_more_button"],
-  }
-}
 
-const getGalleryItems = async (): Promise<PagedData<GalleryItem>> => {
-  const result = await fetchGalleryItems(1)
-  return !isStrapiError(result) ? result : { data: [], page: 1, hasNextPage: false }
-}
-
-export default async function Home() {
+export default function Home() {
   /* 
     1. Running effects with stores
     2. Store as repo client rendering/ usr for ssr rendering
@@ -68,53 +50,10 @@ export default async function Home() {
     5. Once 4 is know, we structure client-side rendering and ssr
    */
 
-  const pageData = await fetchMainPageData("home")
-  const aboutUsUrl = "about"
-  //const { data: aboutOurStoryResult, error } = useSWR(aboutOurStoryCacheKey, fetchOurStory, { refreshInterval: 3000000 }) // TODO:handle error
-
-  const features = await getHomeFeatureFlags()
-  const initialGalleryItems = await getGalleryItems()
-
-
   return (
     <>
-      <section>
-        {isStrapiError(pageData) ? (
-          <p>Page Errored</p>
-        ) : (
-          <div>
-            {(pageData?.headline && pageData.subheadline) && (
-              <PageIntro
-                headline={<PageHeadline headline={pageData.headline} />}
-                subheadlineAndActions={
-                  <PageSubHeadlineAndActions
-                    subheadline={pageData.subheadline}
-                    actions={[
-                      features.donate && (
-                        <Link href="">
-                          <Button theme="border" title="Make donation" />
-                        </Link>
-                      ),
-                      features.learnMore && (
-                        <Link href={`/${aboutUsUrl}`}>
-                          <Button theme="secondary" title="Lean more" />
-                        </Link>
-                      ),
-                    ]} />
-                }
-              />
-            )}
-            {pageData?.heroes && (
-              <div className="relative w-screen pt-4 aspect-[2/3] sm:aspect-[16/9]">
-                <PageHeroes
-                  className="absolute h-full"
-                  feature="home_hero_carousel"
-                  heroes={pageData.heroes}
-                />
-              </div>
-            )}
-          </div>
-        )}
+      <section className="mt-8">
+        <HomeContent />
       </section>
       <section>
         <HomeAboutUs className="w-11/12 mx-auto mt-8" />
@@ -126,12 +65,12 @@ export default async function Home() {
             causesUrl="causes"
             causeDetailsUrl="causes"
             donateUrl="donate"
-            donateFeatureFlag={features.donate}
           />
         </div>
       </section>
       <section className="mt-8">
-        <PageGallery className="mb-4" initialItems={initialGalleryItems} />
+        <PageGalleryInitialItems className="mb-4" />
+        {/* <DataFetcher cacheKey="homePageData" dataFetcherKey="homePageData" dataRendererKey="homePageData" /> */}
       </section>
     </>
   )

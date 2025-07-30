@@ -10,8 +10,7 @@ const FeaturedCauses: React.FC<{
     causesUrl: string,
     causeDetailsUrl: string,
     donateUrl: string,
-    donateFeatureFlag: boolean,
-}> = async ({ className, donateUrl, causesUrl, causeDetailsUrl, donateFeatureFlag }) => {
+}> = async ({ className, donateUrl, causesUrl, causeDetailsUrl }) => {
     const featuredCommunitiesResult = await fetchFeaturedCauses(CauseType.Community)
     const featuredProgramsResult = await fetchFeaturedCauses(CauseType.Program)
     const featuredProjectsResult = await fetchFeaturedCauses(CauseType.Project)
@@ -32,7 +31,6 @@ const FeaturedCauses: React.FC<{
                     initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []}
                     initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []}
                     loadMoreCauses={false}
-                    donateFeatureFlag={donateFeatureFlag}
                 />
             </div>
         </>

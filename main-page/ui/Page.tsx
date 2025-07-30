@@ -1,50 +1,52 @@
-"use client"
-import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import PageHeaderDesktop from "./page-header/PageHeaderDesktop"
-import { useEffect } from "react"
-import { fetchPageData, updateCurrentUrlPath, updateViewportBreakpoint } from "./logic"
-import { usePathname } from "next/navigation"
-import { mapMenuItemsToUiStates } from "@/menu/ui/menu-item-ui-state"
-import { createSelector } from '@reduxjs/toolkit'
-import { shallowEqual } from 'react-redux'
-import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
-import { initialiseMainMenuItems } from "@/menu/ui/logic"
 import Loader from "@/components/Loader"
-import PageHeaderMobile from "./page-header/PageHeaderMenu"
-import { ViewportBreakpoint } from "@/core/models"
+import { DataLoad } from "@/core/models"
+import { isStrapiError, StrapiError } from "@/core/data/strapi-error"
+import { MenuItem } from "@/menu/menu-item"
+import { fetchMainMenuItems } from "@/menu/data/menu-strapi-datasource"
+import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-datasource"
+import PageHeader from "./page-header/PageHeader"
+import DataFetcher from "@/components/DataFetcher"
+import BreakpointObserver from "./BreakpointObserver"
 
-const selectPageUiState = createSelector(
-    [
-        (state) => state.usePage,
-        (state) => state.useFeatureFlags,
-        (state) => state.useMainMenuItems
-    ],
-    (pageState, featureFlagsState, mainMenuItemsState) => {
-        return {
-            currentUrlPath: pageState.currentUrlPath,
-            loading: featureFlagsState.loading && mainMenuItemsState.loading,
-            featureFlags: featureFlagsState.featureFlags,
-            featureFlagsError: featureFlagsState.featureFlagsError,
-            header: {
-                menuItems: mapMenuItemsToUiStates(mainMenuItemsState.mainMenuItems, pageState.currentUrlPath),
-                mainMenuItemsError: mainMenuItemsState.mainMenuItemsError,
-                menuOpened: pageState.menuOpened,
-                showDonateBtn: featureFlagsState.featureFlags['get_involved_donate'] ?? false,
-            },
-            viewportBreakpoint: pageState.viewportBreakpoint,
-            isFeatureFlagsRehydrated: featureFlagsState?._persist?.rehydrated,
-            isMenuItemsRehydrated: mainMenuItemsState?._persist?.rehydrated
-        }
+export const fetchSiteData = async (): Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError> => {
+    const menuItemsResult = await fetchMainMenuItems();
+    const featureFlagsResult = await fetchFeatureFlags()
+    if (isStrapiError(menuItemsResult)) {
+        return menuItemsResult
     }
-)
-
-// Selector for just the header props to prevent unnecessary re-renders of PageHeaderDesktop
-const selectHeaderProps = createSelector(
-    selectPageUiState,
-    (pageUiState) => ({
-        menuItems: pageUiState.header.menuItems,
-        showDonateBtn: pageUiState.header.showDonateBtn
+    return ({
+        featureFlags: !isStrapiError(featureFlagsResult) ? featureFlagsResult : {},
+        menuItems: !isStrapiError(menuItemsResult) ? menuItemsResult : []
     })
+}
+
+const Content: React.FC<{
+    className?: string;
+    data?: { featureFlags: Record<string, boolean>, menuItems: MenuItem[] };
+    error?: StrapiError;
+    isLoading: boolean;
+}> = ({ className, data, error, isLoading }) => {
+    return (
+        <div className={className ?? ""}>
+            {data && (
+                <PageHeader mainMenuItems={data.menuItems} featureFlags={data.featureFlags} />
+            )}
+            {isLoading && (
+                <div className="min-h-[30vh] flex flex-col justify-center items-center">
+                    <Loader />
+                </div>
+            )}
+            {error && (
+                <div>
+                    Couldn't load data
+                </div>
+            )} {/* Handle errors and potential reloads */}
+        </div>
+    );
+};
+
+export const renderPageHeader = (dataLoad: DataLoad<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] }>) => (
+    <Content {...dataLoad} />
 )
 
 /*
@@ -57,76 +59,11 @@ const selectHeaderProps = createSelector(
 */
 
 const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const dispatch = useAppDispatch()
-    const currentUrlPathName = usePathname()
-
-    const pageUiState = useAppSelector(selectPageUiState, shallowEqual)
-    const headerProps = useAppSelector(selectHeaderProps, shallowEqual)
-
-    // Initialize feature flags if empty
-    useEffect(() => {
-        if (pageUiState.isFeatureFlagsRehydrated) {
-            if (Object.keys(pageUiState.featureFlags).length === 0) {
-                dispatch(initialiseFeatureFlags());
-            }
-        }
-    }, [pageUiState.isFeatureFlagsRehydrated, dispatch]);
-
-    // Initialize menu items if empty
-    useEffect(() => {
-        try {
-            if (pageUiState.isMenuItemsRehydrated) {
-                if (pageUiState.header.menuItems.length === 0) {
-                    dispatch(initialiseMainMenuItems())
-                }
-            }
-        } catch (error) {
-            console.error("Error loading menu items:", error)
-        }
-    }, [pageUiState.isMenuItemsRehydrated])
-
-    // Update current URL path when it changes
-    useEffect(() => {
-        dispatch(updateCurrentUrlPath(currentUrlPathName))
-    }, [dispatch, currentUrlPathName])
-
-    // Fetch page data
-    useEffect(() => {
-        if (currentUrlPathName == "/") {
-            const thunk = dispatch(fetchPageData(currentUrlPathName));
-            return () => {
-                thunk.abort(); // cancels previous request when URL changes
-            };
-        }
-    }, [currentUrlPathName]);
-
-    // Observe and update viewport break point
-    useEffect(() => {
-        const updateBreakpoint = () => {
-            const width = window.innerWidth;
-
-            if (width < 640) dispatch(updateViewportBreakpoint(ViewportBreakpoint.Mobile));
-            else dispatch(updateViewportBreakpoint(ViewportBreakpoint.Nonmobile));
-        };
-
-        updateBreakpoint(); // Initial
-        window.addEventListener("resize", updateBreakpoint);
-
-        return () => window.removeEventListener("resize", updateBreakpoint);
-    }, []);
-
     return (
         <>
-            {(pageUiState.loading || pageUiState.viewportBreakpoint === null) ? (
-                <div className="min-h-[30vh] flex flex-col justify-center items-center">
-                    <Loader />
-                </div>
-            ) : (
-                <>
-                    {(pageUiState.viewportBreakpoint === 'sm') ? (<PageHeaderMobile />) : (<PageHeaderDesktop {...headerProps} />)}
-                    <main>{children}</main>
-                </>
-            )}
+            <BreakpointObserver />
+            <DataFetcher cacheKey="siteData" dataFetcherKey="siteData" dataRendererKey="siteData" />
+            <main>{children}</main>
         </>
     );
 

@@ -8,10 +8,8 @@ import store, { persistor } from "./store"
 const ReduxProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NextNProgress height={5} color="#F25A5A" />
-        {children}
-      </PersistGate>
+      {/* <NextNProgress height={5} color="#F25A5A" /> */}
+      {children}
     </Provider>
   )
 }

@@ -6,6 +6,7 @@ import Tabs from "@/components/Tabs" // adjust path as needed
 import CausesList from "./CausesList"
 import Link from "next/link"
 import Button from "@/components/Button"
+import { useAppSelector } from "@/logic/store/hooks"
 
 const tabOrder: CauseType[] = [
     CauseType.Community,
@@ -30,7 +31,6 @@ const CauseTabs: React.FC<{
     initialPrograms: Cause[],
     initialProjects: Cause[],
     loadMoreCauses: boolean,
-    donateFeatureFlag: boolean,
 }> = ({
     className,
     backgroundColorClass,
@@ -42,7 +42,6 @@ const CauseTabs: React.FC<{
     initialPrograms,
     initialProjects,
     loadMoreCauses, // TODO:implement on view all causes
-    donateFeatureFlag
 }) => {
         const [activeTabIndex, setActiveTabIndex] = useState(() =>
             tabOrder.indexOf(initialCauseType)
@@ -59,6 +58,7 @@ const CauseTabs: React.FC<{
         }
 
         const activeCauseType = tabOrder[activeTabIndex]
+        const donateFeatureFlag = useAppSelector((state) => state.useFeatureFlags.flags["donate"])
 
         return (
             <div className={className ?? ""}>

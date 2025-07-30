@@ -1,25 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { Config } from "@/core/config";
-import { createTransform, PersistConfig, persistReducer } from 'redux-persist';
-import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
-import storage from "redux-persist/lib/storage"
 import { MenuItem } from "../menu-item";
 import { fetchMainMenuItems } from "@/menu/data/menu-strapi-datasource";
+import { mapMenuItemsToUiStates, MenuItemUiState } from "./menu-item-ui-state";
 
-export interface MainMenuItemsState {
-    mainMenuItems: MenuItem[];
-    mainMenuItemsError: StrapiError | null;
-    loading: boolean;
+export interface MainMenuState {
+    currentUrlPath: string;
+    mainMenuItems: MenuItemUiState[];
+    menuOpened: boolean;
+    showDonateBtn: boolean;
 }
 
-export const initialMainMenuItemsState: MainMenuItemsState = {
+export const initialMainMenuItemsState: MainMenuState = {
     mainMenuItems: [],
-    mainMenuItemsError: null,
-    loading: true,
+    currentUrlPath: "/",
+    menuOpened: false,
+    showDonateBtn: false,
 }
 
-export const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems", async (_, { rejectWithValue }) => {
+const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems", async (_, { rejectWithValue }) => {
     try {
         const menuItemsResult = await fetchMainMenuItems();
         return {
@@ -35,67 +34,31 @@ export const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems
 const useMainMenuItems = createSlice({
     name: "useMainMenuItems",
     initialState: initialMainMenuItemsState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(initialiseMainMenuItems.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(initialiseMainMenuItems.fulfilled, (state, action) => {
-            state.loading = false;
-            state.mainMenuItems = action.payload.mainMenuItems;
-            state.mainMenuItemsError = action.payload.mainMenuItemsError;
-        });
-        builder.addCase(initialiseMainMenuItems.rejected, (state, action) => {
-            state.loading = false;
-            if (action.payload && isStrapiError(action.payload)) {
-                state.mainMenuItemsError = action.payload;
-            }
-        });
-    }
+    reducers: {
+        initialiseMenuItems: (state, action: { payload: MenuItem[] }) => {
+            state.mainMenuItems = mapMenuItemsToUiStates(action.payload, state.currentUrlPath)
+        },
+        toggleMobileMenuVisibility: (state) => {
+            state.menuOpened = !state.menuOpened;
+        },
+        updateCurrentUrlPath: (state, action) => {
+            state.currentUrlPath = getCurrentUrlKey(action.payload);
+            // Update isSelected for all menu items
+            state.mainMenuItems = state.mainMenuItems.map(item => ({
+                ...item,
+                isSelected: item.link === state.currentUrlPath
+            }));
+        },
+    },
 })
 
-const menuItemsTransform = createTransform(
-    (inboundState: any) => {
-        if (inboundState && Array.isArray(inboundState)) {
-            return {
-                ...inboundState,
-                _persistedAt: Date.now()
-            };
-        } else {
-            return inboundState;
-        }
-    },
 
-    (outboundState: any) => {
-        if (outboundState && typeof outboundState === "object" && '_persistedAt' in outboundState) {
-            const now = Date.now();
-            const isExpired = outboundState?._persistedAt &&
-                (now - outboundState._persistedAt > Config.page.reduxCacheMaxAge);
+function getCurrentUrlKey(currentUrlPath: string): string {
+    const basePath = currentUrlPath.split("/")[1];
+    const key = basePath ? `/${basePath}` : '/';
+    return key;
+}
 
-            // Handle expired state
-            if (isExpired) {
-                console.info("Menu items expired - refreshing");
-                return [];
-            }
-            return Object.values(outboundState)
-                .filter((item): item is Record<string, unknown> =>
-                    item !== null &&
-                    typeof item === 'object' &&
-                    !('_persistedAt' in item)
-                );
-        } else {
-            return outboundState
-        }
-    }
-);
+export const { initialiseMenuItems, toggleMobileMenuVisibility, updateCurrentUrlPath } = useMainMenuItems.actions;
 
-const useMainMenuItemsPersistConfig: PersistConfig<MainMenuItemsState> = {
-    key: "useMainMenuItems",
-    storage,
-    transforms: [menuItemsTransform],
-    stateReconciler: autoMergeLevel1
-};
-
-const mainMenuItemsReducer = persistReducer(useMainMenuItemsPersistConfig, useMainMenuItems.reducer)
-
-export default mainMenuItemsReducer
+export default useMainMenuItems.reducer
