@@ -7,6 +7,7 @@ import { fetchFeatureFlags } from "@/feature-flags/data/feature-flags-strapi-dat
 import PageHeader from "./page-header/PageHeader"
 import DataFetcher from "@/components/DataFetcher"
 import BreakpointObserver from "./BreakpointObserver"
+import PageFooter from "./PageFooter"
 
 export const fetchSiteData = async (): Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError> => {
     const menuItemsResult = await fetchMainMenuItems();
@@ -64,6 +65,7 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <BreakpointObserver />
             <DataFetcher cacheKey="siteData" dataFetcherKey="siteData" dataRendererKey="siteData" />
             <main>{children}</main>
+            <PageFooter/>
         </>
     );
 

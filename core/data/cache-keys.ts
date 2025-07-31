@@ -10,7 +10,9 @@ import {
     paginate,
     projectDetailQuery,
     programDetailQuery,
-    aboutQuery
+    aboutQuery,
+    contactFields,
+    socialMediaQuery
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -21,12 +23,14 @@ const causePath = {
 
 export const aboutCachekey = `about-organisation?${aboutQuery()}`
 export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
+export const contactCacheKey = `contact?${contactFields}`
 export const featureFlagsCacheKey = `feature-flags?fields=key,isLive`
 export const mainMenuItemsCacheKey = `main-menu-items?${mainMenuItemQueryFields}`
 
 export const featuredCommunitiesCacheKey = `communities?${featuredCauseQuery()}`
 export const featuredProgramsCacheKey = `programs?${featuredCauseQuery()}`
 export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
+export const socialMediaCacheKey = `social-medias?${socialMediaQuery()}`
 
 export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {
     return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;

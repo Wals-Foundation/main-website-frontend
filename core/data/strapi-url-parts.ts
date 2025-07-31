@@ -26,6 +26,7 @@ const featuredCausesQueryLimit = "pagination[start]=0&pagination[limit]=1"
 const gallerySortFields = "sort=updatedAt:desc"
 const mainMenuDestinationFields = "[populate][destination][fields][0]=relativeUrl"
 const pageFields = "fields[0]=headline&fields[1]=subheadline"
+const socialMediaFields = "fields[0]=accountUrl&fields[1]=name"
 
 const causeDetailFields = (path: string[]): string => {
     const pathString = path.join("")
@@ -90,6 +91,7 @@ const relatedCauseFields = (path: string[]): string => {
 
 // Final query params
 export const aboutOurStoryQueryFields = "fields[0]=id&fields[1]=organisation_story"
+export const contactFields = "fields[0]=email&fields[1]=phone"
 export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
@@ -103,6 +105,17 @@ export const aboutQuery = (): string => {
         imageSourceFields([aboutValuesPath, iconPath]),
     ].join("&")
 }
+
+export const causesQuery = (): string => {
+    return [
+        "[fields][0]=code",
+        featuredCausesSortFields,
+        causesFields([causePath]),
+        heroFields([causePath, heroesPath]),
+        imageFields([causePath, heroesPath, imagePath]),
+        imageSourceFields([causePath, heroesPath, imagePath, imageSourcePath]),
+    ].join("&");
+};
 
 export const communityDetailQuery = (code: string): string => {
     return [
@@ -119,17 +132,6 @@ export const communityDetailQuery = (code: string): string => {
         districtFields([causePath, districtPath]),
         locationFields([causePath, locationPath]),
         regionFields([causePath, regionPath]),
-    ].join("&");
-};
-
-export const causesQuery = (): string => {
-    return [
-        "[fields][0]=code",
-        featuredCausesSortFields,
-        causesFields([causePath]),
-        heroFields([causePath, heroesPath]),
-        imageFields([causePath, heroesPath, imagePath]),
-        imageSourceFields([causePath, heroesPath, imagePath, imageSourcePath]),
     ].join("&");
 };
 
@@ -192,6 +194,13 @@ export const pageQuery = (pageKey: string): string => {
         imageSourceFields([heroesPath, imagePath, imageSourcePath]),
     ].join("&");
 };
+
+export const socialMediaQuery = (): string => {
+    return [
+        "fields[0]=accountUrl&fields[1]=name",
+        imageSourceFields([iconPath])
+    ].join("&")
+}
 
 export const paginate = (page: number, pageSize: number = Config.strapi.contentPageSize): string => {
     return [

@@ -43,6 +43,7 @@ export default {
     }),
   ],
   safelist: [
+    "break-words",
     "h-60",
     "pl-4",
     "pr-4",
@@ -68,6 +69,7 @@ export default {
     "sm:pt-0",
     "sm:pt-16",
     "sm:px-8",
-    "sm:py-0"
+    "sm:py-0",
+    "w-4"
   ]
 } satisfies Config

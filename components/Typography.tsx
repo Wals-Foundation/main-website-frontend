@@ -7,7 +7,7 @@ export const Title: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h1 className={`text-5xl sm:text-6xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold
-      leading-[3.5rem] sm:leading-[4.75rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-[3.5rem] sm:leading-[4.75rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h1>
   );
@@ -20,7 +20,7 @@ export const SectionHeader: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h2 className={`text-base ${!overrideTextColor ? "text-typo-white-800" : ""} font-size-semibold uppercase
-      leading-6 sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-6 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h2>
   );
@@ -33,7 +33,7 @@ export const HeadingLarge: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h3 className={`text-4xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-10 sm:leading-[3rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-10 sm:leading-[3rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h3>
   );
@@ -46,7 +46,7 @@ export const HeadingMedium: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h4 className={`text-lg sm:text-xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-8 sm:leading-10 sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-8 sm:leading-10 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h4>
   );
@@ -59,7 +59,7 @@ export const HeadingSmall: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h5 className={`text-base ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-6 sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h5>
   );
@@ -72,7 +72,7 @@ export const TextLarge: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <p className={`text-base sm:text-lg ${!overrideTextColor ? "text-typo-white-900" : ""} 
-      leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </p>
   );
@@ -85,7 +85,7 @@ export const TextMedium: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <p className={`text-base ${!overrideTextColor ? "text-typo-black-400" : ""} 
-      leading-6 sm:leading-7 sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch]  ${className ?? ""}`}>
       {text}
     </p>
   );
@@ -98,7 +98,7 @@ export const Caption: React.FC<{
 }> = ({ className, text, overrideTextColor = false }) => {
   return (
     <h6 className={`text-sm ${!overrideTextColor ? "text-typo-white-800" : ""} 
-      leading-[1.375rem] sm:leading-[1.875rem] sm:max-w-[75ch] ${className ?? ""}`}>
+      leading-[1.375rem] sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
       {text}
     </h6>
   );

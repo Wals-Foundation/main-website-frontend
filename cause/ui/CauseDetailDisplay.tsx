@@ -21,14 +21,14 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                     <div>
                         <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b border-border-gray">
                             <TextLarge text="Location" />
-                            <Link
+                            <a
                                 href={createGoogleMapsLink(causeDetail.location.latitude, causeDetail.location.longitude)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="my-auto mt-2 sm:mt-0 sm:col-span-2 text-primary underline"
                             >
                                 <TextLarge className="sm:text-right text-primary underline" text="Get Directions" overrideTextColor={true} />
-                            </Link>
+                            </a>
                         </div>
                         {(causeDetail.communities.length > 0) && (
                             <CauseLocationInfo className="py-4 border-b border-border-gray" label="Community" value={causeDetail.communities[0].name} />
