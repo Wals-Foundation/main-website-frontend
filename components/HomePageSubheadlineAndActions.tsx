@@ -12,11 +12,11 @@ const HomePageSubheadlineAndActions: React.FC<{ subheadline: string }> = ({ subh
             subheadline={subheadline}
             actions={[
                 donateFeatureFlag && (
-                    <Link href="">
+                    <Link key={1} href="">
                         <Button theme="border" title="Make donation" />
                     </Link>
                 ),
-                <Link href={`/about`}>
+                <Link key={2} href={`/about`}>
                     <Button theme="secondary" title="Lean more" />
                 </Link>,
             ]} />
