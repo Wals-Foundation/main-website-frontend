@@ -48,6 +48,8 @@ export default {
     "pr-4",
     "sm:hidden",
     "sm:block",
+    "sm:justify-center",
+    "sm:items-center",
     "sm:col-span-2",
     "sm:col-span-3",
     "sm:flex",
@@ -65,6 +67,7 @@ export default {
     "sm:p-8",
     "sm:pt-0",
     "sm:pt-16",
-    "sm:px-8"
+    "sm:px-8",
+    "sm:py-0"
   ]
 } satisfies Config

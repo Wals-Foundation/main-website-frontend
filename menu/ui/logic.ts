@@ -1,35 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
 import { MenuItem } from "../menu-item";
-import { fetchMainMenuItems } from "@/menu/data/menu-strapi-datasource";
 import { mapMenuItemsToUiStates, MenuItemUiState } from "./menu-item-ui-state";
 
 export interface MainMenuState {
     currentUrlPath: string;
     mainMenuItems: MenuItemUiState[];
-    menuOpened: boolean;
+    mobileMenuOpened: boolean;
     showDonateBtn: boolean;
 }
 
 export const initialMainMenuItemsState: MainMenuState = {
     mainMenuItems: [],
     currentUrlPath: "/",
-    menuOpened: false,
+    mobileMenuOpened: false,
     showDonateBtn: false,
 }
-
-const initialiseMainMenuItems = createAsyncThunk("initialiseMainMenuItems", async (_, { rejectWithValue }) => {
-    try {
-        const menuItemsResult = await fetchMainMenuItems();
-        return {
-            mainMenuItems: isStrapiError(menuItemsResult) ? [] : menuItemsResult,
-            mainMenuItemsError: isStrapiError(menuItemsResult) ? menuItemsResult : null,
-            loading: false,
-        }
-    } catch (error) {
-        return rejectWithValue(StrapiError.Unknown)
-    }
-})
 
 const useMainMenuItems = createSlice({
     name: "useMainMenuItems",
@@ -39,7 +24,7 @@ const useMainMenuItems = createSlice({
             state.mainMenuItems = mapMenuItemsToUiStates(action.payload, state.currentUrlPath)
         },
         toggleMobileMenuVisibility: (state) => {
-            state.menuOpened = !state.menuOpened;
+            state.mobileMenuOpened = !state.mobileMenuOpened;
         },
         updateCurrentUrlPath: (state, action) => {
             state.currentUrlPath = getCurrentUrlKey(action.payload);
@@ -48,6 +33,8 @@ const useMainMenuItems = createSlice({
                 ...item,
                 isSelected: item.link === state.currentUrlPath
             }));
+            // Close mobile menu if opened
+            state.mobileMenuOpened = false
         },
     },
 })
