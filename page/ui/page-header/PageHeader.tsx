@@ -10,9 +10,10 @@ import { initialiseFeatureFlags } from "@/feature-flags/ui/logic"
 
 const PageHeader: React.FC<{
     className?: string,
+    donateUrl: string,
     mainMenuItems: MenuItem[],
     featureFlags: Record<string, boolean>,
-}> = ({ className, mainMenuItems, featureFlags }) => {
+}> = ({ className, donateUrl, mainMenuItems, featureFlags }) => {
     const dispatch = useAppDispatch()
     const currentUrlPathName = usePathname()
 
@@ -37,8 +38,17 @@ const PageHeader: React.FC<{
     return (
         <header className={`bg-white ${className ?? ""}`}>
             <div className="w-11/12 mx-auto top-0 z-50">
-                <PageHeaderDesktop className="hidden sm:block border-b border-border-gray" menuItems={menuItems} showDonateBtn={showDonateButton} />
-                <PageHeaderMobile className="block sm:hidden border-b border-border-gray" menuItems={menuItems} showDonateBtn={showDonateButton} />
+                <PageHeaderDesktop
+                    className="hidden sm:block border-b border-border-gray"
+                    donateUrl={donateUrl}
+                    menuItems={menuItems}
+                    showDonateBtn={showDonateButton}
+                />
+                <PageHeaderMobile
+                    className="block sm:hidden border-b border-border-gray"
+                    donateUrl={donateUrl}
+                    menuItems={menuItems}
+                    showDonateBtn={showDonateButton} />
             </div>
         </header>
     )

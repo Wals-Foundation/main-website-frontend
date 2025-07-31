@@ -5,14 +5,14 @@ import PageSubHeadlineAndActions from "@/page/ui/PageSubheadlineAndActions"
 import Link from "next/link"
 import Button from "./Button"
 
-const HomePageSubheadlineAndActions: React.FC<{ subheadline: string }> = ({ subheadline }) => {
+const HomePageSubheadlineAndActions: React.FC<{ donateUrl: string, subheadline: string }> = ({ donateUrl, subheadline }) => {
     const donateFeatureFlag = useAppSelector((state) => state.useFeatureFlags.flags["donate"])
     return (
         <PageSubHeadlineAndActions
             subheadline={subheadline}
             actions={[
                 donateFeatureFlag && (
-                    <Link key={1} href="">
+                    <Link key={1} href={donateUrl}>
                         <Button theme="border" title="Make donation" />
                     </Link>
                 ),

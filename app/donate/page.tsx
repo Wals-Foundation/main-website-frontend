@@ -12,7 +12,7 @@ import { usePaystackPayment } from "react-paystack" */
 export default function Donate() {
   return (
     <>
-      <p>{`Frank it doesn't work so replaced with this message for you`}</p>
+      <p>{`Frank the page doesn't work so replaced with this message for you`}</p>
     </>
   )
 }

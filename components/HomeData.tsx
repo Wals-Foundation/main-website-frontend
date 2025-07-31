@@ -21,7 +21,7 @@ const Content: React.FC<{
           className={className ?? ""}
           headline={<PageHeadline headline={data.headline} />}
           subheadlineAndActions={
-            <HomePageSubheadlineAndActions subheadline={data.subheadline} />
+            <HomePageSubheadlineAndActions donateUrl="/donate" subheadline={data.subheadline} />
           }
         />
       )}

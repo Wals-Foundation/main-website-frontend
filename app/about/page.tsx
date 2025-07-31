@@ -1,9 +1,11 @@
 import AboutPageData from "@/components/AboutData";
+import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems";
 
 export default function About() {
   return (
     <>
       <AboutPageData />
+        <PageGalleryInitialItems className="mt-8" />
     </>
   )
 }

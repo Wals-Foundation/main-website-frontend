@@ -30,7 +30,7 @@ const Content: React.FC<{
     return (
         <div className={className ?? ""}>
             {data && (
-                <PageHeader mainMenuItems={data.menuItems} featureFlags={data.featureFlags} />
+                <PageHeader donateUrl="/donate" mainMenuItems={data.menuItems} featureFlags={data.featureFlags} />
             )}
             {isLoading && (
                 <div className="h-[100vh] w-[100vw] z-2 flex flex-col justify-center items-center">

@@ -14,7 +14,6 @@ import { SectionHeader } from "./Typography";
 import OrganisationApproach from "./OrganisationApproach";
 import OrganisationValue from "./OrganisationValue";
 import PageCallToDonate from "@/page/ui/PageCallToDonate";
-import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems";
 
 const Content: React.FC<{
   className?: string;
@@ -32,7 +31,7 @@ const Content: React.FC<{
           <PageIntro
             headline={<PageHeadline headline={page.headline} />}
             subheadlineAndActions={
-              <AboutPageSubheadlineAndActions subheadline={page.subheadline} />
+              <AboutPageSubheadlineAndActions donateUrl="/donate" subheadline={page.subheadline} />
             }
           />
         )}
@@ -83,7 +82,6 @@ const Content: React.FC<{
       </section>
       <section className="mb-8">
         <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
-        <PageGalleryInitialItems className="mt-8" />
       </section>
     </>
   )

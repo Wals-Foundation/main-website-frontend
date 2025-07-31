@@ -7,31 +7,34 @@ import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
+  donateUrl: string,
   menuItems: MenuItemUiState[],
   showDonateBtn: boolean
-}> = ({ className, menuItems, showDonateBtn }) => {
+}> = ({ className, donateUrl, menuItems, showDonateBtn }) => {
   return (
     <div className={className ?? ""}>
       <div className="h-full flex flex-col gap-4">
         <MainMenu className="flex-1" menuItems={menuItems} />
-      {showDonateBtn && (
-        <div className="mt-4">
-          <Button theme="primary" title="Donate Now" />
-        </div>
-      )}
+        {showDonateBtn && (
+          <Link href={donateUrl} className="mt-4">
+            <Button theme="primary" title="Donate Now" />
+          </Link>
+        )}
       </div>
     </div>
   )
 }
 
 const PageHeaderMobile: React.FC<{
-  className?: string;
-  menuItems: MenuItemUiState[];
-  showDonateBtn: boolean;
-}> = ({ className, menuItems, showDonateBtn }) => {
+  className?: string,
+  donateUrl: string,
+  menuItems: MenuItemUiState[],
+  showDonateBtn: boolean,
+}> = ({ className, donateUrl, menuItems, showDonateBtn }) => {
   const dispatch = useAppDispatch();
   const mobileMenuOpen = useAppSelector(
     (state) => state.useMainMenuItems.mobileMenuOpened
@@ -46,7 +49,7 @@ const PageHeaderMobile: React.FC<{
 
   return (
     <>
-    <div className={`flex justify-between items-center gap-4 py-2 relative z-50 ${className ?? ""}`}>
+      <div className={`flex justify-between items-center gap-4 py-2 relative z-50 ${className ?? ""}`}>
         <div className="shrink-0">
           <WalsLogo />
         </div>
@@ -72,6 +75,7 @@ const PageHeaderMobile: React.FC<{
           <div className="w-11/12 mx-auto pt-16">
             <MobileHeaderDetail
               className=""
+              donateUrl={donateUrl}
               menuItems={menuItems}
               showDonateBtn={showDonateBtn}
             />
