@@ -12,7 +12,7 @@ import useSWR from "swr"
 export default function CommunityDetail() {
     const searchParams = useSearchParams()
     const code = searchParams.get('code') ?? ""
-    const { data, error } = useSWR([communityDetailCacheKey(code), code, CauseType.Community],
+    const { data } = useSWR([communityDetailCacheKey(code), code, CauseType.Community],
         ([, code, causeType]) => fetchCauseDetail(code, causeType)) // TODO:handle error
     const [community, setCommunity] = useState<CauseDetail | null>(null)
 

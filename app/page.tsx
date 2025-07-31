@@ -23,7 +23,7 @@ export default function Home() {
       <section>
         <HomeOurStory />
       </section>
-      <section className="w-screen bg-section-bg-gray mb-8 py-8 sm:py-16">
+      <section className="w-screen bg-section-bg-gray mt-8 mb-8 py-8 sm:py-16">
         <div className="w-11/12 md:max-w-[1052px] mx-auto">
           <FeaturedCauses
             className="w-full mx-auto mt-4"

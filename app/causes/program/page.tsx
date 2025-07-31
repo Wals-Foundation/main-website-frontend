@@ -12,7 +12,7 @@ import useSWR from "swr"
 export default function ProgramDetail() {
     const searchParams = useSearchParams()
     const code = searchParams.get('code') ?? ""
-    const { data, error } = useSWR([programDetailCacheKey(code), code, CauseType.Program],
+    const { data } = useSWR([programDetailCacheKey(code), code, CauseType.Program],
         ([, code, causeType]) => fetchCauseDetail(code, causeType)) // TODO:handle error
     const [program, setProgram] = useState<CauseDetail | null>(null)
 

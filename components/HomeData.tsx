@@ -13,11 +13,12 @@ const Content: React.FC<{
   data?: Page;
   error?: StrapiError;
   isLoading: boolean;
-}> = ({ className, data, error, isLoading }) => {
+}> = ({ className, data }) => {
   return (
     <div>
       {(data?.headline && data.subheadline) && (
         <PageIntro
+          className={className ?? ""}
           headline={<PageHeadline headline={data.headline} />}
           subheadlineAndActions={
             <HomePageSubheadlineAndActions subheadline={data.subheadline} />

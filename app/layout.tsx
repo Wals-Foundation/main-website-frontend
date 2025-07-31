@@ -18,13 +18,15 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    return (
-        <html lang="en">
-            <body>
-                <ReduxProvider>
-                    <Page children={children} />
-                </ReduxProvider>
-            </body>
-        </html>
-    )
+  return (
+    <html lang="en">
+      <body>
+        <ReduxProvider>
+          <Page>
+            {children}
+          </Page>
+        </ReduxProvider>
+      </body>
+    </html>
+  )
 }

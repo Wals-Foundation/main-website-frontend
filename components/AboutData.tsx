@@ -21,7 +21,7 @@ const Content: React.FC<{
   data?: { organisation: Organisation, page: Page };
   error?: StrapiError;
   isLoading: boolean;
-}> = ({ className, data, error, isLoading }) => {
+}> = ({ className, data }) => {
   const organisation = data?.organisation
   const page = data?.page
 
@@ -55,8 +55,9 @@ const Content: React.FC<{
             <div className="mt-4">
               <SectionHeader text="Our approach" />
               <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
-                {organisation.organisationApproaches.map((approach) => (
+                {organisation.organisationApproaches.map((approach, index) => (
                   <OrganisationApproach
+                    key={index}
                     className="mt-4 sm:mt-0"
                     icon={approach.icon}
                     title={approach.title}
@@ -67,8 +68,9 @@ const Content: React.FC<{
             <div className="mt-4">
               <SectionHeader text="Our values" />
               <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
-                {organisation.organisationValues.map((value) => (
+                {organisation.organisationValues.map((value, index) => (
                   <OrganisationValue
+                    key={index}
                     className="mt-4 sm:mt-0"
                     icon={value.icon}
                     title={value.title}
@@ -81,7 +83,7 @@ const Content: React.FC<{
       </section>
       <section className="mb-8">
         <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
-        <PageGalleryInitialItems className="mt-8"/>
+        <PageGalleryInitialItems className="mt-8" />
       </section>
     </>
   )

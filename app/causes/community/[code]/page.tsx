@@ -25,7 +25,7 @@ export default async function CommunityDetail({
     params: Promise<{ code: string }>
 }) {
     const { code } = await params
-    const { community, error } = await getCommunityDetails(code)
+    const { community } = await getCommunityDetails(code)
     return (
         <>
             {community && (

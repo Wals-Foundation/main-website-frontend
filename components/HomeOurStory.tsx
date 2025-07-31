@@ -9,7 +9,7 @@ const Content: React.FC<{
     data?: string;
     error?: StrapiError;
     isLoading: boolean;
-}> = ({ className, data, error, isLoading }) => {
+}> = ({ className, data }) => {
     return (
         <div className={className ?? ""}>
             {data && (
@@ -23,7 +23,7 @@ export const renderAboutOurStory = (dataLoad: DataLoad<string>) => (
     <Content className="w-11/12 mx-auto mt-8 pt-8" {...dataLoad} />
 )
 
-const HomeOurStory: React.FC<{ className?: string }> = ({ className }) => {
+const HomeOurStory: React.FC<{ className?: string }> = () => {
     return (
         <DataFetcher
             cacheKey={aboutOurStoryCacheKey}

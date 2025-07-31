@@ -25,7 +25,7 @@ export default async function ProgramDetail({
     params: Promise<{ code: string }>
 }) {
     const { code } = await params
-    const { program, error } = await getProgramDetails(code)
+    const { program } = await getProgramDetails(code)
     return (
         <>
             {program && (

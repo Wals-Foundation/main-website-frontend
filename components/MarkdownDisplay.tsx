@@ -11,9 +11,9 @@ const MarkdownDisplay: React.FC<{ className?: string, markdown: string }> = ({ c
         <>
             <div className={`prose prose-lg ${className ?? ""}`}>
                 <ReactMarkdown
-                    children={markdown}
-                    remarkPlugins={[remarkGfm]}
-                />
+                    remarkPlugins={[remarkGfm]}>
+                    {markdown}
+                </ReactMarkdown>
             </div>
         </>
     )

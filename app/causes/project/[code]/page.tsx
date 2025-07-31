@@ -25,7 +25,7 @@ export default async function ProjectDetail({
     params: Promise<{ code: string }>
 }) {
     const { code } = await params
-    const { project: project, error } = await getProjectDetails(code)
+    const { project } = await getProjectDetails(code)
     return (
         <>
             {project && (
