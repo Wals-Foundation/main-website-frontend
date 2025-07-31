@@ -1,6 +1,6 @@
 import HomeOurStory from "@/components/HomeOurStory"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
-import PageGalleryInitialItems from "@/main-page/ui/PageGalleryInitialItems"
+import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
 
 

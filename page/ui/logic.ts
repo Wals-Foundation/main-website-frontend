@@ -1,8 +1,8 @@
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
 import { ViewportBreakpoint } from "@/core/models";
-import { fetchMainPageData } from "@/main-page/data/main-page-strapi-datasource";
-import { Page } from "@/main-page/page";
+import { Page } from "@/page/page";
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchMainPageData } from "../data/main-page-strapi-datasource";
 
 // Responsibilities: parsing url arguments, managing state and handling UI logic
 

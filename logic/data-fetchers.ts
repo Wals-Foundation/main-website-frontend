@@ -5,8 +5,8 @@ import { renderAboutOurStory } from "@/components/HomeOurStory";
 import { fetchHomePageData, renderHomePageData } from "@/components/HomeData";
 import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
 import { StrapiError } from "@/core/data/strapi-error";
-import { Page } from "@/main-page/page";
-import { fetchSiteData, renderPageHeader } from "@/main-page/ui/Page";
+import { Page } from "@/page/page";
+import { fetchSiteData, renderPageHeader } from "@/page/ui/Page";
 import { MenuItem } from "@/menu/menu-item";
 import React from "react";
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useAppSelector } from "@/logic/store/hooks"
-import PageSubHeadlineAndActions from "@/main-page/ui/PageSubheadlineAndActions"
+import PageSubHeadlineAndActions from "@/page/ui/PageSubheadlineAndActions"
 import Link from "next/link"
 import Button from "./Button"
 

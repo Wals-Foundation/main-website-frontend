@@ -1,10 +1,10 @@
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
 import { DataLoad } from "@/core/models";
-import { Page } from "@/main-page/page";
-import { fetchPageData } from "@/main-page/ui/logic";
-import PageHeadline from "@/main-page/ui/PageHeadline";
-import PageHeroes from "@/main-page/ui/PageHeroes";
-import PageIntro from "@/main-page/ui/PageIntro";
+import { Page } from "@/page/page";
+import { fetchPageData } from "@/page/ui/logic";
+import PageHeadline from "@/page/ui/PageHeadline";
+import PageHeroes from "@/page/ui/PageHeroes";
+import PageIntro from "@/page/ui/PageIntro";
 import DataFetcher from "./DataFetcher";
 import AboutPageSubheadlineAndActions from "./AboutPageSubheadlineAndActions";
 import { Organisation } from "@/app/about/about-organisation";

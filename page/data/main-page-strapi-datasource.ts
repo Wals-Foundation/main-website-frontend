@@ -1,9 +1,9 @@
 import { getFetcher } from "@/logic/config/base";
 import { StrapiError } from "@/core/data/strapi-error";
 import { pageDataCacheKey } from "@/core/data/cache-keys";
-import { mapPagesResponseToPages, PagesResponse } from "./main-page-item-strapi-response";
 import { Page } from "../page";
 import { Config } from "@/core/config";
+import { mapPagesResponseToPages, PagesResponse } from "./main-page-item-strapi-response";
 
 export const fetchMainPageData = async (key: string, signal?: AbortSignal): Promise<Page | StrapiError> => {
     const pageDataRequestRelativeUrl = pageDataCacheKey(key);
