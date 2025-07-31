@@ -1,0 +1,60 @@
+name: Arch
+
+on:
+  push:
+    branches:
+      - mark/architecture
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Create .env file from GitHub Variables
+        env:
+          NEXT_PUBLIC_CACHE_MAX_AGE_SECONDS: ${{ vars.NEXT_PUBLIC_CACHE_MAX_AGE_SECONDS }}
+          NEXT_PUBLIC_IS_STATIC_HOST: ${{ vars.NEXT_PUBLIC_IS_STATIC_HOST }}
+          NEXT_PUBLIC_IMAGE_SLIDES_DELAY: ${{ vars.NEXT_PUBLIC_IMAGE_SLIDES_DELAY }}
+          NEXT_PUBLIC_REDUX_CACHE_MAX_AGE: ${{ vars.NEXT_PUBLIC_REDUX_CACHE_MAX_AGE }}
+          NEXT_PUBLIC_STRAPI_CONTENT_PAGE_SIZE: ${{ vars.NEXT_PUBLIC_STRAPI_CONTENT_PAGE_SIZE }}
+          STAGING_BACKEND_URL: ${{ vars.STAGING_BACKEND_URL }}
+          PROD_BACKEND_URL: ${{ vars.PROD_BACKEND_URL }}
+        run: |
+          BRANCH_NAME="${GITHUB_REF_NAME}"
+
+          if [[ "$BRANCH_NAME" == "production" ]]; then
+            SERVER_URL="$PROD_BACKEND_URL"
+          else
+            SERVER_URL="$STAGING_BACKEND_URL"
+          fi
+
+          cat <<EOF > .env
+            NEXT_PUBLIC_SERVER_URL=$SERVER_URL
+            NEXT_PUBLIC_CACHE_MAX_AGE_SECONDS=$NEXT_PUBLIC_CACHE_MAX_AGE_SECONDS
+            NEXT_PUBLIC_IS_STATIC_HOST=$NEXT_PUBLIC_IS_STATIC_HOST
+            NEXT_PUBLIC_IMAGE_SLIDES_DELAY=$NEXT_PUBLIC_IMAGE_SLIDES_DELAY
+            NEXT_PUBLIC_REDUX_CACHE_MAX_AGE=$NEXT_PUBLIC_REDUX_CACHE_MAX_AGE
+            NEXT_PUBLIC_STRAPI_CONTENT_PAGE_SIZE=$NEXT_PUBLIC_STRAPI_CONTENT_PAGE_SIZE
+          EOF
+
+      - name: Build Next.js app
+        run: yarn build
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.ARCH_FTP_USERNAME }}
+          password: ${{ secrets.ARCH_FTP_PASSWORD }}
+          local-dir: out/
