@@ -2,7 +2,7 @@ import HomeOurStory from "@/components/HomeOurStory"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
-import PageCallToDonate from "@/page/PageCallToDonate"
+import PageCallToDonate from "@/page/ui/PageCallToDonate"
 
 
 export default function Home() {
@@ -34,8 +34,8 @@ export default function Home() {
         </div>
       </section>
       <section className="mb-8">
-        <PageCallToDonate className="sm:mt-8" donateUrl="/donate"/>
-        <PageGalleryInitialItems />
+        <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate"/>
+        <PageGalleryInitialItems className="mt-8" />
       </section>
     </>
   )

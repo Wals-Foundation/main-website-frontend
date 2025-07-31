@@ -13,7 +13,7 @@ import OrganisationInfo from "./OrganisationInfo";
 import { SectionHeader } from "./Typography";
 import OrganisationApproach from "./OrganisationApproach";
 import OrganisationValue from "./OrganisationValue";
-import PageCallToDonate from "@/page/PageCallToDonate";
+import PageCallToDonate from "@/page/ui/PageCallToDonate";
 import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems";
 
 const Content: React.FC<{

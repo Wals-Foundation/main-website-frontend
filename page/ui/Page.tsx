@@ -32,8 +32,8 @@ const Content: React.FC<{
                 <PageHeader mainMenuItems={data.menuItems} featureFlags={data.featureFlags} />
             )}
             {isLoading && (
-                <div className="min-h-[30vh] flex flex-col justify-center items-center">
-                    <Loader />
+                <div className="h-[100vh] w-[100vw] z-2 flex flex-col justify-center items-center">
+                    <Loader className="w-16" isPageLoad={true} />
                 </div>
             )}
             {error && (

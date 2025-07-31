@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import Loader from "./Loader";
 
 /*
     TEST CASES
@@ -25,7 +26,9 @@ const InfiniteScroller: React.FC<{
         <>
             <div className={`${className ?? ""}`}>
                 {hasMoreData && onLoadMoreData && (
-                    <span ref={loadTrigger} className="mx-auto">Loading...</span>
+                    <div ref={loadTrigger} className="w-fit mx-auto">
+                        <Loader isPageLoad={false} className="w-60"/>
+                    </div>
                 )}
             </div>
         </>
