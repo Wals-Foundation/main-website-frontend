@@ -21,7 +21,7 @@ const getProgramDetails = async (code: string): Promise<{ program: CauseDetail |
 };
 
 export const generateStaticParams = Config.isStaticHost
-    ? async () => ([])
+    ? async () => (['n'])
     : undefined;
 
 export default async function ProgramDetail({
