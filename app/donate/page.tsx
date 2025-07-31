@@ -1,5 +1,5 @@
 "use client"
-import Typography from "@/components/Typography"
+/* import Typography from "@/components/Typography"
 import Input from "@/components/Input"
 import Button from "@/components/Button"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -7,9 +7,17 @@ import Testimonies from "@/components/Testimonies"
 import people4 from "@/assets/images/people4.png"
 import people5 from "@/assets/images/people5.png"
 import { useState } from "react"
-import { usePaystackPayment } from "react-paystack"
+import { usePaystackPayment } from "react-paystack" */
 
 export default function Donate() {
+  return (
+    <>
+      <p>{`Frank it doesn't work so replaced with this message for you`}</p>
+    </>
+  )
+}
+
+/* export default function Donate() {
   const [data, setData] = useState({ name: "", email: "", cause: "", amount: "", message: "" })
 
   const [loading, setLoading] = useState(false)
@@ -148,4 +156,4 @@ export default function Donate() {
       </section>
     </main>
   )
-}
+} */

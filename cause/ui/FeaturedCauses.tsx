@@ -3,6 +3,7 @@ import { CauseType } from "../models"
 import { fetchFeaturedCauses } from "../data/cause-strapi-datasource"
 import CauseTabs from "./CauseTabs"
 import { HeadingLarge, SectionHeader, TextLarge } from "@/components/Typography"
+import SuspenseWrapper from "@/components/SuspenseWrapper"
 
 
 const FeaturedCauses: React.FC<{
@@ -20,17 +21,19 @@ const FeaturedCauses: React.FC<{
                 <SectionHeader className="mx-auto w-fit" text="Featured Causes" />
                 <HeadingLarge className="mt-4 text-center" text="Causes we are passionate about" />
                 <TextLarge className="mt-4 text-center" text="Help us bring education, healthcare, and economic opportunities to underserved communities. Every donation creates lasting change." />
-                <CauseTabs
-                    className="w-full mt-8"
-                    backgroundColorClass="bg-white"
-                    causesUrl={causesUrl}
-                    donateUrl={donateUrl}
-                    causeDetailsUrl={causeDetailsUrl}
-                    initialCommunities={!isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult : []}
-                    initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []}
-                    initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []}
-                    loadMoreCauses={false}
-                />
+                <SuspenseWrapper>
+                    <CauseTabs
+                        className="w-full mt-8"
+                        backgroundColorClass="bg-white"
+                        causesUrl={causesUrl}
+                        donateUrl={donateUrl}
+                        causeDetailsUrl={causeDetailsUrl}
+                        initialCommunities={!isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult : []}
+                        initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []}
+                        initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []}
+                        loadMoreCauses={false}
+                    />
+                </SuspenseWrapper>
             </div>
         </>
     )
