@@ -21,7 +21,7 @@ const getProjectDetails = async (code: string): Promise<{ project: CauseDetail |
 };
 
 export const generateStaticParams = Config.isStaticHost
-    ? async () => (['n'])
+    ? async () => ([{ code: 'n' }])
     : undefined;
 
 export default async function ProjectDetail({

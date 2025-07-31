@@ -21,7 +21,7 @@ const getCommunityDetails = async (code: string): Promise<{ community: CauseDeta
 };
 
 export const generateStaticParams = Config.isStaticHost
-    ? async () => (['n'])
+    ? async () => ([{ code: 'n' }])
     : undefined;
 
 export default async function CommunityDetail({
