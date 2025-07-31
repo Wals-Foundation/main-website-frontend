@@ -1,5 +1,5 @@
 import React from "react"
-import Typography, { SectionHeader } from "./Typography"
+import { SectionHeader } from "./Typography"
 import MarkdownDisplay from "./MarkdownDisplay"
 
 interface AboutSectionProps {

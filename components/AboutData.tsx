@@ -9,6 +9,12 @@ import DataFetcher from "./DataFetcher";
 import AboutPageSubheadlineAndActions from "./AboutPageSubheadlineAndActions";
 import { Organisation } from "@/app/about/about-organisation";
 import { fetchAboutOrganisation } from "@/app/about/data/about-strapi-datasource";
+import OrganisationInfo from "./OrganisationInfo";
+import { SectionHeader } from "./Typography";
+import OrganisationApproach from "./OrganisationApproach";
+import OrganisationValue from "./OrganisationValue";
+import PageCallToDonate from "@/page/PageCallToDonate";
+import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems";
 
 const Content: React.FC<{
   className?: string;
@@ -21,7 +27,7 @@ const Content: React.FC<{
 
   return (
     <>
-      <section className="mt-8">
+      <section className={`mb-8 ${className ?? ""}`}>
         {(page?.headline && page.subheadline) && (
           <PageIntro
             headline={<PageHeadline headline={page.headline} />}
@@ -40,10 +46,42 @@ const Content: React.FC<{
           </div>
         )}
       </section>
-      <section className="mt-8">
+      <section className="w-11/12 mx-auto mb-8">
         {organisation && (
-          <p>{organisation.organisationVision}</p>
+          <div>
+            <OrganisationInfo label="Our mission" info={organisation.organisationMission} />
+            <OrganisationInfo className="mt-4" label="Our vision" info={organisation.organisationMission} />
+            <OrganisationInfo className="mt-4" label="Our story" info={organisation.organisationStory} />
+            <div className="mt-4">
+              <SectionHeader text="Our approach" />
+              <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
+                {organisation.organisationApproaches.map((approach) => (
+                  <OrganisationApproach
+                    className="mt-4 sm:mt-0"
+                    icon={approach.icon}
+                    title={approach.title}
+                    approach={approach.explanation} />
+                ))}
+              </div>
+            </div>
+            <div className="mt-4">
+              <SectionHeader text="Our values" />
+              <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
+                {organisation.organisationValues.map((value) => (
+                  <OrganisationValue
+                    className="mt-4 sm:mt-0"
+                    icon={value.icon}
+                    title={value.title}
+                    value={value.explanation} />
+                ))}
+              </div>
+            </div>
+          </div>
         )}
+      </section>
+      <section className="mb-8">
+        <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
+        <PageGalleryInitialItems className="mt-8"/>
       </section>
     </>
   )
@@ -62,7 +100,7 @@ export const fetchAboutPageData = async (): Promise<{ organisation: Organisation
 }
 
 export const renderAboutPageData = (dataLoad: DataLoad<{ organisation: Organisation, page: Page }>) => (
-  <Content {...dataLoad} />
+  <Content className="mt-8" {...dataLoad} />
 )
 const AboutPageData: React.FC = () => {
   return (<DataFetcher cacheKey="aboutPageData" dataFetcherKey="aboutPageData" dataRendererKey="aboutPageData" />)

@@ -14,7 +14,7 @@ import { DataFetcherKey, dataFetchers, DataRendererKey, dataRenderers } from "@/
  * Use cases: semi-static content like "About Us", where content changes occasionally,
  * but needs to be cached or refreshed via revalidation.
  * 
- * Seems must be wrapped with a normal component which is at top level of page layout
+ * Must not have an ancestor that's async (e.g can't have another DataFetcher as ancestor)
  *
  * @template T - The expected shape of the fetched data.
  *

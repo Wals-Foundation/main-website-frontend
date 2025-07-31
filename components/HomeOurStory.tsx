@@ -1,8 +1,8 @@
 import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
-import AboutUsSection from "./AboutUsSection";
 import { StrapiError } from "@/core/data/strapi-error";
 import DataFetcher from "./DataFetcher";
 import { DataLoad } from "@/core/models";
+import OrganisationInfo from "./OrganisationInfo";
 
 const Content: React.FC<{
     className?: string;
@@ -13,7 +13,7 @@ const Content: React.FC<{
     return (
         <div className={className ?? ""}>
             {data && (
-                <AboutUsSection displayContent={true} title="About Us" content={data} />
+                <OrganisationInfo label="About Us" info={data} />
             )}
         </div>
     );

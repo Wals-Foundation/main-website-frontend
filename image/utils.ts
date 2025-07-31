@@ -29,7 +29,7 @@ function convertAspectRatioFormatForTailwindClass(aspect: string): string {
 const getFeatureViewportBreakpointImageSource = (
     feature: string,
     sources: ImageSource[]
-): { aspectRatio: string; source: ImageSource } => {
+): { featureAspectRatio: string; source: ImageSource } => {
     if (!sources.length) {
         throw new Error(`Image sources array is empty for feature "${feature}"`);
     }
@@ -41,7 +41,7 @@ const getFeatureViewportBreakpointImageSource = (
     const aspectRatio = convertAspectRatioFormatForTailwindClass(rawRatio);
 
     return {
-        aspectRatio,
+        featureAspectRatio: aspectRatio,
         source: selectedSource,
     };
 };

@@ -12,7 +12,9 @@ const getGalleryItems = async (): Promise<PagedData<GalleryItem>> => {
 const PageGalleryInitialItems: React.FC<{ className?: string }> = async ({ className }) => {
     const initialGalleryItems = await getGalleryItems()
     return (
-        <PageGallery className="mb-4" initialItems={initialGalleryItems} />
+        <div className={className ?? ""}>
+            <PageGallery className="mb-4" initialItems={initialGalleryItems} />
+        </div>
     )
 }
 

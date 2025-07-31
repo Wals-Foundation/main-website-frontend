@@ -2,6 +2,7 @@ import HomeOurStory from "@/components/HomeOurStory"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
+import PageCallToDonate from "@/page/PageCallToDonate"
 
 
 export default function Home() {
@@ -16,24 +17,25 @@ export default function Home() {
 
   return (
     <>
-      <section className="mt-8">
+      <section className="mt-8 mb-8">
         <HomeData />
       </section>
       <section>
         <HomeOurStory />
       </section>
-      <section className="w-screen bg-section-bg-gray mt-4 py-8 sm:py-16">
+      <section className="w-screen bg-section-bg-gray mb-8 py-8 sm:py-16">
         <div className="w-11/12 md:max-w-[1052px] mx-auto">
           <FeaturedCauses
             className="w-full mx-auto mt-4"
-            causesUrl="causes"
-            causeDetailsUrl="causes"
-            donateUrl="donate"
+            causesUrl="/causes"
+            causeDetailsUrl="/causes"
+            donateUrl="/donate"
           />
         </div>
       </section>
-      <section className="mt-8">
-        <PageGalleryInitialItems className="mb-4" />
+      <section className="mb-8">
+        <PageCallToDonate className="sm:mt-8" donateUrl="/donate"/>
+        <PageGalleryInitialItems />
       </section>
     </>
   )
