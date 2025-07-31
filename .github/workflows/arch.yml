@@ -1,10 +1,9 @@
-name: Build and Deploy via FTP
+name: Arch
 
 on:
   push:
     branches:
       - mark/architecture
-      - production
 
 jobs:
   build-and-deploy:
