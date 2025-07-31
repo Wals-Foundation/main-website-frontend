@@ -39,7 +39,7 @@ export default function Home() {
       </section>
     </>
   )
-
+ 
   /* const [loading, setLoading] = useState(false) // 
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)
