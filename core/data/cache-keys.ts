@@ -1,8 +1,6 @@
 import { CauseType } from "@/cause/models";
 import {
     aboutOurStoryQueryFields,
-    aboutQueryFields,
-    aboutValuesQueryFields,
     communityDetailQuery,
     causesQuery,
     featuredCauseQuery,
@@ -11,7 +9,8 @@ import {
     pageQuery,
     paginate,
     projectDetailQuery,
-    programDetailQuery
+    programDetailQuery,
+    aboutQuery
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -20,9 +19,8 @@ const causePath = {
     [CauseType.Project]: 'projects',
 };
 
-export const aboutCachekey = `about-organisation?${aboutQueryFields}`
+export const aboutCachekey = `about-organisation?${aboutQuery()}`
 export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
-export const aboutValuesCacheKey = `about-organisation?${aboutValuesQueryFields}`
 export const featureFlagsCacheKey = `feature-flags?fields=key,isLive`
 export const mainMenuItemsCacheKey = `main-menu-items?${mainMenuItemQueryFields}`
 

@@ -1,10 +1,20 @@
-import { Organisation, OrganisationValue } from "../about-organisation"
+import { ImageSourceResponse, mapImageSourceResponseToImageSource } from "@/core/data/strapi-responses"
+import { Organisation, OrganisationApproach, OrganisationValue } from "../about-organisation"
+
+export interface OrganisationApproachResponse {
+    id: number
+    documentId: string
+    title: string
+    explanation: string
+    icon: ImageSourceResponse
+}
 
 export interface OrganisationValueResponse {
     id: number
     documentId: string
     title: string
     explanation: string
+    icon: ImageSourceResponse
 }
 
 export interface OrganisationResponseData {
@@ -13,10 +23,7 @@ export interface OrganisationResponseData {
     organisation_mission: string
     organisation_story: string
     organisation_vision: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    locale: string
+    organisation_approaches: OrganisationApproachResponse[]
     organisation_values: OrganisationValueResponse[]
 }
 
@@ -44,11 +51,21 @@ export interface OrganisationValuesResponse {
     data: OrganisationValuesResponseData
 }
 
-function mapValueResponseToValue(valueResponse: OrganisationValueResponse): OrganisationValue {
+function mapApproachResponseToApproach(response: OrganisationApproachResponse): OrganisationApproach {
     return {
-        id: valueResponse.documentId,
-        title: valueResponse.title,
-        explanation: valueResponse.explanation
+        id: response.documentId,
+        title: response.title,
+        explanation: response.explanation,
+        icon: mapImageSourceResponseToImageSource(response.icon)
+    };
+}
+
+function mapValueResponseToValue(response: OrganisationValueResponse): OrganisationValue {
+    return {
+        id: response.documentId,
+        title: response.title,
+        explanation: response.explanation,
+        icon: mapImageSourceResponseToImageSource(response.icon)
     };
 }
 
@@ -60,6 +77,7 @@ export function mapOrganisationResponseToOrganisation(
         organisationMission: response.organisation_mission,
         organisationStory: response.organisation_story,
         organisationVision: response.organisation_vision,
+        organisationApproaches: response.organisation_approaches.map(mapApproachResponseToApproach),
         organisationValues: response.organisation_values.map(mapValueResponseToValue)
     };
 }

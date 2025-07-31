@@ -44,7 +44,7 @@ export function mapImageResponseToImage(imageResponse: ImageResponse): Image {
   };
 }
 
-function mapImageSourceResponseToImageSource(
+export function mapImageSourceResponseToImageSource(
   sourceResponse: ImageSourceResponse
 ): ImageSource {
   return {

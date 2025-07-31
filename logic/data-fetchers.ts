@@ -1,6 +1,7 @@
+import { Organisation } from "@/app/about/about-organisation";
 import { fetchOurStory } from "@/app/about/data/about-strapi-datasource";
 import { fetchAboutPageData, renderAboutPageData } from "@/components/AboutData";
-import { renderAboutOurStory } from "@/components/HomeAboutUs";
+import { renderAboutOurStory } from "@/components/HomeOurStory";
 import { fetchHomePageData, renderHomePageData } from "@/components/HomeData";
 import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
 import { StrapiError } from "@/core/data/strapi-error";
@@ -13,7 +14,7 @@ import React from "react";
 // Define return types for each fetcher
 type DataFetchers = {
     "about:ourStory": () => Promise<string | StrapiError>;
-    "aboutPageData": () => Promise<Page | StrapiError>;
+    "aboutPageData": () => Promise<{ organisation: Organisation, page: Page } | StrapiError>;
     "homePageData": () => Promise<Page | StrapiError>;
     "siteData": () => Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError>
     // Add more mappings here

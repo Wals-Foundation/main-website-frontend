@@ -3,9 +3,7 @@ import AboutPageData from "@/components/AboutData";
 export default function About() {
   return (
     <>
-      <section className="mt-8">
-        <AboutPageData />
-      </section>
+      <AboutPageData />
     </>
   )
 }

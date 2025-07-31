@@ -23,7 +23,7 @@ export const renderAboutOurStory = (dataLoad: DataLoad<string>) => (
     <Content className="w-11/12 mx-auto mt-8 pt-8" {...dataLoad} />
 )
 
-const HomeAboutUs: React.FC<{ className?: string }> = ({ className }) => {
+const HomeOurStory: React.FC<{ className?: string }> = ({ className }) => {
     return (
         <DataFetcher
             cacheKey={aboutOurStoryCacheKey}
@@ -33,4 +33,4 @@ const HomeAboutUs: React.FC<{ className?: string }> = ({ className }) => {
     );
 };
 
-export default HomeAboutUs;
+export default HomeOurStory;

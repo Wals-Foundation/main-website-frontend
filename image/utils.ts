@@ -13,6 +13,8 @@ const featureViewportBreakpointAspectRatio: Record<string, string> = {
     cause_detail_mobile: "3x2",
     activity_desktop: "1x1",
     activity_mobile: "1x1",
+    icon_desktop: "1x1",
+    icon_mobile: "1x1"
 };
 
 const aspectRatioRegex = (ratio: string): RegExp => {

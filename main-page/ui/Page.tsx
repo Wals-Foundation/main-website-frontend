@@ -11,13 +11,13 @@ import BreakpointObserver from "./BreakpointObserver"
 export const fetchSiteData = async (): Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError> => {
     const menuItemsResult = await fetchMainMenuItems();
     const featureFlagsResult = await fetchFeatureFlags()
-    if (isStrapiError(menuItemsResult)) {
-        return menuItemsResult
+    if (!isStrapiError(menuItemsResult)) {
+        return ({
+            featureFlags: !isStrapiError(featureFlagsResult) ? featureFlagsResult : {},
+            menuItems: !isStrapiError(menuItemsResult) ? menuItemsResult : []
+        })
     }
-    return ({
-        featureFlags: !isStrapiError(featureFlagsResult) ? featureFlagsResult : {},
-        menuItems: !isStrapiError(menuItemsResult) ? menuItemsResult : []
-    })
+    return menuItemsResult
 }
 
 const Content: React.FC<{

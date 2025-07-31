@@ -1,4 +1,4 @@
-import HomeAboutUs from "@/components/HomeAboutUs"
+import HomeOurStory from "@/components/HomeOurStory"
 import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 import PageGalleryInitialItems from "@/main-page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
@@ -20,7 +20,7 @@ export default function Home() {
         <HomeData />
       </section>
       <section>
-        <HomeAboutUs />
+        <HomeOurStory />
       </section>
       <section className="w-screen bg-section-bg-gray mt-4 py-8 sm:py-16">
         <div className="w-11/12 md:max-w-[1052px] mx-auto">

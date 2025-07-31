@@ -1,6 +1,7 @@
 import { Config } from "../config"
 
 //paths
+const aboutApproachesPath = "[populate][organisation_approaches]"
 const aboutValuesPath = "[populate][organisation_values]"
 const causePath = "[populate][cause]"
 const communitiesPath = "[populate][communities]"
@@ -9,6 +10,7 @@ const districtPath = "[populate][district]"
 const donatablePath = "[populate][donatable]"
 const donationPath = "[populate][donation]"
 const heroesPath = "[populate][heroes]"
+const iconPath = "[populate][icon]"
 const imagePath = "[populate][image]"
 const imageSourcePath = "[populate][source]"
 const locationPath = "[populate][location]"
@@ -17,6 +19,7 @@ const programsPath = "[populate][programs]"
 
 
 // Fields
+const aboutApproachesFields = `${aboutApproachesPath}[fields][0]=title&${aboutApproachesPath}[fields][1]=explanation`
 const aboutValuesFields = `${aboutValuesPath}[fields][0]=title&${aboutValuesPath}[fields][1]=explanation`
 const featuredCausesSortFields = "sort=featuredIndex:desc"
 const featuredCausesQueryLimit = "pagination[start]=0&pagination[limit]=1"
@@ -86,12 +89,20 @@ const relatedCauseFields = (path: string[]): string => {
 
 
 // Final query params
-export const aboutQueryFields = `${aboutValuesFields}`
 export const aboutOurStoryQueryFields = "fields[0]=id&fields[1]=organisation_story"
-export const aboutValuesQueryFields = `${aboutValuesFields}&fields[0]=id`
 export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
+
+export const aboutQuery = (): string => {
+    return [
+        "fields[0]=organisation_mission&fields[1]=organisation_vision&fields[2]=organisation_story",
+        aboutApproachesFields,
+        aboutValuesFields,
+        imageSourceFields([aboutApproachesPath, iconPath]),
+        imageSourceFields([aboutValuesPath, iconPath]),
+    ].join("&")
+}
 
 export const communityDetailQuery = (code: string): string => {
     return [
