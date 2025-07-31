@@ -1,6 +1,7 @@
 import { fetchCauseDetail } from "@/cause/data/cause-strapi-datasource"
 import { CauseDetail, CauseType } from "@/cause/models"
 import CauseDetailDisplay from "@/cause/ui/CauseDetailDisplay";
+import { Config } from "@/core/config";
 import { isStrapiError, StrapiError } from "@/core/data/strapi-error"
 
 const getProjectDetails = async (code: string): Promise<{ project: CauseDetail | null, error: StrapiError | null }> => {
@@ -18,6 +19,10 @@ const getProjectDetails = async (code: string): Promise<{ project: CauseDetail |
         error: null
     };
 };
+
+export const generateStaticParams = Config.isStaticHost
+    ? async () => ([])
+    : undefined;
 
 export default async function ProjectDetail({
     params,
