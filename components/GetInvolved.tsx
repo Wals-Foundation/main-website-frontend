@@ -8,7 +8,7 @@ import MarkdownDisplay from "./MarkdownDisplay";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 import { getFetcher } from "@/logic/config/base";
 import { ImageResponse, ImageSourceResponse, mapImageResponseToModel, mapImageSourceResponseToModel, mapWebsiteActionResponseToModel, WebsiteActionResponse } from "@/core/data/strapi-responses";
-import { getInvolvedQuery as getInvolvedOptionsQuery, imageQuery } from "@/core/data/strapi-url-parts";
+import { imageQuery } from "@/core/data/strapi-url-parts";
 import { Config } from "@/core/config";
 import DataFetcher from "./DataFetcher";
 import { getInvolvedCacheKey } from "@/core/data/cache-keys";
@@ -57,6 +57,7 @@ export const fetchGetInvolvedData = async (): Promise<{ image?: Image, options: 
         }
         return StrapiError.Unknown
     } catch (error) {
+        console.error("Error fetching Get Involved data:", error);
         return StrapiError.Server
     }
 }
@@ -91,9 +92,8 @@ const GetInvolvedOption: React.FC<{
 
 const Content: React.FC<{
     className?: string,
-    data?: { image?: Image, options: GetInvolvedOption[] },
-    error?: StrapiError,
-}> = ({ className, data, error }) => {
+    data?: { image?: Image, options: GetInvolvedOption[] }
+}> = ({ className, data }) => {
     return (
         <>
             <div className={`${className ?? ""}`}>
