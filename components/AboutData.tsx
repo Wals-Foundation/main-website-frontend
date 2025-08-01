@@ -7,13 +7,15 @@ import PageHeroes from "@/page/ui/PageHeroes";
 import PageIntro from "@/page/ui/PageIntro";
 import DataFetcher from "./DataFetcher";
 import AboutPageSubheadlineAndActions from "./AboutPageSubheadlineAndActions";
-import { Organisation } from "@/app/about/about-organisation";
+import { Organisation } from "@/app/about/models";
 import { fetchAboutOrganisation } from "@/app/about/data/about-strapi-datasource";
 import OrganisationInfo from "./OrganisationInfo";
-import { SectionHeader } from "./Typography";
+import { Caption, HeadingLarge, SectionHeader } from "./Typography";
 import OrganisationApproach from "./OrganisationApproach";
 import OrganisationValue from "./OrganisationValue";
 import PageCallToDonate from "@/page/ui/PageCallToDonate";
+import ImageDisplay from "@/image/Image";
+import OrganisationImpactContainer from "./OrganisationImpactContainer";
 
 const Content: React.FC<{
   className?: string;
@@ -23,7 +25,6 @@ const Content: React.FC<{
 }> = ({ className, data }) => {
   const organisation = data?.organisation
   const page = data?.page
-
   return (
     <>
       <section className={`mb-8 ${className ?? ""}`}>
@@ -77,6 +78,34 @@ const Content: React.FC<{
                 ))}
               </div>
             </div>
+            {(organisation.organisationImpact.length > 0) && (
+              <div className="mt-4">
+                <SectionHeader className="w-fit mx-auto" text="Our impact" />
+                <div className="mt-4 sm:grid sm:grid-cols-4 sm:gap-8">
+                  {organisation.organisationImpact.map((impact) => (
+                    <>
+                      <OrganisationImpactContainer className="mt-2" key={`${impact.id}-image`}>
+                        <ImageDisplay className="rounded-lg" feature="organisation_impact" image={impact.image} />
+                      </OrganisationImpactContainer>
+                      <OrganisationImpactContainer key={impact.id} className="mt-2 bg-primary rounded-lg">
+                        <div>
+                          <HeadingLarge
+                            className="w-fit mx-auto text-white"
+                            text={impact.number}
+                            overrideTextColor={true}
+                          />
+                          <Caption
+                            className="w-fit mx-auto text-white text-center"
+                            text={impact.caption}
+                            overrideTextColor={true}
+                          />
+                        </div>
+                      </OrganisationImpactContainer>
+                    </>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </section>

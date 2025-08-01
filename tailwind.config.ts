@@ -70,6 +70,9 @@ export default {
     "sm:pt-16",
     "sm:px-8",
     "sm:py-0",
+    "sm:shrink-0",
+    "sm:h-64",
+    "sm:flex-wrap",
     "w-4"
   ]
 } satisfies Config

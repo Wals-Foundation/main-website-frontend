@@ -12,7 +12,8 @@ import {
     programDetailQuery,
     aboutQuery,
     contactFields,
-    socialMediaQuery
+    socialMediaQuery,
+    getInvolvedQuery
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -30,6 +31,7 @@ export const mainMenuItemsCacheKey = `main-menu-items?${mainMenuItemQueryFields}
 export const featuredCommunitiesCacheKey = `communities?${featuredCauseQuery()}`
 export const featuredProgramsCacheKey = `programs?${featuredCauseQuery()}`
 export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
+export const getInvolvedCacheKey = `get-involved-options?${getInvolvedQuery()}`
 export const socialMediaCacheKey = `social-medias?${socialMediaQuery()}`
 
 export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {

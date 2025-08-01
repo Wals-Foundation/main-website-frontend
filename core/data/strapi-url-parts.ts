@@ -2,7 +2,10 @@ import { Config } from "../config"
 
 //paths
 const aboutApproachesPath = "[populate][organisation_approaches]"
+const aboutImpactsPath = "[populate][organisation_impacts]"
 const aboutValuesPath = "[populate][organisation_values]"
+const actionPath = "[populate][action]"
+const actionsPath = "[populate][actions]"
 const causePath = "[populate][cause]"
 const communitiesPath = "[populate][communities]"
 const currencyPath = "[populate][currency]"
@@ -20,13 +23,18 @@ const programsPath = "[populate][programs]"
 
 // Fields
 const aboutApproachesFields = `${aboutApproachesPath}[fields][0]=title&${aboutApproachesPath}[fields][1]=explanation`
+const aboutImpactsFields = `${aboutImpactsPath}[fields][0]=caption&${aboutImpactsPath}[fields][1]=details&${aboutImpactsPath}[fields][2]=number`
 const aboutValuesFields = `${aboutValuesPath}[fields][0]=title&${aboutValuesPath}[fields][1]=explanation`
 const featuredCausesSortFields = "sort=featuredIndex:desc"
 const featuredCausesQueryLimit = "pagination[start]=0&pagination[limit]=1"
 const gallerySortFields = "sort=updatedAt:desc"
 const mainMenuDestinationFields = "[populate][destination][fields][0]=relativeUrl"
 const pageFields = "fields[0]=headline&fields[1]=subheadline"
-const socialMediaFields = "fields[0]=accountUrl&fields[1]=name"
+
+const actionFields = (path: string[]): string => {
+    const pathString = path.join("")
+    return `${pathString}[fields][0]=id&${pathString}[fields][1]=label&${pathString}[fields][2]=link&${pathString}[fields][3]=type`
+}
 
 const causeDetailFields = (path: string[]): string => {
     const pathString = path.join("")
@@ -100,8 +108,11 @@ export const aboutQuery = (): string => {
     return [
         "fields[0]=organisation_mission&fields[1]=organisation_vision&fields[2]=organisation_story",
         aboutApproachesFields,
+        aboutImpactsFields,
         aboutValuesFields,
         imageSourceFields([aboutApproachesPath, iconPath]),
+        imageFields([aboutImpactsPath, imagePath]),
+        imageSourceFields([aboutImpactsPath, imagePath, imageSourcePath]),
         imageSourceFields([aboutValuesPath, iconPath]),
     ].join("&")
 }
@@ -145,6 +156,21 @@ export const galleryQuery = (): string => {
         gallerySortFields,
         imageFields([imagePath]),
         imageSourceFields([imagePath, imageSourcePath]),
+    ].join("&");
+};
+
+export const getInvolvedQuery = (): string => {
+    return [
+        "[fields][0]=details",
+        actionFields([actionPath]),
+        imageSourceFields([iconPath])
+    ].join("&")
+}
+
+export const imageQuery = (): string => {
+    return [
+        "[fields][0]=id",
+        imageSourceFields([imageSourcePath]),
     ].join("&");
 };
 

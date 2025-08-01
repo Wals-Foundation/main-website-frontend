@@ -1,5 +1,5 @@
-import { ImageSourceResponse, mapImageSourceResponseToImageSource } from "@/core/data/strapi-responses"
-import { Organisation, OrganisationApproach, OrganisationValue } from "../about-organisation"
+import { ImageResponse, ImageSourceResponse, mapImageResponseToModel, mapImageSourceResponseToModel } from "@/core/data/strapi-responses"
+import { Organisation, OrganisationApproach, OrganisationImpact, OrganisationValue } from "../models"
 
 export interface OrganisationApproachResponse {
     id: number
@@ -7,6 +7,15 @@ export interface OrganisationApproachResponse {
     title: string
     explanation: string
     icon: ImageSourceResponse
+}
+
+export interface OrganisationImpactResponse {
+    id: number
+    documentId: string
+    caption: string
+    details: string
+    number: string
+    image: ImageResponse
 }
 
 export interface OrganisationValueResponse {
@@ -20,6 +29,7 @@ export interface OrganisationValueResponse {
 export interface OrganisationResponseData {
     id: number
     documentId: string
+    organisation_impacts: OrganisationImpactResponse[]
     organisation_mission: string
     organisation_story: string
     organisation_vision: string
@@ -51,45 +61,57 @@ export interface OrganisationValuesResponse {
     data: OrganisationValuesResponseData
 }
 
-function mapApproachResponseToApproach(response: OrganisationApproachResponse): OrganisationApproach {
+function mapApproachResponseToModel(response: OrganisationApproachResponse): OrganisationApproach {
     return {
         id: response.documentId,
         title: response.title,
         explanation: response.explanation,
-        icon: mapImageSourceResponseToImageSource(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon)
     };
 }
 
-function mapValueResponseToValue(response: OrganisationValueResponse): OrganisationValue {
+function mapImpactResponseToModel(response: OrganisationImpactResponse): OrganisationImpact {
+    return {
+        id: response.documentId,
+        caption: response.caption,
+        details: response.details,
+        number: response.number,
+        image: mapImageResponseToModel(response.image)
+    };
+}
+
+function mapValueResponseToModel(response: OrganisationValueResponse): OrganisationValue {
     return {
         id: response.documentId,
         title: response.title,
         explanation: response.explanation,
-        icon: mapImageSourceResponseToImageSource(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon)
     };
 }
 
-export function mapOrganisationResponseToOrganisation(
+export function mapOrganisationResponseToModel(
     response: OrganisationResponseData
 ): Organisation {
+    console.log("About response", response.organisation_impacts)
     return {
         id: response.documentId,
+        organisationImpact: response.organisation_impacts.map(mapImpactResponseToModel),
         organisationMission: response.organisation_mission,
         organisationStory: response.organisation_story,
         organisationVision: response.organisation_vision,
-        organisationApproaches: response.organisation_approaches.map(mapApproachResponseToApproach),
-        organisationValues: response.organisation_values.map(mapValueResponseToValue)
+        organisationApproaches: response.organisation_approaches.map(mapApproachResponseToModel),
+        organisationValues: response.organisation_values.map(mapValueResponseToModel)
     };
 }
 
-export function mapOrganisationStoryResponseToStory(
+export function mapOrganisationStoryResponseString(
     response: OrganisationStoryResponseData
 ): string {
     return response.organisation_story;
 }
 
-export function mapOrganisationValuesResponseToValues(
+export function mapOrganisationValuesResponseToModels(
     response: OrganisationValuesResponseData
 ): OrganisationValue[] {
-    return response.organisation_values.map(mapValueResponseToValue);
+    return response.organisation_values.map(mapValueResponseToModel);
 }

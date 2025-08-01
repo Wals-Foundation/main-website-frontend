@@ -9,7 +9,6 @@ import { Config } from "@/core/config";
 export const fetchGalleryItems = async (page: number): Promise<PagedData<GalleryItem> | StrapiError> => {
 
     const relativeUrl = galleryCacheKey(page);
-    console.log(relativeUrl)
     try {
         const response = await getFetcher<GalleryItemsResponse>(relativeUrl, {
             next: {

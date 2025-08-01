@@ -3,6 +3,7 @@ import FeaturedCauses from "@/cause/ui/FeaturedCauses"
 import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
 import PageCallToDonate from "@/page/ui/PageCallToDonate"
+import GetInvolved from "@/components/GetInvolved"
 
 
 export default function Home() {
@@ -33,13 +34,18 @@ export default function Home() {
           />
         </div>
       </section>
+      <section className="w-screen bg-header mt-8 mb-8 py-8 sm:py-16">
+        <div className="w-11/12 md:max-w-[1052px] mx-auto">
+          <GetInvolved className="w-full mx-auto mt-4" />
+        </div>
+      </section>
       <section className="mb-8">
-        <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate"/>
+        <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
         <PageGalleryInitialItems className="mt-8" />
       </section>
     </>
   )
- 
+
   /* const [loading, setLoading] = useState(false) // 
   const [activeCause, setActiveCause] = useState<CauseType>("Communities")
   const data = useAppSelector((state) => state.usePageHeadlines)

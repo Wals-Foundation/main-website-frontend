@@ -1,5 +1,18 @@
 import { StrapiError } from "./data/strapi-error";
 
+export enum WebsiteActionType {
+    Primary = "primary",
+    Secondary = "secondary",
+    SecondaryBorder = "secondaryBorder"
+}
+
+export interface WebsiteAction {
+    id: string;
+    label: string;
+    link: string;
+    type: WebsiteActionType
+}
+
 export interface DataLoad<T> {
     data?: T
     error?: StrapiError

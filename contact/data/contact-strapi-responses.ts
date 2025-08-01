@@ -1,4 +1,4 @@
-import { ImageSourceResponse, mapImageSourceResponseToImageSource } from "@/core/data/strapi-responses"
+import { ImageSourceResponse, mapImageSourceResponseToModel } from "@/core/data/strapi-responses"
 import { Contact, SocialMediaAccount } from "../models"
 
 export interface SocialMediaAccountResponse {
@@ -19,6 +19,6 @@ export function mapSocialMediaAccountResponseToDomain(response: SocialMediaAccou
     return {
         accountUrl: response.accountUrl,
         name: response.name,
-        icon: mapImageSourceResponseToImageSource(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon)
     };
 }

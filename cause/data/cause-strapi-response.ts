@@ -1,4 +1,4 @@
-import { HeroResponse, mapHeroResponseToHero, mapMetaToPagination, Meta } from "@/core/data/strapi-responses";
+import { HeroResponse, mapHeroResponseToModel, mapMetaToPagination, Meta } from "@/core/data/strapi-responses";
 import { Cause, CauseDetail, CauseType, District, Location, Region, RelatedCause } from "../models";
 import { DonatableResponse, mapDonatableResponseToDonatable } from "@/donation/data/donatable-strapi-response";
 import { PagedData } from "@/core/models";
@@ -102,7 +102,7 @@ function mapCauseResponseToCause(
         type,
         introduction: response.cause.introduction,
         impact: response.cause.impact,
-        heroes: response.cause.heroes.map(mapHeroResponseToHero),
+        heroes: response.cause.heroes.map(mapHeroResponseToModel),
     };
 }
 
@@ -147,7 +147,7 @@ function mapCauseDetailInfoResponseToCauseDetailInfo(
         district: mapDistrictResponseToDistrict(response.district),
         location: mapLocationResponseToLocation(response.location),
         region: mapRegionResponseToRegion(response.region),
-        heroes: response.heroes.map(mapHeroResponseToHero)
+        heroes: response.heroes.map(mapHeroResponseToModel)
     };
 }
 

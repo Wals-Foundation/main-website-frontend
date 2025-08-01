@@ -1,4 +1,4 @@
-import { Hero, Image, ImageSource } from "../models";
+import { Hero, Image, ImageSource, WebsiteAction, WebsiteActionType } from "../models";
 
 export interface ImageSourceResponse {
   id: number;
@@ -19,6 +19,14 @@ export interface HeroResponse {
   image: ImageResponse;
 }
 
+export interface WebsiteActionResponse {
+  id: number;
+  documentId: string;
+  label: string;
+  link: string;
+  type: string;
+}
+
 export interface Pagination {
   page: number;
   pageSize: number;
@@ -30,21 +38,21 @@ export interface Meta {
   pagination: Pagination;
 }
 
-export function mapHeroResponseToHero(heroResponse: HeroResponse): Hero {
+export function mapHeroResponseToModel(heroResponse: HeroResponse): Hero {
   return {
     id: heroResponse.documentId,
-    image: mapImageResponseToImage(heroResponse.image)
+    image: mapImageResponseToModel(heroResponse.image)
   };
 }
 
-export function mapImageResponseToImage(imageResponse: ImageResponse): Image {
+export function mapImageResponseToModel(imageResponse: ImageResponse): Image {
   return {
     id: imageResponse.documentId,
-    source: imageResponse.source.map(mapImageSourceResponseToImageSource)
+    source: imageResponse.source.map(mapImageSourceResponseToModel)
   };
 }
 
-export function mapImageSourceResponseToImageSource(
+export function mapImageSourceResponseToModel(
   sourceResponse: ImageSourceResponse
 ): ImageSource {
   return {
@@ -54,6 +62,13 @@ export function mapImageSourceResponseToImageSource(
     name: sourceResponse.name
   };
 }
+
+export const mapWebsiteActionResponseToModel = (response: WebsiteActionResponse): WebsiteAction => ({
+  id: response.documentId,
+  label: response.label,
+  link: response.link,
+  type: response.type as WebsiteActionType,
+});
 
 export function mapMetaToPagination(meta: Meta): { 
   page: number; 

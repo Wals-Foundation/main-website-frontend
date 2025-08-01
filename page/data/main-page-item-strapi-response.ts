@@ -1,4 +1,4 @@
-import { HeroResponse, Meta, mapHeroResponseToHero } from "@/core/data/strapi-responses";
+import { HeroResponse, Meta, mapHeroResponseToModel } from "@/core/data/strapi-responses";
 import { Page } from "../page";
 
 export interface PageResponse {
@@ -23,6 +23,6 @@ function mapPageResponseToPage(response: PageResponse): Page {
         id: response.documentId,
         headline: response.headline,
         subheadline: response.subheadline,
-        heroes: response.heroes.map(mapHeroResponseToHero)
+        heroes: response.heroes.map(mapHeroResponseToModel)
     };
 }

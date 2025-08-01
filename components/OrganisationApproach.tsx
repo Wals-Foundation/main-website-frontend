@@ -1,6 +1,6 @@
 import { ImageSource } from "@/core/models";
-import ImageDisplay from "@/image/Image";
 import { HeadingSmall, TextMedium } from "./Typography";
+import Icon from "./Icon";
 
 const OrganisationApproach: React.FC<{
     className?: string,
@@ -11,7 +11,7 @@ const OrganisationApproach: React.FC<{
     return (
         <div className={className ?? ""}>
             <div>
-                <ImageDisplay className="w-6" image={icon} aspectRatio="1/1" />
+                <Icon icon={icon} />
                 <HeadingSmall className="mt-2" text={title} />
                 <TextMedium className="mt-2" text={approach} />
             </div>

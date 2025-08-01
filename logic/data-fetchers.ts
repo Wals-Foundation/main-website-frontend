@@ -1,4 +1,4 @@
-import { Organisation } from "@/app/about/about-organisation";
+import { Organisation } from "@/app/about/models";
 import { fetchOurStory } from "@/app/about/data/about-strapi-datasource";
 import { fetchAboutPageData, renderAboutPageData } from "@/components/AboutData";
 import { renderAboutOurStory } from "@/components/HomeOurStory";
@@ -11,11 +11,14 @@ import { MenuItem } from "@/menu/menu-item";
 import React from "react";
 import { Contact, SocialMediaAccount } from "@/contact/models";
 import { fetchFooterData, renderPageFooter } from "@/page/ui/PageFooter";
+import { fetchGetInvolvedData, GetInvolvedOption, renderGetInvolvedData } from "@/components/GetInvolved";
+import { Image } from "@/core/models";
 
 // Define return types for each fetcher
 type DataFetchers = {
     "about:ourStory": () => Promise<string | StrapiError>;
     "aboutPageData": () => Promise<{ organisation: Organisation, page: Page } | StrapiError>;
+    "getInvolvedData": () => Promise<{ image?: Image, options: GetInvolvedOption[] } | StrapiError>;
     "homePageData": () => Promise<Page | StrapiError>;
     "siteData": () => Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError>
     "siteFooter": () => Promise<{ contact?: Contact, socialMedia: SocialMediaAccount[] } | StrapiError>
@@ -25,6 +28,7 @@ type DataFetchers = {
 type DataRenderers = {
     "about:ourStory": (dataLoad: any) => React.ReactElement;
     "aboutPageData": (dataLoad: any) => React.ReactElement;
+    "getInvolvedData": (dataLoad: any) => React.ReactElement;
     "homePageData": (dataLoad: any) => React.ReactElement;
     "siteData": (dataLoad: any) => React.ReactElement;
     "siteFooter": (dataLoad: any) => React.ReactElement;
@@ -34,6 +38,7 @@ type DataRenderers = {
 export const dataRenderers = (): DataRenderers => ({
     "about:ourStory": renderAboutOurStory,
     "aboutPageData": renderAboutPageData,
+    "getInvolvedData": renderGetInvolvedData,
     "homePageData": renderHomePageData,
     "siteData": renderPageHeader,
     "siteFooter": renderPageFooter
@@ -42,6 +47,7 @@ export const dataRenderers = (): DataRenderers => ({
 export const dataFetchers: DataFetchers = {
     "about:ourStory": () => fetchOurStory(aboutOurStoryCacheKey),
     "aboutPageData": () => fetchAboutPageData(),
+    "getInvolvedData": () => fetchGetInvolvedData(),
     "homePageData": () => fetchHomePageData(),
     "siteData": () => fetchSiteData(),
     "siteFooter": () => fetchFooterData()

@@ -3,10 +3,10 @@ import { StrapiError } from "@/core/data/strapi-error";
 import {
     aboutCachekey as aboutRelativeUrl,
 } from "@/core/data/cache-keys";
-import { Organisation } from "../about-organisation";
+import { Organisation } from "../models";
 import {
-    mapOrganisationResponseToOrganisation,
-    mapOrganisationStoryResponseToStory,
+    mapOrganisationResponseToModel,
+    mapOrganisationStoryResponseString,
     OrganisationResponse,
     OrganisationStoryResponse
 } from "./about-strapi-responses";
@@ -22,7 +22,7 @@ export async function fetchAboutOrganisation(): Promise<Organisation | StrapiErr
                 },
             }
         )
-        return mapOrganisationResponseToOrganisation(response.data)
+        return mapOrganisationResponseToModel(response.data)
     } catch (error) {
         console.error(error)
         return StrapiError.Server
@@ -38,7 +38,7 @@ export async function fetchOurStory(aboutOurStoryRelativeUrl: string): Promise<s
                     revalidate: Config.page.cacheMaxAge
                 },
             })
-        return mapOrganisationStoryResponseToStory(response.data)
+        return mapOrganisationStoryResponseString(response.data)
     } catch (error) {
         console.error(error)
         return StrapiError.Server

@@ -1,4 +1,4 @@
-import { ImageResponse, mapImageResponseToImage, mapMetaToPagination, Meta } from "@/core/data/strapi-responses";
+import { ImageResponse, mapImageResponseToModel, mapMetaToPagination, Meta } from "@/core/data/strapi-responses";
 import { PagedData } from "@/core/models";
 import { GalleryItem } from "../gallery-item";
 
@@ -16,7 +16,7 @@ export interface GalleryItemsResponse {
 export function mapGalleryItemResponseToGalleryItem(response: GalleryItemResponse): GalleryItem {
     return {
         id: response.documentId,
-        image: mapImageResponseToImage(response.image)
+        image: mapImageResponseToModel(response.image)
     };
 }
 
