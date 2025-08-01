@@ -99,14 +99,14 @@ const HeroSliderSection: React.FC<HeroSliderSectionProps> = ({
                       </div>
                     </div>
                   ))}
-                  <div className="pt-3">
+                  <div className="p-4 bg-white rounded-lg">
                     <iframe
                       src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                       width="100%"
                       height="200"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
-                      className="rounded-md w-full"
+                      className="rounded-lg w-full"
                     />
                   </div>
                 </div>

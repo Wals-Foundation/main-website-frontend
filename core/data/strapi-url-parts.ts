@@ -68,7 +68,7 @@ const donationFields = (path: string[]): string => {
 
 const heroFields = (path: string[]): string => {
     const pathString = path.join("")
-    return `${pathString}[fields][0]=id`
+    return `${pathString}[fields][0]=html`
 }
 
 const imageFields = (path: string[]): string => {

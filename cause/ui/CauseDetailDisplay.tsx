@@ -4,7 +4,6 @@ import CauseInfoSection from "./CauseInfoSection"
 import ImageDisplay from "@/image/Image"
 import CauseLocationInfo from "./CauseLocationInfo"
 import Donation from "@/donation/ui/Donation"
-import Link from "next/link"
 import { createGoogleMapsLink } from "../utils"
 
 const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetail }> = ({ className, causeDetail }) => {
@@ -12,11 +11,13 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
         <div className={className ?? ""}>
             <article className="w-full">
                 <HeadingLarge className="w-fit mx-auto text-center" text={causeDetail.name} />
-                <ImageDisplay
-                    className="mt-8 rounded-lg"
-                    feature="cause_detail"
-                    image={causeDetail.heroes[0].image}
-                />
+                {(causeDetail.heroes[0].image) && (
+                    <ImageDisplay
+                        className="mt-8 rounded-lg"
+                        feature="cause_detail"
+                        image={causeDetail.heroes[0].image}
+                    />
+                )}
                 <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
                     <div>
                         <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b border-border-gray">

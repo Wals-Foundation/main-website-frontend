@@ -1,8 +1,8 @@
 import { ImageSource } from "@/core/models";
 
 const featureViewportBreakpointAspectRatio: Record<string, string> = {
-    home_hero_carousel_desktop: "16x9",
-    home_hero_carousel_mobile: "2x3",
+    page_hero_desktop: "16x9",
+    page_hero_mobile: "2x3",
     cause_card_desktop: "1x1",
     cause_card_mobile: "1x1",
     gallery_desktop: "1x1",

@@ -29,7 +29,6 @@ const Content: React.FC<{
         <div className="relative w-screen pt-4 aspect-[2/3] sm:aspect-[16/9]">
           <PageHeroes
             className="absolute h-full"
-            feature="home_hero_carousel"
             heroes={data.heroes}
           />
         </div>

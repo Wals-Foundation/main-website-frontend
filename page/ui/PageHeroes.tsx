@@ -3,8 +3,8 @@ import { Hero } from '@/core/models';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper/modules"
 import 'swiper/css';
-import ImageDisplay from '@/image/Image';
 import { Config } from '@/core/config';
+import PageHero from './PageHero';
 
 /*
     TEST CASES
@@ -13,11 +13,11 @@ import { Config } from '@/core/config';
     Slides - autoplay, interact
 */
 
+
 const PageHeroes: React.FC<{
     className?: string,
-    feature: string,
     heroes: Hero[]
-}> = ({ className, feature, heroes }) => {
+}> = ({ className, heroes }) => {
 
     return (
         <>
@@ -30,13 +30,11 @@ const PageHeroes: React.FC<{
                 >
                     {heroes.map((hero) => (
                         <SwiperSlide key={hero.id} className="w-full h-full">
-                            <ImageDisplay
-                                className="w-full"
-                                feature={feature}
-                                image={hero.image}
-                            />
-                            {/* Puts an overlay over the images */}
-                            <div className="absolute inset-0 bg-black/60" />
+                            <PageHero
+                                className="w-full h-full"
+                                image = {hero.image}
+                                html={hero.html}
+                             />
                         </SwiperSlide>
                     ))}
                 </Swiper>

@@ -16,7 +16,8 @@ export interface ImageResponse {
 export interface HeroResponse {
   id: number;
   documentId: string;
-  image: ImageResponse;
+  html?: string;
+  image?: ImageResponse;
 }
 
 export interface WebsiteActionResponse {
@@ -41,7 +42,8 @@ export interface Meta {
 export function mapHeroResponseToModel(heroResponse: HeroResponse): Hero {
   return {
     id: heroResponse.documentId,
-    image: mapImageResponseToModel(heroResponse.image)
+    html: heroResponse.html,
+    image: heroResponse.image ? mapImageResponseToModel(heroResponse.image) : undefined
   };
 }
 
@@ -57,7 +59,7 @@ export function mapImageSourceResponseToModel(
 ): ImageSource {
   return {
     id: sourceResponse.documentId,
-    alt:"", // TODO: update to match alt from network
+    alt: "", // TODO: update to match alt from network
     url: sourceResponse.url,
     name: sourceResponse.name
   };
@@ -70,9 +72,9 @@ export const mapWebsiteActionResponseToModel = (response: WebsiteActionResponse)
   type: response.type as WebsiteActionType,
 });
 
-export function mapMetaToPagination(meta: Meta): { 
-  page: number; 
-  hasNextPage: boolean 
+export function mapMetaToPagination(meta: Meta): {
+  page: number;
+  hasNextPage: boolean
 } {
   return {
     page: meta.pagination.page,

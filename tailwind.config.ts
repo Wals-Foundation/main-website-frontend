@@ -73,6 +73,7 @@ export default {
     "sm:shrink-0",
     "sm:h-64",
     "sm:flex-wrap",
+    "col-start-3",
     "w-4"
   ]
 } satisfies Config

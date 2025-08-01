@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
 import Link from "next/link";
+import WebsiteLink from "@/menu/ui/WebsiteLink";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -20,9 +21,9 @@ const MobileHeaderDetail: React.FC<{
       <div className="h-full flex flex-col gap-4">
         <MainMenu className="flex-1" menuItems={menuItems} />
         {showDonateBtn && (
-          <Link href={donateUrl} className="mt-4">
-            <Button theme="primary" title="Donate Now" />
-          </Link>
+          <WebsiteLink link={donateUrl}>
+            <Button className="mt-4" theme="primary" title="Donate Now" />
+          </WebsiteLink>
         )}
       </div>
     </div>
@@ -51,7 +52,9 @@ const PageHeaderMobile: React.FC<{
     <>
       <div className={`flex justify-between items-center gap-4 py-2 relative z-50 ${className ?? ""}`}>
         <div className="shrink-0">
-          <WalsLogo />
+          <WebsiteLink link="/">
+            <WalsLogo />
+          </WebsiteLink>
         </div>
         <button
           id="menu-button"

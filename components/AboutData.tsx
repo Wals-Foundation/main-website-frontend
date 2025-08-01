@@ -16,6 +16,7 @@ import OrganisationValue from "./OrganisationValue";
 import PageCallToDonate from "@/page/ui/PageCallToDonate";
 import ImageDisplay from "@/image/Image";
 import OrganisationImpactContainer from "./OrganisationImpactContainer";
+import React from "react";
 
 const Content: React.FC<{
   className?: string;
@@ -40,7 +41,6 @@ const Content: React.FC<{
           <div className="relative w-screen pt-4 aspect-[2/3] sm:aspect-[16/9]">
             <PageHeroes
               className="absolute h-full"
-              feature="home_hero_carousel"
               heroes={page.heroes}
             />
           </div>
@@ -65,29 +65,16 @@ const Content: React.FC<{
                 ))}
               </div>
             </div>
-            <div className="mt-4">
-              <SectionHeader text="Our values" />
-              <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
-                {organisation.organisationValues.map((value, index) => (
-                  <OrganisationValue
-                    key={index}
-                    className="mt-4 sm:mt-0"
-                    icon={value.icon}
-                    title={value.title}
-                    value={value.explanation} />
-                ))}
-              </div>
-            </div>
             {(organisation.organisationImpact.length > 0) && (
               <div className="mt-4">
                 <SectionHeader className="w-fit mx-auto" text="Our impact" />
                 <div className="mt-4 sm:grid sm:grid-cols-4 sm:gap-8">
                   {organisation.organisationImpact.map((impact) => (
-                    <>
-                      <OrganisationImpactContainer className="mt-2" key={`${impact.id}-image`}>
+                    <React.Fragment key={impact.id}>
+                      <OrganisationImpactContainer className="mt-2">
                         <ImageDisplay className="rounded-lg" feature="organisation_impact" image={impact.image} />
                       </OrganisationImpactContainer>
-                      <OrganisationImpactContainer key={impact.id} className="mt-2 bg-primary rounded-lg">
+                      <OrganisationImpactContainer className="mt-2 bg-primary rounded-lg">
                         <div>
                           <HeadingLarge
                             className="w-fit mx-auto text-white"
@@ -101,11 +88,24 @@ const Content: React.FC<{
                           />
                         </div>
                       </OrganisationImpactContainer>
-                    </>
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
             )}
+            <div className="mt-4">
+              <SectionHeader text="Our values" />
+              <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-8">
+                {organisation.organisationValues.map((value, index) => (
+                  <OrganisationValue
+                    key={index}
+                    className="mt-4 sm:mt-0"
+                    icon={value.icon}
+                    title={value.title}
+                    value={value.explanation} />
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </section>

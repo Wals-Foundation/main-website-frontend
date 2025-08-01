@@ -39,7 +39,8 @@ export interface Image {
 
 export interface Hero {
     id: string;
-    image: Image;
+    image?: Image;
+    html?: string;
 }
 
 export enum ViewportBreakpoint {

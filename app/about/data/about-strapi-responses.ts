@@ -92,7 +92,6 @@ function mapValueResponseToModel(response: OrganisationValueResponse): Organisat
 export function mapOrganisationResponseToModel(
     response: OrganisationResponseData
 ): Organisation {
-    console.log("About response", response.organisation_impacts)
     return {
         id: response.documentId,
         organisationImpact: response.organisation_impacts.map(mapImpactResponseToModel),

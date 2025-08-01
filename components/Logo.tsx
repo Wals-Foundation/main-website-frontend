@@ -15,13 +15,11 @@ const Logo: React.FC = () => {
 
 export const WalsLogo: React.FC = () => {
   return (
-    <Link href="/">
-      <img
-        src={logo.src}
-        alt="Wals Logo"
-        className="h-interactive"
-      />
-    </Link>
+    <img
+      src={logo.src}
+      alt="Wals Logo"
+      className="h-interactive"
+    />
   );
 };
 
