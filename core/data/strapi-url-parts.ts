@@ -7,12 +7,14 @@ const aboutValuesPath = "[populate][organisation_values]"
 const actionPath = "[populate][action]"
 const actionsPath = "[populate][actions]"
 const causePath = "[populate][cause]"
+const galleryPath = "[populate][gallery]"
 const communitiesPath = "[populate][communities]"
 const currencyPath = "[populate][currency]"
 const districtPath = "[populate][district]"
 const donatablePath = "[populate][donatable]"
 const donationPath = "[populate][donation]"
 const heroesPath = "[populate][heroes]"
+
 const iconPath = "[populate][icon]"
 const imagePath = "[populate][image]"
 const imageSourcePath = "[populate][source]"
@@ -100,6 +102,7 @@ const relatedCauseFields = (path: string[]): string => {
 // Final query params
 export const aboutOurStoryQueryFields = "fields[0]=id&fields[1]=organisation_story"
 export const contactFields = "fields[0]=email&fields[1]=phone"
+export const faqFields = "fields[0]=question&fields[1]=answer"
 export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
@@ -158,6 +161,14 @@ export const galleryQuery = (): string => {
         imageSourceFields([imagePath, imageSourcePath]),
     ].join("&");
 };
+
+export const causeGalleryQuery = (code: string): string => {
+    return [
+        `filters[code][$eq]=${code}`,
+        imageFields([causePath, galleryPath, imagePath]),
+        imageSourceFields([causePath, galleryPath, imagePath, imageSourcePath]),
+    ].join("&");
+}
 
 export const getInvolvedQuery = (): string => {
     return [

@@ -13,7 +13,9 @@ import {
     aboutQuery,
     contactFields,
     socialMediaQuery,
-    getInvolvedQuery
+    getInvolvedQuery,
+    causeGalleryQuery,
+    faqFields
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -38,9 +40,17 @@ export const causesCacheKey = (type: CauseType, page: number, pageSize?: number)
     return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;
 };
 
+export const causeGalleryCacheKey = (code: string, type: CauseType, page: number, pageSize?: number): string => {
+    return `${causePath[type]}?${causeGalleryQuery(code)}&${paginate(page, pageSize)}`;
+};
+
 export const communityDetailCacheKey = (code: string): string => {
     return `${causePath[CauseType.Community]}?${communityDetailQuery(code)}`;
 };
+
+export const faqCacheKey = (page: number, pageSize?: number): string => {
+    return `faqs?${faqFields}&${paginate(page, pageSize)}`;
+}
 
 export const programDetailCacheKey = (code: string): string => {
     return `${causePath[CauseType.Program]}?${programDetailQuery(code)}`;

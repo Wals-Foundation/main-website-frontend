@@ -12,12 +12,15 @@ import React from "react";
 import { Contact, SocialMediaAccount } from "@/contact/models";
 import { fetchFooterData, renderPageFooter } from "@/page/ui/PageFooter";
 import { fetchGetInvolvedData, GetInvolvedOption, renderGetInvolvedData } from "@/components/GetInvolved";
-import { Image } from "@/core/models";
+import { Image, PagedData } from "@/core/models";
+import { Faq } from "@/faq/faq";
+import { fetchFaqsData, renderFaqsData } from "@/faq/ui/Faqs";
 
 // Define return types for each fetcher
 type DataFetchers = {
     "about:ourStory": () => Promise<string | StrapiError>;
     "aboutPageData": () => Promise<{ organisation: Organisation, page: Page } | StrapiError>;
+    "faqs": () => Promise<PagedData<Faq> | StrapiError>;
     "getInvolvedData": () => Promise<{ image?: Image, options: GetInvolvedOption[] } | StrapiError>;
     "homePageData": () => Promise<Page | StrapiError>;
     "siteData": () => Promise<{ featureFlags: Record<string, boolean>, menuItems: MenuItem[] } | StrapiError>
@@ -28,6 +31,7 @@ type DataFetchers = {
 type DataRenderers = {
     "about:ourStory": (dataLoad: any) => React.ReactElement;
     "aboutPageData": (dataLoad: any) => React.ReactElement;
+    "faqs": (dataLoad: any) => React.ReactElement;
     "getInvolvedData": (dataLoad: any) => React.ReactElement;
     "homePageData": (dataLoad: any) => React.ReactElement;
     "siteData": (dataLoad: any) => React.ReactElement;
@@ -38,6 +42,7 @@ type DataRenderers = {
 export const dataRenderers = (): DataRenderers => ({
     "about:ourStory": renderAboutOurStory,
     "aboutPageData": renderAboutPageData,
+    "faqs": renderFaqsData,
     "getInvolvedData": renderGetInvolvedData,
     "homePageData": renderHomePageData,
     "siteData": renderPageHeader,
@@ -47,6 +52,7 @@ export const dataRenderers = (): DataRenderers => ({
 export const dataFetchers: DataFetchers = {
     "about:ourStory": () => fetchOurStory(aboutOurStoryCacheKey),
     "aboutPageData": () => fetchAboutPageData(),
+    "faqs": () => fetchFaqsData(),
     "getInvolvedData": () => fetchGetInvolvedData(),
     "homePageData": () => fetchHomePageData(),
     "siteData": () => fetchSiteData(),
