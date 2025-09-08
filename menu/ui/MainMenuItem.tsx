@@ -3,23 +3,24 @@ import { TextMedium } from "@/components/Typography"
 
 const MainMenuItem: React.FC<{
     className?: string,
-    colorClass?: string,
+    color?: string,
     isSelected: boolean,
     label: string,
     link: string,
-}> = ({ label, link, isSelected, colorClass, className }) => {
-    const textColorClass = isSelected
-        ? "text-primary"
-        : colorClass || ""
-
-    const overrideTextColor = isSelected || !!colorClass
+}> = ({ label, link, isSelected, color, className }) => {
 
     return (
         <Link href={link}>
             <TextMedium
-                className={`${textColorClass} sm:ml-4 hover:text-primary cursor-pointer ${className ?? ""}`}
-                text={label}
-                overrideTextColor={overrideTextColor}
+            className={`sm:ml-4 hover:text-primary cursor-pointer ${className ?? ""}`}
+            text={label}
+            styles={{
+                color: isSelected
+                ? "var(--primary)"
+                : color
+                ? color
+                : undefined,
+            }}
             />
         </Link>
     )

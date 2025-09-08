@@ -9,7 +9,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#009EE2",
+        primary: "var(--primary)",
         "typo-black-200": "#303030",
         "typo-black-400": "#414141",
         "typo-black-500": "#111111",

@@ -1,4 +1,4 @@
-import { HeadingLarge, TextLarge } from "@/components/Typography"
+import { Caption, HeadingLarge, TextLarge } from "@/components/Typography"
 import { CauseDetail } from "../models"
 import CauseInfoSection from "./CauseInfoSection"
 import ImageDisplay from "@/image/Image"
@@ -21,14 +21,17 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                 <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
                     <div>
                         <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b border-border-gray">
-                            <TextLarge text="Location" />
+                            <Caption text="Location" />
                             <a
                                 href={createGoogleMapsLink(causeDetail.location.latitude, causeDetail.location.longitude)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="my-auto mt-2 sm:mt-0 sm:col-span-2 text-primary underline"
                             >
-                                <TextLarge className="sm:text-right text-primary underline" text="Get Directions" overrideTextColor={true} />
+                                <TextLarge 
+                                className="sm:text-right underline" 
+                                text="Get Directions" 
+                                styles={{ color: "var(--primary)" }} />
                             </a>
                         </div>
                         {(causeDetail.communities.length > 0) && (

@@ -7,8 +7,8 @@ const SocialMediaAccountDisplay: React.FC<{
     accountUrl: string,
     icon: ImageSource,
     name: string,
-    colorClass: string
-}> = ({ className, accountUrl, icon, name, colorClass }) => {
+    color: string
+}> = ({ className, accountUrl, icon, name, color }) => {
     return (
         <div className={className ?? ""}>
             <a
@@ -18,8 +18,9 @@ const SocialMediaAccountDisplay: React.FC<{
                 <div className="flex items-center gap-2">
                     <ImageDisplay className="w-4 flex-none" aspectRatio="1/1" image={icon} />
                     <TextMedium
-                        className={`flex-1 min-w-0  break-words ${colorClass}`}
-                        overrideTextColor={true} text={name}
+                        className={`flex-1 min-w-0  break-words`}
+                        styles={{ color: color }}
+                        text={name}
                     />
                 </div>
             </a>

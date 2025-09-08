@@ -76,8 +76,9 @@ const GetInvolvedOption: React.FC<{
                 <div className="mt-4 sm:mt-0 sm:flex-1">
                     <div className="flex gap-4">
                         <HeadingSmall
-                            className="flex-1 text-btn-disabled-text"
-                            overrideTextColor={true} text={label}
+                            className="flex-1"
+                            styles={{ color: "var(--btn-disabled-text)" }} 
+                            text={label}
                         />
                         <WebsiteLink link={link}>
                             <Icon icon={{ id: arrow.src, alt: "", url: arrow.src, name: "" }} />
@@ -99,9 +100,9 @@ const Content: React.FC<{
             <div className={`${className ?? ""}`}>
                 <SectionHeader text="How can you help?" />
                 <HeadingLarge
-                    className="mt-4 text-white"
+                    className="mt-4"
                     text="How it works is very simple."
-                    overrideTextColor={true}
+                    styles={{ color: "white" }}
                 />
                 <div className="mt-4 sm:grid sm:grid-cols-2 gap-4">
                     <div>

@@ -35,16 +35,19 @@ const Content: React.FC<{
                         <div className="sm:col-span-2">
                             <WalsLogo />
                         </div>
-                        <FooterLinks className="mt-8 sm:mt-0" colorClass="text-btn-disabled-text" />
+                        <FooterLinks
+                            className="mt-8 sm:mt-0"
+                            color="var(--btn-disabled-text)" 
+                            />
                         <SocialMedia
                             className="mt-8 sm:mt-0"
-                            colorClass="text-btn-disabled-text"
+                            color="var(--btn-disabled-text)"
                             accounts={data.socialMedia}
                         />
                         {data.contact && (
                             <ContactDisplay
                                 className="mt-8 sm:mt-0"
-                                colorClass="text-btn-disabled-text"
+                                color="var(--btn-disabled-text)"
                                 email={data.contact.email}
                                 phone={data.contact.phone} />
                         )}

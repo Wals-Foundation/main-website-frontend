@@ -3,11 +3,12 @@ import React, { ReactNode } from "react"
 export const Title: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h1 className={`text-5xl sm:text-6xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold
-      leading-[3.5rem] sm:leading-[4.75rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h1 className={`text-5xl sm:text-6xl text-typo-black-500 font-size-semibold
+      leading-[3.5rem] sm:leading-[4.75rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h1>
   );
@@ -16,11 +17,12 @@ export const Title: React.FC<{
 export const SectionHeader: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h2 className={`text-base ${!overrideTextColor ? "text-typo-white-800" : ""} font-size-semibold uppercase
-      leading-6 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h2 className={`text-base text-typo-white-800 font-size-semibold uppercase
+      leading-6 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h2>
   );
@@ -29,11 +31,12 @@ export const SectionHeader: React.FC<{
 export const HeadingLarge: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h3 className={`text-4xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-10 sm:leading-[3rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h3 className={`text-4xl text-typo-black-500 font-size-semibold 
+      leading-10 sm:leading-[3rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h3>
   );
@@ -42,11 +45,12 @@ export const HeadingLarge: React.FC<{
 export const HeadingMedium: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h4 className={`text-lg sm:text-xl ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-8 sm:leading-10 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h4 className={`text-lg sm:text-xl text-typo-black-500 font-size-semibold 
+      leading-8 sm:leading-10 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h4>
   );
@@ -55,11 +59,12 @@ export const HeadingMedium: React.FC<{
 export const HeadingSmall: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h5 className={`text-base ${!overrideTextColor ? "text-typo-black-500" : ""} font-size-semibold 
-      leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h5 className={`text-base text-typo-black-500 font-size-semibold 
+      leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h5>
   );
@@ -68,11 +73,12 @@ export const HeadingSmall: React.FC<{
 export const TextLarge: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <p className={`text-base sm:text-lg ${!overrideTextColor ? "text-typo-white-900" : ""} 
-      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <p className={`text-base sm:text-lg text-typo-white-900 
+      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </p>
   );
@@ -81,11 +87,12 @@ export const TextLarge: React.FC<{
 export const TextMedium: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <p className={`text-base ${!overrideTextColor ? "text-typo-black-400" : ""} 
-      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch]  ${className ?? ""}`}>
+    <p className={`text-base text-typo-black-400 
+      leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch]  ${className ?? ""}`}
+      style={styles}>
       {text}
     </p>
   );
@@ -94,11 +101,12 @@ export const TextMedium: React.FC<{
 export const Caption: React.FC<{
   className?: string;
   text: string;
-  overrideTextColor?: boolean;
-}> = ({ className, text, overrideTextColor = false }) => {
+  styles?: React.CSSProperties;
+}> = ({ className, text, styles }) => {
   return (
-    <h6 className={`text-sm ${!overrideTextColor ? "text-typo-white-800" : ""} 
-      leading-[1.375rem] sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}>
+    <h6 className={`text-sm text-typo-white-800 
+      leading-[1.375rem] sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+      style={styles}>
       {text}
     </h6>
   );

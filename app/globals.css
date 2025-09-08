@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  --primary: #009EE2;
+  --btn-disabled-text: #B5B5B5;
 }
 
 @font-face {

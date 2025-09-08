@@ -77,14 +77,14 @@ const Content: React.FC<{
                       <OrganisationImpactContainer className="mt-2 bg-primary rounded-lg">
                         <div>
                           <HeadingLarge
-                            className="w-fit mx-auto text-white"
+                            className="w-fit mx-auto"
                             text={impact.number}
-                            overrideTextColor={true}
+                            styles={{ color: "white" }}
                           />
                           <Caption
-                            className="w-fit mx-auto text-white text-center"
+                            className="w-fit mx-auto text-center"
                             text={impact.caption}
-                            overrideTextColor={true}
+                            styles={{ color: "white" }}
                           />
                         </div>
                       </OrganisationImpactContainer>

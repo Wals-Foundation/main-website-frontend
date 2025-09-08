@@ -5,11 +5,14 @@ import SocialMediaAccountDisplay from "./SocialMediaAccountDisplay"
 const SocialMedia: React.FC<{
     className?: string,
     accounts: SocialMediaAccount[],
-    colorClass: string
-}> = ({ className, accounts, colorClass }) => {
+    color: string
+}> = ({ className, accounts, color }) => {
     return (
         <div className={className ?? ""}>
-            <HeadingSmall className={colorClass} overrideTextColor={true} text="Social Media" />
+            <HeadingSmall 
+            styles={{ color: color }} 
+            text="Social Media" 
+            />
             <div>
                 {accounts.map((account, index) => (
                     <SocialMediaAccountDisplay
@@ -18,7 +21,7 @@ const SocialMedia: React.FC<{
                         accountUrl={account.accountUrl}
                         icon={account.icon}
                         name={account.name}
-                        colorClass={colorClass}
+                        color={color}
                     />
                 ))}
             </div>
