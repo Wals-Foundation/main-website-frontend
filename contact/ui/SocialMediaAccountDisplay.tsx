@@ -1,4 +1,4 @@
-import { TextMedium } from "@/components/Typography"
+import { TextSmall } from "@/components/Typography"
 import { ImageSource } from "@/core/models"
 import ImageDisplay from "@/image/Image"
 
@@ -7,7 +7,7 @@ const SocialMediaAccountDisplay: React.FC<{
     accountUrl: string,
     icon: ImageSource,
     name: string,
-    color: string
+    color?: string
 }> = ({ className, accountUrl, icon, name, color }) => {
     return (
         <div className={className ?? ""}>
@@ -17,7 +17,7 @@ const SocialMediaAccountDisplay: React.FC<{
                 rel="noopener noreferrer">
                 <div className="flex items-center gap-2">
                     <ImageDisplay className="w-4 flex-none" aspectRatio="1/1" image={icon} />
-                    <TextMedium
+                    <TextSmall
                         className={`flex-1 min-w-0  break-words`}
                         styles={{ color: color }}
                         text={name}

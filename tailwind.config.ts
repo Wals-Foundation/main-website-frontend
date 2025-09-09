@@ -8,14 +8,15 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        "background-dark": "var(--background-dark)",
+        "background-highlight": "var(--background-highlight)",
         primary: "var(--primary)",
         "typo-black-200": "#303030",
         "typo-black-400": "#414141",
         "typo-black-500": "#111111",
         "typo-gray": "#B5B5B5",
         "typo-white-800": "#8C8C8C",
-        "typo-white-900": "#6B6B6B",
+        "typo-white-900": "var(--on-light)",
         header: "#111111",
         ash: "#8C8C8C",
         "title-gray": "#B5B5B5",

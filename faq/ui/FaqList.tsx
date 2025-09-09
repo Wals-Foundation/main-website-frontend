@@ -56,7 +56,7 @@ const FaqList: React.FC<{
                             </div>
                         )
                     }}
-                    itemContainerClass={(_) => "py-5 border-t"}
+                    itemContainerClass={(_) => "py-4 border-t"}
                     itemKey={(index) => faqsList[index].id}
                     onLoadMoreItems={onLoadMoreFaqs}
                 />

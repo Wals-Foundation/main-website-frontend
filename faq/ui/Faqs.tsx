@@ -26,7 +26,7 @@ export const fetchFaqsData = async (): Promise<PagedData<Faq> | StrapiError> => 
 }
 
 export const renderFaqsData = (dataLoad: DataLoad<PagedData<Faq>>) => (
-    <Content className="" {...dataLoad} />
+    <Content className="mt-8 sm:mt-0" {...dataLoad} />
 )
 
 const Faqs: React.FC = () => {

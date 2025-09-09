@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background-light: #ffffff;
+  --background-dark: #111111;
+  --background-highlight: #FAFBFC;
   --primary: #009EE2;
-  --btn-disabled-text: #B5B5B5;
+  --on-dark: #B5B5B5;
+  --on-light: #6B6B6B;
 }
 
 @font-face {
@@ -50,16 +52,19 @@ body {
 .font-size-medium {
   font-family: "ManropeMedium";
 }
+
 .font-size-semibold {
   font-family: "ManropeSemiBold";
 }
+
 .font-size-bold {
   font-family: "ManropeBold";
 }
 
 .swiper-pagination {
   bottom: 20px !important;
-  text-align: right; /* or center/left */
+  text-align: right;
+  /* or center/left */
 }
 
 .swiper-pagination-bullet {

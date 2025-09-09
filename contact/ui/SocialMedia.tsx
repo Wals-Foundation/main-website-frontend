@@ -5,7 +5,7 @@ import SocialMediaAccountDisplay from "./SocialMediaAccountDisplay"
 const SocialMedia: React.FC<{
     className?: string,
     accounts: SocialMediaAccount[],
-    color: string
+    color?: string
 }> = ({ className, accounts, color }) => {
     return (
         <div className={className ?? ""}>
