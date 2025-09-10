@@ -1,5 +1,5 @@
 import { ImageSource } from "@/core/models";
-import { HeadingSmall, TextMedium } from "./Typography";
+import { HeadingSmall, TextSmall } from "./Typography";
 import Icon from "./Icon";
 
 const OrganisationApproach: React.FC<{
@@ -13,7 +13,7 @@ const OrganisationApproach: React.FC<{
             <div>
                 <Icon icon={icon} />
                 <HeadingSmall className="mt-2" text={title} />
-                <TextMedium className="mt-2" text={approach} />
+                <TextSmall className="mt-2" text={approach} />
             </div>
         </div>
     )

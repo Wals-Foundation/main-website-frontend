@@ -8,10 +8,10 @@ const PageCallToDonate: React.FC<{ className?: string, donateUrl: string }> = ({
             <div>
                 <SectionHeader className="mx-auto w-fit" text="Donate" />
                 <HeadingLarge
-                    className="w-fit mx-auto mt-4 text-center"
+                    className="w-fit mx-auto mt-4 sm:mt-6 text-center"
                     text="Donate towards a worthy cause"
                 />
-                <div className="w-full pt-8">
+                <div className="w-full mt-4 sm:mt-6">
                     <div className="mx-auto sm:w-fit">
                         <Link href={donateUrl}>
                             <Button theme="primary" title="Donate" />

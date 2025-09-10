@@ -1,8 +1,8 @@
-import { TextMedium } from "@/components/Typography";
+import { TextSmall } from "@/components/Typography";
 
 const PageSubHeadline: React.FC<{ className?: string, subheadline: string }> = ({ className, subheadline }) => {
     return (
-        <TextMedium text={subheadline} className={`${className ? className : ""}`} />
+        <TextSmall text={subheadline} className={`${className ? className : ""}`} />
     );
 };
 

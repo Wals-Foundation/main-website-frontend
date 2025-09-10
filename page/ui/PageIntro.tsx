@@ -5,9 +5,9 @@ const PageIntro: React.FC<
 > = ({ className, headline, subheadlineAndActions }) => {
     return (
         <>
-            <div className={`w-11/12 mx-auto pt-4 sm:pt-16 sm:grid sm:grid-cols-5 sm:gap-16 md:gap-28 ${className ?? ""}`}>
-                <div className="sm:col-span-3">{headline}</div>
-                <div className="sm:col-span-2">{subheadlineAndActions}</div>
+            <div className={`mx-horizontal sm:grid sm:grid-cols-4 sm:gap-16 ${className ?? ""}`}>
+                <div className="sm:col-span-2">{headline}</div>
+                <div className="mt-4 sm:mt-0 sm:col-span-2">{subheadlineAndActions}</div>
             </div>
         </>
     )

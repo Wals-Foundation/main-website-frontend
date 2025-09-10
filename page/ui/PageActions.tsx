@@ -2,9 +2,14 @@ const PageActions: React.FC<{ className?: string; actions: React.ReactNode[] }> 
 
     return (
         <>
-            <div className={`w-full sm:flex gap-2  ${className ? className : ""}`}>
+            <div className={`w-full sm:flex sm:gap-6  ${className ? className : ""}`}>
                 {actions.map((action, index) => (
-                    <div className="pt-4" key={index}>{action}</div>
+                    <div
+                        className={index !== 0 ? "mt-4 sm:mt-0" : ""}
+                        key={index}
+                    >
+                        {action}
+                    </div>
                 ))}
             </div>
         </>

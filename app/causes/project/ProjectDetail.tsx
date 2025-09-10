@@ -28,7 +28,7 @@ export default function ProjectDetail() {
   return (
     <>
       {project && (
-        <div className="w-11/12 mt-12 sm:mt-16 mb-12 mx-auto sm:max-w-[1440px]">
+        <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
           <CauseDetailDisplay causeDetail={project} />
         </div>
       )}

@@ -1,4 +1,4 @@
-import { Caption, TextLarge } from "@/components/Typography"
+import { Caption, Text } from "@/components/Typography"
 
 const CauseLocationInfo: React.FC<{
     className?: string,
@@ -9,7 +9,7 @@ const CauseLocationInfo: React.FC<{
         <div className={className ?? ""}>
             <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8">
                 <Caption text={label} />
-                <TextLarge
+                <Text
                     className="mt-2 sm:mt-0 sm:col-span-2 sm:text-right font-size-bold"
                     styles={{ color: "#000000" }}
                     text={value} />

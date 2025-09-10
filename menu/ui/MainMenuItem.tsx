@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { TextMedium } from "@/components/Typography"
+import { TextSmall } from "@/components/Typography"
 
 const MainMenuItem: React.FC<{
     className?: string,
@@ -11,7 +11,7 @@ const MainMenuItem: React.FC<{
 
     return (
         <Link href={link}>
-            <TextMedium
+            <TextSmall
             className={`sm:ml-4 hover:text-primary cursor-pointer ${className ?? ""}`}
             text={label}
             styles={{

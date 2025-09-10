@@ -1,4 +1,4 @@
-import { Caption, TextLarge } from "@/components/Typography"
+import { Caption, Text } from "@/components/Typography"
 import { Currency } from "../models"
 import { formatValueFromMinorToMajorUnit } from "../utils"
 
@@ -10,7 +10,7 @@ const DonationValue: React.FC<{
 }> = ({ className, currency, label, valueInMinorCurrencyUnit }) => {
     return (
         <div className={className ?? ""}>
-            <TextLarge
+            <Text
                 className="font-size-bold"
                 styles={{ color: "#000000" }}
                 text={`${currency} ${formatValueFromMinorToMajorUnit(valueInMinorCurrencyUnit)}`}

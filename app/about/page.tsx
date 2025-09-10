@@ -5,7 +5,7 @@ export default function About() {
   return (
     <>
       <AboutPageData />
-        <PageGalleryInitialItems className="mt-8" />
+      <PageGalleryInitialItems className="mt-8" />
     </>
   )
 }

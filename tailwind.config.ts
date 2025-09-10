@@ -37,6 +37,12 @@ export default {
     typography,
     plugin(function ({ addComponents }) {
       addComponents({
+        '.mx-horizontal':{
+          '@apply mx-4 sm:mx-6':{}
+        },
+        '.mt-section':{
+          '@apply mt-12 sm:mt-16':{}
+        },
         '.h-interactive': {
           '@apply h-10 sm:h-14': {},
         },
@@ -45,7 +51,14 @@ export default {
   ],
   safelist: [
     "break-words",
+    "flex-1",
     "h-60",
+    "mt-4",
+    "mt-12",
+    "mt-20",
+    "mt-28",
+    "mx-4",
+    "mx-6",
     "pl-4",
     "pr-4",
     "sm:hidden",
@@ -57,15 +70,20 @@ export default {
     "sm:flex",
     "sm:flex-1",
     "sm:gap-4",
+    "sm:gap-6",
     "sm:gap-8",
+    "sm:gap-16",
     "sm:gap-28",
     "sm:grid",
     "sm:grid-cols-2",
     "sm:grid-cols-3",
+    "sm:grid-cols-4",
     "sm:grid-cols-5",
     "sm:col-span-2",
     "sm:ml-4",
     "sm:mt-0",
+    "sm:mt-6",
+    "sm:mt-16",
     "sm:p-8",
     "sm:pt-0",
     "sm:pt-16",

@@ -3,11 +3,10 @@ import { isStrapiError, StrapiError } from "@/core/data/strapi-error"
 import DataFetcher from "@/components/DataFetcher"
 import { Contact, SocialMediaAccount } from "@/contact/models"
 import { fetchContact, fetchSocialMedia } from "@/contact/data/contact-strapi-datasource"
-import SocialMedia from "@/contact/ui/SocialMedia"
-import ContactDisplay from "@/contact/ui/ContactDisplay"
-import { TextMedium } from "@/components/Typography"
+import { TextSmall } from "@/components/Typography"
 import FooterLinks from "./FooterLinks"
 import { WalsLogo } from "@/components/Logo"
+import ContactAndSocialMedia from "@/contact/ui/ContactAndSocialMedia"
 
 export const fetchFooterData = async (): Promise<{ contact?: Contact, socialMedia: SocialMediaAccount[] } | StrapiError> => {
     const contactResult = await fetchContact();
@@ -37,39 +36,32 @@ const Content: React.FC<{
                         </div>
                         <FooterLinks
                             className="mt-8 sm:mt-0"
-                            color="var(--btn-disabled-text)" 
-                            />
-                        <SocialMedia
-                            className="mt-8 sm:mt-0"
-                            color="var(--btn-disabled-text)"
-                            accounts={data.socialMedia}
                         />
-                        {data.contact && (
-                            <ContactDisplay
-                                className="mt-8 sm:mt-0"
-                                color="var(--btn-disabled-text)"
-                                email={data.contact.email}
-                                phone={data.contact.phone} />
-                        )}
+                        <ContactAndSocialMedia
+                            className="mt-8 sm:mt-0 sm:col-span-2"
+                            contact={data.contact}
+                            socialMedia={data.socialMedia}
+                            color="var(--on-dark)"
+                        />
                     </>
                 )
                 }
             </div>
             <div className="py-8 sm:py-16">
-                <TextMedium text="© 2024 We Are Liberating Societies Foundation. All rights reserved." />
+                <TextSmall text="© 2024 We Are Liberating Societies Foundation. All rights reserved." />
             </div>
         </div>
     );
 };
 
 export const renderPageFooter = (dataLoad: DataLoad<{ contact?: Contact, socialMedia: SocialMediaAccount[] }>) => (
-    <Content className="w-11/12 mx-auto mb-16" {...dataLoad} />
+    <Content className="mx-horizontal mb-16" {...dataLoad} />
 )
 
 
 const PageFooter: React.FC<{ className?: string }> = ({ className }) => {
     return (
-        <div className="bg-header">
+        <div className={`bg-header ${className ?? ""}`}>
             <DataFetcher cacheKey="siteFooter" dataFetcherKey="siteFooter" dataRendererKey="siteFooter" />
         </div>
     );

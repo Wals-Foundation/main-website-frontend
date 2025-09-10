@@ -1,72 +1,34 @@
-import Typography from "@/components/Typography"
-import FAQ from "@/components/FAQ"
-import Input from "@/components/Input"
-import Button from "@/components/Button"
+import { HeadingLarge, SectionHeader, Text } from "@/components/Typography"
+import { fetchContact, fetchSocialMedia } from "@/contact/data/contact-strapi-datasource";
+import ContactAndSocialMedia from "@/contact/ui/ContactAndSocialMedia";
+import { isStrapiError } from "@/core/data/strapi-error";
+import Faqs from "@/faq/ui/Faqs"
 
-export default function Contact() {
+export default async function Contact() {
+  const contact = await fetchContact().then(res => isStrapiError(res) ? undefined : res);
+  const socialMedia = await fetchSocialMedia().then(res => isStrapiError(res) ? [] : res);
+
   return (
-    <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto pt-16 md:pt-32 pb-16">
-        <div className="w-11/12 mx-auto">
+    <>
+      <section className="mx-horizontal mt-8 sm:mt-16 ">
+        <div className="sm:grid sm:grid-cols-2 sm:gap-8">
           <div>
-            <Typography type="Title" className="text-center">
-              Get in touch
-            </Typography>
+            <HeadingLarge text="Frequently asked questions" />
+            <Text className="mt-4" text="Do you have any questions? No problem. This page provides the answers to the most frequently asked questions. And if you cannot find the information you are looking for, we will be happy to help you further. Simply get in touch." />
           </div>
-          <form>
-            <div className="pt-8 md:pt-32 lg:grid lg:grid-cols-2 gap-12">
-              <div className="md:max-w-[616px] p-8 border rounded-xl space-y-5 bg-section-bg-gray border-form-border">
-                <div>
-                  <label htmlFor="name">Name</label>
-                  <Input placeholder="Enter your name" />
-                </div>
-                <div>
-                  <label htmlFor="email">Email</label>
-                  <Input placeholder="Enter your email" />
-                </div>
-                <div>
-                  <label htmlFor="message">Mesage</label>
-                  <Input type="textarea" placeholder="Enter your email" />
-                </div>
-                <div>
-                  <Button title="Contact us" className="md:w-full" />
-                </div>
-              </div>
-              <div className="md:max-w-[648px] py-8 md:py-0 md:p-8 flex flex-col justify-between">
-                <div className="space-y-5">
-                  <div className="flex justify-between items-center">
-                    <Typography>Email</Typography>
-                    <Typography> info@wals.com </Typography>
-                  </div>
-                  <div className="w-full border-b border-form-border" />
-                  <div className="flex justify-between items-center">
-                    <Typography>Call us</Typography>
-                    <Typography> (+233) 202-6814</Typography>
-                  </div>
-                  <div className="w-full border-b border-form-border" />
-                  <div className="flex justify-between items-center">
-                    <Typography>Visit us</Typography>
-                    <Typography>Tseaddo B44, East La - Accra</Typography>
-                  </div>
-                  <div className="w-full border-b border-form-border" />
-                  <div className="flex justify-between items-center">
-                    <Typography>Chat with us</Typography>
-                    <Typography>(+233) 202-6814</Typography>
-                  </div>
-                  <div className="w-full border-b border-form-border" />
-                </div>
-                <div className="flex justify-between">
-                  <Typography>Follow us</Typography>
-                  <div>
-                    <Typography> (+233) 202-6814</Typography>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+          <Faqs />
         </div>
       </section>
-      <FAQ />
-    </main>
+      <section className="bg-background-highlight mt-8 sm:mt-16">
+        <div className="mx-horizontal py-8">
+          <SectionHeader text="Get in touch" />
+          <ContactAndSocialMedia
+            className="mt-8"
+            contact={contact}
+            socialMedia={socialMedia}
+          />
+        </div>
+      </section>
+    </>
   )
 }

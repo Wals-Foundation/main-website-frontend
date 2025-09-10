@@ -7,7 +7,6 @@ import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
-import Link from "next/link";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 
 const MobileHeaderDetail: React.FC<{
@@ -75,7 +74,7 @@ const PageHeaderMobile: React.FC<{
           className={`fixed inset-0 bg-white transition-transform duration-300 ease-in-out z-40 ${mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
             }`}
         >
-          <div className="w-11/12 mx-auto pt-16">
+          <div className="mx-horizontal pt-16">
             <MobileHeaderDetail
               className=""
               donateUrl={donateUrl}

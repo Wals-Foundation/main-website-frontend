@@ -37,7 +37,7 @@ const PageHeader: React.FC<{
 
     return (
         <header className={`bg-white ${className ?? ""}`}>
-            <div className="w-11/12 mx-auto top-0 z-50">
+            <div className="mx-horizontal top-0 z-50">
                 <PageHeaderDesktop
                     className="hidden sm:block border-b border-border-gray"
                     donateUrl={donateUrl}

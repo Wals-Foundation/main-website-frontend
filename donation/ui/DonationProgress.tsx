@@ -1,6 +1,6 @@
 "use client"
 
-import { Caption, TextLarge } from '@/components/Typography';
+import { Caption, Text } from '@/components/Typography';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 const DonationProgress: React.FC<{
@@ -30,7 +30,7 @@ const DonationProgress: React.FC<{
             >
                 <div className="w-fit mx-auto">
                     <Caption className="w-fit" text="Donated" />
-                    <TextLarge className="w-fit mx-auto font-size-bold" text={`${progressValue}%`} />
+                    <Text className="w-fit mx-auto font-size-bold" text={`${progressValue}%`} />
                 </div>
             </CircularProgressbarWithChildren>
         </div>

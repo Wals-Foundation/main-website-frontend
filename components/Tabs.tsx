@@ -16,6 +16,7 @@ const Tab: React.FC<{
         >
             <HeadingSmall
                 className={`w-fit ${isActive ? "" : "text-typo-gray"}`}
+                styles={{fontSize: "var(--text-base)"}}
                 text={label}
             />
         </div>

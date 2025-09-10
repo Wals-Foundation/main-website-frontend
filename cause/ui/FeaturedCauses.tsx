@@ -2,7 +2,7 @@ import { isStrapiError } from "@/core/data/strapi-error"
 import { CauseType } from "../models"
 import { fetchFeaturedCauses } from "../data/cause-strapi-datasource"
 import CauseTabs from "./CauseTabs"
-import { HeadingLarge, SectionHeader, TextLarge } from "@/components/Typography"
+import { HeadingLarge, SectionHeader, Text } from "@/components/Typography"
 import SuspenseWrapper from "@/components/SuspenseWrapper"
 
 
@@ -19,8 +19,8 @@ const FeaturedCauses: React.FC<{
         <>
             <div className={`${className ?? ""}`}>
                 <SectionHeader className="mx-auto w-fit" text="Featured Causes" />
-                <HeadingLarge className="mt-4 text-center" text="Causes we are passionate about" />
-                <TextLarge className="mt-4 text-center" text="Help us bring education, healthcare, and economic opportunities to underserved communities. Every donation creates lasting change." />
+                <HeadingLarge className="mt-4 sm:mt-6 text-center mx-auto" text="Causes we are passionate about" />
+                <Text className="mt-4 sm:mt-6 text-center mx-auto" text="Help us bring education, healthcare, and economic opportunities to underserved communities. Every donation creates lasting change." />
                 <SuspenseWrapper>
                     <CauseTabs
                         className="w-full mt-8"

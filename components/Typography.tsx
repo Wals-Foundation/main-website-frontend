@@ -34,7 +34,7 @@ export const HeadingLarge: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h3 className={`text-4xl text-typo-black-500 font-size-semibold 
+    <h3 className={`text-4xl sm:text-5xl text-typo-black-500 font-size-semibold 
       leading-10 sm:leading-[3rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -48,7 +48,7 @@ export const HeadingMedium: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h4 className={`text-lg sm:text-xl text-typo-black-500 font-size-semibold 
+    <h4 className={`text-3xl sm:text-4xl text-typo-black-500 font-size-semibold 
       leading-8 sm:leading-10 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -62,7 +62,7 @@ export const HeadingSmall: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h5 className={`text-base text-typo-black-500 font-size-semibold 
+    <h5 className={`text-2xl sm:text-3xl text-typo-black-500 font-size-semibold 
       leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -70,13 +70,13 @@ export const HeadingSmall: React.FC<{
   );
 };
 
-export const TextLarge: React.FC<{
+export const Text: React.FC<{
   className?: string;
   text: string;
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <p className={`text-base sm:text-lg text-typo-white-900 
+    <p className={`text-base text-typo-white-900 
       leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -84,13 +84,13 @@ export const TextLarge: React.FC<{
   );
 };
 
-export const TextMedium: React.FC<{
+export const TextSmall: React.FC<{
   className?: string;
   text: string;
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <p className={`text-base text-typo-black-400 
+    <p className={`text-sm text-typo-black-400 
       leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch]  ${className ?? ""}`}
       style={styles}>
       {text}

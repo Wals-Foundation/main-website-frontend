@@ -18,30 +18,30 @@ export default function Home() {
 
   return (
     <>
-      <section className="mt-8 mb-8">
+      <section>
         <HomeData />
       </section>
-      <section>
+      <section className="mx-horizontal mt-section">
         <HomeOurStory />
       </section>
-      <section className="w-screen bg-section-bg-gray mt-8 mb-8 py-8 sm:py-16">
-        <div className="w-11/12 md:max-w-[1052px] mx-auto">
+      <section className="bg-background-highlight mt-section">
+        <div className="mx-horizontal mx-auto py-12 sm:py-16">
           <FeaturedCauses
-            className="w-full mx-auto mt-4"
+            className="w-full mt-4"
             causesUrl="/causes"
             causeDetailsUrl="/causes"
             donateUrl="/donate"
           />
         </div>
       </section>
-      <section className="w-screen bg-header mt-8 mb-8 py-8 sm:py-16">
-        <div className="w-11/12 md:max-w-[1052px] mx-auto">
-          <GetInvolved className="w-full mx-auto mt-4" />
+      <section className="bg-background-dark mt-section">
+        <div className="mx-horizontal py-12 sm:py-16">
+          <GetInvolved className="w-full mx-auto" />
         </div>
       </section>
-      <section className="mb-8">
-        <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
-        <PageGalleryInitialItems className="mt-8" />
+      <section className="mt-section">
+        <PageCallToDonate className="mx-horizontal" donateUrl="/donate" />
+        <PageGalleryInitialItems className="mt-section" />
       </section>
     </>
   )

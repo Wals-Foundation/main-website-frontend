@@ -16,6 +16,13 @@ Put use client on top of page to make it work with static server
 ### Breakpoint rendering
 All layouts and styles that are dependent on breakpoint are done server side and depend on viewportbreakpoint stored in a redux store in pagedata slice.
 
+### Spacing (specified with [tailwind values](https://v2.tailwindcss.com/docs/customizing-spacing)) 
+Between page header and content: 20(mobile), 28(desktop)
+Between page sections: 12(mobile), 16(desktop)
+Between content: 4(mobile), 6(desktop)
+
+Do not use w-screen
+
 ### Server component to client
 Mark all pages as use client and adapt [dynamic routes](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#in-client-components) and [static exports](https://nextjs.org/docs/app/guides/static-exports)
 Move data fetch into useSWR, example in HomeAboutUs.tsx

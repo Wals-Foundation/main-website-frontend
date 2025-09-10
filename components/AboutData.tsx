@@ -28,7 +28,7 @@ const Content: React.FC<{
   const page = data?.page
   return (
     <>
-      <section className={`mb-8 ${className ?? ""}`}>
+      <section className={`${className ?? ""}`}>
         {(page?.headline && page.subheadline) && (
           <PageIntro
             headline={<PageHeadline headline={page.headline} />}
@@ -38,7 +38,7 @@ const Content: React.FC<{
           />
         )}
         {page?.heroes && (
-          <div className="relative w-screen pt-4 aspect-[2/3] sm:aspect-[16/9]">
+          <div className="relative w-full pt-4 aspect-[2/3] sm:aspect-[16/9]">
             <PageHeroes
               className="absolute h-full"
               heroes={page.heroes}
@@ -46,7 +46,7 @@ const Content: React.FC<{
           </div>
         )}
       </section>
-      <section className="w-11/12 mx-auto mb-8">
+      <section className="mx-horizontal mt-8">
         {organisation && (
           <div>
             <OrganisationInfo label="Our mission" info={organisation.organisationMission} />
@@ -109,7 +109,7 @@ const Content: React.FC<{
           </div>
         )}
       </section>
-      <section className="mb-8">
+      <section className="mt-8">
         <PageCallToDonate className="w-11/12 mx-auto sm:mt-8" donateUrl="/donate" />
       </section>
     </>
@@ -129,7 +129,7 @@ export const fetchAboutPageData = async (): Promise<{ organisation: Organisation
 }
 
 export const renderAboutPageData = (dataLoad: DataLoad<{ organisation: Organisation, page: Page }>) => (
-  <Content className="mt-8" {...dataLoad} />
+  <Content {...dataLoad} />
 )
 const AboutPageData: React.FC = () => {
   return (<DataFetcher cacheKey="aboutPageData" dataFetcherKey="aboutPageData" dataRendererKey="aboutPageData" />)

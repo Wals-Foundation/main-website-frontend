@@ -1,4 +1,4 @@
-import { Caption, HeadingLarge, TextLarge } from "@/components/Typography"
+import { Caption, HeadingLarge, Text } from "@/components/Typography"
 import { CauseDetail } from "../models"
 import CauseInfoSection from "./CauseInfoSection"
 import ImageDisplay from "@/image/Image"
@@ -28,7 +28,7 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                                 rel="noopener noreferrer"
                                 className="my-auto mt-2 sm:mt-0 sm:col-span-2 text-primary underline"
                             >
-                                <TextLarge 
+                                <Text 
                                 className="sm:text-right underline" 
                                 text="Get Directions" 
                                 styles={{ color: "var(--primary)" }} />
