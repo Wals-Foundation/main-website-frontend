@@ -22,7 +22,7 @@ const darkModeIcon: ImageSource = {
 }
 
 const DarkModeToggle: React.FC<{
-    className?: string
+  className?: string
 }> = (className) => {
   const [isDark, setIsDark] = useState(false)
 
@@ -44,7 +44,7 @@ const DarkModeToggle: React.FC<{
     <button
       onClick={toggleTheme}
       aria-label={icon.alt}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+      className={`h-interactive rounded-full hover:bg-secondary ${className ?? ""}`}
     >
       <Icon className="w-6 h-6" icon={icon} />
     </button>
