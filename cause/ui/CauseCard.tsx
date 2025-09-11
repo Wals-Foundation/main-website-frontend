@@ -148,7 +148,7 @@ export const CauseCard: React.FC<{
 }) => {
     return (
       <>
-        <article className={`p-4 sm:p-8 sm:grid sm:grid-cols-2 sm:gap-8 rounded-lg ${backgroundColorClass} ${className ?? ""}`}>
+        <article className={`max-w-[1052px] mx-auto p-4 sm:p-8 sm:grid sm:grid-cols-2 sm:gap-8 rounded-lg ${backgroundColorClass} ${className ?? ""}`}>
           <div>
             {causeImage && (
               <ImageDisplay

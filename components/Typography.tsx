@@ -6,7 +6,7 @@ export const Title: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h1 className={`text-5xl sm:text-6xl text-typo-black-500 font-size-semibold
+    <h1 className={`text-5xl sm:text-6xl font-size-semibold
       leading-[3.5rem] sm:leading-[4.75rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -20,8 +20,8 @@ export const SectionHeader: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h2 className={`text-base text-typo-white-800 font-size-semibold uppercase
-      leading-6 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
+    <h2 className={`text-base font-medium uppercase
+      leading-6 whitespace-normal sm:max-w-[88ch] ${className ?? ""}`}
       style={styles}>
       {text}
     </h2>
@@ -34,7 +34,7 @@ export const HeadingLarge: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h3 className={`text-4xl sm:text-5xl text-typo-black-500 font-size-semibold 
+    <h3 className={`text-4xl sm:text-5xl font-size-semibold 
       leading-10 sm:leading-[3rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -48,7 +48,7 @@ export const HeadingMedium: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h4 className={`text-3xl sm:text-4xl text-typo-black-500 font-size-semibold 
+    <h4 className={`text-3xl sm:text-4xl font-size-semibold 
       leading-8 sm:leading-10 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -62,7 +62,7 @@ export const HeadingSmall: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h5 className={`text-2xl sm:text-3xl text-typo-black-500 font-size-semibold 
+    <h5 className={`text-2xl sm:text-3xl font-medium 
       leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}
@@ -76,7 +76,7 @@ export const Text: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <p className={`text-base text-typo-white-900 
+    <p className={`text-base 
       leading-6 sm:leading-7 whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}

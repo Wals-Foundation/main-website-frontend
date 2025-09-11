@@ -3,13 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --background-light: #ffffff;
-  --background-dark: #111111;
-  --background-highlight: #FAFBFC;
+  --background: #f7f9ff;
+  --background-variant: #d7dadf;
+  --background-inverse: #101417;
+  --foreground: #181c20;
+  --foreground-inverse: #B5B5B5;
+  --outline: #72787e;
+  --outline-variant: #c1c7ce;
   --primary: #009EE2;
-  --on-dark: #B5B5B5;
-  --on-light: #6B6B6B;
+  --primary-inverse: #95cdf7;
+  --seconday: #ECF6FF;
+  --error: #ba1a1a;
+  --on-primary: #FFFFFF;
+  --on-secondary: #00344f;
+  --on-error: #ffffff;
 }
+
+[data-theme="dark"] {
+  --background: #101417;
+  --background-variant: #363a3e;
+  --background-inverse: #e0e3e8;
+  --foreground: #B5B5B5;
+  --foreground-inverse: #181c20;
+  --outline: #8b9198;
+  --outline-variant: #41474d;
+  --on-primary: #B5B5B5;
+  --on-error: #B5B5B5;
+}
+
+[data-inverse] {
+  background: var(--background-inverse);
+  color: var(--foreground-inverse);
+}
+
 
 @font-face {
   font-family: "ManropeRegular";

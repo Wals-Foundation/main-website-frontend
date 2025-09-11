@@ -10,11 +10,11 @@ interface ButtonProps {
 }
 // /filled/outlined/text, enabled/disabled
 const buttonStyle = (enabled: boolean, theme?: "primary" | "secondary" | "border"): string => {
-  const filledButtonStyle = "bg-primary text-white hover:bg-primary-50"
+  const filledButtonStyle = "bg-primary text-on-primary hover:bg-primary-inverse"
   const filledButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
   const outlinedButtonStyle = "border-2 border-primary text-primary"
   const outlinedButtonDisabledStyle = "border-2 border-btn-disabled text-btn-disabled-text"
-  const textButtonStyle = "bg-btn-text text-primary"
+  const textButtonStyle = "bg-secondary text-primary"
   const textButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
 
   switch (theme) {

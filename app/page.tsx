@@ -25,16 +25,16 @@ export default function Home() {
         <HomeOurStory />
       </section>
       <section className="bg-background-highlight mt-section">
-        <div className="mx-horizontal mx-auto py-12 sm:py-16">
+        <div className="mx-horizontal mx-auto bg-background-variant  py-12 sm:py-16">
           <FeaturedCauses
-            className="w-full mt-4"
+            className="mx-horizontal"
             causesUrl="/causes"
             causeDetailsUrl="/causes"
             donateUrl="/donate"
           />
         </div>
       </section>
-      <section className="bg-background-dark mt-section">
+      <section data-inverse className="mt-section">
         <div className="mx-horizontal py-12 sm:py-16">
           <GetInvolved className="w-full mx-auto" />
         </div>

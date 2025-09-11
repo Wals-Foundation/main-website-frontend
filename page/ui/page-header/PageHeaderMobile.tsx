@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -18,7 +19,7 @@ const MobileHeaderDetail: React.FC<{
   return (
     <div className={className ?? ""}>
       <div className="h-full flex flex-col gap-4">
-        <MainMenu className="flex-1" menuItems={menuItems} />
+        <MainMenu className="flex-1 min-h-0" menuItems={menuItems} />
         {showDonateBtn && (
           <WebsiteLink link={donateUrl}>
             <Button className="mt-4" theme="primary" title="Donate Now" />
@@ -55,26 +56,29 @@ const PageHeaderMobile: React.FC<{
             <WalsLogo />
           </WebsiteLink>
         </div>
-        <button
-          id="menu-button"
-          className="md:hidden p-2"
-          onClick={() => dispatch(toggleMobileMenuVisibility())}
-          aria-label="Toggle menu"
-          aria-expanded={mobileMenuOpen}
-        >
-          <img
-            src={mobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
-            alt={mobileMenuOpen ? "Close menu" : "Open menu"}
-            className="h-interactive filter invert"
-          />
-        </button>
+        <div className="flex items-center">
+          <DarkModeToggle />
+          <button
+            id="menu-button"
+            className="md:hidden p-2"
+            onClick={() => dispatch(toggleMobileMenuVisibility())}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <img
+              src={mobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
+              alt={mobileMenuOpen ? "Close menu" : "Open menu"}
+              className="h-interactive filter invert"
+            />
+          </button>
+        </div>
       </div>
       {mobileMenuOpen && (
         <div
           className={`fixed inset-0 bg-white transition-transform duration-300 ease-in-out z-40 ${mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
             }`}
         >
-          <div className="mx-horizontal pt-16">
+          <div className="mx-horizontal h-full py-16">
             <MobileHeaderDetail
               className=""
               donateUrl={donateUrl}

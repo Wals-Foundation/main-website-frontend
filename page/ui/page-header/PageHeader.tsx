@@ -36,10 +36,10 @@ const PageHeader: React.FC<{
     const showDonateButton = featureFlags["donate"]
 
     return (
-        <header className={`bg-white ${className ?? ""}`}>
+        <header className={`${className ?? ""}`}>
             <div className="mx-horizontal top-0 z-50">
                 <PageHeaderDesktop
-                    className="hidden sm:block border-b border-border-gray"
+                    className="hidden sm:block border-b border-outline"
                     donateUrl={donateUrl}
                     menuItems={menuItems}
                     showDonateBtn={showDonateButton}

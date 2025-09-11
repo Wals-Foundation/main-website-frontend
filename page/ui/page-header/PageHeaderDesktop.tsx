@@ -4,6 +4,7 @@ import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
 import MainMenu from "@/menu/ui/MainMenu";
 import Link from "next/link";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const PageHeaderDesktop: React.FC<{
     className?: string,
@@ -22,6 +23,7 @@ const PageHeaderDesktop: React.FC<{
                 <div className="flex-1 min-w-0 overflow-x-auto">
                     <MainMenu menuItems={menuItems} className="w-full" />
                 </div>
+                <DarkModeToggle />
                 {showDonateBtn && (
                     <WebsiteLink link={donateUrl}>
                         <Button className="shrink-0 ml-4" title="Donate Now" />

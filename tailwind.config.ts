@@ -8,28 +8,17 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        "background-dark": "var(--background-dark)",
-        "background-highlight": "var(--background-highlight)",
+        "background-variant": "var(--background-variant)",
+        foreground: "var(--foreground)",
+        outline: "var(--outline)",
+        "outline-variant": "var(--outline-variant)",
         primary: "var(--primary)",
-        "typo-black-200": "#303030",
-        "typo-black-400": "#414141",
-        "typo-black-500": "#111111",
-        "typo-gray": "#B5B5B5",
-        "typo-white-800": "#8C8C8C",
-        "typo-white-900": "var(--on-light)",
-        header: "#111111",
-        ash: "#8C8C8C",
-        "title-gray": "#B5B5B5",
-        paragraph: "#414141",
-        "border-gray": "#E7E7E7",
-        "light-gray": "#E0E0E0",
-        "section-bg-gray": "#FAFBFC",
-        "light-blue": "#00ACEE",
-        "transparent-blue": "#F3FAFD",
-        "form-border": "#E6ECF0",
-        "btn-disabled": "#E0E0E0",
-        "btn-disabled-text": "#B5B5B5",
-        "btn-text": "#ECF6FF"
+        "primary-inverse": "var(--primary-inverse)",
+        secondary: "var(--seconday)",
+        error: "var(--error)",
+        "on-primary": "var(--on-primary)",
+        "on-secondary": "var(--on-secondary)",
+        "on-error": "var(--on-error)",
       },
     },
   },
@@ -37,11 +26,11 @@ export default {
     typography,
     plugin(function ({ addComponents }) {
       addComponents({
-        '.mx-horizontal':{
-          '@apply mx-4 sm:mx-6':{}
+        '.mx-horizontal': {
+          '@apply mx-4 sm:mx-6': {}
         },
-        '.mt-section':{
-          '@apply mt-12 sm:mt-16':{}
+        '.mt-section': {
+          '@apply mt-12 sm:mt-16': {}
         },
         '.h-interactive': {
           '@apply h-10 sm:h-14': {},
@@ -50,6 +39,7 @@ export default {
     }),
   ],
   safelist: [
+    "max-w-[1052px]",
     "break-words",
     "flex-1",
     "h-60",

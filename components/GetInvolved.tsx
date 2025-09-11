@@ -102,7 +102,6 @@ const Content: React.FC<{
                 <HeadingLarge
                     className="mt-4"
                     text="How it works is very simple."
-                    styles={{ color: "white" }}
                 />
                 <div className="mt-4 sm:grid sm:grid-cols-2 gap-4">
                     <div>

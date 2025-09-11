@@ -24,7 +24,7 @@ const FeaturedCauses: React.FC<{
                 <SuspenseWrapper>
                     <CauseTabs
                         className="w-full mt-8"
-                        backgroundColorClass="bg-white"
+                        backgroundColorClass="bg-background"
                         causesUrl={causesUrl}
                         donateUrl={donateUrl}
                         causeDetailsUrl={causeDetailsUrl}
