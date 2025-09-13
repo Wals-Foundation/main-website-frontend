@@ -1,15 +1,21 @@
-import type { Config } from "tailwindcss"
-import plugin from 'tailwindcss/plugin'
-import typography from '@tailwindcss/typography';
+// tailwind.config.ts
+import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+import typography from "@tailwindcss/typography";
 
 export default {
-  content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
         "background-variant": "var(--background-variant)",
         foreground: "var(--foreground)",
+        "foreground-inverse": "var(--foreground-inverse)",
         outline: "var(--outline)",
         "outline-variant": "var(--outline-variant)",
         primary: "var(--primary)",
@@ -20,34 +26,95 @@ export default {
         "on-secondary": "var(--on-secondary)",
         "on-error": "var(--on-error)",
       },
+      typography: ({ theme }: { theme: any }) => ({
+        DEFAULT: {
+          css: {
+            color: "var(--foreground)",
+            h1: {
+              fontSize: theme("fontSize.5xl")[0],
+              lineHeight: "3.5rem",
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h2: {
+              fontSize: theme("fontSize.base")[0],
+              lineHeight: theme("lineHeight.6"),
+              fontWeight: theme("fontWeight.medium"),
+              textTransform: "uppercase",
+            },
+            h3: {
+              fontSize: theme("fontSize.4xl")[0],
+              lineHeight: theme("lineHeight.10"),
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h4: {
+              fontSize: theme("fontSize.3xl")[0],
+              lineHeight: theme("lineHeight.8"),
+              fontWeight: theme("fontWeight.semibold"),
+            },
+            h5: {
+              fontSize: theme("fontSize.2xl")[0],
+              lineHeight: theme("lineHeight.6"),
+              fontWeight: theme("fontWeight.medium"),
+            },
+            h6: {
+              fontSize: theme("fontSize.sm")[0],
+              lineHeight: theme("lineHeight.6"),
+              fontWeight: theme("fontWeight.medium"),
+            },
+            strong: {
+              fontSize: theme("fontSize.lg")[0],
+              fontWeight: theme("fontWeight.bold"),
+              color: "inherit",
+            },
+            em: {
+              fontSize: theme("fontSize.lg")[0],
+              fontWeight: theme("fontWeight.bold"),
+              color: "inherit",
+            },
+            a: {
+              color: "var(--primary)",
+              "&:hover": {
+                color: "var(--primary-inverse)",
+              },
+            },
+          },
+        },
+        inverse: {
+          css: {
+            color: "var(--foreground-inverse)",
+          },
+        },
+      }),
     },
   },
   plugins: [
-    typography,
-    plugin(function ({ addComponents, addUtilities }) {
+    plugin(function ({ addComponents, addUtilities, addVariant }) {
       addComponents({
-        '.mx-horizontal': {
-          '@apply mx-4 sm:mx-6': {}
+        ".mx-horizontal": {
+          "@apply mx-4 sm:mx-6": {},
         },
-        '.px': {
-          '@apply px-4 sm:px-6': {}
+        ".px": {
+          "@apply px-4 sm:px-6": {},
         },
-        '.py': {
-          '@apply py-4': {}
+        ".py": {
+          "@apply py-4": {},
         },
-        '.mt-section': {
-          '@apply mt-12 sm:mt-16': {}
+        ".mt-section": {
+          "@apply mt-12 sm:mt-16": {},
         },
-      })
+      });
       addUtilities({
-        '.sentence-case': {
-          'text-transform': 'lowercase',
-          '&::first-letter': {
-            'text-transform': 'uppercase',
+        ".sentence-case": {
+          "text-transform": "lowercase",
+          "&::first-letter": {
+            "text-transform": "uppercase",
           },
         },
-      })
+      });
+      // Enable inverse variant
+      addVariant("inverse", "&[data-inverse] &");
     }),
+    typography,
   ],
   safelist: [
     "max-w-[1052px]",
@@ -94,6 +161,6 @@ export default {
     "sm:h-64",
     "sm:flex-wrap",
     "col-start-3",
-    "w-4"
-  ]
-} satisfies Config
+    "w-4",
+  ],
+} satisfies Config;

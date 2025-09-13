@@ -9,7 +9,7 @@ import remarkGfm from "remark-gfm"
 const MarkdownDisplay: React.FC<{ className?: string, markdown: string }> = ({ className, markdown }) => {
     return (
         <>
-            <div className={`prose ${className ?? ""}`}>
+            <div className={`prose inverse:prose-inverse ${className ?? ""}`}>
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}>
                     {markdown}

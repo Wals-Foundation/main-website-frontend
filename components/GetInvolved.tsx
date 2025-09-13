@@ -62,7 +62,7 @@ export const fetchGetInvolvedData = async (): Promise<{ image?: Image, options: 
     }
 }
 
-const GetInvolvedOption: React.FC<{
+const GetInvolvedOptionDisplay: React.FC<{
     className?: string,
     icon: ImageSource,
     details: string,
@@ -84,7 +84,7 @@ const GetInvolvedOption: React.FC<{
                             <Icon icon={{ id: arrow.src, alt: "", url: arrow.src, name: "" }} />
                         </WebsiteLink>
                     </div>
-                    <MarkdownDisplay className="mt-8 text-btn-disabled-text" markdown={details} />
+                    <MarkdownDisplay className="mt-8" markdown={details} />
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@ const Content: React.FC<{
                     </div>
                     <div className="mt-8 sm:mt-0">
                         {data?.options.map((option) => (
-                            <GetInvolvedOption
+                            <GetInvolvedOptionDisplay
                                 key={option.id}
                                 className="mb-4"
                                 icon={option.icon}

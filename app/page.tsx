@@ -34,7 +34,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section data-inverse className="mt-section">
+      <section data-inverse className="mt-section inverse:prose-inverse">
         <div className="mx-horizontal py-12 sm:py-16">
           <GetInvolved className="w-full mx-auto" />
         </div>
