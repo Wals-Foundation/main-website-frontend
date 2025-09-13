@@ -1,6 +1,6 @@
-import Button from "@/components/Button"
+import { FilledButton } from "@/components/Button"
 import { HeadingLarge, SectionHeader } from "@/components/Typography"
-import Link from "next/link"
+import WebsiteLink from "@/menu/ui/WebsiteLink"
 
 const PageCallToDonate: React.FC<{ className?: string, donateUrl: string }> = ({ className, donateUrl }) => {
     return (
@@ -11,11 +11,11 @@ const PageCallToDonate: React.FC<{ className?: string, donateUrl: string }> = ({
                     className="w-fit mx-auto mt-4 sm:mt-6 text-center"
                     text="Donate towards a worthy cause"
                 />
-                <div className="w-full mt-4 sm:mt-6">
-                    <div className="mx-auto sm:w-fit">
-                        <Link href={donateUrl}>
-                            <Button theme="primary" title="Donate" />
-                        </Link>
+                <div className="mt-4 sm:mt-6">
+                    <div className="mx-auto w-fit">
+                        <WebsiteLink link={donateUrl}>
+                            <FilledButton title="Donate" />
+                        </WebsiteLink>
                     </div>
                 </div>
             </div>

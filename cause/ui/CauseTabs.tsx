@@ -4,12 +4,12 @@ import { useMemo, useState } from "react"
 import { Cause, CauseType } from "../models"
 import Tabs from "@/components/Tabs"
 import CausesList from "./CausesList"
-import Link from "next/link"
-import Button from "@/components/Button"
 import { useAppSelector } from "@/logic/store/hooks"
 import { fetchCauses } from "../data/cause-strapi-datasource"
 import { isStrapiError } from "@/core/data/strapi-error"
 import { useSearchParams } from "next/navigation"
+import WebsiteLink from "@/menu/ui/WebsiteLink"
+import { OutlinedButton } from "@/components/Button"
 
 const tabOrder: CauseType[] = [
     CauseType.Community,
@@ -137,9 +137,12 @@ const CauseTabs: React.FC<{
                 {!loadMoreCauses && (
                     <div className="w-full pt-8">
                         <div className="mx-auto sm:w-fit">
-                            <Link href={`${causesUrl}?type=${activeCauseType}`}>
-                                <Button theme="border" title="View all causes" />
-                            </Link>
+                            <WebsiteLink link={`${causesUrl}?type=${activeCauseType}`}>
+                                <OutlinedButton
+                                    className="w-full sm:w-auto"
+                                    title="view all causes"
+                                />
+                            </WebsiteLink>
                         </div>
                     </div>
                 )}

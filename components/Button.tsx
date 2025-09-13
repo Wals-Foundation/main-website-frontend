@@ -28,7 +28,7 @@ export const IconButton: React.FC<{
 }> = ({ className, icon, type, style, onClick }) => {
   return (
     <button
-      className={`interactive px py flex justify-center align-middle hover:bg-primary-inverse ${className ?? ""}`}
+      className={`interactive px py flex justify-center align-middle rounded-full hover:bg-primary-inverse ${className ?? ""}`}
       type={type}
       style={style}
       onClick={onClick}

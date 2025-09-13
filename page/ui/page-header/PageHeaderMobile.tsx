@@ -60,7 +60,7 @@ const PageHeaderMobile: React.FC<{
           </WebsiteLink>
         </div>
         <div className="flex items-center">
-          <DarkModeToggle />
+          
           <button
             id="menu-button"
             className="md:hidden p-2"

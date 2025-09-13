@@ -1,15 +1,12 @@
 import React from "react"
-import Typography, { HeadingMedium } from "../../components/Typography"
-import Button from "../../components/Button"
-import { useAppSelector } from "@/logic/store/hooks"
-import { createSlugMapForControl, trim } from "@/utils"
-import Link from "next/link"
-import { isDev } from "@/logic/config/url"
+import { HeadingMedium } from "../../components/Typography"
+import { FilledButton, OutlinedButton } from "../../components/Button"
 import { CauseType } from "../models"
 import { Image } from "@/core/models"
 import MarkdownDisplay from "@/components/MarkdownDisplay"
 import ImageDisplay from '@/image/Image';
 import { Config } from "@/core/config"
+import WebsiteLink from "@/menu/ui/WebsiteLink"
 
 /* TEST CASES
    Navigate to cause details
@@ -26,14 +23,20 @@ const CauseActions: React.FC<{
   return (
     <>
       <div className={`w-full sm:flex sm:gap-4 ${className ?? ""}`}>
-        <Link href={`${viewCauseDetailsUrl}/${causeType}${Config.isStaticHost ? "?code=" + causeId : "/" + causeId}`}>
-          <Button theme="primary" title="Read more" />
-        </Link>
+        <WebsiteLink link={`${viewCauseDetailsUrl}/${causeType}${Config.isStaticHost ? "?code=" + causeId : "/" + causeId}`}>
+          <FilledButton
+            className="w-full sm:w-auto"
+            title="Read more"
+          />
+        </WebsiteLink>
         {donateFeatureFlag && (
           <div className="pt-4 sm:pt-0">
-            <Link href={`${donateUrl}?type=${causeType}&id=${causeId}`}>
-              <Button theme="secondary" title="Make donation" />
-            </Link>
+            <WebsiteLink link={`${donateUrl}?type=${causeType}&id=${causeId}`}>
+              <OutlinedButton
+                className="w-full sm:w-auto"
+                title="Make donation"
+              />
+            </WebsiteLink>
           </div>
         )}
       </div>
@@ -174,61 +177,3 @@ export const CauseCard: React.FC<{
     )
 
   }
-
-interface CausesCardProps {
-  id?: string
-  title?: string
-  image?: string
-  subtitle?: string
-  content?: string
-  displayDonateButton?: boolean
-  link?: string
-}
-
-const CausesCardOld: React.FC<CausesCardProps> = (props) => {
-  const { title, subtitle, content, id, displayDonateButton, image } = props
-  const data = useAppSelector((state) => state.usePageHeadlines)
-  const pageControlSlugMap = createSlugMapForControl(data.pageControl)
-
-  return (
-    <div className="lg:max-w-[1052px] mx-auto bg-white p-6 rounded-2xl w-full">
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        {/* Image Section */}
-        {image && (
-          <div className="w-full lg:w-1/2">
-            <img src={image} alt={title} className="rounded-xl w-full h-[270px] md:h-[429px] object-cover" />
-          </div>
-        )}
-
-        {/* Text Section */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-between md:min-h-[429px]">
-          <div>
-            <Typography type="Subtitle" className="text-left text-2xl">
-              {trim(title || "", 16)}
-            </Typography>
-            <Typography type="Custom">{trim(subtitle || "", 150)}</Typography>
-          </div>
-          <div className="border-t border-light-gray pt-5 mt-4">
-            {pageControlSlugMap.get("cause_card_impact_text") && (
-              <Typography type="Custom">{trim(content || "", 150)}</Typography>
-            )}
-            {pageControlSlugMap.get("cause_card_button_2") && (
-              <div className="pt-4 md:flex flex-col lg:flex-row items-start lg:items-center gap-4">
-                <Link href={`/${isDev ? "causes/cause?" : "causes/cause.html?"}${id}`}>
-                  <Button theme="primary" title="Read More" />
-                </Link>
-                {displayDonateButton && (
-                  <Link href="/donate">
-                    <Button theme="secondary" title="Make a Donation" />
-                  </Link>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default CausesCardOld

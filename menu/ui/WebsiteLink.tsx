@@ -8,11 +8,16 @@ const WebsiteLink: React.FC<{
     return (
         <>
             {isInternalLink(link) ? (
-                <Link href={link}>
+                <Link className="cursor-pointer" href={link}>
                     {children}
                 </Link>
             ) : (
-                <a href={link} target="_blank" rel="noopener noreferrer">
+                <a
+                    className="cursor-pointer"
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     {children}
                 </a>
             )}
