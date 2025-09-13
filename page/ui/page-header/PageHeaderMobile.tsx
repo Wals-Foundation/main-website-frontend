@@ -1,6 +1,5 @@
 "use client"
 
-import Button from "@/components/Button";
 import { WalsLogo } from "@/components/Logo";
 import MainMenu from "@/menu/ui/MainMenu";
 import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
@@ -9,6 +8,7 @@ import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import { FilledButton } from "@/components/Button";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -22,7 +22,10 @@ const MobileHeaderDetail: React.FC<{
         <MainMenu className="flex-1 min-h-0" menuItems={menuItems} />
         {showDonateBtn && (
           <WebsiteLink link={donateUrl}>
-            <Button className="mt-4" theme="primary" title="Donate Now" />
+            <FilledButton
+              className="w-full mt-4"
+              title="donate now"
+            />
           </WebsiteLink>
         )}
       </div>
@@ -68,7 +71,7 @@ const PageHeaderMobile: React.FC<{
             <img
               src={mobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
               alt={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="h-interactive filter invert"
+              className="interactive filter invert"
             />
           </button>
         </div>

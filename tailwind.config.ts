@@ -24,16 +24,27 @@ export default {
   },
   plugins: [
     typography,
-    plugin(function ({ addComponents }) {
+    plugin(function ({ addComponents, addUtilities }) {
       addComponents({
         '.mx-horizontal': {
           '@apply mx-4 sm:mx-6': {}
         },
+        '.px': {
+          '@apply px-4 sm:px-6': {}
+        },
+        '.py': {
+          '@apply py-4': {}
+        },
         '.mt-section': {
           '@apply mt-12 sm:mt-16': {}
         },
-        '.h-interactive': {
-          '@apply h-10 sm:h-14': {},
+      })
+      addUtilities({
+        '.sentence-case': {
+          'text-transform': 'lowercase',
+          '&::first-letter': {
+            'text-transform': 'uppercase',
+          },
         },
       })
     }),

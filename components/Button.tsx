@@ -1,5 +1,81 @@
 import React from "react"
 
+export const FilledButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-primary text-on-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
+export const IconButton: React.FC<{
+  className?: string,
+  icon: React.ReactNode,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, icon, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py flex justify-center align-middle hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {icon}
+    </button>
+  );
+};
+
+export const OutlinedButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py sentence-case rounded-full align-middle border border-primary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
+export const TonalButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-secondary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
 interface ButtonProps {
   title?: string
   loading?: boolean

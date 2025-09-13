@@ -1,9 +1,9 @@
 "use client"
 
 import { useAppSelector } from "@/logic/store/hooks"
+import WebsiteLink from "@/menu/ui/WebsiteLink"
 import PageSubHeadlineAndActions from "@/page/ui/PageSubheadlineAndActions"
-import Link from "next/link"
-import Button from "./Button"
+import { OutlinedButton, TonalButton } from "./Button"
 
 const HomePageSubheadlineAndActions: React.FC<{ donateUrl: string, subheadline: string }> = ({ donateUrl, subheadline }) => {
     const donateFeatureFlag = useAppSelector((state) => state.useFeatureFlags.flags["donate"])
@@ -12,13 +12,19 @@ const HomePageSubheadlineAndActions: React.FC<{ donateUrl: string, subheadline: 
             subheadline={subheadline}
             actions={[
                 donateFeatureFlag && (
-                    <Link key={1} href={donateUrl}>
-                        <Button theme="border" title="Make donation" />
-                    </Link>
+                    <WebsiteLink key={1} link={donateUrl}>
+                        <OutlinedButton
+                            className="w-full sm:w-auto"
+                            title="make donation"
+                        />
+                    </WebsiteLink>
                 ),
-                <Link key={2} href={`/about`}>
-                    <Button theme="secondary" title="Lean more" />
-                </Link>,
+                <WebsiteLink key={2} link={`/about`}>
+                    <TonalButton
+                        className="w-full sm:w-auto"
+                        title="Lean more"
+                    />
+                </WebsiteLink>,
             ]} />
     )
 }

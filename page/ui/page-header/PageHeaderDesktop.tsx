@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
 import { WalsLogo } from "@/components/Logo";
 import { MenuItemUiState } from "@/menu/ui/menu-item-ui-state";
 import MainMenu from "@/menu/ui/MainMenu";
 import Link from "next/link";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import { FilledButton } from "@/components/Button";
 
 const PageHeaderDesktop: React.FC<{
     className?: string,
@@ -26,7 +26,10 @@ const PageHeaderDesktop: React.FC<{
                 <DarkModeToggle />
                 {showDonateBtn && (
                     <WebsiteLink link={donateUrl}>
-                        <Button className="shrink-0 ml-4" title="Donate Now" />
+                        <FilledButton
+                            className="shrink-0 ml-4"
+                            title="donate now"
+                        />
                     </WebsiteLink>
                 )}
             </div>

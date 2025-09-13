@@ -5,6 +5,7 @@ import moon from "@/assets/images/moon.svg"
 import sun from "@/assets/images/sun.svg"
 import { ImageSource } from "@/core/models"
 import Icon from "./Icon"
+import { IconButton } from "./Button"
 
 
 const lightModeIcon: ImageSource = {
@@ -41,13 +42,11 @@ const DarkModeToggle: React.FC<{
   const icon = isDark ? darkModeIcon : lightModeIcon
 
   return (
-    <button
+    <IconButton
+      className={className?.className}
+      icon={<Icon icon={icon} />}
       onClick={toggleTheme}
-      aria-label={icon.alt}
-      className={`h-interactive rounded-full hover:bg-secondary ${className ?? ""}`}
-    >
-      <Icon className="w-6 h-6" icon={icon} />
-    </button>
+    />
   )
 }
 
