@@ -78,7 +78,7 @@ const PageHeaderMobile: React.FC<{
       </div>
       {mobileMenuOpen && (
         <div
-          className={`fixed inset-0 bg-white transition-transform duration-300 ease-in-out z-40 ${mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+          className={`fixed inset-0 bg-background transition-transform duration-300 ease-in-out z-40 ${mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
             }`}
         >
           <div className="mx-horizontal h-full py-16">
