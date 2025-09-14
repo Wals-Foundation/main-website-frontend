@@ -1,10 +1,33 @@
 "use client"
-import Typography from "@components/Typography"
+import Typography from "@/components/Typography"
+import { getTransactionsData } from "@/logic/hooks/api/useFinances"
+import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
+import dayjs from "dayjs"
+import { useEffect, useState } from "react"
 
 export default function Donate() {
+  const dispatch = useAppDispatch()
+  const data = useAppSelector((state) => state.useFinances)
+  const [loading, setLoading] = useState(false)
+
+  const getAllData = async () => {
+    setLoading(true)
+    try {
+      await dispatch(getTransactionsData())
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getAllData()
+  }, [])
+
   return (
     <main className="bg-white">
-      <section className="max-w-[1440px] mx-auto py-16 xl:pt-32">
+      <section className="max-w-[1440px] mx-auto py-16 md:pt-32">
         <div className="w-11/12 mx-auto">
           <div>
             <Typography type="Title" className="text-center">
@@ -17,90 +40,55 @@ export default function Donate() {
                 Show Filter
               </button>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full table-auto border-collapse">
-                <thead className="bg-gray-100 text-gray-700 text-left font-semibold">
-                  <tr>
-                    <th className="py-3 px-4">Date</th>
-                    <th className="py-3 px-4">Type</th>
-                    <th className="py-3 px-4">Description</th>
-                    <th className="py-3 px-4">Amount</th>
-                    <th className="py-3 px-4"></th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-600">
-                  <tr className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4">18th Jun, 2024 • 10:23 AM</td>
-                    <td className="py-3 px-4">Cash In</td>
-                    <td className="py-3 px-4">Donated towards Microprograms</td>
-                    <td className="py-3 px-4">GHS 2,313.00</td>
-                    <td className="py-3 px-4">
-                      <a href="#" className="text-blue-500 font-semibold hover:underline">
-                        View Details
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4">18th Oct, 2024 • 10:23 AM</td>
-                    <td className="py-3 px-4">Cash In</td>
-                    <td className="py-3 px-4">AT Money</td>
-                    <td className="py-3 px-4">GHS 2,313.00</td>
-                    <td className="py-3 px-4">
-                      <a href="#" className="text-blue-500 font-semibold hover:underline">
-                        View Details
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4">18th Oct, 2024 • 10:23 AM</td>
-                    <td className="py-3 px-4">Cash Out</td>
-                    <td className="py-3 px-4">Telecel Cash</td>
-                    <td className="py-3 px-4">GHS 2,313.00</td>
-                    <td className="py-3 px-4">
-                      <a href="#" className="text-blue-500 font-semibold hover:underline">
-                        View Details
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4">18th Oct, 2024 • 10:23 AM</td>
-                    <td className="py-3 px-4">Cash Out</td>
-                    <td className="py-3 px-4">Telecel Cash</td>
-                    <td className="py-3 px-4">GHS 2,313.00</td>
-                    <td className="py-3 px-4">
-                      <a href="#" className="text-blue-500 font-semibold hover:underline">
-                        View Details
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4">18th Oct, 2024 • 10:23 AM</td>
-                    <td className="py-3 px-4">Cash In</td>
-                    <td className="py-3 px-4">MTN Mobile Money</td>
-                    <td className="py-3 px-4">GHS 2,313.00</td>
-                    <td className="py-3 px-4">
-                      <a href="#" className="text-blue-500 font-semibold hover:underline">
-                        View Details
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="flex justify-between items-center mt-4">
-              <p className="text-gray-500 text-sm">1-10 of 5,639 records</p>
-              <div className="flex space-x-2">
-                <button className="px-3 py-1 bg-gray-100 text-gray-500 rounded border border-gray-300" disabled>
-                  &laquo;
-                </button>
-                <button className="px-3 py-1 bg-blue-500 text-white rounded">1</button>
-                <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">2</button>
-                <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">3</button>
-                <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">4</button>
-                <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">5</button>
-                <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">&raquo;</button>
+            {loading ? (
+              <p className="text-center text-2xl">Loading Please wait..</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full table-auto border-collapse">
+                  <thead className="bg-gray-100 text-gray-700 text-left font-semibold">
+                    <tr>
+                      <th className="py-3 px-4">Date</th>
+                      <th className="py-3 px-4">Type</th>
+                      <th className="py-3 px-4">Description</th>
+                      <th className="py-3 px-4">Amount</th>
+                      <th className="py-3 px-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-600">
+                    {!!data.finances?.length &&
+                      data.finances.map((finance, n) => (
+                        <tr className="border-b hover:bg-gray-50" key={n}>
+                          <td className="py-3 px-4">{dayjs(finance.date, "M/D/YYYY").format("D MMM, YYYY • h:mm A")}</td>
+                          <td className="py-3 px-4">{finance.type}</td>
+                          <td className="py-3 px-4">{finance.description}</td>
+                          <td className="py-3 px-4">GHS {finance.amount?.toFixed(2)}</td>
+                          <td className="py-3 px-4">
+                            <a href="#" className="text-blue-500 font-semibold hover:underline">
+                              View Details
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
               </div>
-            </div>
+            )}
+            {!loading && (
+              <div className="flex justify-between items-center mt-4">
+                <p className="text-gray-500 text-sm">1-10 of 5,639 records</p>
+                <div className="flex space-x-2">
+                  <button className="px-3 py-1 bg-gray-100 text-gray-500 rounded border border-gray-300" disabled>
+                    &laquo;
+                  </button>
+                  <button className="px-3 py-1 bg-blue-500 text-white rounded">1</button>
+                  <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">2</button>
+                  <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">3</button>
+                  <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">4</button>
+                  <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">5</button>
+                  <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded border border-gray-300">&raquo;</button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

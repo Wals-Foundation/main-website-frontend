@@ -1,6 +1,6 @@
 import React from "react"
 import Typography from "./Typography"
-import blog1 from "@assets/images/blog1.svg"
+import blog1 from "@/assets/images/blog1.svg"
 
 interface BlogCardProps {
   haeding?: string
@@ -8,9 +8,9 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({}) => {
   return (
-    <div className="lg:max-w-[632px]">
+    <div className="lg:max-w-[632px] pt-12 md:pt-0 w-full">
       <div className="rounded-xl">
-        <img src={blog1.src} alt="" className="lg:h-[429px] rounded-xl" />
+        <img src={blog1.src} alt="" className="lg:h-[429px] w-full rounded-xl" />
       </div>
       <div className="pt-4">
         <div className="flex items-center">
@@ -27,10 +27,10 @@ const BlogCard: React.FC<BlogCardProps> = ({}) => {
           </Typography>
         </div>
         <div className="pt-2">
-          <Typography type="Custom" className="xl:text-2xl">
+          <Typography type="Custom" className="text-2xl font-size-semibold">
             Blog title heading will go here
           </Typography>
-          <Typography type="Custom" className="xl:text-base pt-2">
+          <Typography type="Custom" className="md:text-base pt-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
           </Typography>
         </div>

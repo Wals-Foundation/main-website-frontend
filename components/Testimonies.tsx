@@ -13,9 +13,9 @@ const Testimonies: React.FC<TestimoniesProps> = (props) => {
   return (
     <div className="bg-white">
       <div className="max-w-[1440px] mx-auto pt-10">
-        <div className="w-11/12 mx-auto relative xl:h-[516px] flex flex-col justify-center items-center">
+        <div className="w-11/12 mx-auto relative md:h-[516px] flex flex-col justify-center items-center">
           <Typography
-            type="Small"
+            type="Custom"
             className="text-center text-header text-2xl leading-8  max-w-[768px] mx-auto font-size-semibold"
           >
             {content}

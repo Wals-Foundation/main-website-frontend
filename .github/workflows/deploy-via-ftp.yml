@@ -1,0 +1,46 @@
+name: Build and Deploy via FTP
+
+on:
+  push:
+    branches:
+      - strapi-api-integration
+      - production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      STAGING_BACKEND_URL: ${{ vars.STAGING_BACKEND_URL }}
+      PROD_BACKEND_URL: ${{ vars.PROD_BACKEND_URL }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Create .env file based on branch
+        run: |
+          BRANCH_NAME="${GITHUB_REF##*/}"
+          if [[ "$BRANCH_NAME" == "strapi-api-integration" ]]; then
+            echo "NEXT_PUBLIC_SERVER_URL=$STAGING_BACKEND_URL" > .env
+          elif [[ "$BRANCH_NAME" == "production" ]]; then
+            echo "NEXT_PUBLIC_SERVER_URL=$PROD_BACKEND_URL" > .env
+          fi
+
+      - name: Build Next.js app
+        run: yarn build
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: out/
