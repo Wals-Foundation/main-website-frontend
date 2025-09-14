@@ -1,5 +1,81 @@
 import React from "react"
 
+export const FilledButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-primary text-on-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
+export const IconButton: React.FC<{
+  className?: string,
+  icon: React.ReactNode,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, icon, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py flex justify-center align-middle rounded-full hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {icon}
+    </button>
+  );
+};
+
+export const OutlinedButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py sentence-case rounded-full align-middle border border-primary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
+export const TonalButton: React.FC<{
+  className?: string,
+  title: string,
+  type?: "submit" | "reset" | "button" | undefined,
+  style?: React.CSSProperties,
+  onClick?: () => void
+}> = ({ className, title, type, style, onClick }) => {
+  return (
+    <button
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-secondary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      type={type}
+      style={style}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
+};
+
 interface ButtonProps {
   title?: string
   loading?: boolean
@@ -8,7 +84,33 @@ interface ButtonProps {
   type?: "submit" | "reset" | "button" | undefined
   className?: string
 }
+// /filled/outlined/text, enabled/disabled
+const buttonStyle = (enabled: boolean, theme?: "primary" | "secondary" | "border"): string => {
+  const filledButtonStyle = "bg-primary text-on-primary hover:bg-primary-inverse"
+  const filledButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
+  const outlinedButtonStyle = "border-2 border-primary text-primary"
+  const outlinedButtonDisabledStyle = "border-2 border-btn-disabled text-btn-disabled-text"
+  const textButtonStyle = "bg-secondary text-primary"
+  const textButtonDisabledStyle = "bg-btn-disabled text-btn-disabled-text"
 
+  switch (theme) {
+    case "border":
+      if (enabled)
+        return outlinedButtonStyle
+      else
+        return outlinedButtonDisabledStyle
+    case "secondary":
+      if (enabled)
+        return textButtonStyle
+      else
+        return textButtonDisabledStyle
+    default:
+      if (enabled)
+        return filledButtonStyle
+      else
+        return filledButtonDisabledStyle
+  }
+}
 const Button: React.FC<ButtonProps> = (props) => {
   const { title, loading, onClick, type, theme, className } = props
   return (
@@ -16,13 +118,8 @@ const Button: React.FC<ButtonProps> = (props) => {
       <button
         type={type}
         onClick={onClick}
-        className={`${!!className ? className : ""} ${
-          theme === "secondary"
-            ? "bg-secondary text-primary"
-            : theme === "border"
-            ? "border-2 border-primary text-primary"
-            : "bg-primary text-white"
-        } rounded-[33px] px-6 py-4 font-size-bold cursor-pointer w-full xl:w-auto`}
+        className={`h-interactive w-full sm:w-fit px-6 rounded-full font-size-bold align-middle
+           whitespace-nowrap ${buttonStyle(true, theme)}  ${!!className ? className : ""}`}
       >
         {loading && (
           <svg
@@ -43,8 +140,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             />
           </svg>
         )}
-
-        <>{!loading ? title || "Submit" : ""}</>
+        <span>{!loading ? title || "Submit" : ""}</span>
       </button>
     </>
   )

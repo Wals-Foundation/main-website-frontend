@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import Typography from "./Typography"
 
@@ -15,7 +16,7 @@ const ImpactCard: React.FC<ImpactCardProps> = (props) => {
           {title}
         </Typography>
       </div>
-      <div className="pt-2">
+      <div className="pt-10 md:pt-2">
         <Typography className="text-white text-center">{content}</Typography>
       </div>
     </div>
