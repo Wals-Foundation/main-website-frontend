@@ -91,7 +91,7 @@ export default {
     plugin(function ({ addComponents, addUtilities, addVariant }) {
       addComponents({
         ".mx-horizontal": {
-          "@apply mx-4 sm:mx-6": {},
+          "@apply mx-4 sm:mx-16": {},
         },
         ".px": {
           "@apply px-4 sm:px-6": {},
