@@ -63,7 +63,7 @@ const PageHeaderMobile: React.FC<{
           </WebsiteLink>
         </div>
         <div className="flex items-center">
-          <DarkModeToggle />
+        
           <IconButton
             icon={<Icon>{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}</Icon>}
             aria-label="Toggle menu"
