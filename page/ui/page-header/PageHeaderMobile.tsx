@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
-import DarkModeToggle from "@/components/DarkModeToggle";
 import { FilledButton, IconButton } from "@/components/Button";
 import CloseIcon from "@/assets/icons/close.svg";
 import MenuIcon from "@/assets/icons/menu.svg";
