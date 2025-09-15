@@ -26,12 +26,12 @@ const Content: React.FC<{
         />
       )}
       {data?.heroes && (
-        <div className="relative w-full mt-4 sm:mt-6 aspect-[2/3] sm:aspect-[16/9]">
+        <section className="relative w-full mt-section aspect-[2/3] sm:aspect-[16/9]">
           <PageHeroes
             className="absolute h-full"
             heroes={data.heroes}
           />
-        </div>
+        </section>
       )}
     </div>
   )
