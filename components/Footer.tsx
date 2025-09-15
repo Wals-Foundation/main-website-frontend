@@ -7,9 +7,9 @@ import Typography from "./Typography"
 import Button from "./Button"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
-import Logo from "./Logo"
 import { getContactData, getGalleryData, getSocialsData } from "@/logic/hooks/api/useAboutOrganization"
 import { usePathname } from "next/navigation"
+import { WalsLogo } from "./Logo"
 
 const Footer: React.FC = ({}) => {
   const data = useAppSelector((state) => state.usePageHeadlines)
@@ -49,7 +49,7 @@ const Footer: React.FC = ({}) => {
                 <div className="lg:flex justify-between items-start pb-10 lg:space-x-6">
                   <div className="lg:max-w-[500px]">
                     <div className="cursor-pointer">
-                      <Logo />
+                      <WalsLogo />
                     </div>
                     {pageControlSlugMap.get("footer_news_letter") && (
                       <>
