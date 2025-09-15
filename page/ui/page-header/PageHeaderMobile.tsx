@@ -9,8 +9,8 @@ import { useEffect } from "react";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { FilledButton, IconButton } from "@/components/Button";
-import CloseIcon from "@/assets/images/close.svg";
-import MenuIcon from "@/assets/images/menu.svg";
+import CloseIcon from "@/assets/icons/close.svg";
+import MenuIcon from "@/assets/icons/menu.svg";
 import Icon from "@/components/Icon";
 
 const MobileHeaderDetail: React.FC<{

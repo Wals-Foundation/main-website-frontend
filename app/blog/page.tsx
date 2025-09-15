@@ -1,6 +1,6 @@
 import Button from "@/components/Button"
 import Typography from "@/components/Typography"
-import training from "@/assets/images/training.svg"
+import Training from "@/assets/images/training.svg"
 import BlogCard from "@/components/BlogCard"
 
 export default function Blog() {
@@ -16,7 +16,7 @@ export default function Blog() {
           <div>
             <div className="lg:flex justify-between items-end pt-16 gap-12">
               <div className="w-full lg:max-w-[656px] rounded-xl">
-                <img src={training.src} alt="" className="w-full lg:w-auto lg:h-[461px] rounded-xl" />
+                <Training className="w-full lg:w-auto lg:h-[461px] rounded-xl" />
               </div>
               <div className="lg:max-w-[656px] pt-4 md:pt-0">
                 <Typography

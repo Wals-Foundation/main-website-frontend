@@ -1,6 +1,6 @@
 import React from "react"
 import Typography from "./Typography"
-import blog1 from "@/assets/images/blog1.svg"
+import Blog1 from "@/assets/images/blog1.svg"
 
 interface BlogCardProps {
   haeding?: string
@@ -10,7 +10,7 @@ const BlogCard: React.FC<BlogCardProps> = ({}) => {
   return (
     <div className="lg:max-w-[632px] pt-12 md:pt-0 w-full">
       <div className="rounded-xl">
-        <img src={blog1.src} alt="" className="lg:h-[429px] w-full rounded-xl" />
+        <Blog1 className="lg:h-[429px] w-full rounded-xl" />
       </div>
       <div className="pt-4">
         <div className="flex items-center">

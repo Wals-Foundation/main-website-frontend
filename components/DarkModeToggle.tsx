@@ -1,25 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import moon from "@/assets/images/moon.svg"
-import sun from "@/assets/images/sun.svg"
-import { ImageSource } from "@/core/models"
+import Moon from "@/assets/icons/moon.svg"
+import Sun from "@/assets/icons/sun.svg"
 import Icon from "./Icon"
 import { IconButton } from "./Button"
 
-const lightModeIcon: ImageSource = {
-  id: "light-mode-icon",
-  alt: "Enable dark mode",
-  url: sun.src,
-  name: "light",
-}
-
-const darkModeIcon: ImageSource = {
-  id: "dark-mode-icon",
-  alt: "Enable light mode",
-  url: moon.src,
-  name: "dark",
-}
 
 const DarkModeToggle: React.FC<{
   className?: string
@@ -61,13 +47,15 @@ const DarkModeToggle: React.FC<{
     setIsDark(nextIsDark)
   }
 
-  const icon = isDark ? darkModeIcon : lightModeIcon
+  const ToggleIcon = isDark ? Moon : Sun
 
   return (
     <IconButton
-      className={className}
-      icon={<Icon icon={icon} />}
+      className={`interactive ${className ?? ""}`}
       onClick={toggleTheme}
+      icon={<Icon><ToggleIcon /></Icon>}
+      aria-label="Toggle dark mode"
+      aria-pressed={isDark}
     />
   )
 }

@@ -91,6 +91,9 @@ export default {
   plugins: [
     plugin(function ({ addComponents, addUtilities, addVariant }) {
       addComponents({
+        ".icon": {
+          "@apply w-6 h-6": {},
+        },
         ".interactive": {
           "@apply min-w-12 min-h-12": {},
         },

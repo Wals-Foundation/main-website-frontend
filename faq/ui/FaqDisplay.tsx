@@ -1,6 +1,7 @@
 import { HeadingSmall } from "@/components/Typography"
-import arrowDown from "@/assets/images/arrow-down.svg"
+import ArrowDownIcon from "@/assets/images/arrow-down.svg"
 import MarkdownDisplay from "@/components/MarkdownDisplay"
+import Icon from "@/components/Icon"
 
 const FaqDisplay: React.FC<{
     className?: string,
@@ -27,7 +28,9 @@ const Question: React.FC<{
         <div className={`flex items-center  justify-between ${className ?? ""}`}>
             <HeadingSmall className="flex-auto w-full mr-4 font-size-bold" text={question} />
             <div className={`flex-none transition-transform duration-300 ${isAnswerVisible ? "rotate-180" : ""}`}>
-                <img src={arrowDown.src} alt="" />
+                <Icon>
+                    <ArrowDownIcon />
+                </Icon>
             </div>
         </div>
     )

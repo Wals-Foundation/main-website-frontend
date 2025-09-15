@@ -3,15 +3,15 @@
 import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button"
 import menu from "@/assets/images/Menu.png"
-import closeIcon from "@/assets/images/close.svg"
+import CloseIcon from "@/assets/images/close.svg"
 import Typography from "./Typography"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
 import { getMainMenus, getPageControlData, getPageHeadlinesData } from "@/logic/hooks/api/usePageHeadlines"
 import { createSlugMapForControl, isActiveLink, normalizeLink } from "@/utils"
 import { usePathname } from "next/navigation"
-import Logo from "./Logo"
 import Loader from "./Loader"
+import { WalsLogo } from "./Logo"
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
           <section id="Header" className="max-w-[1440px] mx-auto">
             <nav className="w-11/12 mx-auto flex justify-between items-center py-4 border-b border-border-gray relative">
               <div className="cursor-pointer">
-                <Logo />
+                <WalsLogo />
               </div>
 
               <button
@@ -147,10 +147,10 @@ const Header: React.FC = () => {
                 <div className="p-6 h-full flex flex-col">
                   <div className="mb-8 flex justify-between items-center">
                     <div className="cursor-pointer" onClick={handleLinkClick}>
-                      <Logo />
+                      <WalsLogo />
                     </div>
                     <div onClick={() => setMobileMenuOpen(false)}>
-                      <img src={closeIcon.src} alt="Close" />
+                      <CloseIcon />
                     </div>
                   </div>
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper/modules"
-import blog1 from "@/assets/images/blog1.svg"
+import Blog1 from "@/assets/images/blog1.svg"
 import { Activities as ActiviteType } from "@/utils/types"
 
 interface ActivitiesProps {
@@ -22,7 +22,7 @@ const Activities: React.FC<ActivitiesProps> = ({ activities = [], perView = 1 })
     >
       {activities.map((activity, i) => (
         <SwiperSlide key={i}>
-          <img src={blog1.src} alt="Activity" className="rounded-lg mb-4 object-cover h-[310px] w-full" />
+          <Blog1 className="rounded-lg mb-4 object-cover h-[310px] w-full" />
           <h3 className="text-xl font-semibold mb-2">{activity.program?.name}</h3>
           <div className="flex justify-between text-sm">
             <p className="text-gray-500">Expenditure</p>
