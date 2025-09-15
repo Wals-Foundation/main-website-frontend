@@ -64,7 +64,7 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <>
             <BreakpointObserver />
             <DataFetcher cacheKey="siteData" dataFetcherKey="siteData" dataRendererKey="siteData" />
-            <main className="mt-20 sm:mt-28">{children}</main>
+            <main className="mt-20 sm:mt-28 border-outline">{children}</main>
             <PageFooter className="mt-section"/>
         </>
     );

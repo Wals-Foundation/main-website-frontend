@@ -11,7 +11,7 @@ const OrganisationValue: React.FC<{
     return (
         <div className={className ?? ""}>
             <div>
-                <Icon icon={icon} />
+                <Icon src={icon} />
                 <HeadingSmall className="mt-2" text={title} />
                 <TextSmall className="mt-2" text={value} />
             </div>

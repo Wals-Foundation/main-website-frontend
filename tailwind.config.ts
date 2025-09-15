@@ -8,6 +8,7 @@ export default {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./page/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -90,6 +91,9 @@ export default {
   plugins: [
     plugin(function ({ addComponents, addUtilities, addVariant }) {
       addComponents({
+        ".interactive": {
+          "@apply min-w-12 min-h-12": {},
+        },
         ".mx-horizontal": {
           "@apply mx-4 sm:mx-16": {},
         },

@@ -8,7 +8,10 @@ import { toggleMobileMenuVisibility } from "@/menu/ui/logic";
 import { useEffect } from "react";
 import WebsiteLink from "@/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
-import { FilledButton } from "@/components/Button";
+import { FilledButton, IconButton } from "@/components/Button";
+import CloseIcon from "@/assets/images/close.svg";
+import MenuIcon from "@/assets/images/menu.svg";
+import Icon from "@/components/Icon";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -60,20 +63,13 @@ const PageHeaderMobile: React.FC<{
           </WebsiteLink>
         </div>
         <div className="flex items-center">
-          
-          <button
-            id="menu-button"
-            className="md:hidden p-2"
-            onClick={() => dispatch(toggleMobileMenuVisibility())}
+          <DarkModeToggle />
+          <IconButton
+            icon={<Icon>{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}</Icon>}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
-          >
-            <img
-              src={mobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
-              alt={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="interactive filter invert"
-            />
-          </button>
+            onClick={() => dispatch(toggleMobileMenuVisibility())}
+          />
         </div>
       </div>
       {mobileMenuOpen && (

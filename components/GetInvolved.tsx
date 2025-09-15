@@ -72,7 +72,7 @@ const GetInvolvedOptionDisplay: React.FC<{
     return (
         <div className={className ?? ""}>
             <div className="w-full sm:flex sm:gap-4">
-                <Icon className="sm:shrink-0" icon={icon} />
+                <Icon className="sm:shrink-0" src={icon} />
                 <div className="mt-4 sm:mt-0 sm:flex-1">
                     <div className="flex gap-4">
                         <HeadingSmall
@@ -81,7 +81,7 @@ const GetInvolvedOptionDisplay: React.FC<{
                             text={label}
                         />
                         <WebsiteLink link={link}>
-                            <Icon icon={{ id: arrow.src, alt: "", url: arrow.src, name: "" }} />
+                            <Icon src={{ id: arrow.src, alt: "", url: arrow.src, name: "" }} />
                         </WebsiteLink>
                     </div>
                     <MarkdownDisplay className="mt-8" markdown={details} />
