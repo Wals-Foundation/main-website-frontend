@@ -1,5 +1,5 @@
 import type { NextConfig } from "next"
-import { Config } from "./core/config"
+import { Config } from "./src/core/config"
 
 const nextConfig: NextConfig = {
   output: Config.isStaticHost ? "export" : undefined,

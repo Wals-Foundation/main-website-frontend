@@ -1,8 +1,8 @@
 import "./globals.css"
 import "swiper/css"
 import "swiper/css/pagination"
-import Page from "@/page/ui/Page";
-import ReduxProvider from "@/logic/store/ReduxProvider";
+import Page from "@/src/page/ui/Page";
+import ReduxProvider from "@/src/logic/store/ReduxProvider";
 import React from "react";
 import { Metadata } from "next";
 

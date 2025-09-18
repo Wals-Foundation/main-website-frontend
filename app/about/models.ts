@@ -1,4 +1,4 @@
-import { Image, ImageSource } from "@/core/models"
+import { Image, ImageSource } from "@/src/core/models"
 
 export interface OrganisationApproach {
     id: string

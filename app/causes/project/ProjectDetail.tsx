@@ -1,11 +1,11 @@
 // app/causes/project/ProjectDetail.tsx
 "use client"
 
-import { fetchCauseDetail } from "@/cause/data/cause-strapi-datasource"
-import { CauseDetail, CauseType } from "@/cause/models"
-import CauseDetailDisplay from "@/cause/ui/CauseDetailDisplay"
-import { projectDetailCacheKey } from "@/core/data/cache-keys"
-import { isStrapiError } from "@/core/data/strapi-error"
+import { fetchCauseDetail } from "@/src/cause/data/cause-strapi-datasource"
+import { CauseDetail, CauseType } from "@/src/cause/models"
+import CauseDetailDisplay from "@/src/cause/ui/CauseDetailDisplay"
+import { projectDetailCacheKey } from "@/src/core/data/cache-keys"
+import { isStrapiError } from "@/src/core/data/strapi-error"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import useSWR from "swr"

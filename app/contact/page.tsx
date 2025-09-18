@@ -1,8 +1,8 @@
 import { HeadingLarge, SectionHeader, Text } from "@/components/Typography"
-import { fetchContact, fetchSocialMedia } from "@/contact/data/contact-strapi-datasource";
-import ContactAndSocialMedia from "@/contact/ui/ContactAndSocialMedia";
-import { isStrapiError } from "@/core/data/strapi-error";
-import Faqs from "@/faq/ui/Faqs"
+import { fetchContact, fetchSocialMedia } from "@/src/contact/data/contact-strapi-datasource";
+import ContactAndSocialMedia from "@/src/contact/ui/ContactAndSocialMedia";
+import { isStrapiError } from "@/src/core/data/strapi-error";
+import Faqs from "@/src/faq/ui/Faqs"
 
 export default async function Contact() {
   const contact = await fetchContact().then(res => isStrapiError(res) ? undefined : res);

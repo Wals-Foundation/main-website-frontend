@@ -1,8 +1,8 @@
-import { getFetcher } from "@/logic/config/base";
-import { StrapiError } from "@/core/data/strapi-error";
+import { getFetcher } from "@/src/logic/config/base";
+import { StrapiError } from "@/src/core/data/strapi-error";
 import {
     aboutCachekey as aboutRelativeUrl,
-} from "@/core/data/cache-keys";
+} from "@/src/core/data/cache-keys";
 import { Organisation } from "../models";
 import {
     mapOrganisationResponseToModel,
@@ -10,7 +10,7 @@ import {
     OrganisationResponse,
     OrganisationStoryResponse
 } from "./about-strapi-responses";
-import { Config } from "@/core/config";
+import { Config } from "@/src/core/config";
 
 export async function fetchAboutOrganisation(): Promise<Organisation | StrapiError> {
     try {

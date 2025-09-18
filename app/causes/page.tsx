@@ -1,4 +1,4 @@
-import AllCauses from "@/cause/ui/AllCauses";
+import AllCauses from "@/src/cause/ui/AllCauses";
 import { HeadingLarge, Text } from "@/components/Typography";
 
 export default function Causes() {

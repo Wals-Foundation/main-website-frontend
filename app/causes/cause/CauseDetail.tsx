@@ -2,13 +2,13 @@
 "use client"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState, useCallback } from "react"
-import { useAppDispatch, useAppSelector } from "@/logic/store/hooks"
-import { getActivitiesData, getCauseByID } from "@/logic/hooks/api/useCauses"
+import { useAppDispatch, useAppSelector } from "@/src/logic/store/hooks"
+import { getActivitiesData, getCauseByID } from "@/src/logic/hooks/api/useCauses"
 import Loader from "@/components/Loader"
 import Gallery from "@/components/Gallery"
 import { createSlugMapForControl } from "@/utils"
 import Activities from "@/components/Activities"
-import { useCauseDetails } from "@/logic/hooks/custom/useFormattedCauseDetails"
+import { useCauseDetails } from "@/src/logic/hooks/custom/useFormattedCauseDetails"
 import MarkdownDisplay from "@/components/MarkdownDisplay"
 
 export default function CauseDetailPage() {

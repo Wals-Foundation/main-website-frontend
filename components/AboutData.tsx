@@ -1,10 +1,10 @@
-import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { DataLoad } from "@/core/models";
-import { Page } from "@/page/page";
-import { fetchPageData } from "@/page/ui/logic";
-import PageHeadline from "@/page/ui/PageHeadline";
-import PageHeroes from "@/page/ui/PageHeroes";
-import PageIntro from "@/page/ui/PageIntro";
+import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error";
+import { DataLoad } from "@/src/core/models";
+import { Page } from "@/src/page/page";
+import { fetchPageData } from "@/src/page/ui/logic";
+import PageHeadline from "@/src/page/ui/PageHeadline";
+import PageHeroes from "@/src/page/ui/PageHeroes";
+import PageIntro from "@/src/page/ui/PageIntro";
 import DataFetcher from "./DataFetcher";
 import AboutPageSubheadlineAndActions from "./AboutPageSubheadlineAndActions";
 import { Organisation } from "@/app/about/models";
@@ -13,8 +13,8 @@ import OrganisationInfo from "./OrganisationInfo";
 import { Caption, HeadingLarge, SectionHeader } from "./Typography";
 import OrganisationApproach from "./OrganisationApproach";
 import OrganisationValue from "./OrganisationValue";
-import PageCallToDonate from "@/page/ui/PageCallToDonate";
-import ImageDisplay from "@/image/Image";
+import PageCallToDonate from "@/src/page/ui/PageCallToDonate";
+import ImageDisplay from "@/src/image/Image";
 import OrganisationImpactContainer from "./OrganisationImpactContainer";
 import React from "react";
 

@@ -1,8 +1,8 @@
-import { Config } from "@/core/config";
-import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { DataLoad } from "@/core/models";
+import { Config } from "@/src/core/config";
+import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error";
+import { DataLoad } from "@/src/core/models";
 import ClientSideDataFetcher from "./ClientSideDataFetcher";
-import { DataFetcherKey, dataFetchers, DataRendererKey, dataRenderers } from "@/logic/data-fetchers";
+import { DataFetcherKey, dataFetchers, DataRendererKey, dataRenderers } from "@/src/logic/data-fetchers";
 
 /**
  * DataFetcher

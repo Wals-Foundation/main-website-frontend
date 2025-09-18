@@ -1,8 +1,8 @@
 "use client"
 
-import { isStrapiError, StrapiError } from "@/core/data/strapi-error";
-import { DataLoad } from "@/core/models";
-import { DataFetcherKey, dataFetchers, DataRendererKey, dataRenderers } from "@/logic/data-fetchers";
+import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error";
+import { DataLoad } from "@/src/core/models";
+import { DataFetcherKey, dataFetchers, DataRendererKey, dataRenderers } from "@/src/logic/data-fetchers";
 import useSWR from "swr";
 
 /**

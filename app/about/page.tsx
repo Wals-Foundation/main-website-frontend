@@ -1,5 +1,5 @@
 import AboutPageData from "@/components/AboutData";
-import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems";
+import PageGalleryInitialItems from "@/src/page/ui/PageGalleryInitialItems";
 
 export default function About() {
   return (

@@ -1,8 +1,8 @@
 "use client"
 
-import { useAppSelector } from "@/logic/store/hooks"
-import WebsiteLink from "@/menu/ui/WebsiteLink"
-import PageSubHeadlineAndActions from "@/page/ui/PageSubheadlineAndActions"
+import { useAppSelector } from "@/src/logic/store/hooks"
+import WebsiteLink from "@/src/menu/ui/WebsiteLink"
+import PageSubHeadlineAndActions from "@/src/page/ui/PageSubheadlineAndActions"
 import { OutlinedButton, TonalButton } from "./Button"
 
 const HomePageSubheadlineAndActions: React.FC<{ donateUrl: string, subheadline: string }> = ({ donateUrl, subheadline }) => {

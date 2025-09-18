@@ -1,9 +1,9 @@
 import HomeOurStory from "@/components/HomeOurStory"
-import FeaturedCauses from "@/cause/ui/FeaturedCauses"
-import PageGalleryInitialItems from "@/page/ui/PageGalleryInitialItems"
 import HomeData from "@/components/HomeData"
-import PageCallToDonate from "@/page/ui/PageCallToDonate"
 import GetInvolved from "@/components/GetInvolved"
+import FeaturedCauses from "@/src/cause/ui/FeaturedCauses"
+import PageCallToDonate from "@/src/page/ui/PageCallToDonate"
+import PageGalleryInitialItems from "@/src/page/ui/PageGalleryInitialItems"
 
 
 export default function Home() {

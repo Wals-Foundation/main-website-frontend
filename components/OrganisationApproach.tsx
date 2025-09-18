@@ -1,4 +1,4 @@
-import { ImageSource } from "@/core/models";
+import { ImageSource } from "@/src/core/models";
 import { HeadingSmall, TextSmall } from "./Typography";
 import Icon from "./Icon";
 

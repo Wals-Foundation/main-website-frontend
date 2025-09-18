@@ -1,5 +1,5 @@
-import { ImageSource } from "@/core/models";
-import ImageDisplay from "@/image/Image";
+import { ImageSource } from "@/src/core/models";
+import ImageDisplay from "@/src/image/Image";
 import React from "react";
 
 const Icon: React.FC<{

@@ -1,4 +1,4 @@
-import { ImageResponse, ImageSourceResponse, mapImageResponseToModel, mapImageSourceResponseToModel } from "@/core/data/strapi-responses"
+import { ImageResponse, ImageSourceResponse, mapImageResponseToModel, mapImageSourceResponseToModel } from "@/src/core/data/strapi-responses"
 import { Organisation, OrganisationApproach, OrganisationImpact, OrganisationValue } from "../models"
 
 export interface OrganisationApproachResponse {

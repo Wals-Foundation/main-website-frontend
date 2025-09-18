@@ -1,7 +1,7 @@
-import { aboutOurStoryCacheKey } from "@/core/data/cache-keys";
-import { StrapiError } from "@/core/data/strapi-error";
+import { aboutOurStoryCacheKey } from "@/src/core/data/cache-keys";
+import { StrapiError } from "@/src/core/data/strapi-error";
 import DataFetcher from "./DataFetcher";
-import { DataLoad } from "@/core/models";
+import { DataLoad } from "@/src/core/models";
 import OrganisationInfo from "./OrganisationInfo";
 
 const Content: React.FC<{
