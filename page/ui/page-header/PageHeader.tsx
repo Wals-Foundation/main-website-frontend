@@ -39,7 +39,7 @@ const PageHeader: React.FC<{
         <header className={`${className ?? ""}`}>
             <div className="mx-horizontal top-0 z-50">
                 <PageHeaderDesktop
-                    className="hidden sm:block border-b border-outline"
+                    className="hidden sm:block border-b"
                     donateUrl={donateUrl}
                     menuItems={menuItems}
                     showDonateBtn={showDonateButton}

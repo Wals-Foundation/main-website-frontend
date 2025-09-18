@@ -17,7 +17,6 @@ export default {
         "background-variant": "var(--background-variant)",
         foreground: "var(--foreground)",
         "foreground-inverse": "var(--foreground-inverse)",
-        outline: "var(--outline)",
         "outline-variant": "var(--outline-variant)",
         primary: "var(--primary)",
         "primary-inverse": "var(--primary-inverse)",
@@ -87,6 +86,10 @@ export default {
         },
       }),
     },
+    borderColor: ({ theme }) => ({
+      ...theme("colors"),
+      DEFAULT: "var(--outline)",
+    }),
   },
   plugins: [
     plugin(function ({ addComponents, addUtilities, addVariant }) {
