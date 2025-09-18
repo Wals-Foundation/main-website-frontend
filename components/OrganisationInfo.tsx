@@ -12,7 +12,7 @@ const OrganisationInfo: React.FC<{
           <div>
             <SectionHeader text={label} />
           </div>
-          <div className="mt-4 sm:mt-0 sm:ml-4 sm:col-span-2">
+          <div className="mt-4 sm:mt-0 sm:ml-4 sm:col-span-2 sm:flex sm:justify-end">
             <MarkdownDisplay markdown={info} />
           </div>
       </div>
