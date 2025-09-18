@@ -1,7 +1,6 @@
 import { WalsLogo } from "@/components/Logo";
 import { MenuItemUiState } from "@/src/menu/ui/menu-item-ui-state";
 import MainMenu from "@/src/menu/ui/MainMenu";
-import Link from "next/link";
 import WebsiteLink from "@/src/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { FilledButton } from "@/components/Button";

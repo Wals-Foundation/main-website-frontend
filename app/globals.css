@@ -50,6 +50,11 @@
   color: var(--foreground-inverse);
 }
 
+[data-inverse] .bg-variant {
+  background: var(--foreground);
+}
+
+
 
 @font-face {
   font-family: "ManropeRegular";

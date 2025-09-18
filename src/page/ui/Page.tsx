@@ -39,7 +39,7 @@ const Content: React.FC<{
             )}
             {error && (
                 <div>
-                    Couldn't load data
+                    Couldn&apos;t load data
                 </div>
             )} {/* Handle errors and potential reloads */}
         </div>

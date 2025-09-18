@@ -62,7 +62,7 @@ export const HeadingSmall: React.FC<{
   styles?: React.CSSProperties;
 }> = ({ className, text, styles }) => {
   return (
-    <h5 className={`text-2xl sm:text-3xl font-medium 
+    <h5 className={`text-xl sm:text-2xl font-medium 
       leading-6 sm:leading-[1.875rem] whitespace-normal sm:max-w-[75ch] ${className ?? ""}`}
       style={styles}>
       {text}

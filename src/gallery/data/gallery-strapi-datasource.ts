@@ -17,7 +17,7 @@ export const fetchGalleryItems = async (page: number): Promise<PagedData<Gallery
         });
 
         return mapGalleryItemsResponseToPagedData(response);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error(error);
         return StrapiError.Server;
     }

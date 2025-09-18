@@ -25,7 +25,7 @@ const Content: React.FC<{
     data?: { contact?: Contact, socialMedia: SocialMediaAccount[] };
     error?: StrapiError;
     isLoading: boolean;
-}> = ({ className, data, error, isLoading }) => {
+}> = ({ className, data }) => {
     return (
         <div className={className ?? ""}>
             <div className="py-8 sm:py-16 sm:grid sm:grid-cols-5 border-b border-border-gray">

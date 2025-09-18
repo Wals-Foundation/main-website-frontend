@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { MenuItem } from "../menu-item";
 import { mapMenuItemsToUiStates, MenuItemUiState } from "./menu-item-ui-state";
 

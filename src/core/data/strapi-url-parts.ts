@@ -5,7 +5,6 @@ const aboutApproachesPath = "[populate][organisation_approaches]"
 const aboutImpactsPath = "[populate][organisation_impacts]"
 const aboutValuesPath = "[populate][organisation_values]"
 const actionPath = "[populate][action]"
-const actionsPath = "[populate][actions]"
 const causePath = "[populate][cause]"
 const galleryPath = "[populate][gallery]"
 const communitiesPath = "[populate][communities]"
@@ -172,7 +171,7 @@ export const causeGalleryQuery = (code: string): string => {
 
 export const getInvolvedQuery = (): string => {
     return [
-        "[fields][0]=details",
+        "[fields][0]=details&[fields][1]=iconRawSvg",
         actionFields([actionPath]),
         imageSourceFields([iconPath])
     ].join("&")
@@ -234,7 +233,7 @@ export const pageQuery = (pageKey: string): string => {
 
 export const socialMediaQuery = (): string => {
     return [
-        "fields[0]=accountUrl&fields[1]=name",
+        "fields[0]=accountUrl&fields[1]=name&fields[2]=iconRawSvg",
         imageSourceFields([iconPath])
     ].join("&")
 }

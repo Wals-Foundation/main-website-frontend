@@ -18,7 +18,7 @@ const CauseActions: React.FC<{
   causeType: CauseType,
   donateUrl: string,
   viewCauseDetailsUrl: string,
-  donateFeatureFlag: Boolean,
+  donateFeatureFlag: boolean,
 }> = ({ className, causeId, causeType, donateUrl, viewCauseDetailsUrl, donateFeatureFlag }) => {
   return (
     <>
@@ -51,7 +51,7 @@ const CauseImpactAndActions: React.FC<{
   causeType: CauseType,
   donateUrl: string,
   viewCauseDetailsUrl: string,
-  donateFeatureFlag: Boolean,
+  donateFeatureFlag: boolean,
 }> = ({ className, causeId, causeImpact, causeType, donateUrl, viewCauseDetailsUrl, donateFeatureFlag }) => {
   return (
     <>
@@ -94,7 +94,7 @@ const CauseOverviewAndActions: React.FC<{
   causeType: CauseType,
   donateUrl: string,
   viewCauseDetailsUrl: string,
-  donateFeatureFlag: Boolean,
+  donateFeatureFlag: boolean,
 }> = ({
   className,
   causeName,
@@ -135,7 +135,7 @@ export const CauseCard: React.FC<{
   causeType: CauseType,
   donateUrl: string,
   viewCauseDetailsUrl: string,
-  donateFeatureFlag: Boolean,
+  donateFeatureFlag: boolean,
 }> = ({
   className,
   backgroundColorClass,

@@ -9,7 +9,7 @@ const CausesList: React.FC<{
     donateUrl: string,
     hasMoreCauses: boolean,
     viewCauseDetailsUrl: string,
-    donateFeatureFlag: Boolean,
+    donateFeatureFlag: boolean,
     onLoadMoreCauses?: () => void
 }> = ({
     className,
@@ -46,7 +46,7 @@ const CausesList: React.FC<{
                             />
                         )
                     }}
-                    itemContainerClass={(_) => "mb-4"}
+                    itemContainerClass={() => "mb-4"}
                     itemKey={(index) => causes[index].id}
                     onLoadMoreItems={onLoadMoreCauses}
                 />

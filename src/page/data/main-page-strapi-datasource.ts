@@ -19,7 +19,7 @@ export const fetchMainPageData = async (key: string, signal?: AbortSignal): Prom
             });
         const pages = mapPagesResponseToPages(response);
         return pages[0];
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error(error);
         return StrapiError.Server;
     }

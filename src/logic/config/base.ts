@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import axios from "axios"
 import { Config } from "@/src/core/config"
 
@@ -32,7 +34,7 @@ const axiosInstance = axios.create({
 })
 
 export const axiosFetcher = async <T>(url: string, options?: { signal?: AbortSignal }): Promise<T> => {
-  const response = await axiosInstance.get<T>(url)
+  const response = await axiosInstance.get<T>(url, { ...options })
   return response.data
 }
 

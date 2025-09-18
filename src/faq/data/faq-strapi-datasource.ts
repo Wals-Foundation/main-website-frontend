@@ -17,7 +17,7 @@ export const fetchFaqs = async (page: number): Promise<PagedData<Faq> | StrapiEr
         });
 
         return mapFaqsResponseToPagedData(response);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error(error);
         return StrapiError.Server;
     }

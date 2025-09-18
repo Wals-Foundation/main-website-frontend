@@ -11,6 +11,7 @@ import { FilledButton, IconButton } from "@/components/Button";
 import CloseIcon from "@/assets/icons/close.svg";
 import MenuIcon from "@/assets/icons/menu.svg";
 import Icon from "@/components/Icon";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -62,7 +63,7 @@ const PageHeaderMobile: React.FC<{
           </WebsiteLink>
         </div>
         <div className="flex items-center">
-        
+          <DarkModeToggle/>
           <IconButton
             icon={<Icon>{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}</Icon>}
             aria-label="Toggle menu"

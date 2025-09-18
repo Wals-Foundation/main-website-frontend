@@ -1,4 +1,5 @@
-import { Organisation } from "@/app/about/models";
+/* eslint-disable @typescript-eslint/no-explicit-any */import { Organisation } from "@/app/about/models";
+
 import { fetchOurStory } from "@/app/about/data/about-strapi-datasource";
 import { fetchAboutPageData, renderAboutPageData } from "@/components/AboutData";
 import { renderAboutOurStory } from "@/components/HomeOurStory";

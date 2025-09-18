@@ -1,6 +1,6 @@
 import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error";
 import { ViewportBreakpoint } from "@/src/core/models";
-import { Page } from "@/page/page";
+import { Page } from "@/src/page/page";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchMainPageData } from "../data/main-page-strapi-datasource";
 
@@ -26,6 +26,7 @@ export const fetchPageData = async (key: string): Promise<Page | StrapiError> =>
             }
             return result;
         } catch (error) {
+            console.error(`Attempt ${attempt} failed:`, error);
             if (attempt < MAX_RETRIES - 1) {
                 await new Promise((res) => setTimeout(res, RETRY_DELAY_MS));
             } else {

@@ -35,7 +35,7 @@ export const fetchCauseDetail = async (
     });
 
     return mapCausesDetailsResponseToCausesDetails(response, type);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return StrapiError.Server;
   }
@@ -54,7 +54,7 @@ export const fetchCauses = async (
     });
 
     return mapCausesResponseToCauses(response, type);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return StrapiError.Server;
   }
@@ -79,7 +79,7 @@ export const fetchFeaturedCauses = async (
     });
 
     return mapCausesResponseToCauses(response, type).data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return StrapiError.Server;
   }

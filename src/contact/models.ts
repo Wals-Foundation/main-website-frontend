@@ -9,4 +9,5 @@ export interface SocialMediaAccount {
     accountUrl: string
     icon: ImageSource
     name: string
+    iconRawSvg: string
 }

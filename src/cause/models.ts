@@ -7,10 +7,6 @@ export enum CauseType {
     Project = "project"
 }
 
-export interface RelatedCause {
-
-}
-
 export interface District {
     id: string;
     name: string;

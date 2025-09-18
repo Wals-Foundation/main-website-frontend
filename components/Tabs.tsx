@@ -10,7 +10,7 @@ const Tab: React.FC<{
 }> = ({ className, isActive, label, onSelected }) => {
     return (
         <div
-            className={`pt-2 pb-3 px-4 sm:px-8 cursor-pointer transition-colors duration-300 border-b-2 ${isActive ? "border-primary" : "border-transparent"
+            className={`pt-2 pb-3 px-4 sm:px-8 cursor-pointer transition-colors duration-300 border-b ${isActive ? "border-primary" : ""
                 } ${className ?? ""}`}
             onClick={onSelected}
         >
@@ -31,7 +31,7 @@ const Tabs: React.FC<{
 }> = ({ className, activeIndex, tabs, onTabSelected }) => {
     return (
         <div className={`${className ?? ""}`}>
-            <div className="flex justify-between items-center border-b border-gray-300 overflow-x-auto">
+            <div className="flex justify-between items-center overflow-x-auto">
                 {tabs.map((tab, index) => (
                     <Tab
                         key={index}

@@ -26,4 +26,18 @@ const Icon: React.FC<{
   );
 };
 
+export const ContainedIcon: React.FC<{
+  className?: string;
+  src?: ImageSource;
+  children?: React.ReactNode;
+}> = ({ className, src, children }) => {
+  return (
+    <div className={`w-12 h-12 flex rounded-xl ${className ?? ""}`}>
+      <Icon className="mx-auto my-auto" src={src}>
+        {children}
+      </Icon>
+    </div>
+  )
+}
+
 export default Icon;

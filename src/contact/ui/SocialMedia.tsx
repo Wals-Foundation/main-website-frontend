@@ -9,9 +9,9 @@ const SocialMedia: React.FC<{
 }> = ({ className, accounts, color }) => {
     return (
         <div className={className ?? ""}>
-            <HeadingSmall 
-            styles={{ color: color }} 
-            text="Social Media" 
+            <HeadingSmall
+                styles={{ color: color }}
+                text="Social Media"
             />
             <div>
                 {accounts.map((account, index) => (
@@ -22,6 +22,7 @@ const SocialMedia: React.FC<{
                         icon={account.icon}
                         name={account.name}
                         color={color}
+                        iconRawSvg={account.iconRawSvg}
                     />
                 ))}
             </div>

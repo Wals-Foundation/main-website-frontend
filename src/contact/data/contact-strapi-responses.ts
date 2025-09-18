@@ -5,6 +5,7 @@ export interface SocialMediaAccountResponse {
     accountUrl: string
     name: string
     icon: ImageSourceResponse
+    iconRawSvg: string
 }
 
 export interface ContactResponse {
@@ -19,6 +20,7 @@ export function mapSocialMediaAccountResponseToDomain(response: SocialMediaAccou
     return {
         accountUrl: response.accountUrl,
         name: response.name,
-        icon: mapImageSourceResponseToModel(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon),
+        iconRawSvg: response.iconRawSvg
     };
 }

@@ -2,8 +2,7 @@ import { DataLoad, Image, ImageSource, WebsiteAction } from "@/src/core/models"
 import { HeadingLarge, HeadingSmall, SectionHeader } from "./Typography"
 import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error";
 import ImageDisplay from "@/src/image/Image";
-import Icon from "./Icon";
-import arrow from "@/assets/images/arrow.png"
+import { ContainedIcon } from "./Icon";
 import MarkdownDisplay from "./MarkdownDisplay";
 import WebsiteLink from "@/src/menu/ui/WebsiteLink";
 import { getFetcher } from "@/src/logic/config/base";
@@ -12,6 +11,7 @@ import { imageQuery } from "@/src/core/data/strapi-url-parts";
 import { Config } from "@/src/core/config";
 import DataFetcher from "./DataFetcher";
 import { getInvolvedCacheKey } from "@/src/core/data/cache-keys";
+import OpenLinkIcon from "@/assets/icons/open-link.svg";
 
 export interface GetInvolvedOptionResponse {
     id: number;
@@ -19,6 +19,7 @@ export interface GetInvolvedOptionResponse {
     details: string;
     action: WebsiteActionResponse;
     icon: ImageSourceResponse;
+    iconRawSvg: string;
 }
 
 export interface GetInvolvedOption {
@@ -26,6 +27,7 @@ export interface GetInvolvedOption {
     icon: ImageSource;
     details: string;
     action: WebsiteAction;
+    iconRawSvg: string;
 }
 
 // Making direct calls here because this data would hardly change
@@ -51,7 +53,8 @@ export const fetchGetInvolvedData = async (): Promise<{ image?: Image, options: 
                     id: response.documentId,
                     icon: mapImageSourceResponseToModel(response.icon),
                     details: response.details,
-                    action: mapWebsiteActionResponseToModel(response.action)
+                    action: mapWebsiteActionResponseToModel(response.action),
+                    iconRawSvg: response.iconRawSvg
                 }))
             }
         }
@@ -68,25 +71,29 @@ const GetInvolvedOptionDisplay: React.FC<{
     details: string,
     label: string,
     link: string,
-}> = ({ className, icon, details, label, link }) => {
+    iconRawSvg: string
+}> = ({ className, details, label, link, iconRawSvg }) => {
     return (
         <div className={className ?? ""}>
-            <div className="w-full sm:flex sm:gap-4">
-                <Icon className="sm:shrink-0" src={icon} />
-                <div className="mt-4 sm:mt-0 sm:flex-1">
-                    <div className="flex gap-4">
-                        <HeadingSmall
-                            className="flex-1"
-                            styles={{ color: "var(--btn-disabled-text)" }} 
-                            text={label}
-                        />
-                        <WebsiteLink link={link}>
-                            <Icon src={{ id: arrow.src, alt: "", url: arrow.src, name: "" }} />
-                        </WebsiteLink>
+            <WebsiteLink link={link}>
+                <div className="w-full sm:flex sm:gap-4">
+                    <ContainedIcon className="bg-variant">
+                        <div className="text-primary" dangerouslySetInnerHTML={{ __html: iconRawSvg }} />
+                    </ContainedIcon>
+                    <div className="mt-4 sm:mt-0 sm:flex-1">
+                        <div className="flex items-center gap-4">
+                            <HeadingSmall
+                                className="flex-1"
+                                text={label}
+                            />
+                            <ContainedIcon>
+                                <OpenLinkIcon />
+                            </ContainedIcon>
+                        </div>
+                        <MarkdownDisplay className="mt-8" markdown={details} />
                     </div>
-                    <MarkdownDisplay className="mt-8" markdown={details} />
                 </div>
-            </div>
+            </WebsiteLink>
         </div>
     )
 }
@@ -103,17 +110,20 @@ const Content: React.FC<{
                     className="mt-4"
                     text="How it works is very simple."
                 />
-                <div className="mt-4 sm:grid sm:grid-cols-2 gap-4">
+                <div className="mt-4 sm:grid sm:grid-cols-2 sm:items-stretch sm:gap-4">
                     <div>
                         {data?.image && (
                             <ImageDisplay
-                                className=" rounded-lg"
+                                className="rounded-lg sm:h-full sm:object-cover"
                                 image={data.image}
                                 feature="get_involved"
                             />
                         )}
                     </div>
-                    <div className="mt-8 sm:mt-0">
+                    <div
+                        id="2"
+                        className="mt-8 sm:mt-0 sm:flex sm:flex-col sm:justify-center"
+                    >
                         {data?.options.map((option) => (
                             <GetInvolvedOptionDisplay
                                 key={option.id}
@@ -122,10 +132,12 @@ const Content: React.FC<{
                                 details={option.details}
                                 label={option.action.label}
                                 link={option.action.link}
+                                iconRawSvg={option.iconRawSvg}
                             />
                         ))}
                     </div>
                 </div>
+
             </div>
         </>
     )

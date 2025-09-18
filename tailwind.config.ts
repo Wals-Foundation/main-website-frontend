@@ -14,7 +14,7 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        "background-variant": "var(--background-variant)",
+        backgroundVariant: "var(--background-variant)",
         foreground: "var(--foreground)",
         "foreground-inverse": "var(--foreground-inverse)",
         "outline-variant": "var(--outline-variant)",
