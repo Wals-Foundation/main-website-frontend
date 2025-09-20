@@ -1,17 +1,17 @@
-"use client"
-
-import { useAppSelector } from "@/src/logic/store/hooks"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 import PageSubHeadlineAndActions from "@/src/page/ui/PageSubheadlineAndActions"
 import { OutlinedButton, TonalButton } from "./Button"
 
-const HomePageSubheadlineAndActions: React.FC<{ donateUrl: string, subheadline: string }> = ({ donateUrl, subheadline }) => {
-    const donateFeatureFlag = useAppSelector((state) => state.useFeatureFlags.flags["donate"])
+const HomePageSubheadlineAndActions: React.FC<{
+    donateUrl: string,
+    subheadline: string,
+    isDonateEnabled: boolean
+}> = ({ donateUrl, subheadline, isDonateEnabled }) => {
     return (
         <PageSubHeadlineAndActions
             subheadline={subheadline}
             actions={[
-                donateFeatureFlag && (
+                isDonateEnabled && (
                     <WebsiteLink key={1} link={donateUrl}>
                         <OutlinedButton
                             className="w-full sm:w-auto"

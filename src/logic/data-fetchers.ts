@@ -3,7 +3,6 @@
 import { fetchOurStory } from "@/app/about/data/about-strapi-datasource";
 import { fetchAboutPageData, renderAboutPageData } from "@/components/AboutData";
 import { renderAboutOurStory } from "@/components/HomeOurStory";
-import { fetchHomePageData, renderHomePageData } from "@/components/HomeData";
 import { aboutOurStoryCacheKey } from "@/src/core/data/cache-keys";
 import { StrapiError } from "@/src/core/data/strapi-error";
 import { Page } from "@/src/page/page";
@@ -19,7 +18,6 @@ type DataFetchers = {
     "aboutPageData": () => Promise<{ organisation: Organisation, page: Page } | StrapiError>;
     "faqs": () => Promise<PagedData<Faq> | StrapiError>;
     "getInvolvedData": () => Promise<{ image?: Image, options: GetInvolvedOption[] } | StrapiError>;
-    "homePageData": () => Promise<Page | StrapiError>;
     // Add more mappings here
 };
 
@@ -28,7 +26,6 @@ type DataRenderers = {
     "aboutPageData": (dataLoad: any) => React.ReactElement;
     "faqs": (dataLoad: any) => React.ReactElement;
     "getInvolvedData": (dataLoad: any) => React.ReactElement;
-    "homePageData": (dataLoad: any) => React.ReactElement;
 };
 
 export const dataRenderers = (): DataRenderers => ({
@@ -36,7 +33,6 @@ export const dataRenderers = (): DataRenderers => ({
     "aboutPageData": renderAboutPageData,
     "faqs": renderFaqsData,
     "getInvolvedData": renderGetInvolvedData,
-    "homePageData": renderHomePageData,
 })
 
 export const dataFetchers: DataFetchers = {
@@ -44,7 +40,6 @@ export const dataFetchers: DataFetchers = {
     "aboutPageData": () => fetchAboutPageData(),
     "faqs": () => fetchFaqsData(),
     "getInvolvedData": () => fetchGetInvolvedData(),
-    "homePageData": () => fetchHomePageData(),
 };
 
 export type DataFetcherKey = keyof typeof dataFetchers;
