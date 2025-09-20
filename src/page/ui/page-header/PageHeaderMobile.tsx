@@ -2,7 +2,6 @@
 
 import { WalsLogo } from "@/components/Logo";
 import MainMenu from "@/src/menu/ui/MainMenu";
-import { MenuItemUiState } from "@/src/menu/ui/menu-item-ui-state";
 import { useAppDispatch, useAppSelector } from "@/src/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/src/menu/ui/logic";
 import { useEffect } from "react";
@@ -12,18 +11,19 @@ import CloseIcon from "@/assets/icons/close.svg";
 import MenuIcon from "@/assets/icons/menu.svg";
 import Icon from "@/components/Icon";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import { MenuItem } from "@/src/menu/menu-item";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
   donateUrl: string,
-  menuItems: MenuItemUiState[],
-  showDonateBtn: boolean
-}> = ({ className, donateUrl, menuItems, showDonateBtn }) => {
+  menuItems: MenuItem[],
+  isDonatedEnabled: boolean
+}> = ({ className, donateUrl, menuItems, isDonatedEnabled }) => {
   return (
     <div className={className ?? ""}>
       <div className="h-full flex flex-col gap-4">
         <MainMenu className="flex-1 min-h-0" menuItems={menuItems} />
-        {showDonateBtn && (
+        {isDonatedEnabled && (
           <WebsiteLink link={donateUrl}>
             <FilledButton
               className="w-full mt-4"
@@ -39,9 +39,9 @@ const MobileHeaderDetail: React.FC<{
 const PageHeaderMobile: React.FC<{
   className?: string,
   donateUrl: string,
-  menuItems: MenuItemUiState[],
-  showDonateBtn: boolean,
-}> = ({ className, donateUrl, menuItems, showDonateBtn }) => {
+  menuItems: MenuItem[],
+  isDonatedEnabled: boolean,
+}> = ({ className, donateUrl, menuItems, isDonatedEnabled }) => {
   const dispatch = useAppDispatch();
   const mobileMenuOpen = useAppSelector(
     (state) => state.useMainMenuItems.mobileMenuOpened
@@ -63,7 +63,7 @@ const PageHeaderMobile: React.FC<{
           </WebsiteLink>
         </div>
         <div className="flex items-center">
-          <DarkModeToggle/>
+          <DarkModeToggle />
           <IconButton
             icon={<Icon>{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}</Icon>}
             aria-label="Toggle menu"
@@ -82,7 +82,7 @@ const PageHeaderMobile: React.FC<{
               className=""
               donateUrl={donateUrl}
               menuItems={menuItems}
-              showDonateBtn={showDonateBtn}
+              isDonatedEnabled={isDonatedEnabled}
             />
           </div>
         </div>

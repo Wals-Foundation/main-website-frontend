@@ -1,4 +1,5 @@
 import { HeadingSmall, TextSmall } from "@/components/Typography"
+import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 
 const ContactDisplay: React.FC<{
     className?: string,
@@ -12,20 +13,20 @@ const ContactDisplay: React.FC<{
                 text="Contact"
                 styles={{ color: color }}
             />
-            <a href={`mailto:${email}`}>
+            <WebsiteLink link={`mailto:${email}`}>
                 <TextSmall
                     className={`mt-2 flex-1 min-w-0  break-words`}
                     styles={{ color: color }}
                     text={email}
                 />
-            </a>
-            <a href={`tel:${phone}`}>
+            </WebsiteLink>
+            <WebsiteLink link={`tel:${phone}`}>
                 <TextSmall
                     className={`mt-4 flex-1 min-w-0  break-words`}
                     styles={{ color: color }}
                     text={phone}
                 />
-            </a>
+            </WebsiteLink>
         </div>
     )
 }

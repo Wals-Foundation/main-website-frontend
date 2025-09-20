@@ -4,13 +4,11 @@ import SocialMediaAccountDisplay from "./SocialMediaAccountDisplay"
 
 const SocialMedia: React.FC<{
     className?: string,
-    accounts: SocialMediaAccount[],
-    color?: string
-}> = ({ className, accounts, color }) => {
+    accounts: SocialMediaAccount[]
+}> = ({ className, accounts }) => {
     return (
         <div className={className ?? ""}>
             <HeadingSmall
-                styles={{ color: color }}
                 text="Social Media"
             />
             <div>
@@ -21,7 +19,6 @@ const SocialMedia: React.FC<{
                         accountUrl={account.accountUrl}
                         icon={account.icon}
                         name={account.name}
-                        color={color}
                         iconRawSvg={account.iconRawSvg}
                     />
                 ))}

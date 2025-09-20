@@ -1,39 +1,13 @@
-"use client"
 import { MenuItem } from "@/src/menu/menu-item"
 import PageHeaderDesktop from "./PageHeaderDesktop"
-import { useAppDispatch, useAppSelector } from "@/src/logic/store/hooks"
-import { useEffect } from "react"
-import { initialiseMenuItems, updateCurrentUrlPath } from "@/src/menu/ui/logic"
-import { usePathname } from "next/navigation"
 import PageHeaderMobile from "./PageHeaderMobile"
-import { initialiseFeatureFlags } from "@/src/feature-flags/ui/logic"
 
 const PageHeader: React.FC<{
     className?: string,
     donateUrl: string,
     mainMenuItems: MenuItem[],
-    featureFlags: Record<string, boolean>,
-}> = ({ className, donateUrl, mainMenuItems, featureFlags }) => {
-    const dispatch = useAppDispatch()
-    const currentUrlPathName = usePathname()
-
-    const menuItems = useAppSelector((state) => state.useMainMenuItems.mainMenuItems)
-    // Update current URL path when it changes
-    useEffect(() => {
-        dispatch(updateCurrentUrlPath(currentUrlPathName))
-    }, [dispatch, currentUrlPathName])
-
-    // initialise menu items
-    useEffect(() => {
-        dispatch(initialiseMenuItems(mainMenuItems))
-    }, [dispatch, currentUrlPathName])
-
-    // initialise feature flags
-    useEffect(() => {
-        dispatch(initialiseFeatureFlags(featureFlags))
-    }, [])
-
-    const showDonateButton = featureFlags["donate"]
+    isDonateEnabled: boolean,
+}> = ({ className, donateUrl, mainMenuItems, isDonateEnabled }) => {
 
     return (
         <header className={`${className ?? ""}`}>
@@ -41,14 +15,14 @@ const PageHeader: React.FC<{
                 <PageHeaderDesktop
                     className="hidden sm:block border-b"
                     donateUrl={donateUrl}
-                    menuItems={menuItems}
-                    showDonateBtn={showDonateButton}
+                    menuItems={mainMenuItems}
+                    isDonateEnabled={isDonateEnabled}
                 />
                 <PageHeaderMobile
                     className="block sm:hidden border-b border-border-gray"
                     donateUrl={donateUrl}
-                    menuItems={menuItems}
-                    showDonateBtn={showDonateButton} />
+                    menuItems={mainMenuItems}
+                    isDonatedEnabled={isDonateEnabled} />
             </div>
         </header>
     )

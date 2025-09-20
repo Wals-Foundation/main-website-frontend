@@ -1,28 +1,28 @@
-import Link from "next/link"
-import { TextSmall } from "@/components/Typography"
+'use client'
+import { Text } from "@/components/Typography"
+import WebsiteLink from "./WebsiteLink"
+import { usePathname } from "next/navigation"
+
+const getCurrentUrlKey = (currentUrlPath: string): string => {
+    const basePath = currentUrlPath.split("/")[1];
+    const key = basePath ? `/${basePath}` : '/';
+    return key;
+}
 
 const MainMenuItem: React.FC<{
     className?: string,
-    color?: string,
-    isSelected: boolean,
     label: string,
-    link: string,
-}> = ({ label, link, isSelected, color, className }) => {
+    relativeUrl: string,
+}> = ({ label, relativeUrl, className }) => {
+    const currentUrlPathName = usePathname()
 
     return (
-        <Link href={link}>
-            <TextSmall
-            className={`sm:ml-4 hover:text-primary cursor-pointer ${className ?? ""}`}
-            text={label}
-            styles={{
-                color: isSelected
-                ? "var(--primary)"
-                : color
-                ? color
-                : undefined,
-            }}
+        <WebsiteLink link={relativeUrl}>
+            <Text
+                className={`mt-4 sm:mt-0 ${className ?? ""} ${getCurrentUrlKey(currentUrlPathName) === relativeUrl ? "text-primary" : ""}`}
+                text={label}
             />
-        </Link>
+        </WebsiteLink>
     )
 }
 

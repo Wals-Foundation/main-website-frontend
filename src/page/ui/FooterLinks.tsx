@@ -1,13 +1,11 @@
-"use client"
-
 import { HeadingSmall } from "@/components/Typography"
-import { useAppSelector } from "@/src/logic/store/hooks"
+import { MenuItem } from "@/src/menu/menu-item"
 import MainMenuItem from "@/src/menu/ui/MainMenuItem"
 
 const FooterLinks: React.FC<{
-    className?: string
-}> = ({ className }) => {
-    const menuItems = useAppSelector((state) => state.useMainMenuItems.mainMenuItems)
+    className?: string,
+    mainMenuItems: MenuItem[],
+}> = ({ className, mainMenuItems }) => {
     return (
         <div className={className ?? ""}>
             <HeadingSmall
@@ -16,9 +14,9 @@ const FooterLinks: React.FC<{
             />
             <nav>
                 <ul>
-                    {menuItems.map((item, index) => (
+                    {mainMenuItems.map((item, index) => (
                         <li className={(index !== 0) ? "mt-4" : "mt-2"} key={item.id}>
-                            <MainMenuItem {...item} color="var(--on-dark)" />
+                            <MainMenuItem {...item} />
                         </li>
                     ))}
                 </ul>

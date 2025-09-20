@@ -7,62 +7,37 @@ import { TextSmall } from "@/components/Typography"
 import FooterLinks from "./FooterLinks"
 import { WalsLogo } from "@/components/Logo"
 import ContactAndSocialMedia from "@/src/contact/ui/ContactAndSocialMedia"
+import { MenuItem } from "@/src/menu/menu-item"
 
-export const fetchFooterData = async (): Promise<{ contact?: Contact, socialMedia: SocialMediaAccount[] } | StrapiError> => {
+
+const PageFooter: React.FC<{
+    className?: string,
+    mainMenuItems: MenuItem[],
+}> = async ({ className,mainMenuItems }) => {
     const contactResult = await fetchContact();
+    const contact = !isStrapiError(contactResult) ? contactResult : undefined
     const socialMediaResult = await fetchSocialMedia()
-    if (!isStrapiError(socialMediaResult)) {
-        return ({
-            contact: !isStrapiError(contactResult) ? contactResult : undefined,
-            socialMedia: !isStrapiError(socialMediaResult) ? socialMediaResult : []
-        })
-    }
-    return socialMediaResult
-}
+    const socialMedia = !isStrapiError(socialMediaResult) ? socialMediaResult : []
 
-const Content: React.FC<{
-    className?: string;
-    data?: { contact?: Contact, socialMedia: SocialMediaAccount[] };
-    error?: StrapiError;
-    isLoading: boolean;
-}> = ({ className, data }) => {
     return (
-        <div className={className ?? ""}>
+        <div className={`mx-horizontal mb-16 ${className ?? ""}`}>
             <div className="py-8 sm:py-16 sm:grid sm:grid-cols-5 border-b border-border-gray">
-                {data && (
-                    <>
-                        <div className="sm:col-span-2">
-                            <WalsLogo />
-                        </div>
-                        <FooterLinks
-                            className="mt-8 sm:mt-0"
-                        />
-                        <ContactAndSocialMedia
-                            className="mt-8 sm:mt-0 sm:col-span-2"
-                            contact={data.contact}
-                            socialMedia={data.socialMedia}
-                            color="var(--on-dark)"
-                        />
-                    </>
-                )
-                }
+                <div className="sm:col-span-2">
+                    <WalsLogo />
+                </div>
+                <FooterLinks
+                    className="mt-8 sm:mt-0"
+                    mainMenuItems={mainMenuItems}
+                />
+                <ContactAndSocialMedia
+                    className="mt-8 sm:mt-0 sm:col-span-2"
+                    contact={contact}
+                    socialMedia={socialMedia}
+                />
             </div>
             <div className="py-8 sm:py-16">
                 <TextSmall text="© 2024 We Are Liberating Societies Foundation. All rights reserved." />
             </div>
-        </div>
-    );
-};
-
-export const renderPageFooter = (dataLoad: DataLoad<{ contact?: Contact, socialMedia: SocialMediaAccount[] }>) => (
-    <Content className="mx-horizontal mb-16" {...dataLoad} />
-)
-
-
-const PageFooter: React.FC<{ className?: string }> = ({ className }) => {
-    return (
-        <div className={`bg-header ${className ?? ""}`}>
-            <DataFetcher cacheKey="siteFooter" dataFetcherKey="siteFooter" dataRendererKey="siteFooter" />
         </div>
     );
 

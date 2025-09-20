@@ -1,16 +1,16 @@
 import { WalsLogo } from "@/components/Logo";
-import { MenuItemUiState } from "@/src/menu/ui/menu-item-ui-state";
 import MainMenu from "@/src/menu/ui/MainMenu";
 import WebsiteLink from "@/src/menu/ui/WebsiteLink";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { FilledButton } from "@/components/Button";
+import { MenuItem } from "@/src/menu/menu-item";
 
 const PageHeaderDesktop: React.FC<{
     className?: string,
     donateUrl: string,
-    menuItems: MenuItemUiState[],
-    showDonateBtn: boolean
-}> = ({ className, donateUrl, menuItems, showDonateBtn }) => {
+    menuItems: MenuItem[],
+    isDonateEnabled: boolean
+}> = ({ className, donateUrl, menuItems, isDonateEnabled }) => {
     return (
         <div className={className ?? ""}>
             <div className="flex items-center py-4">
@@ -23,7 +23,7 @@ const PageHeaderDesktop: React.FC<{
                     <MainMenu menuItems={menuItems} className="w-full" />
                 </div>
                 <DarkModeToggle/>
-                {showDonateBtn && (
+                {isDonateEnabled && (
                     <WebsiteLink link={donateUrl}>
                         <FilledButton
                             className="shrink-0 ml-4"

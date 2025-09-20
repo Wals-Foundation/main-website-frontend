@@ -94,6 +94,9 @@ export default {
   plugins: [
     plugin(function ({ addComponents, addUtilities, addVariant }) {
       addComponents({
+        ".clickable": {
+          "@apply cursor-pointer hover:text-primary-inverse": {},
+        },
         ".icon": {
           "@apply w-6 h-6": {},
         },

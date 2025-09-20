@@ -1,12 +1,12 @@
-import { MenuItemUiState } from "./menu-item-ui-state"
+import { MenuItem } from "../menu-item";
 import MainMenuItem from "./MainMenuItem"
 
-const MainMenu: React.FC<{ className?: string, menuItems: MenuItemUiState[] }> = ({ className, menuItems }) => {
+const MainMenu: React.FC<{ className?: string, menuItems: MenuItem[] }> = ({ className, menuItems }) => {
     return (
-        <nav className={`${className ?? ""} py-4 sm:py-0 sm:mx-auto`}>
-            <ul className="sm:flex sm:justify-center sm:items-center">
+        <nav className={`${className ?? ""} pt-4 sm:py-0`}>
+            <ul className="sm:flex sm:justify-center sm:gap-4">
                 {menuItems.map((item) => (
-                    <li className="mt-4 sm:mt-0" key={item.id}>
+                    <li key={item.id}>
                         <MainMenuItem {...item} />
                     </li>
                 ))}
