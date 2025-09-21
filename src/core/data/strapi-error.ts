@@ -2,7 +2,8 @@ export enum StrapiError {
     Aborted = 'Aborted',
     Network = 'Network',
     Server = 'Server',
-    Unknown = 'Unknown'
+    Unknown = 'Unknown',
+    isStrapiError = "isStrapiError"
 }
 
 export function isStrapiError(value: unknown): value is StrapiError {

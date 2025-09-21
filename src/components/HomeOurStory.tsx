@@ -1,35 +1,18 @@
 import { aboutOurStoryCacheKey } from "@/src/core/data/cache-keys";
-import { StrapiError } from "@/src/core/data/strapi-error";
-import DataFetcher from "./DataFetcher";
-import { DataLoad } from "@/src/core/models";
+import { isStrapiError } from "@/src/core/data/strapi-error";
 import OrganisationInfo from "./OrganisationInfo";
+import { fetchOurStory } from "../app/about/data/about-strapi-datasource";
 
-const Content: React.FC<{
-    className?: string;
-    data?: string;
-    error?: StrapiError;
-    isLoading: boolean;
-}> = ({ className, data }) => {
+const HomeOurStory: React.FC<{ className?: string }> = async (className) => {
+    const ourStoryResult = await fetchOurStory(aboutOurStoryCacheKey);
+    const ourStory = !isStrapiError(ourStoryResult) ? ourStoryResult : undefined;
+
     return (
-        <div className={className ?? ""}>
-            {data && (
-                <OrganisationInfo label="About Us" info={data} />
+        <div className={`${className ?? ""}`}>
+            {ourStory && (
+                <OrganisationInfo label="About Us" info={ourStory} />
             )}
         </div>
-    );
-};
-
-export const renderAboutOurStory = (dataLoad: DataLoad<string>) => (
-    <Content {...dataLoad} />
-)
-
-const HomeOurStory: React.FC<{ className?: string }> = () => {
-    return (
-        <DataFetcher
-            cacheKey={aboutOurStoryCacheKey}
-            dataFetcherKey="about:ourStory"
-            dataRendererKey="about:ourStory"
-        />
     );
 };
 
