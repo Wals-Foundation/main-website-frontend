@@ -13,8 +13,12 @@ const FeaturedCauses: React.FC<{
     donateUrl: string,
 }> = async ({ className, donateUrl, causesUrl, causeDetailsUrl }) => {
     const featuredCommunitiesResult = await fetchFeaturedCauses(CauseType.Community)
+    const communities = !isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult : []
     const featuredProgramsResult = await fetchFeaturedCauses(CauseType.Program)
+    const programs = !isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []
     const featuredProjectsResult = await fetchFeaturedCauses(CauseType.Project)
+    const projects = !isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []
+
     return (
         <>
             <div className={`${className ?? ""}`}>
@@ -28,9 +32,9 @@ const FeaturedCauses: React.FC<{
                         causesUrl={causesUrl}
                         donateUrl={donateUrl}
                         causeDetailsUrl={causeDetailsUrl}
-                        initialCommunities={!isStrapiError(featuredCommunitiesResult) ? featuredCommunitiesResult : []}
-                        initialPrograms={!isStrapiError(featuredProgramsResult) ? featuredProgramsResult : []}
-                        initialProjects={!isStrapiError(featuredProjectsResult) ? featuredProjectsResult : []}
+                        initialCommunities={communities}
+                        initialPrograms={programs}
+                        initialProjects={projects}
                         loadMoreCauses={false}
                     />
                 </SuspenseWrapper>

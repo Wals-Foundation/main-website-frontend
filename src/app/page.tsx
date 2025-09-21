@@ -54,7 +54,7 @@ export default async function Home() {
       <section className="mx-horizontal mt-section">
         <HomeOurStory />
       </section>
-      <section className="mt-section mx-horizontal mx-auto bg-background-variant  py-12 sm:py-16">
+      <section className="mt-section mx-horizontal mx-auto bg-backgroundVariant  py-12 sm:py-16">
         <FeaturedCauses
           className="mx-horizontal"
           causesUrl="/causes"
