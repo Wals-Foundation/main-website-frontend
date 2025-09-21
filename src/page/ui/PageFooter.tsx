@@ -21,7 +21,7 @@ const PageFooter: React.FC<{
         <div className={`mx-horizontal mb-16 ${className ?? ""}`}>
             <div className="py-8 sm:py-16 sm:grid sm:grid-cols-5 border-b border-border-gray">
                 <div className="sm:col-span-2">
-                    <WebsiteLink link="/">
+                    <WebsiteLink link="/" ariaLabel="Home">
                         <WalsLogo />
                     </WebsiteLink>
                 </div>

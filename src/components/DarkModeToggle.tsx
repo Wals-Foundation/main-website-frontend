@@ -54,7 +54,7 @@ const DarkModeToggle: React.FC<{
       className={`interactive ${className ?? ""}`}
       onClick={toggleTheme}
       icon={<Icon><ToggleIcon /></Icon>}
-      aria-label="Toggle dark mode"
+      ariaLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
     />
   )

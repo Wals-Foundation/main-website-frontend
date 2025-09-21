@@ -24,14 +24,16 @@ export const IconButton: React.FC<{
   icon: React.ReactNode,
   type?: "submit" | "reset" | "button" | undefined,
   style?: React.CSSProperties,
+  ariaLabel?: string,
   onClick?: () => void
-}> = ({ className, icon, type, style, onClick }) => {
+}> = ({ className, icon, type, style, ariaLabel, onClick }) => {
   return (
     <button
       className={`interactive px py flex justify-center align-middle rounded-full hover:bg-primary-inverse ${className ?? ""}`}
       type={type}
       style={style}
       onClick={onClick}
+      {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
     >
       {icon}
     </button>

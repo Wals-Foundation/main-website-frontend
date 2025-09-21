@@ -3,17 +3,23 @@ import { isInternalLink } from "../utils"
 
 const WebsiteLink: React.FC<{
     link: string,
-    children: React.ReactNode
-}> = ({ link, children }) => {
+    children: React.ReactNode,
+    ariaLabel?: string
+}> = ({ link, children, ariaLabel }) => {
+    const commonProps = {
+        className: "clickable",
+        ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
+    }
+
     return (
         <>
             {isInternalLink(link) ? (
-                <Link className="clickable" href={link}>
+                <Link {...commonProps} href={link}>
                     {children}
                 </Link>
             ) : (
                 <a
-                    className="clickable"
+                    {...commonProps}
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
