@@ -1,4 +1,4 @@
-import { Caption, HeadingLarge, Text } from "@/components/Typography"
+import { Caption, HeadingLarge, Text } from "@/src/components/Typography"
 import { CauseDetail } from "../models"
 import CauseInfoSection from "./CauseInfoSection"
 import ImageDisplay from "@/src/image/Image"

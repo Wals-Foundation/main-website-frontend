@@ -2,8 +2,8 @@ import { isStrapiError } from "@/src/core/data/strapi-error"
 import { CauseType } from "../models"
 import { fetchFeaturedCauses } from "../data/cause-strapi-datasource"
 import CauseTabs from "./CauseTabs"
-import { HeadingLarge, SectionHeader, Text } from "@/components/Typography"
-import SuspenseWrapper from "@/components/SuspenseWrapper"
+import { HeadingLarge, SectionHeader, Text } from "@/src/components/Typography"
+import SuspenseWrapper from "@/src/components/SuspenseWrapper"
 
 
 const FeaturedCauses: React.FC<{

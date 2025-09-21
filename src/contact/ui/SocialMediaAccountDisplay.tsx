@@ -1,5 +1,5 @@
-import Icon from "@/components/Icon"
-import { TextSmall } from "@/components/Typography"
+import Icon from "@/src/components/Icon"
+import { TextSmall } from "@/src/components/Typography"
 import { ImageSource } from "@/src/core/models"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 

@@ -1,4 +1,4 @@
-import { Caption, Text } from "@/components/Typography"
+import { Caption, Text } from "@/src/components/Typography"
 
 const CauseLocationInfo: React.FC<{
     className?: string,

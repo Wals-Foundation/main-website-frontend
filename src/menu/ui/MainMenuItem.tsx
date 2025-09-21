@@ -1,5 +1,5 @@
 'use client'
-import { Text } from "@/components/Typography"
+import { Text } from "@/src/components/Typography"
 import WebsiteLink from "./WebsiteLink"
 import { usePathname } from "next/navigation"
 

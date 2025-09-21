@@ -1,4 +1,4 @@
-import { HeadingSmall } from "@/components/Typography"
+import { HeadingSmall } from "@/src/components/Typography"
 import { MenuItem } from "@/src/menu/menu-item"
 import MainMenuItem from "@/src/menu/ui/MainMenuItem"
 

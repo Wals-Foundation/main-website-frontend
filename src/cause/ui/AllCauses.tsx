@@ -2,7 +2,7 @@ import { isStrapiError } from "@/src/core/data/strapi-error"
 import { CauseType } from "../models"
 import { fetchCauses } from "../data/cause-strapi-datasource"
 import CauseTabs from "./CauseTabs"
-import SuspenseWrapper from "@/components/SuspenseWrapper"
+import SuspenseWrapper from "@/src/components/SuspenseWrapper"
 
 
 const AllCauses: React.FC<{

@@ -1,9 +1,9 @@
 import React from "react"
-import { HeadingMedium } from "@/components/Typography"
-import { FilledButton, OutlinedButton } from "@/components/Button"
+import { HeadingMedium } from "@/src/components/Typography"
+import { FilledButton, OutlinedButton } from "@/src/components/Button"
 import { CauseType } from "../models"
 import { Image } from "@/src/core/models"
-import MarkdownDisplay from "@/components/MarkdownDisplay"
+import MarkdownDisplay from "@/src/components/MarkdownDisplay"
 import ImageDisplay from '@/src/image/Image';
 import { Config } from "@/src/core/config"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"

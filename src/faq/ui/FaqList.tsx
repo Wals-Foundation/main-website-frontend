@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { Faq } from "../faq"
-import List from "@/components/List"
+import List from "@/src/components/List"
 import FaqDisplay from "./FaqDisplay"
 import { fetchFaqs } from "../data/faq-strapi-datasource"
 import { isStrapiError } from "@/src/core/data/strapi-error"

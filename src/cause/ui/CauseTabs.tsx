@@ -2,14 +2,14 @@
 
 import { useMemo, useState } from "react"
 import { Cause, CauseType } from "../models"
-import Tabs from "@/components/Tabs"
+import Tabs from "@/src/components/Tabs"
 import CausesList from "./CausesList"
 import { useAppSelector } from "@/src/logic/store/hooks"
 import { fetchCauses } from "../data/cause-strapi-datasource"
 import { isStrapiError } from "@/src/core/data/strapi-error"
 import { useSearchParams } from "next/navigation"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
-import { OutlinedButton } from "@/components/Button"
+import { OutlinedButton } from "@/src/components/Button"
 import { AnimatePresence, motion } from "framer-motion"
 
 const tabOrder: CauseType[] = [

@@ -1,16 +1,16 @@
 "use client"
 
-import { WalsLogo } from "@/components/Logo";
+import { WalsLogo } from "@/src/components/Logo";
 import MainMenu from "@/src/menu/ui/MainMenu";
 import { useAppDispatch, useAppSelector } from "@/src/logic/store/hooks";
 import { toggleMobileMenuVisibility } from "@/src/menu/ui/logic";
 import { useEffect } from "react";
 import WebsiteLink from "@/src/menu/ui/WebsiteLink";
-import { FilledButton, IconButton } from "@/components/Button";
-import CloseIcon from "@/assets/icons/close.svg";
-import MenuIcon from "@/assets/icons/menu.svg";
-import Icon from "@/components/Icon";
-import DarkModeToggle from "@/components/DarkModeToggle";
+import { FilledButton, IconButton } from "@/src/components/Button";
+import CloseIcon from "@/src/assets/icons/close.svg";
+import MenuIcon from "@/src/assets/icons/menu.svg";
+import Icon from "@/src/components/Icon";
+import DarkModeToggle from "@/src/components/DarkModeToggle";
 import { MenuItem } from "@/src/menu/menu-item";
 
 const MobileHeaderDetail: React.FC<{

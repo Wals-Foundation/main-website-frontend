@@ -1,6 +1,6 @@
 "use client"
 
-import List from "@/components/List"
+import List from "@/src/components/List"
 import { PagedData } from "@/src/core/models"
 import { GalleryItem } from "../gallery-item"
 import { useState } from "react"

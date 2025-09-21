@@ -1,7 +1,7 @@
-import { HeadingSmall } from "@/components/Typography"
-import ArrowDownIcon from "@/assets/images/arrow-down.svg"
-import MarkdownDisplay from "@/components/MarkdownDisplay"
-import Icon from "@/components/Icon"
+import { HeadingSmall } from "@/src/components/Typography"
+import ArrowDownIcon from "@/src/assets/images/arrow-down.svg"
+import MarkdownDisplay from "@/src/components/MarkdownDisplay"
+import Icon from "@/src/components/Icon"
 
 const FaqDisplay: React.FC<{
     className?: string,

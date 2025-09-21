@@ -1,6 +1,6 @@
 "use client"
 
-import { Caption, Text } from '@/components/Typography';
+import { Caption, Text } from '@/src/components/Typography';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 const DonationProgress: React.FC<{

@@ -1,4 +1,4 @@
-import { TextSmall } from "@/components/Typography";
+import { TextSmall } from "@/src/components/Typography";
 
 const PageSubHeadline: React.FC<{ className?: string, subheadline: string }> = ({ className, subheadline }) => {
     return (

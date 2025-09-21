@@ -1,4 +1,4 @@
-import { HeadingSmall, TextSmall } from "@/components/Typography"
+import { HeadingSmall, TextSmall } from "@/src/components/Typography"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 
 const ContactDisplay: React.FC<{

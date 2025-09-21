@@ -1,7 +1,4 @@
-import Loader from "@/components/Loader"
-import { DataLoad } from "@/src/core/models"
-import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error"
-import { MenuItem } from "@/src/menu/menu-item"
+import { isStrapiError } from "@/src/core/data/strapi-error"
 import { fetchMainMenuItems } from "@/src/menu/data/menu-strapi-datasource"
 import { fetchFeatureFlags } from "@/src/feature-flags/data/feature-flags-strapi-datasource"
 import PageHeader from "./page-header/PageHeader"

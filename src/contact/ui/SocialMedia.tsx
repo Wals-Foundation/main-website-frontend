@@ -1,4 +1,4 @@
-import { HeadingSmall } from "@/components/Typography"
+import { HeadingSmall } from "@/src/components/Typography"
 import { SocialMediaAccount } from "../models"
 import SocialMediaAccountDisplay from "./SocialMediaAccountDisplay"
 

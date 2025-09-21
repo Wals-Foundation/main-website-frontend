@@ -3,7 +3,7 @@ import { Faq } from "../faq";
 import { StrapiError } from "@/src/core/data/strapi-error";
 import { fetchFaqs } from "../data/faq-strapi-datasource";
 import FaqList from "./FaqList";
-import DataFetcher from "@/components/DataFetcher";
+import DataFetcher from "@/src/components/DataFetcher";
 
 const Content: React.FC<{
     className?: string;

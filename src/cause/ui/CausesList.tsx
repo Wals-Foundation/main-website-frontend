@@ -1,6 +1,6 @@
 import { Cause } from "../models"
 import { CauseCard } from "./CauseCard"
-import List from "@/components/List"
+import List from "@/src/components/List"
 
 const CausesList: React.FC<{
     className?: string,

@@ -1,5 +1,5 @@
-import { FilledButton } from "@/components/Button"
-import { HeadingLarge, SectionHeader } from "@/components/Typography"
+import { FilledButton } from "@/src/components/Button"
+import { HeadingLarge, SectionHeader } from "@/src/components/Typography"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 
 const PageCallToDonate: React.FC<{ className?: string, donateUrl: string }> = ({ className, donateUrl }) => {

@@ -1,8 +1,8 @@
-import { WalsLogo } from "@/components/Logo";
+import { WalsLogo } from "@/src/components/Logo";
 import MainMenu from "@/src/menu/ui/MainMenu";
 import WebsiteLink from "@/src/menu/ui/WebsiteLink";
-import DarkModeToggle from "@/components/DarkModeToggle";
-import { FilledButton } from "@/components/Button";
+import DarkModeToggle from "@/src/components/DarkModeToggle";
+import { FilledButton } from "@/src/components/Button";
 import { MenuItem } from "@/src/menu/menu-item";
 
 const PageHeaderDesktop: React.FC<{

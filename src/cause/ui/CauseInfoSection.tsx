@@ -1,5 +1,5 @@
-import MarkdownDisplay from "@/components/MarkdownDisplay"
-import { HeadingMedium } from "@/components/Typography"
+import MarkdownDisplay from "@/src/components/MarkdownDisplay"
+import { HeadingMedium } from "@/src/components/Typography"
 
 const CauseInfoSection: React.FC<{
     className?: string,
