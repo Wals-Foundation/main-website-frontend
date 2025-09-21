@@ -1,17 +1,18 @@
-import { ImageSource } from "@/src/core/models";
 import { HeadingSmall, TextSmall } from "./Typography";
-import Icon from "./Icon";
+import { ContainedIcon } from "./Icon";
 
 const OrganisationValue: React.FC<{
     className?: string,
-    icon: ImageSource,
+    iconRawSvg: string,
     title: string,
     value: string
-}> = ({ className, icon, title, value }) => {
+}> = ({ className, iconRawSvg, title, value }) => {
     return (
         <div className={className ?? ""}>
             <div>
-                <Icon src={icon} />
+                <ContainedIcon className="bg-secondary">
+                    <div className="text-primary" dangerouslySetInnerHTML={{ __html: iconRawSvg }} />
+                </ContainedIcon>
                 <HeadingSmall className="mt-2" text={title} />
                 <TextSmall className="mt-2" text={value} />
             </div>

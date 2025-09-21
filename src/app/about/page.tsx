@@ -54,7 +54,7 @@ export default async function About() {
                   <OrganisationApproach
                     key={index}
                     className="mt-4 sm:mt-0"
-                    icon={approach.icon}
+                    iconRawSvg={approach.iconRawSvg}
                     title={approach.title}
                     approach={approach.explanation} />
                 ))}
@@ -95,7 +95,7 @@ export default async function About() {
                   <OrganisationValue
                     key={index}
                     className="mt-4 sm:mt-0"
-                    icon={value.icon}
+                    iconRawSvg={value.iconRawSvg}
                     title={value.title}
                     value={value.explanation} />
                 ))}

@@ -23,9 +23,9 @@ const programsPath = "[populate][programs]"
 
 
 // Fields
-const aboutApproachesFields = `${aboutApproachesPath}[fields][0]=title&${aboutApproachesPath}[fields][1]=explanation`
+const aboutApproachesFields = `${aboutApproachesPath}[fields][0]=title&${aboutApproachesPath}[fields][1]=explanation&${aboutApproachesPath}[fields][2]=iconRawSvg`
 const aboutImpactsFields = `${aboutImpactsPath}[fields][0]=caption&${aboutImpactsPath}[fields][1]=details&${aboutImpactsPath}[fields][2]=number`
-const aboutValuesFields = `${aboutValuesPath}[fields][0]=title&${aboutValuesPath}[fields][1]=explanation`
+const aboutValuesFields = `${aboutValuesPath}[fields][0]=title&${aboutValuesPath}[fields][1]=explanation&${aboutValuesPath}[fields][2]=iconRawSvg`
 const featuredCausesSortFields = "sort=featuredIndex:desc"
 const featuredCausesQueryLimit = "pagination[start]=0&pagination[limit]=1"
 const gallerySortFields = "sort=updatedAt:desc"

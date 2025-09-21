@@ -3,8 +3,9 @@ import { Image, ImageSource } from "@/src/core/models"
 export interface OrganisationApproach {
     id: string
     title: string
-    explanation: string,
+    explanation: string
     icon: ImageSource
+    iconRawSvg: string
 }
 
 export interface OrganisationImpact {
@@ -18,8 +19,9 @@ export interface OrganisationImpact {
 export interface OrganisationValue {
     id: string
     title: string
-    explanation: string,
+    explanation: string
     icon: ImageSource
+    iconRawSvg: string
 }
 
 export interface Organisation {

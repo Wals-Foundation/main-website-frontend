@@ -7,6 +7,7 @@ export interface OrganisationApproachResponse {
     title: string
     explanation: string
     icon: ImageSourceResponse
+    iconRawSvg: string
 }
 
 export interface OrganisationImpactResponse {
@@ -24,6 +25,7 @@ export interface OrganisationValueResponse {
     title: string
     explanation: string
     icon: ImageSourceResponse
+    iconRawSvg: string
 }
 
 export interface OrganisationResponseData {
@@ -66,7 +68,8 @@ function mapApproachResponseToModel(response: OrganisationApproachResponse): Org
         id: response.documentId,
         title: response.title,
         explanation: response.explanation,
-        icon: mapImageSourceResponseToModel(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon),
+        iconRawSvg: response.iconRawSvg
     };
 }
 
@@ -85,7 +88,8 @@ function mapValueResponseToModel(response: OrganisationValueResponse): Organisat
         id: response.documentId,
         title: response.title,
         explanation: response.explanation,
-        icon: mapImageSourceResponseToModel(response.icon)
+        icon: mapImageSourceResponseToModel(response.icon),
+        iconRawSvg: response.iconRawSvg
     };
 }
 
