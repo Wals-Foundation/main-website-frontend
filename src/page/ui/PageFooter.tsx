@@ -5,12 +5,13 @@ import FooterLinks from "./FooterLinks"
 import { WalsLogo } from "@/src/components/Logo"
 import ContactAndSocialMedia from "@/src/contact/ui/ContactAndSocialMedia"
 import { MenuItem } from "@/src/menu/menu-item"
+import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 
 
 const PageFooter: React.FC<{
     className?: string,
     mainMenuItems: MenuItem[],
-}> = async ({ className,mainMenuItems }) => {
+}> = async ({ className, mainMenuItems }) => {
     const contactResult = await fetchContact();
     const contact = !isStrapiError(contactResult) ? contactResult : undefined
     const socialMediaResult = await fetchSocialMedia()
@@ -20,7 +21,9 @@ const PageFooter: React.FC<{
         <div className={`mx-horizontal mb-16 ${className ?? ""}`}>
             <div className="py-8 sm:py-16 sm:grid sm:grid-cols-5 border-b border-border-gray">
                 <div className="sm:col-span-2">
-                    <WalsLogo />
+                    <WebsiteLink link="/">
+                        <WalsLogo />
+                    </WebsiteLink>
                 </div>
                 <FooterLinks
                     className="mt-8 sm:mt-0"

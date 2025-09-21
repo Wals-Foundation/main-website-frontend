@@ -106,10 +106,10 @@ const GetInvolved: React.FC<{ className?: string }> = async ({ className }) => {
                     id="2"
                     className="mt-8 sm:mt-0 sm:flex sm:flex-col sm:justify-center"
                 >
-                    {options.map((option) => (
+                    {options.map((option, index) => (
                         <GetInvolvedOptionDisplay
                             key={option.id}
-                            className="mb-8"
+                            className={index !== 0 ? "mt-section" : ""}
                             icon={option.icon}
                             details={option.details}
                             label={option.action.label}
