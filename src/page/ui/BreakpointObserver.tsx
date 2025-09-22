@@ -21,7 +21,7 @@ const BreakpointObserver: React.FC = () => {
         window.addEventListener("resize", updateBreakpoint);
 
         return () => window.removeEventListener("resize", updateBreakpoint);
-    }, []);
+    }, [dispatch]);
 
     return (<></>)
 }

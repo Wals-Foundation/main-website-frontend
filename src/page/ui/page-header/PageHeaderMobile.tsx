@@ -12,6 +12,7 @@ import MenuIcon from "@/src/assets/icons/menu.svg";
 import Icon from "@/src/components/Icon";
 import DarkModeToggle from "@/src/components/DarkModeToggle";
 import { MenuItem } from "@/src/menu/menu-item";
+import { usePathname } from "next/navigation";
 
 const MobileHeaderDetail: React.FC<{
   className?: string,
@@ -43,9 +44,15 @@ const PageHeaderMobile: React.FC<{
   isDonatedEnabled: boolean,
 }> = ({ className, donateUrl, menuItems, isDonatedEnabled }) => {
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
+
   const mobileMenuOpen = useAppSelector(
     (state) => state.useMainMenuItems.mobileMenuOpened
   );
+
+  useEffect(() => {
+    dispatch(toggleMobileMenuVisibility(false));
+  }, [dispatch, pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto"
@@ -68,7 +75,7 @@ const PageHeaderMobile: React.FC<{
             icon={<Icon>{mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}</Icon>}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
-            onClick={() => dispatch(toggleMobileMenuVisibility())}
+            onClick={() => dispatch(toggleMobileMenuVisibility(!mobileMenuOpen))}
           />
         </div>
       </div>

@@ -16,8 +16,8 @@ const useMainMenuItems = createSlice({
     name: "useMainMenuItems",
     initialState: initialMainMenuItemsState,
     reducers: {
-        toggleMobileMenuVisibility: (state) => {
-            state.mobileMenuOpened = !state.mobileMenuOpened;
+        toggleMobileMenuVisibility: (state, action: { payload: boolean }) => {
+            state.mobileMenuOpened = action.payload;
         },
     },
 })

@@ -1,6 +1,6 @@
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 import PageSubHeadlineAndActions from "@/src/page/ui/PageSubheadlineAndActions"
-import { OutlinedButton, TonalButton } from "./Button"
+import { OutlinedButton } from "./Button"
 
 const AboutPageSubheadlineAndActions: React.FC<{
     getInvolvedUrl: string,

@@ -11,7 +11,7 @@ const FooterLinks: React.FC<{
             <HeadingSmall text="Links"/>
             <nav>
                 <ul>
-                    {mainMenuItems.map((item, index) => (
+                    {mainMenuItems.map((item) => (
                         <li key={item.id}>
                             <MainMenuItem className="mt-4" {...item} />
                         </li>

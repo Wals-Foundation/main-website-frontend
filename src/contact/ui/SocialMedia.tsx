@@ -12,7 +12,7 @@ const SocialMedia: React.FC<{
                 text="Social Media"
             />
             <div>
-                {accounts.map((account, index) => (
+                {accounts.map((account) => (
                     <SocialMediaAccountDisplay
                         key={account.accountUrl}
                         className="mt-4"
