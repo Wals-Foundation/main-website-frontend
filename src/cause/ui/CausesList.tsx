@@ -9,7 +9,7 @@ const CausesList: React.FC<{
     donateUrl: string,
     hasMoreCauses: boolean,
     viewCauseDetailsUrl: string,
-    donateFeatureFlag: boolean,
+    isDonateEnabled: boolean,
     onLoadMoreCauses?: () => void
 }> = ({
     className,
@@ -18,7 +18,7 @@ const CausesList: React.FC<{
     donateUrl,
     hasMoreCauses,
     viewCauseDetailsUrl,
-    donateFeatureFlag,
+    isDonateEnabled,
     onLoadMoreCauses
 }) => {
         return (
@@ -32,7 +32,7 @@ const CausesList: React.FC<{
                         const cause = causes[index]
                         return (
                             <CauseCard
-                                className="w-full"
+                                className="mt-8"
                                 backgroundColorClass={backgroundColorClass}
                                 causeId={cause.id}
                                 causeName={cause.name}
@@ -42,7 +42,7 @@ const CausesList: React.FC<{
                                 causeType={cause.type}
                                 donateUrl={donateUrl}
                                 viewCauseDetailsUrl={viewCauseDetailsUrl}
-                                donateFeatureFlag={donateFeatureFlag}
+                                isDonateEnabled={isDonateEnabled}
                             />
                         )
                     }}

@@ -12,7 +12,6 @@ const DonationValue: React.FC<{
         <div className={className ?? ""}>
             <Text
                 className="font-size-bold"
-                styles={{ color: "#000000" }}
                 text={`${currency} ${formatValueFromMinorToMajorUnit(valueInMinorCurrencyUnit)}`}
             />
             <Caption className="mt-2" text={label} />

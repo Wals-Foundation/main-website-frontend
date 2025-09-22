@@ -34,9 +34,7 @@ export default async function CommunityDetail({
     return (
         <>
             {community && (
-                <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
-                    <CauseDetailDisplay causeDetail={community} />
-                </div>
+                <CauseDetailDisplay causeDetail={community} />
             )}
         </>
     )

@@ -4,7 +4,6 @@ import { useMemo, useState } from "react"
 import { Cause, CauseType } from "../models"
 import Tabs from "@/src/components/Tabs"
 import CausesList from "./CausesList"
-import { useAppSelector } from "@/src/logic/store/hooks"
 import { fetchCauses } from "../data/cause-strapi-datasource"
 import { isStrapiError } from "@/src/core/data/strapi-error"
 import { useSearchParams } from "next/navigation"
@@ -33,6 +32,7 @@ const CauseTabs: React.FC<{
   initialCommunities: Cause[]
   initialPrograms: Cause[]
   initialProjects: Cause[]
+  isDonateEnabled: boolean
   loadMoreCauses: boolean
 }> = ({
   className,
@@ -43,6 +43,7 @@ const CauseTabs: React.FC<{
   initialCommunities,
   initialPrograms,
   initialProjects,
+  isDonateEnabled,
   loadMoreCauses,
 }) => {
   const searchParams = useSearchParams()
@@ -120,10 +121,6 @@ const CauseTabs: React.FC<{
     }
   }
 
-  const donateFeatureFlag = useAppSelector(
-    (state) => state.useFeatureFlags.flags["donate"]
-  )
-
   const handleTabChange = (newIndex: number) => {
     setPrevTabIndex(activeTabIndex)
     setActiveTabIndex(newIndex)
@@ -150,12 +147,11 @@ const CauseTabs: React.FC<{
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <CausesList
-              className="w-full"
               backgroundColorClass={backgroundColorClass}
               causes={causesByType[activeCauseType]}
               donateUrl={donateUrl}
               viewCauseDetailsUrl={causeDetailsUrl}
-              donateFeatureFlag={donateFeatureFlag}
+              isDonateEnabled={isDonateEnabled}
               hasMoreCauses={hasMoreCausesByType[activeCauseType]}
               onLoadMoreCauses={loadMoreCauses ? loadMore : undefined}
             />

@@ -17,7 +17,7 @@ export default {
         "outline-variant": "var(--outline-variant)",
         primary: "var(--primary)",
         "primary-inverse": "var(--primary-inverse)",
-        secondary: "var(--seconday)",
+        secondary: "var(--secondary)",
         error: "var(--error)",
         "on-primary": "var(--on-primary)",
         "on-secondary": "var(--on-secondary)",

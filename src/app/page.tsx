@@ -59,6 +59,7 @@ export default async function Home() {
           causesUrl="/causes"
           causeDetailsUrl="/causes"
           donateUrl="/donate"
+          isDonateEnabled={featureFlags["cause_card_donate"]}
         />
       </section>
       <section id="get-involved" data-inverse className="mt-section inverse:prose-inverse">

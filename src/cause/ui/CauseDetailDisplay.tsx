@@ -6,21 +6,23 @@ import CauseLocationInfo from "./CauseLocationInfo"
 import Donation from "@/src/donation/ui/Donation"
 import { createGoogleMapsLink } from "../utils"
 
-const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetail }> = ({ className, causeDetail }) => {
+const CauseDetailDisplay: React.FC<{
+    className?: string,
+    causeDetail: CauseDetail
+}> = ({ className, causeDetail }) => {
     return (
-        <div className={className ?? ""}>
-            <article className="w-full">
+        <article className={className ?? ""}>
                 <HeadingLarge className="w-fit mx-auto text-center" text={causeDetail.name} />
                 {(causeDetail.heroes[0].image) && (
                     <ImageDisplay
-                        className="mt-8 rounded-lg"
+                        className="mt-4 rounded-lg"
                         feature="cause_detail"
                         image={causeDetail.heroes[0].image}
                     />
                 )}
-                <section className="mt-8 sm:grid sm:grid-cols-2 sm:gap-8">
+                <section className="mt-section sm:grid sm:grid-cols-2 sm:gap-8">
                     <div>
-                        <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b border-border-gray">
+                        <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b">
                             <Caption text="Location" />
                             <a
                                 href={createGoogleMapsLink(causeDetail.location.latitude, causeDetail.location.longitude)}
@@ -28,14 +30,14 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                                 rel="noopener noreferrer"
                                 className="my-auto mt-2 sm:mt-0 sm:col-span-2 text-primary underline"
                             >
-                                <Text 
-                                className="sm:text-right underline" 
-                                text="Get Directions" 
-                                styles={{ color: "var(--primary)" }} />
+                                <Text
+                                    className="sm:text-right underline"
+                                    text="Get Directions"
+                                    styles={{ color: "var(--primary)" }} />
                             </a>
                         </div>
                         {(causeDetail.communities.length > 0) && (
-                            <CauseLocationInfo className="py-4 border-b border-border-gray" label="Community" value={causeDetail.communities[0].name} />
+                            <CauseLocationInfo className="py-4 border-b" label="Community" value={causeDetail.communities[0].name} />
                         )}
                         {(causeDetail.programs.length > 0) && (
                             <CauseLocationInfo className="py-4 border-b border-border-gray" label="Program" value={causeDetail.programs[0].name} />
@@ -57,7 +59,6 @@ const CauseDetailDisplay: React.FC<{ className?: string, causeDetail: CauseDetai
                     <CauseInfoSection className="mt-8" heading="Impact" info={causeDetail.impact} />
                 </section>
             </article>
-        </div>
     )
 }
 

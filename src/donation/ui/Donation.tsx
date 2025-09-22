@@ -10,7 +10,7 @@ const Donation: React.FC<{
 }> = ({ className, currency, donatedAmountInMinorCurrencyUnit, targetAmountInMinorCurrencyUnit }) => {
     return (
         <div className={className ?? ""}>
-            <div className="w-full p-4 sm:grid sm:grid-cols-2 sm:gap-8  bg-section-bg-gray  rounded-lg">
+            <div className="w-full p-4 sm:grid sm:grid-cols-2 sm:gap-8  bg-backgroundVariant  rounded-lg">
                 <div>
                     <DonationValue
                         currency={currency}
@@ -28,7 +28,7 @@ const Donation: React.FC<{
                         valueInMinorCurrencyUnit={targetAmountInMinorCurrencyUnit - donatedAmountInMinorCurrencyUnit}
                     />
                 </div>
-                <div className="mt-8 sm:mt-0">
+                <div className="mt-8 sm:mt-0 flex justify-center items-center">
                     <DonationProgress
                         className="w-60 sm:w-full mx-auto"
                         donatedAmountInMinorCurrencyUnit={donatedAmountInMinorCurrencyUnit}

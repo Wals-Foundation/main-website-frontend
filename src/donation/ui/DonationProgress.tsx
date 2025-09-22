@@ -19,11 +19,11 @@ const DonationProgress: React.FC<{
                 strokeWidth={10}
                 styles={{
                     path: {
-                        stroke: "#009EE2",
+                        stroke: "var(--primary)",
                         strokeLinecap: 'round',
                     },
                     trail: {
-                        stroke: '#DEF5FF',
+                        stroke: 'var(--secondary)',
                         strokeLinecap: 'round',
                     },
                 }}
