@@ -18,27 +18,27 @@ const PageFooter: React.FC<{
     const socialMedia = !isStrapiError(socialMediaResult) ? socialMediaResult : []
 
     return (
-        <div className={`mx-horizontal mb-16 ${className ?? ""}`}>
-            <div className="py-8 sm:py-16 sm:grid sm:grid-cols-5 border-b border-border-gray">
+        <section className={`mx-horizontal mt-section mb-16 ${className ?? ""}`}>
+            <div className="pb-8 sm:grid sm:grid-cols-5 border-b">
                 <div className="sm:col-span-2">
                     <WebsiteLink link="/" ariaLabel="Home">
                         <WalsLogo />
                     </WebsiteLink>
                 </div>
                 <FooterLinks
-                    className="mt-8 sm:mt-0"
+                    className="mt-section sm:mt-0"
                     mainMenuItems={mainMenuItems}
                 />
                 <ContactAndSocialMedia
-                    className="mt-8 sm:mt-0 sm:col-span-2"
+                    className="mt-section sm:mt-0 sm:col-span-2"
                     contact={contact}
                     socialMedia={socialMedia}
                 />
             </div>
-            <div className="py-8 sm:py-16">
+            <div className="py-8">
                 <TextSmall text="© 2024 We Are Liberating Societies Foundation. All rights reserved." />
             </div>
-        </div>
+        </section>
     );
 
 }

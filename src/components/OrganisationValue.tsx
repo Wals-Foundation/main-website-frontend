@@ -13,8 +13,8 @@ const OrganisationValue: React.FC<{
                 <ContainedIcon className="bg-secondary">
                     <div className="text-primary" dangerouslySetInnerHTML={{ __html: iconRawSvg }} />
                 </ContainedIcon>
-                <HeadingSmall className="mt-2" text={title} />
-                <TextSmall className="mt-2" text={value} />
+                <HeadingSmall className="mt-4" text={title} />
+                <TextSmall className="mt-4" text={value} />
             </div>
         </div>
     )

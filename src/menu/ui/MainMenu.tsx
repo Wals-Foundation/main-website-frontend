@@ -7,7 +7,7 @@ const MainMenu: React.FC<{ className?: string, menuItems: MenuItem[] }> = ({ cla
             <ul className="sm:flex sm:justify-center sm:gap-4">
                 {menuItems.map((item) => (
                     <li key={item.id}>
-                        <MainMenuItem {...item} />
+                        <MainMenuItem className="mt-4 sm:mt-0" {...item} />
                     </li>
                 ))}
             </ul>

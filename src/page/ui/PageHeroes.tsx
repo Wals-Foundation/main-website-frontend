@@ -20,26 +20,24 @@ const PageHeroes: React.FC<{
 }> = ({ className, heroes }) => {
 
     return (
-        <>
-            {
-                <Swiper
-                    className={`w-full ${className ?? ""}`}
-                    modules={[Autoplay, Pagination]}
-                    autoplay={{ delay: Config.images.slides.autoPlayDelay }}
-                    pagination={{ clickable: true }}
-                >
-                    {heroes.map((hero) => (
-                        <SwiperSlide key={hero.id} className="w-full h-full">
-                            <PageHero
-                                className="w-full h-full"
-                                image = {hero.image}
-                                html={hero.html}
-                             />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            }
-        </>
+        <div className={`w-full aspect-[2/3] sm:aspect-[16/9] ${className ?? ""}`}>
+            <Swiper
+                className={`w-full h-full ${className ?? ""}`}
+                modules={[Autoplay, Pagination]}
+                autoplay={{ delay: Config.images.slides.autoPlayDelay }}
+                pagination={{ clickable: true }}
+            >
+                {heroes.map((hero) => (
+                    <SwiperSlide key={hero.id} className="w-full h-full">
+                        <PageHero
+                            className="w-full h-full"
+                            image={hero.image}
+                            html={hero.html}
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
     )
 }
 

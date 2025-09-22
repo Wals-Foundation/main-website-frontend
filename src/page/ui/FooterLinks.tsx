@@ -8,15 +8,12 @@ const FooterLinks: React.FC<{
 }> = ({ className, mainMenuItems }) => {
     return (
         <div className={className ?? ""}>
-            <HeadingSmall
-                styles={{ color: "var(--on-dark)" }}
-                text="Links"
-            />
+            <HeadingSmall text="Links"/>
             <nav>
                 <ul>
                     {mainMenuItems.map((item, index) => (
-                        <li className={(index !== 0) ? "mt-4" : "mt-2"} key={item.id}>
-                            <MainMenuItem {...item} />
+                        <li key={item.id}>
+                            <MainMenuItem className="mt-4" {...item} />
                         </li>
                     ))}
                 </ul>

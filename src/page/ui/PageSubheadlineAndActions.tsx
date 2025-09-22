@@ -7,7 +7,7 @@ const PageSubHeadlineAndActions: React.FC<
     return (
         <div className={`${className ? className : ""}`}>
             <PageSubHeadline subheadline={subheadline} />
-            <PageActions actions={actions} className="mt-4 sm:mt-6" />
+            <PageActions actions={actions} className="mt-4" />
         </div>
     )
 }

@@ -15,7 +15,7 @@ const ContactDisplay: React.FC<{
             />
             <WebsiteLink link={`mailto:${email}`}>
                 <TextSmall
-                    className={`mt-2 flex-1 min-w-0  break-words`}
+                    className={`mt-4 flex-1 min-w-0  break-words`}
                     styles={{ color: color }}
                     text={email}
                 />

@@ -19,7 +19,7 @@ const MainMenuItem: React.FC<{
     return (
         <WebsiteLink link={relativeUrl}>
             <Text
-                className={`mt-4 sm:mt-0 ${className ?? ""} ${getCurrentUrlKey(currentUrlPathName) === relativeUrl ? "text-primary" : ""}`}
+                className={`${className ?? ""} ${getCurrentUrlKey(currentUrlPathName) === relativeUrl ? "text-primary" : ""}`}
                 text={label}
             />
         </WebsiteLink>

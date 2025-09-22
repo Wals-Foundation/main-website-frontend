@@ -15,7 +15,7 @@ const SocialMedia: React.FC<{
                 {accounts.map((account, index) => (
                     <SocialMediaAccountDisplay
                         key={account.accountUrl}
-                        className={(index !== 0) ? "mt-4" : "mt-2"}
+                        className="mt-4"
                         accountUrl={account.accountUrl}
                         icon={account.icon}
                         name={account.name}

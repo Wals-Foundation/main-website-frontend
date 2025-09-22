@@ -43,9 +43,8 @@ export default async function Home() {
               }
             />
           </section>
-          <section className="relative w-full mt-section aspect-[2/3] sm:aspect-[16/9]">
+          <section className="mt-section">
             <PageHeroes
-              className="absolute h-full"
               heroes={page.heroes}
             />
           </section>
@@ -62,7 +61,7 @@ export default async function Home() {
           donateUrl="/donate"
         />
       </section>
-      <section data-inverse className="mt-section inverse:prose-inverse">
+      <section id="get-involved" data-inverse className="mt-section inverse:prose-inverse">
         <div className="mx-horizontal py-12 sm:py-16">
           <GetInvolved className="w-full mx-auto" />
         </div>

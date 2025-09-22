@@ -7,7 +7,7 @@ const PageIntro: React.FC<
         <>
             <div className={`mx-horizontal sm:grid sm:grid-cols-4 sm:gap-16 ${className ?? ""}`}>
                 <div className="sm:col-span-2">{headline}</div>
-                <div className="mt-4 sm:mt-0 sm:col-span-2">{subheadlineAndActions}</div>
+                <div className="mt-4 sm:mt-0 sm:col-span-2 sm:flex sm:justify-end">{subheadlineAndActions}</div>
             </div>
         </>
     )
