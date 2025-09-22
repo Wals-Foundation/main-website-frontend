@@ -3,7 +3,6 @@ import { getFetcher } from "@/src/logic/config/base";
 import { Feature, FeatureFlagsResponse, mapFeatureFlagsResponseToLiveStateMap } from "./feature-flags-strapi-response";
 import { featureFlagsCacheKey as featureFlagsUrl } from "@/src/core/data/cache-keys";
 import { paginate } from "@/src/core/data/strapi-url-parts";
-import { Config } from "@/src/core/config";
 
 export async function fetchFeatureFlags(): Promise<Record<string, boolean> | StrapiError> {
     try {
@@ -13,12 +12,7 @@ export async function fetchFeatureFlags(): Promise<Record<string, boolean> | Str
 
         while (true) {
             const response = await getFetcher<FeatureFlagsResponse>(
-                `${featureFlagsUrl}&${paginate(page, pageSize)}`,
-                {
-                    next: {
-                        revalidate: Config.page.cacheMaxAge
-                    },
-                }
+                `${featureFlagsUrl}&${paginate(page, pageSize)}`
             );
 
             allFeatures.push(...response.data);
