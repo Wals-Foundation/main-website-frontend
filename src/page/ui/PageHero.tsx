@@ -3,20 +3,21 @@ import ImageDisplay from '@/src/image/Image';
 
 const PageHero: React.FC<{
     className?: string,
+    feature?: string,
     image?: Image,
     html?: string
-}> = ({ className, image, html }) => {
+}> = ({ className, feature, image, html }) => {
     return (
         <div className={`relative ${className ?? ""}`}>
             {image && (
                 <div className="w-full">
                     <ImageDisplay
                         className="w-full"
-                        feature="page_hero"
+                        feature={feature ?? "page_hero"}
                         image={image}
                     />
                     {/* Puts an overlay over the images */}
-                    <div className="absolute inset-0 bg-black/60" />
+                    {html?.length && (<div className="absolute inset-0 bg-black/60" />)}
                 </div>
             )}
             {html && (

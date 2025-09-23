@@ -26,7 +26,10 @@ export default function CommunityDetail() {
         <>
             {community && (
                 <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
-                    <CauseDetailDisplay causeDetail={community} />
+                    <CauseDetailDisplay 
+                    causeDetail={community} 
+                    causeDetailsUrl="/causes"
+                    />
                 </div>
             )}
         </>

@@ -26,7 +26,10 @@ export default function ProgramDetail() {
         <>
             {program && (
                 <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
-                    <CauseDetailDisplay causeDetail={program} />
+                    <CauseDetailDisplay 
+                    causeDetail={program} 
+                    causeDetailsUrl="/causes"
+                    />
                 </div>
             )}
         </>

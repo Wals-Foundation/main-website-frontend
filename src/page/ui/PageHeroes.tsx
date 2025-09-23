@@ -16,11 +16,13 @@ import PageHero from './PageHero';
 
 const PageHeroes: React.FC<{
     className?: string,
+    aspectRatio?: string,
+    feature?: string,
     heroes: Hero[]
-}> = ({ className, heroes }) => {
+}> = ({ className, aspectRatio, feature, heroes }) => {
 
     return (
-        <div className={`w-full aspect-[2/3] sm:aspect-[16/9] ${className ?? ""}`}>
+        <div className={`w-full ${aspectRatio ?? "aspect-[2/3] sm:aspect-[16/9]"} ${className ?? ""}`}>
             <Swiper
                 className={`w-full h-full ${className ?? ""}`}
                 modules={[Autoplay, Pagination]}
@@ -31,6 +33,7 @@ const PageHeroes: React.FC<{
                     <SwiperSlide key={hero.id} className="w-full h-full">
                         <PageHero
                             className="w-full h-full"
+                            feature={feature}
                             image={hero.image}
                             html={hero.html}
                         />

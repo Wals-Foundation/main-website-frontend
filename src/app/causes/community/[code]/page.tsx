@@ -34,7 +34,10 @@ export default async function CommunityDetail({
     return (
         <>
             {community && (
-                <CauseDetailDisplay causeDetail={community} />
+                <CauseDetailDisplay
+                    causeDetail={community}
+                    causeDetailsUrl="/causes"
+                />
             )}
         </>
     )

@@ -35,7 +35,10 @@ export default async function ProjectDetail({
         <>
             {project && (
                 <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
-                    <CauseDetailDisplay causeDetail={project} />
+                    <CauseDetailDisplay 
+                    causeDetail={project} 
+                    causeDetailsUrl="/causes"
+                    />
                 </div>
             )}
         </>
