@@ -2,12 +2,13 @@ import Link from "next/link"
 import { isInternalLink } from "../utils"
 
 const WebsiteLink: React.FC<{
+    className?: string,
     link: string,
     children: React.ReactNode,
     ariaLabel?: string
-}> = ({ link, children, ariaLabel }) => {
+}> = ({ className, link, children, ariaLabel }) => {
     const commonProps = {
-        className: "clickable",
+        className: `clickable ${className ?? ""}`,
         ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
     }
 

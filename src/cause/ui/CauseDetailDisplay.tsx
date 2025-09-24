@@ -30,15 +30,16 @@ const CauseDetailDisplay: React.FC<{
                     <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b">
                         <Caption text="Location" />
                         <WebsiteLink
+                            className="sm:mt-0 sm:col-span-2"
                             link={createGoogleMapsLink(causeDetail.location.latitude, causeDetail.location.longitude)}
                         >
                             <Text
-                                className="text-primary underline sm:text-right"
+                                className="mt-2 text-primary underline sm:text-end"
                                 text="Get Directions" />
                         </WebsiteLink>
                     </div>
                     <CauseLocationInfo className="py-4 border-b" label="Region" value={causeDetail.region.name} />
-                    <CauseLocationInfo className="py-4" label="District" value={causeDetail.district.name} />
+                    <CauseLocationInfo className="py-4 border-b" label="District" value={causeDetail.district.name} />
 
                     {(causeDetail.communities.length > 0) && (
                         <RelatedCauses

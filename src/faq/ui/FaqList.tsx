@@ -6,30 +6,25 @@ import List from "@/src/components/List"
 import FaqDisplay from "./FaqDisplay"
 import { fetchFaqs } from "../data/faq-strapi-datasource"
 import { isStrapiError } from "@/src/core/data/strapi-error"
+import { PagedData } from "@/src/core/models"
 
 const FaqList: React.FC<{
     className?: string,
-    faqs: Faq[],
-    hasMoreFaqs: boolean
+    initialFaqs: PagedData<Faq>
 }> = ({
     className,
-    faqs,
-    hasMoreFaqs,
+    initialFaqs
 }) => {
-        const [faqsList, setFaqsList] = useState(faqs)
-        const [hasMore, setHasMore] = useState(hasMoreFaqs)
+        const [faqsList, setFaqsList] = useState(initialFaqs.data)
+        const [nextPage, setNextPage] = useState(initialFaqs.nextPage)
         const [openIndex, setOpenIndex] = useState<number | null>(null)
-        const [page, setPage] = useState(1)
 
         const onLoadMoreFaqs = async () => {
-            const nextPage = page + 1
-
+            if (!nextPage) return
             const result = await fetchFaqs(nextPage)
             if (!isStrapiError(result)) {
-                const { data, hasNextPage } = result
-                setFaqsList([...faqsList, ...data])
-                setHasMore(hasNextPage)
-                setPage(nextPage)
+                setFaqsList([...faqsList, ...result.data])
+                setNextPage(result.nextPage)
             }
         }
 
@@ -41,7 +36,7 @@ const FaqList: React.FC<{
             <>
                 <List
                     className={className}
-                    hasMoreItems={hasMore}
+                    hasMoreItems={nextPage !== undefined}
                     isVertical={true}
                     itemsCount={faqsList.length}
                     item={(index) => {

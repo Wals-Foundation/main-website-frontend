@@ -14,7 +14,7 @@ const Content: React.FC<{
     return (
         <>
             {data && (
-                <FaqList className={`${className ?? ""}`} faqs={data.data} hasMoreFaqs={data.hasNextPage} />
+                <FaqList className={`${className ?? ""}`} initialFaqs={data} />
             )}
             {error && <div>Error occurred</div>}
         </>
@@ -30,7 +30,7 @@ export const renderFaqsData = (dataLoad: DataLoad<PagedData<Faq>>) => (
 )
 
 const Faqs: React.FC = () => {
-  return (<DataFetcher cacheKey="faqs" dataFetcherKey="faqs" dataRendererKey="faqs" />)
+    return (<DataFetcher cacheKey="faqs" dataFetcherKey="faqs" dataRendererKey="faqs" />)
 }
 
 export default Faqs

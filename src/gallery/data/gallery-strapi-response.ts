@@ -13,7 +13,7 @@ export interface GalleryItemsResponse {
     meta: Meta;
 }
 
-export function mapGalleryItemResponseToGalleryItem(response: GalleryItemResponse): GalleryItem {
+function mapGalleryItemResponseToGalleryItem(response: GalleryItemResponse): GalleryItem {
     return {
         id: response.documentId,
         image: mapImageResponseToModel(response.image)

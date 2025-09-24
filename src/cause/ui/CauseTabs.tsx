@@ -105,7 +105,7 @@ const CauseTabs: React.FC<{
 
     const result = await fetchCauses(activeCauseType, nextPage)
     if (!isStrapiError(result)) {
-      const { data: newCauses, hasNextPage } = result
+      const { data: newCauses, nextPage } = result
 
       setCausesByType[activeCauseType]((prev) => [...prev, ...newCauses])
 
@@ -116,7 +116,7 @@ const CauseTabs: React.FC<{
 
       setHasMoreCausesByType((prev) => ({
         ...prev,
-        [activeCauseType]: hasNextPage,
+        [activeCauseType]: nextPage,
       }))
     }
   }

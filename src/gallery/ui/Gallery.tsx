@@ -13,23 +13,20 @@ const Gallery: React.FC<{
     onLoadMoreItems: (page: number) => Promise<PagedData<GalleryItem>>
 }> = ({ className, feature, initialItems, onLoadMoreItems }) => {
     const [galleryItems, setGalleryItems] = useState(initialItems.data)
-    const [hasMoreItems, setHasMoreItems] = useState(initialItems.hasNextPage)
-    const [page, setPage] = useState(initialItems.page)
+    const [nextPage, setNextPage] = useState(initialItems.nextPage)
 
     const handleLoadMore = async () => {
-        const nextPage = page + 1
+        if (!nextPage) return
         const newItems = await onLoadMoreItems(nextPage)
-
         setGalleryItems(prev => [...prev, ...newItems.data])
-        setHasMoreItems(newItems.hasNextPage)
-        setPage(nextPage)
+        setNextPage(newItems.nextPage)
     }
 
     return (
         <>
             <div className={className ?? ""}>
                 <List
-                    hasMoreItems={hasMoreItems}
+                    hasMoreItems={nextPage !== undefined}
                     isVertical={false}
                     itemsCount={galleryItems.length}
                     item={(index) => {

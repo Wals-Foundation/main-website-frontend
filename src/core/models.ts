@@ -22,7 +22,7 @@ export interface DataLoad<T> {
 export interface PagedData<T> {
     data: T[];
     page: number;
-    hasNextPage: boolean;
+    nextPage?: number;
 };
 
 export interface ImageSource {

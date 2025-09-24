@@ -74,10 +74,10 @@ export const mapWebsiteActionResponseToModel = (response: WebsiteActionResponse)
 
 export function mapMetaToPagination(meta: Meta): {
   page: number;
-  hasNextPage: boolean
+  nextPage?: number;
 } {
   return {
     page: meta.pagination.page,
-    hasNextPage: meta.pagination.page < meta.pagination.pageCount
+    nextPage: meta.pagination.page < meta.pagination.pageCount ? meta.pagination.page + 1 : undefined,
   };
 }
