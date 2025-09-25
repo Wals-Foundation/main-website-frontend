@@ -5,7 +5,7 @@ import InfiniteScroller from "./InfiniteScroller"
 const List: React.FC<{
     className?: string
     hasMoreItems: boolean
-    isVertical: boolean
+    isVertical?: boolean
     itemsCount: number
     item: (index: number) => React.ReactElement
     itemContainerClass?: (index: number) => string
@@ -14,7 +14,7 @@ const List: React.FC<{
 }> = ({
     className,
     hasMoreItems,
-    isVertical,
+    isVertical = true,
     itemsCount,
     item,
     itemContainerClass,

@@ -119,6 +119,18 @@ export const aboutQuery = (): string => {
     ].join("&")
 }
 
+export const activitiesQuery = (): string => {
+    return [
+        `fields[0]=name&fields[1]=description&fields[2]=startDate&fields[3]=endDate`,
+        donatableFields([donatablePath]),
+        donationFields([donatablePath, donationPath]),
+        currencyFields([donatablePath, donationPath, currencyPath]),
+        heroFields([heroesPath]),
+        imageFields([heroesPath, imagePath]),
+        imageSourceFields([heroesPath, imagePath, imageSourcePath]),
+    ].join("&")
+}
+
 export const causesQuery = (): string => {
     return [
         "[fields][0]=code",

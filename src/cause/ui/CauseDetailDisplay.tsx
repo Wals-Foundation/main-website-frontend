@@ -1,4 +1,4 @@
-import { Caption, HeadingLarge, Text } from "@/src/components/Typography"
+import { Caption, HeadingLarge, HeadingMedium, Text } from "@/src/components/Typography"
 import { CauseDetail, CauseType } from "../models"
 import CauseInfoSection from "./CauseInfoSection"
 import Donation from "@/src/donation/ui/Donation"
@@ -8,12 +8,24 @@ import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 import { Config } from "@/src/core/config"
 import CauseLocationInfo from "./CauseLocationInfo"
 import RelatedCauses from "./RelatedCauses"
+import { Activity } from "@/src/activity/models"
+import { PagedData } from "@/src/core/models"
+import { fetchCauseActivities } from "@/src/activity/data/activity-strapi-datasource"
+import { isStrapiError } from "@/src/core/data/strapi-error"
+import CauseActivities from "./CauseActivities"
+
+export const getCauseActivities = async (type: CauseType, code: string, page: number): Promise<PagedData<Activity>> => {
+    const result = await fetchCauseActivities(type, code, page)
+    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined, error: result }
+}
 
 const CauseDetailDisplay: React.FC<{
     className?: string,
-    causeDetail: CauseDetail
+    causeDetail: CauseDetail,
     causeDetailsUrl: string,
-}> = ({ className, causeDetail, causeDetailsUrl }) => {
+    donateUrl: string,
+}> = async ({ className, causeDetail, causeDetailsUrl, donateUrl }) => {
+    const initialActivities = await getCauseActivities(causeDetail.type, causeDetail.id, 1)
     return (
         <article className={className ?? ""}>
             <HeadingLarge className="w-fit mx-auto text-center" text={causeDetail.name} />
@@ -73,6 +85,7 @@ const CauseDetailDisplay: React.FC<{
                     currency={causeDetail.donatable.currency}
                     donatedAmountInMinorCurrencyUnit={causeDetail.donatable.donatedAmountInMinorCurrencyUnit}
                     targetAmountInMinorCurrencyUnit={causeDetail.donatable.targetAmountInMinorCurrencyUnit}
+                    donateUrl={donateUrl}
                 />
             </section>
             <section className="mt-section">
@@ -80,6 +93,16 @@ const CauseDetailDisplay: React.FC<{
                 <CauseInfoSection className="mt-4" heading="Problem" info={causeDetail.problem} />
                 <CauseInfoSection className="mt-4" heading="Solution" info={causeDetail.solution} />
                 <CauseInfoSection className="mt-4" heading="Impact" info={causeDetail.impact} />
+            </section>
+            <section className="mt-section">
+                <HeadingMedium text="Activities" />
+                <CauseActivities
+                    className="mt-4"
+                    causeCode={causeDetail.id}
+                    causeType={causeDetail.type}
+                    donateUrl={donateUrl}
+                    initialActivities={initialActivities}
+                />
             </section>
         </article>
     )

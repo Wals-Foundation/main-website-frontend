@@ -34,10 +34,13 @@ export default async function CommunityDetail({
     return (
         <>
             {community && (
-                <CauseDetailDisplay
-                    causeDetail={community}
-                    causeDetailsUrl="/causes"
-                />
+                <div className="mx-horizontal mt-12 sm:mt-16 mb-12">
+                    <CauseDetailDisplay
+                        causeDetail={community}
+                        causeDetailsUrl="/causes"
+                        donateUrl="/donate"
+                    />
+                </div>
             )}
         </>
     )

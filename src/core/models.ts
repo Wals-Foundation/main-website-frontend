@@ -23,6 +23,7 @@ export interface PagedData<T> {
     data: T[];
     page: number;
     nextPage?: number;
+    error?: StrapiError;
 };
 
 export interface ImageSource {

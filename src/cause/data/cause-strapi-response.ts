@@ -133,11 +133,12 @@ function mapRegionResponseToRegion(response: RegionResponse): Region {
 }
 
 function mapCauseDetailInfoResponseToCauseDetailInfo(
+    code: string,
     response: CauseDetailInfoResponse,
     type: CauseType
 ): Omit<CauseDetail, 'donatable' | 'communities' | 'programs'> {
     return {
-        id: response.id.toString(),
+        id: code,
         name: response.name,
         introduction: response.introduction,
         impact: response.impact,
@@ -156,7 +157,7 @@ export function mapCausesDetailsResponseToCausesDetails(
     type: CauseType
 ): CauseDetail[] {
     return response.data.map(item => ({
-        ...mapCauseDetailInfoResponseToCauseDetailInfo(item.cause, type),
+        ...mapCauseDetailInfoResponseToCauseDetailInfo(item.code, item.cause, type),
         donatable: mapDonatableResponseToDonatable(item.donatable),
         communities: item?.communities?.map(mapRelatedCauseReponseToRelatedCause) ?? [],
         programs: item?.programs?.map(mapRelatedCauseReponseToRelatedCause) ?? []

@@ -1,5 +1,5 @@
 import MarkdownDisplay from "@/src/components/MarkdownDisplay"
-import { HeadingMedium } from "@/src/components/Typography"
+import { HeadingSmall } from "@/src/components/Typography"
 
 const CauseInfoSection: React.FC<{
     className?: string,
@@ -8,7 +8,7 @@ const CauseInfoSection: React.FC<{
 }> = ({ className, heading, info }) => {
     return (
         <div className={className ?? ""}>
-            <HeadingMedium text={heading} />
+            <HeadingSmall text={heading} />
             <MarkdownDisplay className="mt-4" markdown={info} />
         </div>
     )

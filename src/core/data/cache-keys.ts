@@ -15,7 +15,8 @@ import {
     socialMediaQuery,
     getInvolvedQuery,
     causeGalleryQuery,
-    faqFields
+    faqFields,
+    activitiesQuery
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -36,6 +37,10 @@ export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
 export const getInvolvedCacheKey = `get-involved-options?${getInvolvedQuery()}`
 export const socialMediaCacheKey = `social-medias?${socialMediaQuery()}`
 
+
+export const causeActivitiesCacheKey = (code: string, type: CauseType, page: number, pageSize?: number): string => {
+    return `activities?filters[${causePath[type]}][code][$eq]=${code}&${activitiesQuery()}&${paginate(page, pageSize)}`;
+};
 export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {
     return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;
 };
