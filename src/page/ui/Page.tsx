@@ -4,6 +4,7 @@ import { fetchFeatureFlags } from "@/src/feature-flags/data/feature-flags-strapi
 import PageHeader from "./page-header/PageHeader"
 import BreakpointObserver from "./BreakpointObserver"
 import PageFooter from "./PageFooter"
+import ScrollToTop from "@/src/components/ScrollToTop"
 
 /*
     TEST CASES
@@ -25,6 +26,7 @@ const Page: React.FC<{ children: React.ReactNode }> = async ({ children }) => {
             <PageHeader donateUrl="/donate" mainMenuItems={menuItems} isDonateEnabled={featureFlags['donate']} />
             <main className="mt-20 sm:mt-28">{children}</main>
             <PageFooter mainMenuItems={menuItems} className="mt-section" />
+            <ScrollToTop className={`fixed bottom-4 right-4 `} />
         </>
     );
 }

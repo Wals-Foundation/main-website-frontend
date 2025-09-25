@@ -3,7 +3,6 @@
 import { Caption, Text } from '@/src/components/Typography';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import DonateIcon from "@/src/assets/icons/donate.svg"
-import { IconButton } from '@/src/components/Button';
 
 const DonationProgress: React.FC<{
     className?: string,
@@ -31,13 +30,9 @@ const DonationProgress: React.FC<{
                 }}
             >
                 <div className="w-fit mx-auto">
+                    <DonateIcon className="mx-auto" />
                     <Caption className="w-fit mx-auto" text="Donated" />
                     <Text className="w-fit mx-auto font-size-bold" text={`${progressValue}%`} />
-                    <IconButton
-                        className="mt-2 mx-auto bg-primary text-on-primary"
-                        icon={<DonateIcon />}
-                        ariaLabel="donate to cause"
-                    />
                 </div>
             </CircularProgressbarWithChildren>
         </div>
