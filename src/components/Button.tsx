@@ -49,7 +49,7 @@ export const OutlinedButton: React.FC<{
 }> = ({ className, title, type, style, onClick }) => {
   return (
     <button
-      className={`interactive px py sentence-case rounded-full text-primary hover:bg-primary-inverse 
+      className={`interactive px py sentence-case rounded-full border border-primary text-primary hover:bg-primary-inverse 
   flex items-center justify-center truncate ${className ?? ""}`}
       type={type}
       style={style}
