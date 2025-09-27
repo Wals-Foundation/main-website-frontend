@@ -5,6 +5,6 @@ export const WalsLogo: React.FC<{
   className?: string
 }> = (className) => {
   return (
-    <Logo className={className?.className ?? ""} />
+    <Logo aria-label="WALS Foundation logo" className={className?.className ?? ""} />
   );
 };
