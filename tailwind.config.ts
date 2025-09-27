@@ -117,7 +117,7 @@ export default {
         ".sentence-case": {
           "text-transform": "lowercase",
           "&::first-letter": {
-            "text-transform": "uppercase",
+            "text-transform": "uppercase !important",
           },
         },
       });
