@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import UpIcon from "@/src/assets/icons/up.svg"
+import ScrollToTopIcon from "@/src/assets/icons/scroll-to-top.svg"
 import { IconButton } from "./Button";
 
 const ScrollToTop: React.FC<{
@@ -31,7 +31,7 @@ const ScrollToTop: React.FC<{
     return (
         <IconButton
             className={`bg-primary text-on-primary shadow-lg transition-opacity ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}  ${className ?? ""}`}
-            icon={<UpIcon />}
+            icon={<ScrollToTopIcon />}
             onClick={scrollToTop}
             aria-label="Scroll to top"
         />

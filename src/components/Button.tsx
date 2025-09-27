@@ -9,7 +9,7 @@ export const FilledButton: React.FC<{
 }> = ({ className, title, type, style, onClick }) => {
   return (
     <button
-      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-primary text-on-primary hover:bg-primary-inverse ${className ?? ""}`}
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-primary line-clamp-1 text-on-primary hover:bg-primary-inverse ${className ?? ""}`}
       type={type}
       style={style}
       onClick={onClick}
@@ -49,7 +49,7 @@ export const OutlinedButton: React.FC<{
 }> = ({ className, title, type, style, onClick }) => {
   return (
     <button
-      className={`interactive px py sentence-case rounded-full align-middle border border-primary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      className={`interactive px py sentence-case rounded-full align-middle border border-primary line-clamp-1 text-primary hover:bg-primary-inverse ${className ?? ""}`}
       type={type}
       style={style}
       onClick={onClick}
@@ -68,7 +68,7 @@ export const TonalButton: React.FC<{
 }> = ({ className, title, type, style, onClick }) => {
   return (
     <button
-      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-secondary text-primary hover:bg-primary-inverse ${className ?? ""}`}
+      className={`interactive px py font-semibold sentence-case rounded-full align-middle bg-secondary line-clamp-1 text-primary hover:bg-primary-inverse ${className ?? ""}`}
       type={type}
       style={style}
       onClick={onClick}

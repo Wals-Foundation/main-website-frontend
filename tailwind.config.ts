@@ -2,6 +2,7 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 import typography from "@tailwindcss/typography";
+import lineClamp from "@tailwindcss/line-clamp";
 
 export default {
   content: [
@@ -121,9 +122,10 @@ export default {
           },
         },
       });
-      // Enable inverse variant
+      
       addVariant("inverse", "&[data-inverse] &");
     }),
     typography,
+    lineClamp,
   ],
 } satisfies Config;
