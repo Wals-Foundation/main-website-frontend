@@ -18,6 +18,10 @@
     "paths": {
       "@/*": ["./*"] // Fixed path alias format
     },
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types"
+    ],
     "plugins": [
       {
         "name": "next"

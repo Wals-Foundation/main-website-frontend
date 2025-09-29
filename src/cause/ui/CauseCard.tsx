@@ -65,7 +65,7 @@ const CauseImpactAndActions: React.FC<{
     return (
       <>
         <div className={`${className ?? ""}`}>
-          <MarkdownDisplay markdown={causeImpact} />
+          <MarkdownDisplay markdown={causeImpact} initialLines={3}/>
           <CauseActions
             className="mt-4"
             causeId={causeId}
@@ -88,7 +88,7 @@ const CauseOverview: React.FC<{
     <>
       <div className={`pb-8 border-b ${className ?? ""}`}>
         <HeadingMedium text={causeName} />
-        <MarkdownDisplay className="mt-4" markdown={causeIntro} />
+        <MarkdownDisplay className="mt-4" markdown={causeIntro}  initialLines={3}/>
       </div>
     </>
   )
