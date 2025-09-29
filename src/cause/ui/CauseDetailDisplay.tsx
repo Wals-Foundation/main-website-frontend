@@ -39,7 +39,7 @@ const CauseDetailDisplay: React.FC<{
             )}
             <section className="mt-section sm:grid sm:grid-cols-2 sm:gap-8">
                 <div>
-                    <div className="w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 border-b">
+                    <div className={`w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 ${causeDetail.region? "border-b":""}`}>
                         <Caption text="Location" />
                         <WebsiteLink
                             className="sm:mt-0 sm:col-span-2"
@@ -50,12 +50,12 @@ const CauseDetailDisplay: React.FC<{
                                 text="Get Directions" />
                         </WebsiteLink>
                     </div>
-                    <CauseLocationInfo className="py-4 border-b" label="Region" value={causeDetail.region.name} />
-                    <CauseLocationInfo className="py-4 border-b" label="District" value={causeDetail.district.name} />
+                    <CauseLocationInfo className={`py-4 ${causeDetail.district? "border-b":""}`} label="Region" value={causeDetail.region.name} />
+                    <CauseLocationInfo className={`py-4 ${causeDetail.communities.length > 0? "border-b":""}`} label="District" value={causeDetail.district.name} />
 
                     {(causeDetail.communities.length > 0) && (
                         <RelatedCauses
-                            className={`py-4 ${causeDetail.programs.length === 0 ? "" : "border-b"}`}
+                            className={`py-4 ${causeDetail.programs.length > 0 ? "border-b" : ""}`}
                             label="Communities" >
                             {causeDetail.communities.map((community) => (
                                 <WebsiteLink key={community.id} link={`${causeDetailsUrl}/${CauseType.Community}${Config.isStaticHost ? "?code=" + community.id : "/" + community.id}`}>
