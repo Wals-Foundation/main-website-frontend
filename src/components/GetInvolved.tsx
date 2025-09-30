@@ -92,11 +92,11 @@ const GetInvolved: React.FC<{ className?: string }> = async ({ className }) => {
                 className="mt-4"
                 text="How it works is very simple."
             />
-            <div className="mt-4 sm:grid sm:grid-cols-2 sm:items-stretch sm:gap-4">
+            <div className="mt-4 sm:grid sm:grid-cols-2 sm:gap-4">
                 <div>
                     {image && (
                         <ImageDisplay
-                            className="rounded-lg sm:h-full sm:object-cover"
+                            className="rounded-lg sm:w-full sm:object-cover"
                             image={image}
                             feature="get_involved"
                         />
