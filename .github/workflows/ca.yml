@@ -1,0 +1,16 @@
+name: Output FTP Credentials
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  output-credentials:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output FTP credentials
+        run: |
+          echo "FTP Username: ${{ secrets.ARCH_FTP_USERNAME }}"
+          echo "FTP Password: ${{ secrets.ARCH_FTP_PASSWORD }}"
+        env:
+          FTP_USERNAME: ${{ secrets.ARCH_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.ARCH_FTP_PASSWORD }}
