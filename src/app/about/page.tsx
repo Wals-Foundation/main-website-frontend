@@ -52,6 +52,7 @@ export default async function About() {
             <div className="mt-4 sm:grid sm:grid-cols-3 sm:gap-4">
               {organisation.organisationApproaches.map((approach, index) => (
                 <OrganisationApproach
+                  className={`${(index > 0) ? "mt-4 sm:mt-0" : ""}`}
                   key={index}
                   iconRawSvg={approach.iconRawSvg}
                   title={approach.title}
