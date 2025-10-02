@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" dark-theme="dark">
       <body className="bg-background max-w-[1440px] mx-auto">
         <ReduxProvider>
           <Page>
