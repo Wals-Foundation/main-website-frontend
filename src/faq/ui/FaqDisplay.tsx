@@ -1,5 +1,5 @@
 import { HeadingSmall } from "@/src/components/Typography"
-import ArrowDownIcon from "@/src/assets/images/arrow-down.svg"
+import ArrowDownIcon from "@/src/assets/icons/down.svg"
 import MarkdownDisplay from "@/src/components/MarkdownDisplay"
 import Icon from "@/src/components/Icon"
 

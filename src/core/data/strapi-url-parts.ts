@@ -101,7 +101,7 @@ const relatedCauseFields = (path: string[]): string => {
 // Final query params
 export const aboutOurStoryQueryFields = "fields[0]=id&fields[1]=organisation_story"
 export const contactFields = "fields[0]=email&fields[1]=phone"
-export const faqFields = "fields[0]=question&fields[1]=answer"
+export const faqFields = "fields[0]=question&fields[1]=answer&sort=priority:asc"
 export const mainMenuItemQueryFields = `${mainMenuDestinationFields}`
 
 // Top level exports (matches strapi top levels)
