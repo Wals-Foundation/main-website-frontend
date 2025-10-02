@@ -44,7 +44,7 @@ export default async function About() {
         <>
           <section className="mx-horizontal mt-section">
             <OrganisationInfo label="Our mission" info={organisation.organisationMission} />
-            <OrganisationInfo className="mt-4" label="Our vision" info={organisation.organisationMission} />
+            <OrganisationInfo className="mt-4" label="Our vision" info={organisation.organisationVision} />
             <OrganisationInfo className="mt-4" label="Our story" info={organisation.organisationStory} />
           </section>
 
