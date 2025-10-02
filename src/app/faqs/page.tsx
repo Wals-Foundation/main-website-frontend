@@ -1,12 +1,7 @@
 import { HeadingLarge, SectionHeader, Text } from "@/src/components/Typography"
-import { fetchContact, fetchSocialMedia } from "@/src/contact/data/contact-strapi-datasource";
-import ContactAndSocialMedia from "@/src/contact/ui/ContactAndSocialMedia";
-import { isStrapiError } from "@/src/core/data/strapi-error";
 import Faqs from "@/src/faq/ui/Faqs"
 
-export default async function Contact() {
-  const contact = await fetchContact().then(res => isStrapiError(res) ? undefined : res);
-  const socialMedia = await fetchSocialMedia().then(res => isStrapiError(res) ? [] : res);
+export default async function FAQS() {
 
   return (
     <>
@@ -22,11 +17,7 @@ export default async function Contact() {
       <section className="bg-background-highlight mt-8 sm:mt-16">
         <div className="mx-horizontal py-8">
           <SectionHeader text="Get in touch" />
-          <ContactAndSocialMedia
-            className="mt-8"
-            contact={contact}
-            socialMedia={socialMedia}
-          />
+          <Text className="mt-4" text="Couldn't get the answer you want? Then use our accounts below to get in touch" />
         </div>
       </section>
     </>
