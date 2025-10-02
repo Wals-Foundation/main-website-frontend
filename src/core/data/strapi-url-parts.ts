@@ -184,6 +184,7 @@ export const causeGalleryQuery = (code: string): string => {
 export const getInvolvedQuery = (): string => {
     return [
         "[fields][0]=details&[fields][1]=iconRawSvg",
+        "sort=priority:asc",
         actionFields([actionPath]),
         imageSourceFields([iconPath])
     ].join("&")
