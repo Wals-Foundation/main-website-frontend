@@ -3,6 +3,7 @@ import { CauseDetail, CauseType } from "@/src/cause/models"
 import CauseDetailDisplay from "@/src/cause/ui/CauseDetailDisplay";
 import { Config } from "@/src/core/config";
 import { isStrapiError, StrapiError } from "@/src/core/data/strapi-error"
+import { getDonateUrl } from "@/utils/queries";
 
 const getProgramDetails = async (code: string): Promise<{ program: CauseDetail | null, error: StrapiError | null }> => {
     const result = await fetchCauseDetail(code, CauseType.Program);
@@ -31,6 +32,8 @@ export default async function ProgramDetail({
 }) {
     const { code } = await params
     const { program } = await getProgramDetails(code)
+    const donateUrl = await getDonateUrl()
+
     return (
         <>
             {program && (
@@ -38,7 +41,7 @@ export default async function ProgramDetail({
                     <CauseDetailDisplay
                         causeDetail={program}
                         causeDetailsUrl="/causes"
-                        donateUrl="/donate"
+                        donateUrl={donateUrl}
                     />
                 </div>
             )}

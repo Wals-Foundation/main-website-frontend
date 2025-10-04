@@ -7,12 +7,15 @@ import {
   featuredProgramsCacheKey,
   featuredProjectsCacheKey,
   programDetailCacheKey,
-  projectDetailCacheKey
+  projectDetailCacheKey,
+  causeGalleryCacheKey
 } from "@/src/core/data/cache-keys";
 import { Config } from "@/src/core/config";
 import { CausesDetailsResponse, CausesResponse, mapCausesDetailsResponseToCausesDetails, mapCausesResponseToCauses } from "./cause-strapi-response";
 import { Cause, CauseDetail, CauseType } from "../models";
 import { PagedData } from "@/src/core/models";
+import { GalleryItem } from "@/src/gallery/gallery-item";
+import { GalleryItemsResponse, mapGalleryItemsResponseToPagedData } from "@/src/gallery/data/gallery-strapi-response";
 
 const cacheKeyMap: Record<CauseType, (code: string) => string> = {
   [CauseType.Community]: communityDetailCacheKey,
@@ -35,6 +38,27 @@ export const fetchCauseDetail = async (
     });
 
     return mapCausesDetailsResponseToCausesDetails(response, type);
+  } catch (error: unknown) {
+    console.error(error);
+    return StrapiError.Server;
+  }
+};
+
+export const fetchCauseGalleryItems = async (
+  causeCode: string,
+  type: CauseType,
+  page: number
+): Promise<PagedData<GalleryItem> | StrapiError> => {
+
+  const relativeUrl = causeGalleryCacheKey(causeCode, type, page);
+  try {
+    const response = await getFetcher<GalleryItemsResponse>(relativeUrl, {
+      next: {
+        revalidate: Config.page.cacheMaxAge,
+      },
+    });
+
+    return mapGalleryItemsResponseToPagedData(response);
   } catch (error: unknown) {
     console.error(error);
     return StrapiError.Server;

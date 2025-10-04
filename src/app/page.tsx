@@ -10,6 +10,7 @@ import PageHeadline from "@/src/page/ui/PageHeadline"
 import HomePageSubheadlineAndActions from "@/src/components/HomePageSubheadlineAndActions"
 import PageHeroes from "@/src/page/ui/PageHeroes"
 import { fetchFeatureFlags } from "@/src/feature-flags/data/feature-flags-strapi-datasource"
+import { getDonateUrl } from "@/utils/queries"
 
 
 export default async function Home() {
@@ -26,6 +27,7 @@ export default async function Home() {
   const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult;
   const pageResult = await fetchMainPageData("home")
   const page = !isStrapiError(pageResult) ? pageResult : undefined
+  const donateUrl = await getDonateUrl()
 
   return (
     <>
@@ -36,7 +38,7 @@ export default async function Home() {
               headline={<PageHeadline headline={page.headline} />}
               subheadlineAndActions={
                 <HomePageSubheadlineAndActions
-                  donateUrl="/donate"
+                  donateUrl={donateUrl}
                   subheadline={page.subheadline}
                   isDonateEnabled={!!featureFlags['home_donate_button']}
                 />
@@ -58,7 +60,7 @@ export default async function Home() {
           className="mx-horizontal"
           causesUrl="/causes"
           causeDetailsUrl="/causes"
-          donateUrl="/donate"
+          donateUrl={donateUrl}
           isDonateEnabled={featureFlags["cause_card_donate"]}
         />
       </section>
@@ -68,7 +70,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="mt-section">
-        <PageCallToDonate className="mx-horizontal" donateUrl="/donate" />
+        <PageCallToDonate className="mx-horizontal" donateUrl={donateUrl} />
         <PageGalleryInitialItems className="mt-section" />
       </section>
     </>
