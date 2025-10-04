@@ -14,12 +14,14 @@ import OrganisationInfo from "@/src/components/OrganisationInfo";
 import OrganisationApproach from "@/src/components/OrganisationApproach";
 import OrganisationImpactContainer from "@/src/components/OrganisationImpactContainer";
 import ImageDisplay from "@/src/image/Image";
+import { getDonateUrl } from "@/utils/queries";
 
 export default async function About() {
   const organisationResult = await fetchAboutOrganisation()
   const organisation = !isStrapiError(organisationResult) ? organisationResult : undefined
   const pageResult = await fetchMainPageData("about")
   const page = !isStrapiError(pageResult) ? pageResult : undefined
+  const donateUrl = await getDonateUrl()
 
   return (
     <>
@@ -118,7 +120,7 @@ export default async function About() {
         </>
       )}
       <section className="mt-section">
-        <PageCallToDonate className="mx-horizontal" donateUrl="/donate" />
+        <PageCallToDonate className="mx-horizontal" donateUrl={donateUrl} />
         <PageGalleryInitialItems className="mt-section" />
       </section>
     </>
