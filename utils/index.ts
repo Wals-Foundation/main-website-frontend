@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ENVIRONMENT } from "@/logic/config/url"
+import { ENVIRONMENT } from "@/src/logic/config/url"
 import { PageContent, Slugs } from "./types"
 
 export function createSlugMapForControl(array: { key: Slugs; isLive: string | boolean }[]): Map<Slugs, string | boolean> {
