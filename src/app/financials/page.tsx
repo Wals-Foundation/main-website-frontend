@@ -1,11 +1,14 @@
-"use client"
-import Typography from "@/src/components/Typography"
-import { getTransactionsData } from "@/src/logic/hooks/api/useFinances"
-import { useAppDispatch, useAppSelector } from "@/src/logic/store/hooks"
-import dayjs from "dayjs"
-import { useEffect, useState } from "react"
+import { Title } from "@/src/components/Typography"
 
-export default function Donate() {
+export default async function Financials() {
+  return (
+    <section className="mx-horizontal">
+      <Title text="Coming soon" className="text-center" />
+    </section>
+  )
+}
+
+/* export default function Donate() {
   const dispatch = useAppDispatch()
   const data = useAppSelector((state) => state.useFinances)
   const [loading, setLoading] = useState(false)
@@ -94,4 +97,4 @@ export default function Donate() {
       </section>
     </main>
   )
-}
+} */
