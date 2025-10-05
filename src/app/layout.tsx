@@ -7,9 +7,9 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wals Foundation – Empowering Communities, Transforming Lives",
+  title: "Turn your care for others into lasting impact",
   description:
-    "Wals Foundation is a nonprofit organization dedicated to uplifting underserved communities through education, healthcare, and sustainable development initiatives.",
+    "We built a platform that combines your contribution with others to fund community projects that create lasting access to education, healthcare, and economic opportunity. Every contribution is tracked in real-time, so you see where your money goes.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
