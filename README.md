@@ -38,3 +38,4 @@ Search for todo comments and complete them
 
 ### Icons
 https://lucide.dev/icons/chevron-down
+https://www.svgrepo.com/svg/473829/whatsapp?edit=true
