@@ -35,3 +35,6 @@ https://react-svgr.com/
 ### Todos
 Search for todo comments and complete them
 [] generate env.example
+
+### Icons
+https://lucide.dev/icons/chevron-down
