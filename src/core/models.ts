@@ -22,6 +22,7 @@ export interface DataLoad<T> {
 export interface PagedData<T> {
     data: T[];
     page: number;
+    lastPage: number;
     nextPage?: number;
     error?: StrapiError;
 };
