@@ -14,14 +14,6 @@ import { getDonateUrl } from "@/utils/queries"
 
 
 export default async function Home() {
-  /* 
-    1. Running effects with stores
-    2. Store as repo client rendering/ usr for ssr rendering
-    3. usw for fetch
-    How does next js build a page with react components
-    4. What triggers rerendering for react components, that's what the UI needs dependending
-    5. Once 4 is know, we structure client-side rendering and ssr
-   */
 
   const featureFlagsResult = await fetchFeatureFlags()
   const featureFlags = isStrapiError(featureFlagsResult) ? {} : featureFlagsResult;

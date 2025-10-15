@@ -1,9 +1,9 @@
-import { Title } from "@/src/components/Typography"
+import Transactions from "@/src/financials/ui/Transactions";
 
 export default async function Financials() {
   return (
     <section className="mx-horizontal">
-      <Title text="Coming soon" className="text-center" />
+      <Transactions />
     </section>
   )
 }
