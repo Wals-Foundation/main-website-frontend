@@ -7,5 +7,10 @@ export interface Transaction {
     datetime: string;
     description: string;
     functionalCategory: string;
-    type: string;
+    type: TransactionType;
+}
+
+export enum TransactionType {
+    Expense = "expense",
+    Revenue = "revenue",
 }

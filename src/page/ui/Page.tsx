@@ -7,14 +7,6 @@ import PageFooter from "./PageFooter"
 import ScrollToTop from "@/src/components/ScrollToTop"
 import { getDonateUrl } from "@/utils/queries"
 
-/*
-    TEST CASES
-        Fresh Load (site never loaded in browser)
-        Refresh
-        Cache expired - environment variable can be toggled to speed it up
-        Page change
-        Environment change - seems stuck on loading
-*/
 
 const Page: React.FC<{ children: React.ReactNode }> = async ({ children }) => {
     const menuItemsResult = await fetchMainMenuItems();

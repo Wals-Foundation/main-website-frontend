@@ -66,8 +66,8 @@ export const projectDetailCacheKey = (code: string): string => {
     return `${causePath[CauseType.Project]}?${projectDetailQuery(code)}`;
 };
 
-export const transactionsCacheKey = (page: number, pageSize?: number): string => {
-    return `transactions?&${paginateFlattened(page, pageSize)}`;
+export const transactionsCacheKey = (page: number): string => {
+    return `transactions?&${paginateFlattened(page)}`;
 }
 
 export const galleryCacheKey = (page: number, pageSize?: number): string => {

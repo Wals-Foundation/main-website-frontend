@@ -7,7 +7,7 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Turn your care for others into lasting impact",
+  title: "Turn your care for others into lasting change",
   description:
     "We built a platform that combines your contribution with others to fund community projects that create lasting access to education, healthcare, and economic opportunity. Every contribution is tracked in real-time, so you see where your money goes.",
   icons: {

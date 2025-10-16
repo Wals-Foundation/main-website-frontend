@@ -1,6 +1,6 @@
 import { mapMetaFlattenedToPagination, MetaFlattened } from "@/src/core/data/strapi-responses";
 import { PagedData } from "@/src/core/models";
-import { Transaction } from "../transaction";
+import { Transaction, TransactionType } from "../transaction";
 import { Currency } from "@/src/donation/models";
 
 export interface TransactionResponse {
@@ -26,7 +26,7 @@ function mapTransactionResponseToModel(response: TransactionResponse): Transacti
         datetime: response.datetime,
         description: response.description,
         functionalCategory: response.functional_category,
-        type: response.type
+        type: response.type as TransactionType
     };
 }
 
