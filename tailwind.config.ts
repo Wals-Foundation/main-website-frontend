@@ -12,6 +12,7 @@ export default {
       colors: {
         background: "var(--background)",
         backgroundVariant: "var(--background-variant)",
+        backgroundModal: "var(--background-modal)",
         foreground: "var(--foreground)",
         "foreground-inverse": "var(--foreground-inverse)",
         "outline-variant": "var(--outline-variant)",

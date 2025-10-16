@@ -95,7 +95,7 @@ const Transactions: React.FC<{
                                                     text={`${transaction.currency} ${transaction.amount}`}
                                                 />
                                                 <WebsiteLink link={`/financials/${transaction.id}`}>
-                                                    <Text text="View details" />
+                                                    <Text className="text-primary" text="View details" />
                                                 </WebsiteLink>
                                             </td>
                                             <td className="px-4 py-2 hidden sm:table-cell">
