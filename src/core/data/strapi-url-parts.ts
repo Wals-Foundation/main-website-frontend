@@ -257,3 +257,9 @@ export const paginate = (page: number, pageSize: number = Config.strapi.contentP
         `pagination[pageSize]=${pageSize}`,
     ].join("&");
 };
+
+export const paginateFlattened = (page: number): string => {
+    return [
+        `page=${page}`,
+    ].join("&");
+};

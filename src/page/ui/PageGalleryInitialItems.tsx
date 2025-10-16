@@ -6,7 +6,7 @@ import PageGallery from "./PageGallery"
 
 const getGalleryItems = async (): Promise<PagedData<GalleryItem>> => {
     const result = await fetchGalleryItems(1)
-    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined }
+    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined,lastPage:1 }
 }
 
 const PageGalleryInitialItems: React.FC<{ className?: string }> = async ({ className }) => {

@@ -16,7 +16,7 @@ import CauseActivities from "./CauseActivities"
 
 export const getCauseActivities = async (type: CauseType, code: string, page: number): Promise<PagedData<Activity>> => {
     const result = await fetchCauseActivities(type, code, page)
-    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined, error: result }
+    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined, lastPage:1, error: result }
 }
 
 const CauseDetailDisplay: React.FC<{

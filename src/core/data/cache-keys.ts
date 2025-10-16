@@ -16,7 +16,8 @@ import {
     getInvolvedQuery,
     causeGalleryQuery,
     faqFields,
-    activitiesQuery
+    activitiesQuery,
+    paginateFlattened
 } from "./strapi-url-parts";
 
 const causePath = {
@@ -64,6 +65,10 @@ export const programDetailCacheKey = (code: string): string => {
 export const projectDetailCacheKey = (code: string): string => {
     return `${causePath[CauseType.Project]}?${projectDetailQuery(code)}`;
 };
+
+export const transactionsCacheKey = (page: number): string => {
+    return `transactions?&${paginateFlattened(page)}`;
+}
 
 export const galleryCacheKey = (page: number, pageSize?: number): string => {
     return `gallery-items?${galleryQuery()}&${paginate(page, pageSize)}`;

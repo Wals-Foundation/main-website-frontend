@@ -18,7 +18,7 @@ const PageFooter: React.FC<{
     const socialMedia = !isStrapiError(socialMediaResult) ? socialMediaResult : []
 
     return (
-        <section className={`mx-horizontal mt-section mb-16 ${className ?? ""}`}>
+        <footer className={`mx-horizontal mt-section mb-16 ${className ?? ""}`}>
             <div className="pb-8 sm:grid sm:grid-cols-5 border-b">
                 <div className="sm:col-span-2">
                     <WebsiteLink link="/" ariaLabel="Home">
@@ -38,7 +38,7 @@ const PageFooter: React.FC<{
             <div className="py-8">
                 <TextSmall text="© 2024 We Are Liberating Societies Foundation. All rights reserved." />
             </div>
-        </section>
+        </footer>
     );
 
 }

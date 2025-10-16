@@ -39,6 +39,13 @@ export interface Meta {
   pagination: Pagination;
 }
 
+export interface MetaFlattened {
+  current_page: number;
+  per_page: number;
+  last_page: number;
+  total: number;
+}
+
 export function mapHeroResponseToModel(heroResponse: HeroResponse): Hero {
   return {
     id: heroResponse.documentId,
@@ -74,10 +81,24 @@ export const mapWebsiteActionResponseToModel = (response: WebsiteActionResponse)
 
 export function mapMetaToPagination(meta: Meta): {
   page: number;
+  lastPage: number;
   nextPage?: number;
 } {
   return {
     page: meta.pagination.page,
+    lastPage: meta.pagination.pageCount,
     nextPage: meta.pagination.page < meta.pagination.pageCount ? meta.pagination.page + 1 : undefined,
+  };
+}
+
+export function mapMetaFlattenedToPagination(meta: MetaFlattened): {
+  page: number;
+  lastPage: number;
+  nextPage?: number;
+} {
+  return {
+    page: meta.current_page,
+    lastPage: meta.last_page,
+    nextPage: meta.current_page < meta.last_page ? meta.current_page + 1 : undefined,
   };
 }

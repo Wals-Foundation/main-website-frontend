@@ -6,6 +6,7 @@
   --background: #f7f9ff;
   --background-variant: #d7dadf;
   --background-inverse: #101417;
+  --background-modal:#00000080;
   --foreground: #181c20;
   --foreground-inverse: #B5B5B5;
   --outline: #c1c7ce;
@@ -23,6 +24,7 @@
   --background: #101417;
   --background-variant: #363a3e;
   --background-inverse: #e0e3e8;
+  --background-modal:#ffffff80;
   --foreground: #B5B5B5;
   --foreground-inverse: #181c20;
   --outline: #8b9198;
