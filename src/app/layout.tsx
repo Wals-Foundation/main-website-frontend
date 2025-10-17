@@ -15,6 +15,22 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  openGraph: {
+    title: "Turn your care for others into lasting change",
+    description: "We built a platform that combines your contribution with others to fund community projects that create lasting access to education, healthcare, and economic opportunity. Every contribution is tracked in real-time, so you see where your money goes.",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 810,
+        height: 607,
+        alt: "WALS Foundation - Creating lasting change",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.jpg"],
+  },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
