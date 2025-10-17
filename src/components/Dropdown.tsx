@@ -10,16 +10,23 @@ export type DropdownItem<T> = {
     label: string
 }
 
-const Dropdown = <T extends string | number>(): React.FC<{
+interface DropdownProps<T extends string | number> {
     className?: string
     items: DropdownItem<T>[]
     selectedItem?: DropdownItem<T>
     placeholder?: string
     onSelect: (item: DropdownItem<T>) => void
-}> => ({ className, items, selectedItem, placeholder = "Select option", onSelect }) => {
+}
+
+const Dropdown = <T extends string | number>({
+    className,
+    items,
+    selectedItem,
+    placeholder = "Select option",
+    onSelect
+}: DropdownProps<T>): React.ReactElement => {
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
-
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -42,9 +49,10 @@ const Dropdown = <T extends string | number>(): React.FC<{
             <button
                 type="button"
                 onClick={() => setIsOpen((prev) => !prev)}
-                className="w-full flex items-center justify-between gap-4 rounded-lg border px py hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full flex items-center justify-between gap-4 rounded-lg border px py hover:border-primary"
             >
                 <Text
+                    className="text-left"
                     text={selectedItem?.label ?? placeholder}
                     styles={{ flex: 1 }}
                 />
@@ -71,5 +79,7 @@ const Dropdown = <T extends string | number>(): React.FC<{
         </div>
     )
 }
+
+Dropdown.displayName = "Dropdown"
 
 export default Dropdown

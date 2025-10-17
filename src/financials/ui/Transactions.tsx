@@ -11,6 +11,7 @@ import Loader from "@/src/components/Loader"
 import { formatToLocalisedLongDate, formatToLocalisedLongTime, formatToLocalisedShortDate, formatToLocalisedShortTime } from "@/src/core/ui/date"
 import { useAppSelector } from "@/src/logic/store/hooks"
 import { ViewportBreakpoint } from "@/src/core/models"
+import TransactionsFilters from "./TransactionFilters"
 
 
 const Transactions: React.FC<{
@@ -26,6 +27,9 @@ const Transactions: React.FC<{
             return (state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile) ? formatToLocalisedShortTime : formatToLocalisedLongTime
         }
     )
+    const [startDate, setStartDate] = useState<Date | null>(null)
+    const [endDate, setEndDate] = useState<Date | null>(null)
+    const [transactionType, setTransactionType] = useState<TransactionType | null>(null)
     const [transactions, setTransactions] = useState<Transaction[]>([])
     const [currentPage, setCurrentPage] = useState(1)
     const [lastPage, setLastPage] = useState(1)
@@ -34,7 +38,7 @@ const Transactions: React.FC<{
     useEffect(() => {
         startTransition(async () => {
             console.log("Loading initial transactions")
-            const data = await loadTransactions(1)
+            const data = await loadTransactions(1, startDate, endDate, transactionType)
             if (!isStrapiError(data)) {
                 setTransactions(data.data)
                 setCurrentPage(data.page)
@@ -44,9 +48,8 @@ const Transactions: React.FC<{
     }, [])
 
     const handleLoadPage = (page: number) => {
-        console.log("Loading page:", page)
         startTransition(async () => {
-            const data = await loadTransactions(page)
+            const data = await loadTransactions(page, startDate, endDate, transactionType)
             if (!isStrapiError(data)) {
                 setTransactions(data.data)
                 setCurrentPage(data.page)
@@ -57,18 +60,29 @@ const Transactions: React.FC<{
 
     return (
         <div className={className}>
+            <TransactionsFilters
+                className="w-full"
+                startDate={startDate}
+                endDate={endDate}
+                transactionType={transactionType}
+                onStartDateChange={setStartDate}
+                onEndDateChange={setEndDate}
+                onTransactionTypeChange={setTransactionType}
+                onApplyFilters={() => handleLoadPage(1)}
+            />
             <PaginationNavigation
+                className="mt-section"
                 currentPage={currentPage}
                 lastPage={lastPage}
                 onLoadPage={handleLoadPage}
             />
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
                 {isPending && <Loader />}
                 {!isPending && (
                     <div className="overflow-hidden rounded-lg border">
                         <table className="w-full table-auto border-collapse">
-                            <thead>
+                            <thead className="bg-backgroundVariant">
                                 <tr>
                                     <th className="px-4 py-2 text-left"><HeadingSmall text="Date & time" /></th>
                                     <th className="px-4 py-2 text-left"><HeadingSmall text="Type" /></th>

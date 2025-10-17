@@ -7,8 +7,6 @@ import DoubleArrowIcon from "@/src/assets/icons/double-arrow.svg"
 import UpIcon from "@/src/assets/icons/up.svg"
 import Dropdown, { DropdownItem } from "./Dropdown";
 
-const PageDropdown = Dropdown<number>()
-
 const PaginationNavigation: React.FC<{
     className?: string,
     currentPage: number,
@@ -42,7 +40,7 @@ const PaginationNavigation: React.FC<{
                     />
                 </>
             )}
-            <PageDropdown
+            <Dropdown<number>
                 className="mr-2"
                 selectedItem={selected}
                 items={Array.from({ length: lastPage }, (_, i) => ({ id: i + 1, label: `${i + 1}` }))}
