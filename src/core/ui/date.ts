@@ -33,3 +33,14 @@ export function formatToLocalisedShortTime(isoDate: string, locale: string = nav
         hour12: false
     });
 }
+
+export function toUTC(date: Date): Date {
+    return new Date(Date.UTC(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+    ));
+};
