@@ -17,8 +17,9 @@ import {
     causeGalleryQuery,
     faqFields,
     activitiesQuery,
-    paginateFlattened
+    transactionQuery
 } from "./strapi-url-parts";
+import { TransactionType } from "@/src/financials/transaction";
 
 const causePath = {
     [CauseType.Community]: 'communities',
@@ -66,8 +67,13 @@ export const projectDetailCacheKey = (code: string): string => {
     return `${causePath[CauseType.Project]}?${projectDetailQuery(code)}`;
 };
 
-export const transactionsCacheKey = (page: number): string => {
-    return `transactions?&${paginateFlattened(page)}`;
+export const transactionsCacheKey = (
+    page: number,
+    startDate: Date | null,
+    endDate: Date | null,
+    transactionType: TransactionType | null
+): string => {
+    return `transactions?&${transactionQuery(page, startDate, endDate, transactionType)}`;
 }
 
 export const galleryCacheKey = (page: number, pageSize?: number): string => {

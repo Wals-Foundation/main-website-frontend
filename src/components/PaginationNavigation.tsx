@@ -1,9 +1,11 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { IconButton } from "./Button";
 import Icon from "./Icon";
 import DoubleArrowIcon from "@/src/assets/icons/double-arrow.svg"
 import UpIcon from "@/src/assets/icons/up.svg"
+import Dropdown, { DropdownItem } from "./Dropdown";
 
 const PaginationNavigation: React.FC<{
     className?: string,
@@ -11,6 +13,11 @@ const PaginationNavigation: React.FC<{
     lastPage: number,
     onLoadPage: (page: number) => void
 }> = ({ className, currentPage, lastPage, onLoadPage }) => {
+    const [selected, setSelected] = useState<DropdownItem<number>>({ id: currentPage, label: `${currentPage}` })
+
+    useEffect(() => {
+        setSelected({ id: currentPage, label: `${currentPage}` })
+    }, [currentPage])
 
     return (
         <div
@@ -33,17 +40,14 @@ const PaginationNavigation: React.FC<{
                     />
                 </>
             )}
-            <select
-                value={currentPage}
-                onChange={(page) => onLoadPage(Number(page.target.value))}
-                className="interactive px py mr-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-                {Array.from({ length: lastPage }, (_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                    </option>
-                ))}
-            </select>
+            <Dropdown<number>
+                className="mr-2"
+                selectedItem={selected}
+                items={Array.from({ length: lastPage }, (_, i) => ({ id: i + 1, label: `${i + 1}` }))}
+                onSelect={(page) => {
+                    onLoadPage(page.id)
+                }}
+            />
             {currentPage < lastPage && (
                 <>
                     <IconButton

@@ -1,3 +1,4 @@
+import { TransactionType } from "@/src/financials/transaction"
 import { Config } from "../config"
 
 //paths
@@ -249,7 +250,27 @@ export const socialMediaQuery = (): string => {
         "fields[0]=accountUrl&fields[1]=name&fields[2]=iconRawSvg",
         imageSourceFields([iconPath])
     ].join("&")
-}
+};
+
+export const transactionQuery = (
+    page: number,
+    startDate: Date | null,
+    endDate: Date | null,
+    transactionType: TransactionType | null
+): string => {
+    const queryParts: string[] = [];
+    if (startDate) {
+        queryParts.push(`start_date=${startDate.toISOString()}`)
+    }
+    if (endDate) {
+        queryParts.push(`end_date=${endDate.toISOString()}`)
+    }
+    if (transactionType) {
+        queryParts.push(`type=${transactionType}`)
+    }
+    queryParts.push(paginateFlattened(page))
+    return queryParts.join("&")
+};
 
 export const paginate = (page: number, pageSize: number = Config.strapi.contentPageSize): string => {
     return [
