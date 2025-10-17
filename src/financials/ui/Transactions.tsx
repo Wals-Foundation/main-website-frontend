@@ -2,21 +2,27 @@
 
 import PaginationNavigation from "@/src/components/PaginationNavigation"
 import { Transaction, TransactionType } from "../transaction"
-import { isStrapiError } from "@/src/core/data/strapi-error"
-import { useEffect, useState, useTransition } from "react"
-import { loadTransactions } from "../data/actions"
+import { useState } from "react"
 import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 import { HeadingSmall, Text } from "@/src/components/Typography"
-import Loader from "@/src/components/Loader"
 import { formatToLocalisedLongDate, formatToLocalisedLongTime, formatToLocalisedShortDate, formatToLocalisedShortTime } from "@/src/core/ui/date"
 import { useAppSelector } from "@/src/logic/store/hooks"
 import { ViewportBreakpoint } from "@/src/core/models"
 import TransactionsFilters from "./TransactionFilters"
+import { useRouter } from "next/navigation"
 
 
 const Transactions: React.FC<{
     className?: string,
-}> = ({ className }) => {
+    page?: number,
+    lastPage: number,
+    transactions: Transaction[],
+    startDate: Date | null,
+    endDate: Date | null,
+    transactionType: TransactionType | null,
+}> = ({ className, page = 1, lastPage, transactions, startDate, endDate, transactionType }) => {
+    const router = useRouter()
+
     const dateFormatter = useAppSelector(
         (state) => {
             return (state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile) ? formatToLocalisedShortDate : formatToLocalisedLongDate
@@ -27,44 +33,28 @@ const Transactions: React.FC<{
             return (state.usePage.viewportBreakpoint === ViewportBreakpoint.Mobile) ? formatToLocalisedShortTime : formatToLocalisedLongTime
         }
     )
-    const [startDate, setStartDate] = useState<Date | null>(null)
-    const [endDate, setEndDate] = useState<Date | null>(null)
-    const [transactionType, setTransactionType] = useState<TransactionType | null>(null)
-    const [transactions, setTransactions] = useState<Transaction[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
-    const [lastPage, setLastPage] = useState(1)
-    const [isPending, startTransition] = useTransition()
+    const [selectedStartDate, setStartDate] = useState<Date | null>(startDate)
+    const [selectedEndDate, setEndDate] = useState<Date | null>(endDate)
+    const [selectedTransactionType, setTransactionType] = useState<TransactionType | null>(transactionType)
 
-    useEffect(() => {
-        startTransition(async () => {
-            console.log("Loading initial transactions")
-            const data = await loadTransactions(1, startDate, endDate, transactionType)
-            if (!isStrapiError(data)) {
-                setTransactions(data.data)
-                setCurrentPage(data.page)
-                setLastPage(data.lastPage)
-            }
-        })
-    }, [])
+    const handleLoadPage = (selectedPage: number) => {
+        const params = new URLSearchParams()
 
-    const handleLoadPage = (page: number) => {
-        startTransition(async () => {
-            const data = await loadTransactions(page, startDate, endDate, transactionType)
-            if (!isStrapiError(data)) {
-                setTransactions(data.data)
-                setCurrentPage(data.page)
-                setLastPage(data.lastPage)
-            }
-        })
+        params.set('page', selectedPage.toString())
+        if (selectedStartDate) params.set('start_date', selectedStartDate.toISOString())
+        if (selectedEndDate) params.set('end_date', selectedEndDate.toISOString())
+        if (selectedTransactionType) params.set('type', selectedTransactionType)
+
+        router.replace(`/financials?${params.toString()}`)
     }
 
     return (
         <div className={className}>
             <TransactionsFilters
                 className="w-full"
-                startDate={startDate}
-                endDate={endDate}
-                transactionType={transactionType}
+                startDate={selectedStartDate}
+                endDate={selectedEndDate}
+                transactionType={selectedTransactionType}
                 onStartDateChange={setStartDate}
                 onEndDateChange={setEndDate}
                 onTransactionTypeChange={setTransactionType}
@@ -72,14 +62,15 @@ const Transactions: React.FC<{
             />
             <PaginationNavigation
                 className="mt-section"
-                currentPage={currentPage}
+                currentPage={page}
                 lastPage={lastPage}
                 onLoadPage={handleLoadPage}
             />
 
             <div className="mt-4 sm:mt-6">
-                {isPending && <Loader />}
-                {!isPending && (
+                {transactions.length === 0 ? (
+                    <Text text="No transactions found for the selected filters." />
+                ) : (
                     <div className="overflow-hidden rounded-lg border">
                         <table className="w-full table-auto border-collapse">
                             <thead className="bg-backgroundVariant">
@@ -126,7 +117,7 @@ const Transactions: React.FC<{
 
             <PaginationNavigation
                 className="mt-4"
-                currentPage={currentPage}
+                currentPage={page}
                 lastPage={lastPage}
                 onLoadPage={handleLoadPage}
             />
