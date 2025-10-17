@@ -16,8 +16,8 @@ const transactionTypeItems: DropdownItem<string>[] = Object.values(TransactionTy
 
 const TransactionsFilters: React.FC<{
     className?: string,
-    startDate?: Date | null,
-    endDate?: Date | null,
+    startDate: Date | null,
+    endDate: Date | null,
     transactionType: TransactionType | null,
     onStartDateChange?: (date: Date | null) => void,
     onEndDateChange?: (date: Date | null) => void,
@@ -33,7 +33,7 @@ const TransactionsFilters: React.FC<{
     onTransactionTypeChange,
     onApplyFilters
 }) => {
-        const [isOpen, setIsOpen] = useState(false)
+        const [isOpen, setIsOpen] = useState(((startDate != null) || (endDate != null) || (transactionType != null)))
 
         const selectedTransactionTypeItem = transactionType
             ? transactionTypeItems.find(item => item.id === transactionType)
