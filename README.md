@@ -28,8 +28,14 @@ Mark all pages as use client and adapt [dynamic routes](https://nextjs.org/docs/
 Move data fetch into useSWR, example in HomeAboutUs.tsx
 switch NEXT_PUBLIC_IS_STATIC_HOST
 
+https://react-svgr.com/
+
 ### Dark mode
 
 ### Todos
 Search for todo comments and complete them
 [] generate env.example
+
+### Icons
+https://lucide.dev/icons/chevron-down
+https://www.svgrepo.com/svg/473829/whatsapp?edit=true

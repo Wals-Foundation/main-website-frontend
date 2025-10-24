@@ -1,0 +1,87 @@
+import { CauseType } from "@/src/cause/models";
+import {
+    aboutOurStoryQueryFields,
+    communityDetailQuery,
+    causesQuery,
+    featuredCauseQuery,
+    galleryQuery,
+    mainMenuItemQueryFields,
+    pageQuery,
+    paginate,
+    projectDetailQuery,
+    programDetailQuery,
+    aboutQuery,
+    contactFields,
+    socialMediaQuery,
+    getInvolvedQuery,
+    causeGalleryQuery,
+    faqFields,
+    activitiesQuery,
+    transactionQuery
+} from "./strapi-url-parts";
+import { TransactionType } from "@/src/financials/transaction";
+
+const causePath = {
+    [CauseType.Community]: 'communities',
+    [CauseType.Program]: 'programs',
+    [CauseType.Project]: 'projects',
+};
+
+export const aboutCachekey = `about-organisation?${aboutQuery()}`
+export const aboutOurStoryCacheKey = `about-organisation?${aboutOurStoryQueryFields}`
+export const contactCacheKey = `contact?${contactFields}`
+export const featureFlagsCacheKey = `feature-flags?fields=key,isLive`
+export const mainMenuItemsCacheKey = `main-menu-items?${mainMenuItemQueryFields}`
+
+export const featuredCommunitiesCacheKey = `communities?${featuredCauseQuery()}`
+export const featuredProgramsCacheKey = `programs?${featuredCauseQuery()}`
+export const featuredProjectsCacheKey = `projects?${featuredCauseQuery()}`
+export const getInvolvedCacheKey = `get-involved-options?${getInvolvedQuery()}`
+export const socialMediaCacheKey = `social-medias?${socialMediaQuery()}`
+
+
+export const causeActivitiesCacheKey = (code: string, type: CauseType, page: number, pageSize?: number): string => {
+    return `activities?filters[${causePath[type]}][code][$eq]=${code}&${activitiesQuery()}&${paginate(page, pageSize)}`;
+};
+export const causesCacheKey = (type: CauseType, page: number, pageSize?: number): string => {
+    return `${causePath[type]}?${causesQuery()}&${paginate(page, pageSize)}`;
+};
+
+export const causeGalleryCacheKey = (code: string, type: CauseType, page: number, pageSize?: number): string => {
+    return `${causePath[type]}?${causeGalleryQuery(code)}&${paginate(page, pageSize)}`;
+};
+
+export const communityDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Community]}?${communityDetailQuery(code)}`;
+};
+
+export const faqCacheKey = (page: number, pageSize?: number): string => {
+    return `faqs?${faqFields}&${paginate(page, pageSize)}`;
+}
+
+export const programDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Program]}?${programDetailQuery(code)}`;
+};
+
+export const projectDetailCacheKey = (code: string): string => {
+    return `${causePath[CauseType.Project]}?${projectDetailQuery(code)}`;
+};
+
+export const transactionsCacheKey = (
+    page: number,
+    startDate: Date | null,
+    endDate: Date | null,
+    transactionType: TransactionType | null
+): string => {
+    return `transactions?&${transactionQuery(page, startDate, endDate, transactionType)}`;
+}
+
+export const galleryCacheKey = (page: number, pageSize?: number): string => {
+    return `gallery-items?${galleryQuery()}&${paginate(page, pageSize)}`;
+};
+
+
+export const pageDataCacheKey = (key: string): string => {
+    const strapiPageKey = (key === "/") ? "home" : key
+    return `pages?${pageQuery(strapiPageKey)}`
+}
