@@ -5,7 +5,7 @@ import { IconButton } from "./Button";
 import Icon from "./Icon";
 import DoubleArrowIcon from "@/src/assets/icons/double-arrow.svg"
 import UpIcon from "@/src/assets/icons/up.svg"
-import Dropdown, { DropdownItem } from "./Dropdown";
+import Dropdown from "./Dropdown";
 
 const PaginationNavigation: React.FC<{
     className?: string,
@@ -13,10 +13,10 @@ const PaginationNavigation: React.FC<{
     lastPage: number,
     onLoadPage: (page: number) => void
 }> = ({ className, currentPage, lastPage, onLoadPage }) => {
-    const [selected, setSelected] = useState<DropdownItem<number>>({ id: currentPage, label: `${currentPage}` })
+    const [selected, setSelected] = useState<number>(currentPage)
 
     useEffect(() => {
-        setSelected({ id: currentPage, label: `${currentPage}` })
+        setSelected(currentPage)
     }, [currentPage])
 
     return (
@@ -42,10 +42,10 @@ const PaginationNavigation: React.FC<{
             )}
             <Dropdown<number>
                 className="mr-2"
-                selectedItem={selected}
+                selectedItemId={selected}
                 items={Array.from({ length: lastPage }, (_, i) => ({ id: i + 1, label: `${i + 1}` }))}
-                onSelect={(page) => {
-                    onLoadPage(page.id)
+                onSelect={(id) => {
+                    onLoadPage(id)
                 }}
             />
             {currentPage < lastPage && (

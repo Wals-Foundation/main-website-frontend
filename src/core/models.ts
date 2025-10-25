@@ -1,5 +1,16 @@
 import { StrapiError } from "./data/strapi-error";
 
+
+export type ChipItem<T> = {
+    id: T
+    label: string
+}
+
+export type DropdownItem<T> = {
+    id: T
+    label: string
+}
+
 export enum WebsiteActionType {
     Primary = "primary",
     Secondary = "secondary",

@@ -15,6 +15,7 @@ import WebsiteLink from "@/src/menu/ui/WebsiteLink"
 const CauseActions: React.FC<{
   className?: string,
   causeId: string,
+  causeName: string,
   causeType: CauseType,
   donateUrl: string,
   viewCauseDetailsUrl: string,
@@ -22,6 +23,7 @@ const CauseActions: React.FC<{
 }> = ({
   className,
   causeId,
+  causeName,
   causeType,
   donateUrl,
   viewCauseDetailsUrl,
@@ -31,12 +33,12 @@ const CauseActions: React.FC<{
       <>
         <div className={`w-full sm:flex sm:gap-4 ${className ?? ""}`}>
           <WebsiteLink link={`${viewCauseDetailsUrl}/${causeType}${Config.isStaticHost ? "?code=" + causeId : "/" + causeId}`}>
-            <FilledButton className="w-full sm:w-auto" title="Read more"/>
+            <FilledButton className="w-full sm:w-auto" title="Read more" />
           </WebsiteLink>
           {isDonateEnabled && (
             <div className="mt-4 sm:mt-0">
-              <WebsiteLink link={`${donateUrl}?type=${causeType}&id=${causeId}`}>
-                <OutlinedButton className="w-full sm:w-auto" title="Make donation"/>
+              <WebsiteLink link={`${donateUrl}?name=${causeName}&id=${causeId}`}>
+                <OutlinedButton className="w-full sm:w-auto" title="Make donation" />
               </WebsiteLink>
             </div>
           )}
@@ -48,6 +50,7 @@ const CauseActions: React.FC<{
 const CauseImpactAndActions: React.FC<{
   className?: string,
   causeId: string,
+  causeName: string,
   causeImpact: string,
   causeType: CauseType,
   donateUrl: string,
@@ -56,6 +59,7 @@ const CauseImpactAndActions: React.FC<{
 }> = ({
   className,
   causeId,
+  causeName,
   causeImpact,
   causeType,
   donateUrl,
@@ -65,10 +69,11 @@ const CauseImpactAndActions: React.FC<{
     return (
       <>
         <div className={`${className ?? ""}`}>
-          <MarkdownDisplay markdown={causeImpact} initialLines={3}/>
+          <MarkdownDisplay markdown={causeImpact} initialLines={3} />
           <CauseActions
             className="mt-4"
             causeId={causeId}
+            causeName={causeName}
             causeType={causeType}
             donateUrl={donateUrl}
             viewCauseDetailsUrl={viewCauseDetailsUrl}
@@ -88,7 +93,7 @@ const CauseOverview: React.FC<{
     <>
       <div className={`pb-8 border-b ${className ?? ""}`}>
         <HeadingMedium text={causeName} />
-        <MarkdownDisplay className="mt-4" markdown={causeIntro}  initialLines={3}/>
+        <MarkdownDisplay className="mt-4" markdown={causeIntro} initialLines={3} />
       </div>
     </>
   )
@@ -122,6 +127,7 @@ const CauseOverviewAndActions: React.FC<{
           <CauseImpactAndActions
             className="mt-8"
             causeId={causeId}
+            causeName={causeName}
             causeImpact={causeImpact}
             causeType={causeType}
             donateUrl={donateUrl}

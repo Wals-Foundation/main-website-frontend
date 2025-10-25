@@ -56,6 +56,16 @@
   background: var(--foreground);
 }
 
+@layer base {
+
+  input,
+  textarea,
+  select {
+    @apply bg-background text-foreground;
+  }
+}
+
+
 .hero {
   color: #B5B5B5 !important
 }
