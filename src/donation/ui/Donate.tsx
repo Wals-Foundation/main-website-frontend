@@ -126,7 +126,7 @@ const Donate: React.FC<{
                 const emailToUse = email && isValidEmail(email) ? email : Config.transactionsEmail;
 
                 const response = await initialiseTransaction(
-                    causeCode || "",
+                    causeCode || "mge",
                     BigInt(value),
                     selectedCurrency as Currency,
                     emailToUse
