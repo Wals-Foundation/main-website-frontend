@@ -13,14 +13,16 @@ const DonatePage: React.FC = () => {
   return (
     <Modal>
       <div className="px py mt-4">
-        <HeadingSmall
-          className="mx-horizontal text-center"
-          text="Make a donation"
-        />
-        <Text
-          className="mt-auto text-center"
-          text={`This will support ${causeName ?? "all programs, projects & activities"}`}
-        />
+        <div className="mx-horizontal">
+          <HeadingSmall
+            className="mx-auto text-center"
+            text="Make a donation"
+          />
+          <Text
+            className="mt-4 mx-auto text-center"
+            text={`This will support ${causeName ?? "all programs, projects & activities"}`}
+          />
+        </div>
         <section className="mt-section">
           <Donate causeCode={causeCode} />
         </section>
