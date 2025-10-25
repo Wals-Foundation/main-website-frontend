@@ -44,6 +44,7 @@ const DatePickerInput = forwardRef<HTMLButtonElement, DatePickerInputProps>(
 
 DatePickerInput.displayName = "DatePickerInput";
 
+// There's is css in the global styles to support this component occupying full width available
 const DatePicker: React.FC<{
     className?: string;
     selectedDate?: Date | null;

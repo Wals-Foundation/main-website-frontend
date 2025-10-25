@@ -1,6 +1,6 @@
 import { Caption, Text } from "@/src/components/Typography"
 import { Currency } from "../models"
-import { formatValueFromMinorToMajorUnit } from "../utils"
+import { formatValueFromMinorToMajorUnit } from "../../core/utils"
 
 const DonationValue: React.FC<{
     className?: string,

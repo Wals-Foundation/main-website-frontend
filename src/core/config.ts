@@ -12,6 +12,7 @@ export const Config = {
     isStaticHost: process.env.NEXT_PUBLIC_IS_STATIC_HOST === 'true',
     strapi: {
         contentPageSize: parseInt(process.env.NEXT_PUBLIC_STRAPI_CONTENT_PAGE_SIZE || "100", 10),
-        serverUrl: process.env.NEXT_PUBLIC_SERVER_URL || "https://wals-admins-test.onrender.com/api",
-    }
+        serverUrl: process.env.NEXT_PUBLIC_SERVER_URL || "https://staging.admin.walsfoundation.org/api",
+    },
+    transactionsEmail: process.env.NEXT_PUBLIC_TRANSACTIONS_EMAIL || "transactions@walsfoundation.org"
 }

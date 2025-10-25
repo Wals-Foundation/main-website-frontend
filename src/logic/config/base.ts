@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import axios from "axios"
 import { Config } from "@/src/core/config"
 
 export const getFetcher = async <T>(
@@ -28,15 +27,47 @@ export const getFetcher = async <T>(
   return response.json() as Promise<T>;
 };
 
+export const postFetcher = async <T>(
+  url: string,
+  body?: any,
+  options?: RequestInit & {
+    [key: string]: any
+  }
+): Promise<T> => {
+  const isFormData =
+    typeof FormData !== "undefined" && body instanceof FormData;
+  const defaultHeaders: Record<string, string> = {
+    Accept: "application/json",
+    ...(isFormData ? {} : { "Content-Type": "application/json" }),
+  };
 
-const axiosInstance = axios.create({
-  baseURL: Config.strapi.serverUrl,
-})
+  const response = await fetch(`${Config.strapi.serverUrl}/${url}`, {
+    method: "POST",
+    headers: {
+      ...defaultHeaders,
+      ...options?.headers,
+    },
+    body: isFormData ? body : body !== undefined ? JSON.stringify(body) : undefined,
+    ...options,
+  });
 
-export const axiosFetcher = async <T>(url: string, options?: { signal?: AbortSignal }): Promise<T> => {
-  const response = await axiosInstance.get<T>(url, { ...options })
-  return response.data
-}
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(
+      `Fetch error ${response.status}: ${response.statusText} - ${errorBody}`
+    );
+  }
 
+  const contentType = response.headers.get("content-type") || "";
 
-export default axiosInstance
+  if (response.status === 204) {
+    return undefined as unknown as T;
+  }
+
+  if (contentType.includes("application/json")) {
+    return response.json() as Promise<T>;
+  }
+
+  const text = await response.text();
+  return text as unknown as T;
+};

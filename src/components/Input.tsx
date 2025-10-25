@@ -1,51 +1,53 @@
-import React, { ReactNode } from "react"
+"use client"
 
-interface InputProps {
-  name?: string
-  value?: string
-  className?: string
-  type?: string
-  placeholder?: string
-  image?: ReactNode
-  onClickOnIcon?: () => void
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
-  required?: boolean
-}
+import React, { forwardRef } from "react";
 
-const Input: React.FC<InputProps> = (props) => {
-  const { name, type, image, placeholder, className, value, required, onChange, onClickOnIcon } = props
+export const TextInput = forwardRef<HTMLInputElement, {
+  className?: string;
+  value?: string;
+  placeholder?: string;
+  name?: string;
+  type?: string;
+  isInvalid?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+}>(
+  (
+    {
+      className,
+      value,
+      placeholder = "",
+      name,
+      type = "text",
+      isInvalid = false,
+      onChange,
+      onBlur,
+    },
+    ref
+  ) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        className={`
+        w-full 
+        rounded-lg 
+        border 
+        px py
+        text-base leading-6 sm:leading-7 
+        focus:outline-none
+        ${isInvalid ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-primary"}
+        hover:border-primary 
+        ${className ?? ""}
+      `}
+      />
+    );
+  }
+);
 
-  return (
-    <div className="relative">
-      {image && (
-        <div className="absolute inset-y-0 end-0 flex items-center pr-3.5 cursor-pointer" onClick={onClickOnIcon}>
-          {image}
-        </div>
-      )}
-      {type === "textarea" ? (
-        <textarea
-          id={name}
-          name={name}
-          className={`${className || "rounded-lg"} bg-white w-full border px-6 py-4`}
-          rows={10}
-          placeholder={placeholder}
-          required={required}
-          onChange={onChange}
-        />
-      ) : (
-        <input
-          type={type || "text"}
-          id={name}
-          name={name}
-          value={value}
-          className={`${className || "rounded-lg"} bg-white w-full border px-6 py-4`}
-          placeholder={placeholder}
-          required={required}
-          onChange={onChange}
-        />
-      )}
-    </div>
-  )
-}
-
-export default Input
+TextInput.displayName = "TextInput";
