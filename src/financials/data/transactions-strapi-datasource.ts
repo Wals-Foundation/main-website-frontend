@@ -30,12 +30,12 @@ export const fetchTransactions = async (
     }
 };
 
-export const fetchInitialiseTransaction = async(
+export const fetchInitialiseTransaction = async (
     causeCode: string,
     amountInMinorCurrencyUnit: bigint,
     currency: Currency,
     donorEmail: string,
-): Promise<string | StrapiError> => {
+): Promise<{ accessCode: string, reference?: string } | StrapiError> => {
     const relativeUrl = `transactions/initialise`;
     try {
         const body = {
@@ -52,18 +52,14 @@ export const fetchInitialiseTransaction = async(
             authorization_url?: string;
             reference?: string;
             status?: string;
-        }>(relativeUrl, body, {
-            next: {
-                revalidate: Config.page.cacheMaxAge,
-            },
-        });
+        }>(relativeUrl, body);
 
         if (!response || !response.access_code) {
             console.error("initialiseTransaction: invalid response", response);
             return StrapiError.Server;
         }
 
-        return response.access_code;
+        return { accessCode: response.access_code, reference: response.reference };
     } catch (error: unknown) {
         console.error(error);
         return StrapiError.Server;

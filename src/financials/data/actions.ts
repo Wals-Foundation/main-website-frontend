@@ -10,7 +10,7 @@ export async function initialiseTransaction(causeCode: string,
   amountInMinorCurrencyUnit: bigint,
   currency: Currency,
   donorEmail: string,
-): Promise<string | StrapiError> {
+): Promise<{ accessCode: string, reference?: string } | StrapiError> {
   return await fetchInitialiseTransaction(
     causeCode,
     amountInMinorCurrencyUnit,

@@ -13,6 +13,8 @@ import ChipGroup from "@/src/components/Chip"
 import { Config } from "@/src/core/config"
 import PaystackPop from "@paystack/inline-js";
 import { useRouter } from 'next/navigation'
+import { isStrapiError } from "@/src/core/data/strapi-error"
+import Loader from "@/src/components/Loader"
 
 const currencies: DropdownItem<string>[] = Object.values(Currency).map(value => ({
     id: value,
@@ -59,6 +61,7 @@ const Donate: React.FC<{
         const [selectedCurrency, setCurrency] = useState<string>(Currency.GHC)
         const [email, setEmail] = useState("");
         const [emailError, setEmailError] = useState(false);
+        const [isInitialisingTransaction, setIsInitialisingTransaction] = useState(false);
 
         const amountInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -111,6 +114,7 @@ const Donate: React.FC<{
         }
 
         const onContinue = async () => {
+            setIsInitialisingTransaction(true)
             const valid = validateAmount();
             if (!valid) return;
 
@@ -121,20 +125,22 @@ const Donate: React.FC<{
             try {
                 const emailToUse = email && isValidEmail(email) ? email : Config.transactionsEmail;
 
-                const accessCode = await initialiseTransaction(
+                const response = await initialiseTransaction(
                     causeCode || "",
                     BigInt(value),
                     selectedCurrency as Currency,
                     emailToUse
                 );
 
-                if (typeof accessCode === "string") {
+                if (!isStrapiError(response)) {
+                    console.log("Access code: ", response.accessCode)
                     const paystack = new PaystackPop();
                     paystack.newTransaction({
                         key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY as string,
                         email: emailToUse,
                         amount: value,
-                        access_code: accessCode,
+                        access_code: response.accessCode,
+                        reference: response.reference,
                         callback: (response) => {
                             console.log("Payment success", response);
                             router.back()
@@ -144,83 +150,89 @@ const Donate: React.FC<{
                         }
                     });
                 } else {
-                    console.error("Failed to get access code", accessCode);
+                    console.error("Failed to get access code", response);
                 }
             } catch (err) {
                 console.error(err);
+            } finally {
+                setIsInitialisingTransaction(false)
             }
         };
 
         const isFormInvalid = amountError || emailError;
 
         return (
-            <div className={`w-full ${className ?? ""}`}>
-                <div>
-                    <Caption text="Currency" />
-                    <Dropdown<string>
-                        items={currencies}
-                        selectedItemId={selectedCurrency}
-                        placeholder="Select type"
-                        onSelect={setCurrency}
-                    />
-                </div>
-                <div className="mt-4">
-                    <ChipGroup<number>
-                        options={mapDonationAmountsToChips(donateAmountOptions, selectedCurrency)}
-                        selected={donateAmountOption}
-                        onSelect={(v) => {
-                            setDonateAmountOption(v);
-                            if (v !== -1) {
-                                setAmountError(false);
-                            }
-                        }}
-                    />
-                </div>
-                {(donateAmountOption == -1) && (
-                    <div className="mt-4">
-                        <Caption text="Amount" />
-                        <TextInput
-                            ref={amountInputRef}
-                            name="amount"
-                            type="number"
-                            placeholder="Enter amount"
-                            value={amount}
-                            isInvalid={amountError}
-                            onChange={(event) => handleAmountChange(event.target.value)}
-                            onBlur={() => {
-                                // validate on blur as requested
-                                validateAmount();
-                            }}
-                        />
+            <>
+                {isInitialisingTransaction ? (<Loader />) : (
+                    <div className={`w-full ${className ?? ""}`}>
+                        <div>
+                            <Caption text="Currency" />
+                            <Dropdown<string>
+                                items={currencies}
+                                selectedItemId={selectedCurrency}
+                                placeholder="Select type"
+                                onSelect={setCurrency}
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <ChipGroup<number>
+                                options={mapDonationAmountsToChips(donateAmountOptions, selectedCurrency)}
+                                selected={donateAmountOption}
+                                onSelect={(v) => {
+                                    setDonateAmountOption(v);
+                                    if (v !== -1) {
+                                        setAmountError(false);
+                                    }
+                                }}
+                            />
+                        </div>
+                        {(donateAmountOption == -1) && (
+                            <div className="mt-4">
+                                <Caption text="Amount" />
+                                <TextInput
+                                    ref={amountInputRef}
+                                    name="amount"
+                                    type="number"
+                                    placeholder="Enter amount"
+                                    value={amount}
+                                    isInvalid={amountError}
+                                    onChange={(event) => handleAmountChange(event.target.value)}
+                                    onBlur={() => {
+                                        // validate on blur as requested
+                                        validateAmount();
+                                    }}
+                                />
+                            </div>
+                        )}
+                        <div className="mt-6">
+                            <Caption text="Email(Optional)" />
+                            <TextInput
+                                name="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                isInvalid={emailError}
+                                onChange={(event) => {
+                                    const email = event.target.value
+                                    setEmail(email)
+                                    if (email && !isValidEmail(email)) {
+                                        setEmailError(true)
+                                    } else {
+                                        setEmailError(false)
+                                    }
+                                }}
+                            />
+                        </div>
+                        <div className="w-full mt-4 flex justify-end items-center">
+                            <FilledButton
+                                title="Donate"
+                                onClick={onContinue}
+                                disabled={isFormInvalid}
+                            />
+                        </div>
                     </div>
                 )}
-                <div className="mt-6">
-                    <Caption text="Email(Optional)" />
-                    <TextInput
-                        name="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        isInvalid={emailError}
-                        onChange={(event) => {
-                            const email = event.target.value
-                            setEmail(email)
-                            if (email && !isValidEmail(email)) {
-                                setEmailError(true)
-                            } else {
-                                setEmailError(false)
-                            }
-                        }}
-                    />
-                </div>
-                <div className="w-full mt-4 flex justify-end items-center">
-                    <FilledButton
-                        title="Donate"
-                        onClick={onContinue}
-                        disabled={isFormInvalid}
-                    />
-                </div>
-            </div>
+            </>
         )
     }
 
