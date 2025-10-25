@@ -2,10 +2,11 @@
 
 import { FilledButton, TonalButton } from "@/src/components/Button"
 import DatePicker from "@/src/components/DatePicker"
-import Dropdown, { DropdownItem } from "@/src/components/Dropdown"
+import Dropdown from "@/src/components/Dropdown"
 import { Caption } from "@/src/components/Typography"
 import { useState } from "react"
 import { TransactionType } from "../transaction"
+import { DropdownItem } from "@/src/core/models"
 
 
 const transactionTypeItems: DropdownItem<string>[] = Object.values(TransactionType).map(value => ({
@@ -35,12 +36,8 @@ const TransactionsFilters: React.FC<{
 }) => {
         const [isOpen, setIsOpen] = useState(((startDate != null) || (endDate != null) || (transactionType != null)))
 
-        const selectedTransactionTypeItem = transactionType
-            ? transactionTypeItems.find(item => item.id === transactionType)
-            : undefined
-
-        const handleTransactionTypeSelect = (item: DropdownItem<string>) => {
-            const selectedType = item.id as TransactionType
+        const handleTransactionTypeSelect = (type: string) => {
+            const selectedType = type as TransactionType
             onTransactionTypeChange?.(selectedType)
         }
 
@@ -77,7 +74,7 @@ const TransactionsFilters: React.FC<{
                         <Dropdown<string>
                             className="mt-1"
                             items={transactionTypeItems}
-                            selectedItem={selectedTransactionTypeItem}
+                            selectedItemId={transactionType ?? undefined}
                             placeholder="Select type"
                             onSelect={handleTransactionTypeSelect}
                         />

@@ -16,7 +16,7 @@ import CauseActivities from "./CauseActivities"
 
 export const getCauseActivities = async (type: CauseType, code: string, page: number): Promise<PagedData<Activity>> => {
     const result = await fetchCauseActivities(type, code, page)
-    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined, lastPage:1, error: result }
+    return !isStrapiError(result) ? result : { data: [], page: 1, nextPage: undefined, lastPage: 1, error: result }
 }
 
 const CauseDetailDisplay: React.FC<{
@@ -39,7 +39,7 @@ const CauseDetailDisplay: React.FC<{
             )}
             <section className="mt-section sm:grid sm:grid-cols-2 sm:gap-8">
                 <div>
-                    <div className={`w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 ${causeDetail.region? "border-b":""}`}>
+                    <div className={`w-full sm:grid sm:grid-cols-3 sm:gap-8 py-4 ${causeDetail.region ? "border-b" : ""}`}>
                         <Caption text="Location" />
                         <WebsiteLink
                             className="sm:mt-0 sm:col-span-2"
@@ -50,8 +50,8 @@ const CauseDetailDisplay: React.FC<{
                                 text="Get Directions" />
                         </WebsiteLink>
                     </div>
-                    <CauseLocationInfo className={`py-4 ${causeDetail.district? "border-b":""}`} label="Region" value={causeDetail.region.name} />
-                    <CauseLocationInfo className={`py-4 ${causeDetail.communities.length > 0? "border-b":""}`} label="District" value={causeDetail.district.name} />
+                    <CauseLocationInfo className={`py-4 ${causeDetail.district ? "border-b" : ""}`} label="Region" value={causeDetail.region.name} />
+                    <CauseLocationInfo className={`py-4 ${causeDetail.communities.length > 0 ? "border-b" : ""}`} label="District" value={causeDetail.district.name} />
 
                     {(causeDetail.communities.length > 0) && (
                         <RelatedCauses
@@ -82,6 +82,8 @@ const CauseDetailDisplay: React.FC<{
                 </div>
                 <Donation
                     className="mt-4 sm:mt-0 my-auto"
+                    causeId={causeDetail.id}
+                    causeName={causeDetail.name}
                     currency={causeDetail.donatable.currency}
                     donatedAmountInMinorCurrencyUnit={causeDetail.donatable.donatedAmountInMinorCurrencyUnit}
                     targetAmountInMinorCurrencyUnit={causeDetail.donatable.targetAmountInMinorCurrencyUnit}

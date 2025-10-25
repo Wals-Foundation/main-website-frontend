@@ -3,8 +3,9 @@ import { Transaction, TransactionType } from "../transaction";
 import { StrapiError } from "@/src/core/data/strapi-error";
 import { transactionsCacheKey } from "@/src/core/data/cache-keys";
 import { maptransactionsResponseToPagedData, TransactionsResponse } from "./transactions-strapi-response";
-import { getFetcher } from "@/src/logic/config/base";
+import { getFetcher, postFetcher } from "@/src/logic/config/base";
 import { Config } from "@/src/core/config";
+import { Currency } from "@/src/donation/models";
 
 export const fetchTransactions = async (
     page: number,
@@ -23,6 +24,42 @@ export const fetchTransactions = async (
         );
 
         return maptransactionsResponseToPagedData(response);
+    } catch (error: unknown) {
+        console.error(error);
+        return StrapiError.Server;
+    }
+};
+
+export const fetchInitialiseTransaction = async (
+    causeCode: string,
+    amountInMinorCurrencyUnit: bigint,
+    currency: Currency,
+    donorEmail: string,
+): Promise<{ accessCode: string, reference?: string } | StrapiError> => {
+    const relativeUrl = `transactions/initialise`;
+    try {
+        const body = {
+            code: causeCode,
+            email: donorEmail,
+            amount: Number(amountInMinorCurrencyUnit),
+            currency: currency,
+        };
+
+        const response = await postFetcher<{
+            reference_id?: number;
+            code?: string;
+            access_code?: string;
+            authorization_url?: string;
+            reference?: string;
+            status?: string;
+        }>(relativeUrl, body);
+
+        if (!response || !response.access_code) {
+            console.error("initialiseTransaction: invalid response", response);
+            return StrapiError.Server;
+        }
+
+        return { accessCode: response.access_code, reference: response.reference };
     } catch (error: unknown) {
         console.error(error);
         return StrapiError.Server;

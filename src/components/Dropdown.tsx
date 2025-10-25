@@ -4,24 +4,21 @@ import React, { useEffect, useRef, useState } from "react"
 import DownIcon from "@/src/assets/icons/down.svg"
 import { Text } from "./Typography"
 import Icon from "./Icon"
+import { DropdownItem } from "../core/models"
 
-export type DropdownItem<T> = {
-    id: T
-    label: string
-}
 
 interface DropdownProps<T extends string | number> {
     className?: string
     items: DropdownItem<T>[]
-    selectedItem?: DropdownItem<T>
+    selectedItemId?: T
     placeholder?: string
-    onSelect: (item: DropdownItem<T>) => void
+    onSelect: (id: T) => void
 }
 
 const Dropdown = <T extends string | number>({
     className,
     items,
-    selectedItem,
+    selectedItemId,
     placeholder = "Select option",
     onSelect
 }: DropdownProps<T>): React.ReactElement => {
@@ -39,9 +36,9 @@ const Dropdown = <T extends string | number>({
         return () => document.removeEventListener("mousedown", handleClickOutside)
     }, [])
 
-    const handleSelect = (item: DropdownItem<T>) => {
+    const handleSelect = (id: T) => {
         setIsOpen(false)
-        onSelect(item)
+        onSelect(id)
     }
 
     return (
@@ -53,7 +50,7 @@ const Dropdown = <T extends string | number>({
             >
                 <Text
                     className="text-left"
-                    text={selectedItem?.label ?? placeholder}
+                    text={items.find(item => item.id === selectedItemId)?.label ?? placeholder}
                     styles={{ flex: 1 }}
                 />
                 <Icon className={`flex-none transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}><DownIcon /></Icon>
@@ -65,11 +62,11 @@ const Dropdown = <T extends string | number>({
                     {items.map((item) => (
                         <li
                             key={String(item.id)}
-                            onClick={() => handleSelect(item)}
+                            onClick={() => handleSelect(item.id)}
                             className="px-3 py-2 cursor-pointer hover:bg-primary hover:text-on-primary rounded-md transition-colors"
                         >
                             <Text
-                                className={(item.id == selectedItem?.id) ? "text-primary" : ""}
+                                className={(item.id == selectedItemId) ? "text-primary" : ""}
                                 text={item.label}
                             />
                         </li>

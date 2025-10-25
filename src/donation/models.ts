@@ -1,5 +1,5 @@
 export enum Currency {
-    GHC = 'GHC',
+    GHC = 'GHS',
     USD = 'USD'
 }
 
