@@ -1,27 +1,32 @@
-import Modal from "@/src/components/Modal";
-import { HeadingSmall, Text } from "@/src/components/Typography";
-import Donate from "@/src/donation/ui/Donate";
+"use client"
 
-export default async function Page({
-    searchParams,
-}: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
-    const params = await searchParams
-    const causeCode = typeof params.id === "string" ? params.id : undefined
-    const causeName = typeof params.name === "string" ? params.name : undefined
+import Modal from "@/src/components/Modal"
+import { HeadingSmall, Text } from "@/src/components/Typography"
+import Donate from "@/src/donation/ui/Donate"
+import { useSearchParams } from "next/navigation"
 
-    return (
-        <Modal>
-            <div className="px py mt-4">
-                <HeadingSmall className="mx-horizontal text-center" text="Make a donation" />
-                <Text className="mt-auto text-center" text={`This will support ${causeName ?? "all programs, projects & activities"}`} />
-                <section className="mt-section">
-                    <Donate
-                        causeCode={causeCode}
-                    />
-                </section>
-            </div>
-        </Modal>
-    )
+const DonatePage: React.FC = () => {
+  const searchParams = useSearchParams()
+  const causeCode = searchParams.get("id") ?? undefined
+  const causeName = searchParams.get("name") ?? undefined
+
+  return (
+    <Modal>
+      <div className="px py mt-4">
+        <HeadingSmall
+          className="mx-horizontal text-center"
+          text="Make a donation"
+        />
+        <Text
+          className="mt-auto text-center"
+          text={`This will support ${causeName ?? "all programs, projects & activities"}`}
+        />
+        <section className="mt-section">
+          <Donate causeCode={causeCode} />
+        </section>
+      </div>
+    </Modal>
+  )
 }
+
+export default DonatePage

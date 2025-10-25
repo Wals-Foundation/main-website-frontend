@@ -35,7 +35,7 @@ export const mapDonationAmountsToChips = (
                 maximumFractionDigits: 0,
             }).format(value);
         } catch {
-            return `${value} ${currencyCode}`;
+            return `${currencyCode} ${value}`;
         }
     };
 
