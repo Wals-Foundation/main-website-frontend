@@ -16,12 +16,7 @@ export const fetchTransactions = async (
 
     const relativeUrl = transactionsCacheKey(page, startDate, endDate, transactionType);
     try {
-        const response = await getFetcher<TransactionsResponse>(relativeUrl, {
-            next: {
-                revalidate: Config.page.cacheMaxAge
-            },
-        }
-        );
+        const response = await getFetcher<TransactionsResponse>(relativeUrl);
 
         return maptransactionsResponseToPagedData(response);
     } catch (error: unknown) {
