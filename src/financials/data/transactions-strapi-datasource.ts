@@ -4,7 +4,6 @@ import { StrapiError } from "@/src/core/data/strapi-error";
 import { transactionsCacheKey } from "@/src/core/data/cache-keys";
 import { maptransactionsResponseToPagedData, TransactionsResponse } from "./transactions-strapi-response";
 import { getFetcher, postFetcher } from "@/src/logic/config/base";
-import { Config } from "@/src/core/config";
 import { Currency } from "@/src/donation/models";
 
 export const fetchTransactions = async (
