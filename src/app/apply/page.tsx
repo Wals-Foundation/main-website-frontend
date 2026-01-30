@@ -101,8 +101,14 @@ export default function JobApplicationPage() {
 
       setSuccess(true);
       form.reset();
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong');
+    } catch (err: unknown) {
+      let message = 'Something went wrong';
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === 'string') {
+        message = err;
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }
