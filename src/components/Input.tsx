@@ -9,6 +9,7 @@ export const TextInput = forwardRef<HTMLInputElement, {
   name?: string;
   type?: string;
   isInvalid?: boolean;
+  required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }>(
@@ -20,6 +21,7 @@ export const TextInput = forwardRef<HTMLInputElement, {
       name,
       type = "text",
       isInvalid = false,
+      required = false,
       onChange,
       onBlur,
     },
@@ -34,6 +36,7 @@ export const TextInput = forwardRef<HTMLInputElement, {
         onChange={onChange}
         onBlur={onBlur}
         placeholder={placeholder}
+        required={required}
         className={`
         w-full 
         rounded-lg 
