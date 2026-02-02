@@ -149,7 +149,7 @@ export default function JobApplicationPage() {
 
         <TextInput
           name="phone"
-          placeholder="Phone"
+          placeholder="Phone(e.g. 0244123456)"
           required
           isInvalid={phoneError}
           onChange={() => setPhoneError(false)}
